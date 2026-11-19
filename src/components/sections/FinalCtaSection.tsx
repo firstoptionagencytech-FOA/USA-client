@@ -39,13 +39,13 @@ export const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({ onOpenBooking 
         <div className="flex flex-col items-center justify-center gap-4 mb-16">
           <button
             onClick={onOpenBooking}
-            className="cta-glow-btn group px-10 py-5 rounded-full text-white font-extrabold text-base sm:text-lg flex items-center gap-3 cursor-pointer"
+            className="cta-glow-btn group px-8 sm:px-9 py-3 sm:py-3.5 rounded-full text-white font-bold text-sm flex items-center gap-2.5 cursor-pointer shadow-lg hover:shadow-xl transition-all"
           >
-            <div className="w-7 h-7 rounded-lg bg-white/20 flex items-center justify-center">
-              <Calendar className="w-4 h-4 text-white" />
+            <div className="w-5 h-5 rounded-md bg-white/20 flex items-center justify-center">
+              <Calendar className="w-3.5 h-3.5 text-white" />
             </div>
             <span>Book Your Free JIT Helpdesk Demo</span>
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </button>
 
           <span className="text-xs text-pink-200/70 font-medium">

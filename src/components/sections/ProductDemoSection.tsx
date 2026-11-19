@@ -242,7 +242,7 @@ export const ProductDemoSection: React.FC<ProductDemoSectionProps> = ({ onOpenBo
         <div className="text-center mt-10">
           <button
             onClick={onOpenBooking}
-            className="cta-glow-btn px-8 sm:px-10 py-4 rounded-full text-white font-extrabold text-sm sm:text-base inline-flex items-center gap-2.5 cursor-pointer"
+            className="cta-glow-btn px-6 sm:px-8 py-2.5 sm:py-3 rounded-full text-white font-bold text-xs sm:text-sm inline-flex items-center gap-2 cursor-pointer shadow-md hover:shadow-lg transition-all"
           >
             <span>See How JIT Helpdesk Works — Book a Demo</span>
             <ArrowRight className="w-4 h-4" />

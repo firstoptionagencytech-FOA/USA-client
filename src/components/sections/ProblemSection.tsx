@@ -109,7 +109,7 @@ export const ProblemSection: React.FC<ProblemSectionProps> = ({ onOpenBooking })
           </div>
           <button
             onClick={onOpenBooking}
-            className="cta-glow-btn px-6 py-3.5 rounded-full text-white font-bold text-sm flex items-center gap-2 shrink-0 cursor-pointer"
+            className="cta-glow-btn px-5 sm:px-6 py-2.5 rounded-full text-white font-bold text-xs sm:text-sm flex items-center gap-2 shrink-0 cursor-pointer shadow-md hover:shadow-lg transition-all"
           >
             <span>See How It Works</span>
             <ArrowRight className="w-4 h-4" />

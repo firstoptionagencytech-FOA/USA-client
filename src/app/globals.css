@@ -55,18 +55,18 @@ body {
   box-shadow: 0 10px 30px rgba(225, 29, 88, 0.35);
 }
 
-/* CTA Pill Glow */
+/* CTA Pill Glow - Sleek & Refined */
 .cta-glow-btn {
   background: linear-gradient(180deg, #9C093B 0%, #750025 100%);
-  box-shadow: 0 6px 24px rgba(139, 0, 50, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.3);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 14px rgba(139, 0, 50, 0.32), inset 0 1px 1px rgba(255, 255, 255, 0.28);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .cta-glow-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(139, 0, 50, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(139, 0, 50, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.35);
 }
 
 .cta-glow-btn:active {
-  transform: translateY(1px);
+  transform: translateY(0.5px);
 }

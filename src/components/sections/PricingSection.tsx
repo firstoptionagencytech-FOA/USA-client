@@ -102,7 +102,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onOpenBooking })
 
             <button
               onClick={onOpenBooking}
-              className="cta-glow-btn w-full sm:w-auto px-8 py-4 rounded-full text-white font-extrabold text-sm flex items-center justify-center gap-2 cursor-pointer shrink-0"
+              className="cta-glow-btn w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-3 rounded-full text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 cursor-pointer shrink-0 shadow-md hover:shadow-lg transition-all"
             >
               <span>See What Your Business Could Look Like — Book a Free Demo</span>
               <ArrowRight className="w-4 h-4" />

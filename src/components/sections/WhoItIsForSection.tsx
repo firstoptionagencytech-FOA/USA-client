@@ -111,7 +111,7 @@ export const WhoItIsForSection: React.FC<WhoItIsForSectionProps> = ({ onOpenBook
 
             <button
               onClick={onOpenBooking}
-              className="cta-glow-btn px-8 py-4 rounded-full text-white font-extrabold text-sm flex items-center gap-2 cursor-pointer shrink-0"
+              className="cta-glow-btn px-6 sm:px-8 py-2.5 sm:py-3 rounded-full text-white font-bold text-xs sm:text-sm flex items-center gap-2 cursor-pointer shrink-0 shadow-md hover:shadow-lg transition-all"
             >
               <span>Book Your Free Personalized Demo</span>
               <ArrowRight className="w-4 h-4" />
