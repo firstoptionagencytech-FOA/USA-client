@@ -14,5 +14,21 @@
     "reschedule_token": "d7g249dbpy",
     "cancellation_reason": "",
     "updated_at": "2026-11-19T18:53:15.532Z"
+  },
+  {
+    "id": "book_1795115530621_62kt9f",
+    "created_at": "2026-11-19T19:12:10.621Z",
+    "lead_id": "lead_1795115530409_oosy7h",
+    "google_calendar_event_id": "mock_gcal_1795115530621",
+    "meeting_title": "JIT Helpdesk Demo: Sterling Cloud & Managed IT",
+    "meeting_start": "2026-11-23T04:30:00.000Z",
+    "meeting_end": "2026-11-23T05:00:00.000Z",
+    "admin_timezone": "America/New_York",
+    "prospect_timezone": "America/New_York",
+    "status": "confirmed",
+    "meeting_link": "https://meet.google.com/jit-ijgi-e2u",
+    "reschedule_token": "7e8y2v6x6l",
+    "cancellation_reason": "",
+    "updated_at": "2026-11-19T19:12:10.621Z"
   }
 ]
