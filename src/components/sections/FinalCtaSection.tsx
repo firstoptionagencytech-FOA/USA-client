@@ -17,10 +17,10 @@ export const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({ onOpenBooking 
 
       <div className="max-w-4xl mx-auto relative z-10 text-center">
         
-        {/* Brand Kicker */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 text-pink-200 text-xs font-bold uppercase tracking-wider mb-6">
-          <Headphones className="w-4 h-4 text-pink-300" />
-          <span>Elevate Your IT Support Brand</span>
+        {/* Brand Kicker with Official Jewar Logo */}
+        <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/10 text-pink-200 text-xs font-bold uppercase tracking-wider mb-6">
+          <img src="/brand/jewar_emblem.png" alt="Jewar Logo" className="w-4 h-4 object-contain" />
+          <span>Jewar International Technologies</span>
         </div>
 
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight font-display mb-6 leading-tight">
@@ -56,6 +56,7 @@ export const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({ onOpenBooking 
         {/* Bottom Legal & Navigation Bar */}
         <div className="pt-10 border-t border-white/15 flex flex-col sm:flex-row items-center justify-between text-xs text-pink-200/60 gap-4">
           <div className="flex items-center gap-2">
+            <img src="/brand/jewar_emblem.png" alt="Jewar Logo" className="w-4 h-4 object-contain inline shrink-0" />
             <span>© {new Date().getFullYear()} JIT Helpdesk. A product by Jewar International Technologies.</span>
           </div>
 

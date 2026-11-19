@@ -243,8 +243,12 @@ export default function AdminDashboardPage() {
       {/* MOBILE TOPBAR */}
       <div className="lg:hidden bg-[#3D0014] text-white px-4 py-3 flex items-center justify-between sticky top-0 z-40 border-b border-brand-900">
         <div className="flex items-center gap-2.5">
-          <div className="w-7 h-7 rounded-lg bg-brand-700 flex items-center justify-center text-white">
-            <Headphones className="w-4 h-4" />
+          <div className="w-7 h-7 shrink-0 flex items-center justify-center">
+            <img
+              src="/brand/jewar_emblem.png"
+              alt="Jewar Logo"
+              className="w-full h-full object-contain"
+            />
           </div>
           <span className="font-extrabold text-sm font-display tracking-tight">JIT Helpdesk CRM</span>
         </div>
@@ -270,8 +274,12 @@ export default function AdminDashboardPage() {
         <div>
           <div className="p-5 border-b border-white/10 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-700 to-rose-600 flex items-center justify-center text-white shadow-md shadow-brand-900/50">
-                <Headphones className="w-5 h-5" />
+              <div className="w-9 h-9 shrink-0 flex items-center justify-center p-1 rounded-xl bg-white/10 border border-white/20 shadow-md">
+                <img
+                  src="/brand/jewar_emblem.png"
+                  alt="Jewar Logo"
+                  className="w-full h-full object-contain"
+                />
               </div>
               <div>
                 <h2 className="text-sm font-black text-white font-display tracking-tight leading-tight">
@@ -279,7 +287,7 @@ export default function AdminDashboardPage() {
                 </h2>
                 <div className="flex items-center gap-1.5 mt-0.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  <span className="text-[10px] text-pink-200/70 font-semibold">Lead Desk CRM</span>
+                  <span className="text-[10px] text-pink-200/80 font-bold">Jewar Technologies</span>
                 </div>
               </div>
             </div>

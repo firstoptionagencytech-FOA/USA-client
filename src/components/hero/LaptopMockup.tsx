@@ -33,12 +33,16 @@ export const LaptopMockup: React.FC = () => {
           {/* Admin Sidebar */}
           <div className="w-[125px] sm:w-[145px] bg-[#420015] text-slate-200 flex flex-col justify-between py-3 px-2 sm:px-3 shrink-0">
             <div>
-              {/* Brand Header */}
+              {/* Brand Header with Official Jewar Logo */}
               <div className="flex items-center gap-1.5 mb-5 px-1 pt-1">
-                <div className="w-6 h-6 rounded-lg bg-brand-700 flex items-center justify-center text-white shrink-0 shadow-sm">
-                  <Headphones className="w-3.5 h-3.5" />
+                <div className="w-5 h-5 shrink-0 flex items-center justify-center">
+                  <img
+                    src="/brand/jewar_emblem.png"
+                    alt="Jewar Logo"
+                    className="w-full h-full object-contain drop-shadow-xs"
+                  />
                 </div>
-                <div className="text-[11px] font-bold tracking-tight text-white leading-tight">
+                <div className="text-[11px] font-black tracking-tight text-white leading-tight font-display">
                   JIT Helpdesk
                 </div>
               </div>

@@ -45,13 +45,17 @@ export const PhoneMockup: React.FC = () => {
             </div>
           </div>
 
-          {/* App Header */}
+          {/* App Header with Official Jewar Logo */}
           <div className="px-5 pt-2 pb-2 flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <div className="w-7 h-7 rounded-full bg-brand-700 flex items-center justify-center text-white shadow-sm">
-                <Headphones className="w-4 h-4" />
+              <div className="w-6 h-6 shrink-0 flex items-center justify-center">
+                <img
+                  src="/brand/jewar_emblem.png"
+                  alt="Jewar Logo"
+                  className="w-full h-full object-contain drop-shadow-xs"
+                />
               </div>
-              <span className="font-bold text-sm tracking-tight text-brand-900">JIT Helpdesk</span>
+              <span className="font-extrabold text-xs tracking-tight text-brand-900 font-display">JIT Helpdesk</span>
             </div>
             <button className="p-1.5 rounded-full hover:bg-slate-200/60 text-slate-600 transition-colors">
               <Bell className="w-4 h-4" />

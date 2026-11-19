@@ -1,8 +1,9 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { HeroHdVisual } from './HeroHdVisual';
-import { Calendar, ArrowRight, Info, Users, Headphones } from 'lucide-react';
+import { Calendar, ArrowRight, Info, Users } from 'lucide-react';
 
 interface HeroSectionProps {
   onOpenBooking: () => void;
@@ -41,14 +42,22 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenBooking }) => {
       {/* Background Decor: Dot Grids on Top-Right */}
       <div className="absolute top-5 right-4 sm:right-10 w-20 h-20 bg-dots opacity-40 pointer-events-none" />
 
-      {/* Header Container: Logo + Wordmark */}
+      {/* Header Container: Official Logo + Wordmark */}
       <div className="relative z-10 max-w-4xl mx-auto px-4 flex flex-col items-center text-center">
         
-        {/* Brand Header */}
+        {/* Official Brand Header */}
         <div className="flex flex-col items-center mb-3.5 sm:mb-5">
-          <div className="flex items-center justify-center gap-2">
-            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gradient-to-tr from-[#1E56A0] via-[#0081C9] to-[#5BC0F8] flex items-center justify-center text-white shadow-md shadow-sky-500/20">
-              <Headphones className="w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2.2]" />
+          <div className="flex items-center justify-center gap-2.5">
+            {/* Official Jewar International Technologies Emblem */}
+            <div className="relative w-8 h-8 sm:w-10 sm:h-10 shrink-0 flex items-center justify-center drop-shadow-md hover:scale-105 transition-transform">
+              <Image
+                src="/brand/jewar_emblem.png"
+                alt="Jewar International Technologies Logo"
+                width={48}
+                height={48}
+                className="w-full h-full object-contain"
+                priority
+              />
             </div>
             
             <h1 className="text-xl sm:text-2xl md:text-3xl font-black tracking-tight text-brand-900 font-display">
@@ -58,7 +67,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenBooking }) => {
 
           <div className="flex items-center gap-2 sm:gap-3 mt-1 text-[10px] sm:text-xs text-slate-500 font-medium">
             <span className="w-6 sm:w-10 h-[1px] bg-slate-300/80" />
-            <span>by Jewar International Technologies</span>
+            <span className="font-bold text-slate-700 tracking-wide">by Jewar International Technologies</span>
             <span className="w-6 sm:w-10 h-[1px] bg-slate-300/80" />
           </div>
         </div>
@@ -76,7 +85,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenBooking }) => {
           </span>
         </h2>
 
-        {/* Subheadline / Description (Clear margin bottom, no overlap) */}
+        {/* Subheadline / Description (Clear spacing, zero overlap) */}
         <p className="text-xs sm:text-sm md:text-base text-slate-600 font-normal leading-relaxed max-w-xl sm:max-w-2xl mb-2 sm:mb-3">
           Give your IT business its own branded mobile app and customer web portal—so clients can request help, approve quotes, make payments, and track progress, all under your business name.
         </p>
@@ -84,7 +93,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenBooking }) => {
         {/* 100% Transparent Without-BG HD Visual Graphic */}
         <HeroHdVisual />
 
-        {/* Primary CTA Area: Sleek, Elegant Button (Not overly thick) */}
+        {/* Primary CTA Area: Sleek, Elegant Button */}
         <div className="flex flex-col items-center text-center mt-1 mb-8 sm:mb-10 w-full max-w-sm">
           
           {/* Sleek Refined Pill Button */}
