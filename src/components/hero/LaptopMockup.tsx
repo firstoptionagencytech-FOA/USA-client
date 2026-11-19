@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   LayoutDashboard,
   Ticket,
@@ -12,29 +12,97 @@ import {
   CheckCircle2,
   Clock,
   TrendingUp,
-  Headphones,
   ShieldCheck,
-  ChevronDown
+  ChevronDown,
+  Sparkles,
+  Check
 } from 'lucide-react';
 
 export const LaptopMockup: React.FC = () => {
+  const [activeTab, setActiveTab] = useState<'dashboard' | 'tickets' | 'quotes' | 'payments' | 'clients'>('dashboard');
+  const [hoveredMonth, setHoveredMonth] = useState<string | null>(null);
+  
+  // Animated Counters on Scroll
+  const [hasAnimated, setHasAnimated] = useState(false);
+  const [totalTickets, setTotalTickets] = useState(0);
+  const [resolvedTickets, setResolvedTickets] = useState(0);
+  const [inProgressTickets, setInProgressTickets] = useState(0);
+  const [satisfaction, setSatisfaction] = useState(0);
+  const [growth, setGrowth] = useState(0);
+
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (entry.isIntersecting && !hasAnimated) {
+          setHasAnimated(true);
+        }
+      },
+      { threshold: 0.25 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [hasAnimated]);
+
+  useEffect(() => {
+    if (!hasAnimated) return;
+
+    const duration = 1600; // ms
+    const steps = 40;
+    const interval = duration / steps;
+    let step = 0;
+
+    const timer = setInterval(() => {
+      step++;
+      const progress = Math.min(step / steps, 1);
+      // Ease out cubic
+      const ease = 1 - Math.pow(1 - progress, 3);
+
+      setTotalTickets(Math.round(24 * ease));
+      setResolvedTickets(Math.round(18 * ease));
+      setInProgressTickets(Math.round(6 * ease));
+      setSatisfaction(Math.round(92 * ease));
+      setGrowth(Math.round(24 * ease));
+
+      if (progress >= 1) {
+        clearInterval(timer);
+      }
+    }, interval);
+
+    return () => clearInterval(timer);
+  }, [hasAnimated]);
+
   return (
-    <div className="relative mx-auto w-full max-w-[580px] lg:max-w-[620px] select-none">
+    <div ref={containerRef} className="relative mx-auto w-full max-w-[580px] lg:max-w-[620px] select-none">
       
-      {/* Laptop Screen Bezel */}
-      <div className="relative rounded-t-[18px] sm:rounded-t-[22px] bg-[#1a191f] p-2.5 sm:p-3 shadow-[0_30px_70px_-20px_rgba(20,5,15,0.45)] border-t border-x border-slate-700/50">
+      {/* Floating Interactive Badge */}
+      <div className="absolute -top-3.5 right-6 z-30">
+        <div className="px-3 py-1 rounded-full bg-[#8B0032] text-white text-[10px] font-extrabold shadow-md flex items-center gap-1.5 border border-pink-300/40">
+          <Sparkles className="w-3 h-3 text-pink-300" />
+          <span>Interactive Owner Portal</span>
+        </div>
+      </div>
+
+      {/* Laptop Screen Outer Bezel */}
+      <div className="relative rounded-t-[18px] sm:rounded-t-[22px] bg-[#1a191f] p-2 sm:p-2.5 shadow-[0_30px_70px_-20px_rgba(20,5,15,0.45)] border-t border-x border-slate-700/50">
         
-        {/* Webcam / Notch hint */}
+        {/* Webcam dot */}
         <div className="absolute top-1.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-slate-800 ring-1 ring-slate-700/50" />
 
         {/* Inner Screen Surface */}
-        <div className="relative overflow-hidden rounded-t-[12px] sm:rounded-t-[14px] bg-[#FAF8F9] flex h-[330px] sm:h-[370px] border border-slate-200 text-slate-800">
+        <div className="relative overflow-hidden rounded-t-[12px] sm:rounded-t-[14px] bg-[#FAF8F9] flex h-[350px] sm:h-[380px] border border-slate-200 text-slate-800">
           
           {/* Admin Sidebar */}
-          <div className="w-[125px] sm:w-[145px] bg-[#420015] text-slate-200 flex flex-col justify-between py-3 px-2 sm:px-3 shrink-0">
+          <div className="w-[125px] sm:w-[140px] bg-[#3B0014] text-slate-200 flex flex-col justify-between py-3 px-2 sm:px-2.5 shrink-0">
             <div>
-              {/* Brand Header with Official Jewar Logo */}
-              <div className="flex items-center gap-1.5 mb-5 px-1 pt-1">
+              {/* Brand Header */}
+              <div className="flex items-center gap-1.5 mb-4 px-1 pt-1">
                 <div className="w-5 h-5 shrink-0 flex items-center justify-center">
                   <img
                     src="/brand/jewar_emblem.png"
@@ -47,36 +115,67 @@ export const LaptopMockup: React.FC = () => {
                 </div>
               </div>
 
-              {/* Navigation Items */}
+              {/* Navigation Items (Interactive tabs) */}
               <nav className="space-y-1 text-[10px] sm:text-[11px] font-medium">
-                <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-brand-700 text-white font-semibold shadow-sm">
+                <button
+                  onClick={() => setActiveTab('dashboard')}
+                  className={`w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-left transition-all cursor-pointer ${
+                    activeTab === 'dashboard'
+                      ? 'bg-[#8B0032] text-white font-extrabold shadow-sm'
+                      : 'text-slate-300 hover:bg-white/10'
+                  }`}
+                >
                   <LayoutDashboard className="w-3.5 h-3.5" />
                   <span>Dashboard</span>
-                </div>
-                <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg hover:bg-white/10 text-slate-300 transition-colors">
+                </button>
+
+                <button
+                  onClick={() => setActiveTab('tickets')}
+                  className={`w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-left transition-all cursor-pointer ${
+                    activeTab === 'tickets'
+                      ? 'bg-[#8B0032] text-white font-extrabold shadow-sm'
+                      : 'text-slate-300 hover:bg-white/10'
+                  }`}
+                >
                   <Ticket className="w-3.5 h-3.5" />
                   <span>Tickets</span>
-                </div>
-                <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg hover:bg-white/10 text-slate-300 transition-colors">
+                </button>
+
+                <button
+                  onClick={() => setActiveTab('quotes')}
+                  className={`w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-left transition-all cursor-pointer ${
+                    activeTab === 'quotes'
+                      ? 'bg-[#8B0032] text-white font-extrabold shadow-sm'
+                      : 'text-slate-300 hover:bg-white/10'
+                  }`}
+                >
                   <FileText className="w-3.5 h-3.5" />
                   <span>Quotes</span>
-                </div>
-                <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg hover:bg-white/10 text-slate-300 transition-colors">
+                </button>
+
+                <button
+                  onClick={() => setActiveTab('payments')}
+                  className={`w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-left transition-all cursor-pointer ${
+                    activeTab === 'payments'
+                      ? 'bg-[#8B0032] text-white font-extrabold shadow-sm'
+                      : 'text-slate-300 hover:bg-white/10'
+                  }`}
+                >
                   <CreditCard className="w-3.5 h-3.5" />
                   <span>Payments</span>
-                </div>
-                <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg hover:bg-white/10 text-slate-300 transition-colors">
+                </button>
+
+                <button
+                  onClick={() => setActiveTab('clients')}
+                  className={`w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-left transition-all cursor-pointer ${
+                    activeTab === 'clients'
+                      ? 'bg-[#8B0032] text-white font-extrabold shadow-sm'
+                      : 'text-slate-300 hover:bg-white/10'
+                  }`}
+                >
                   <Users className="w-3.5 h-3.5" />
                   <span>Clients</span>
-                </div>
-                <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg hover:bg-white/10 text-slate-300 transition-colors">
-                  <Settings className="w-3.5 h-3.5" />
-                  <span>Settings</span>
-                </div>
-                <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg hover:bg-white/10 text-slate-300 transition-colors">
-                  <BarChart3 className="w-3.5 h-3.5" />
-                  <span>Reports</span>
-                </div>
+                </button>
               </nav>
             </div>
 
@@ -87,172 +186,270 @@ export const LaptopMockup: React.FC = () => {
           </div>
 
           {/* Main Dashboard Canvas */}
-          <div className="flex-1 flex flex-col p-3 sm:p-4 overflow-hidden bg-slate-50/60">
+          <div className="flex-1 flex flex-col p-3 sm:p-3.5 overflow-hidden bg-slate-50/70">
             
             {/* Topbar */}
-            <div className="flex items-center justify-between pb-3 border-b border-slate-200/70">
-              <h3 className="font-extrabold text-xs sm:text-sm text-slate-900 tracking-tight">
-                Dashboard
+            <div className="flex items-center justify-between pb-2.5 border-b border-slate-200/70 shrink-0">
+              <h3 className="font-extrabold text-xs sm:text-sm text-slate-900 tracking-tight capitalize">
+                {activeTab} Overview
               </h3>
               
-              <div className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-white border border-slate-200/80 shadow-xs">
-                <div className="w-5 h-5 rounded-full bg-brand-700 text-white font-bold text-[9px] flex items-center justify-center">
+              <div className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-white border border-slate-200 shadow-xs">
+                <div className="w-4 h-4 rounded-full bg-[#8B0032] text-white font-bold text-[8px] flex items-center justify-center">
                   JD
                 </div>
-                <span className="text-[10px] font-semibold text-slate-700 hidden sm:inline">John Doe</span>
+                <span className="text-[10px] font-bold text-slate-700">John Doe</span>
                 <ChevronDown className="w-3 h-3 text-slate-400" />
               </div>
             </div>
 
-            {/* Metric KPI Cards (3 Cards) */}
-            <div className="grid grid-cols-3 gap-2 sm:gap-2.5 my-2.5">
-              
-              {/* Total Tickets */}
-              <div className="bg-white rounded-xl p-2 sm:p-2.5 border border-pink-100 shadow-xs flex items-center gap-2">
-                <div className="w-7 h-7 rounded-lg bg-pink-100 text-brand-700 flex items-center justify-center shrink-0">
-                  <Ticket className="w-3.5 h-3.5" />
-                </div>
-                <div className="overflow-hidden">
-                  <div className="text-xs sm:text-sm font-extrabold text-slate-900 leading-none">24</div>
-                  <div className="text-[9px] text-slate-500 font-medium truncate">Total Tickets</div>
-                </div>
-              </div>
-
-              {/* Resolved */}
-              <div className="bg-white rounded-xl p-2 sm:p-2.5 border border-purple-100 shadow-xs flex items-center gap-2">
-                <div className="w-7 h-7 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center shrink-0">
-                  <CheckCircle2 className="w-3.5 h-3.5" />
-                </div>
-                <div className="overflow-hidden">
-                  <div className="text-xs sm:text-sm font-extrabold text-slate-900 leading-none">18</div>
-                  <div className="text-[9px] text-slate-500 font-medium truncate">Resolved</div>
-                </div>
-              </div>
-
-              {/* In Progress */}
-              <div className="bg-white rounded-xl p-2 sm:p-2.5 border border-emerald-100 shadow-xs flex items-center gap-2">
-                <div className="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
-                  <Clock className="w-3.5 h-3.5" />
-                </div>
-                <div className="overflow-hidden">
-                  <div className="text-xs sm:text-sm font-extrabold text-slate-900 leading-none">6</div>
-                  <div className="text-[9px] text-slate-500 font-medium truncate">In Progress</div>
-                </div>
-              </div>
-
-            </div>
-
-            {/* Support Overview Graph + Service Status Gauge */}
-            <div className="grid grid-cols-3 gap-2 sm:gap-2.5 flex-1 min-h-0">
-              
-              {/* Curve Chart (Spans 2 cols) */}
-              <div className="col-span-2 bg-white rounded-xl p-2.5 border border-slate-200/80 shadow-xs flex flex-col justify-between">
-                <div className="flex items-center justify-between">
-                  <span className="text-[10px] sm:text-[11px] font-bold text-slate-800">Support Overview</span>
-                  <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[9px] font-bold border border-emerald-200/50">
-                    <TrendingUp className="w-2.5 h-2.5" />
-                    +24% <span className="hidden sm:inline font-normal text-[8px] text-emerald-600">This Month</span>
-                  </span>
-                </div>
-
-                {/* SVG Line Chart */}
-                <div className="h-24 sm:h-28 w-full relative pt-1">
-                  <svg className="w-full h-full overflow-visible" viewBox="0 0 240 80">
-                    <defs>
-                      <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="#8B0032" stopOpacity="0.3" />
-                        <stop offset="100%" stopColor="#8B0032" stopOpacity="0.0" />
-                      </linearGradient>
-                    </defs>
-                    {/* Grid horizontal lines */}
-                    <line x1="0" y1="20" x2="240" y2="20" stroke="#f1f5f9" strokeWidth="1" strokeDasharray="3 3" />
-                    <line x1="0" y1="50" x2="240" y2="50" stroke="#f1f5f9" strokeWidth="1" strokeDasharray="3 3" />
-                    <line x1="0" y1="75" x2="240" y2="75" stroke="#f1f5f9" strokeWidth="1" />
-
-                    {/* Area under curve */}
-                    <path
-                      d="M 10 65 Q 40 45, 70 55 T 130 35 T 180 20 T 230 15 L 230 75 L 10 75 Z"
-                      fill="url(#chartGradient)"
-                    />
-                    {/* Line stroke */}
-                    <path
-                      d="M 10 65 Q 40 45, 70 55 T 130 35 T 180 20 T 230 15"
-                      fill="none"
-                      stroke="#8B0032"
-                      strokeWidth="2.5"
-                      strokeLinecap="round"
-                    />
-                    {/* Data Points */}
-                    <circle cx="10" cy="65" r="2.5" fill="#8B0032" />
-                    <circle cx="70" cy="55" r="2.5" fill="#8B0032" />
-                    <circle cx="130" cy="35" r="2.5" fill="#8B0032" />
-                    <circle cx="180" cy="20" r="2.5" fill="#8B0032" />
-                    <circle cx="230" cy="15" r="3.5" fill="#E60050" stroke="#fff" strokeWidth="1.5" />
-                  </svg>
-                </div>
-
-                {/* X-axis months */}
-                <div className="flex justify-between text-[8px] text-slate-400 font-medium px-1">
-                  <span>Jan</span>
-                  <span>Feb</span>
-                  <span>Mar</span>
-                  <span>Apr</span>
-                  <span>May</span>
-                  <span>Jun</span>
-                </div>
-              </div>
-
-              {/* Service Status Gauge Donut (1 col) */}
-              <div className="col-span-1 bg-white rounded-xl p-2.5 border border-slate-200/80 shadow-xs flex flex-col items-center justify-between text-center">
-                <span className="text-[10px] font-bold text-slate-800">Service Status</span>
+            {/* TAB CONTENT: DASHBOARD */}
+            {activeTab === 'dashboard' && (
+              <div className="flex-1 flex flex-col justify-between pt-2.5 overflow-hidden">
                 
-                {/* Donut Gauge */}
-                <div className="relative w-16 h-16 sm:w-20 sm:h-20 my-auto flex items-center justify-center">
-                  <svg className="w-full h-full -rotate-90" viewBox="0 0 36 36">
-                    <path
-                      className="text-slate-100"
-                      strokeWidth="3.5"
-                      stroke="currentColor"
-                      fill="none"
-                      d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                    />
-                    <path
-                      className="text-brand-700"
-                      strokeDasharray="92, 100"
-                      strokeWidth="3.5"
-                      strokeLinecap="round"
-                      stroke="currentColor"
-                      fill="none"
-                      d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                    />
-                  </svg>
-                  <div className="absolute inset-0 flex flex-col items-center justify-center">
-                    <span className="text-xs sm:text-sm font-extrabold text-slate-900 leading-tight">92%</span>
+                {/* 3 Metric Summary Cards (Animated Numbers on Scroll) */}
+                <div className="grid grid-cols-3 gap-2 shrink-0">
+                  <div className="bg-white rounded-xl p-2 sm:p-2.5 border border-pink-100 shadow-2xs">
+                    <div className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Total Tickets</div>
+                    <div className="text-base sm:text-lg font-black text-slate-900 font-display">
+                      {totalTickets}
+                    </div>
+                  </div>
+
+                  <div className="bg-white rounded-xl p-2 sm:p-2.5 border border-purple-100 shadow-2xs">
+                    <div className="text-[9px] font-bold text-purple-600 uppercase tracking-wider">Resolved</div>
+                    <div className="text-base sm:text-lg font-black text-purple-900 font-display">
+                      {resolvedTickets}
+                    </div>
+                  </div>
+
+                  <div className="bg-white rounded-xl p-2 sm:p-2.5 border border-emerald-100 shadow-2xs">
+                    <div className="text-[9px] font-bold text-emerald-600 uppercase tracking-wider">In Progress</div>
+                    <div className="text-base sm:text-lg font-black text-emerald-900 font-display">
+                      {inProgressTickets}
+                    </div>
                   </div>
                 </div>
 
-                <span className="text-[8px] sm:text-[9px] text-slate-500 font-semibold leading-tight">
-                  Client Satisfaction
-                </span>
-              </div>
+                {/* Middle Row: Support Overview Graph + Service Status Gauge */}
+                <div className="grid grid-cols-12 gap-2 my-2 flex-1 items-stretch">
+                  
+                  {/* Left: Support Overview Curve (Animated bottom to top) */}
+                  <div className="col-span-8 bg-white rounded-xl p-2.5 border border-slate-200/80 shadow-2xs flex flex-col justify-between">
+                    <div className="flex items-center justify-between pb-1">
+                      <span className="text-[10px] font-black text-slate-800">Support Overview</span>
+                      <span className="text-[9px] font-extrabold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">
+                        +{growth}% This Month
+                      </span>
+                    </div>
 
-            </div>
+                    {/* SVG Chart with Smooth Bottom-to-Top Animation */}
+                    <div className="relative w-full h-[85px] sm:h-[100px] flex items-end">
+                      <svg
+                        viewBox="0 0 300 120"
+                        className={`w-full h-full overflow-visible transition-all duration-1000 ease-out ${
+                          hasAnimated ? 'scale-y-100 opacity-100' : 'scale-y-0 opacity-0'
+                        } origin-bottom`}
+                      >
+                        <defs>
+                          <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#8B0032" stopOpacity="0.35" />
+                            <stop offset="100%" stopColor="#8B0032" stopOpacity="0.0" />
+                          </linearGradient>
+                        </defs>
+
+                        {/* Background Grid Lines */}
+                        <line x1="0" y1="20" x2="300" y2="20" stroke="#f1f5f9" strokeDasharray="3 3" />
+                        <line x1="0" y1="60" x2="300" y2="60" stroke="#f1f5f9" strokeDasharray="3 3" />
+                        <line x1="0" y1="100" x2="300" y2="100" stroke="#f1f5f9" strokeDasharray="3 3" />
+
+                        {/* Area Fill */}
+                        <path
+                          d="M0 100 C 40 85, 70 95, 100 70 C 130 50, 160 80, 200 45 C 240 25, 270 40, 300 20 L 300 120 L 0 120 Z"
+                          fill="url(#chartGradient)"
+                        />
+
+                        {/* Foreground Line */}
+                        <path
+                          d="M0 100 C 40 85, 70 95, 100 70 C 130 50, 160 80, 200 45 C 240 25, 270 40, 300 20"
+                          fill="none"
+                          stroke="#8B0032"
+                          strokeWidth="3"
+                          strokeLinecap="round"
+                        />
+
+                        {/* Interactive Data Points */}
+                        {[
+                          { cx: 50, cy: 90, month: 'Jan', val: '12' },
+                          { cx: 100, cy: 70, month: 'Feb', val: '18' },
+                          { cx: 150, cy: 75, month: 'Mar', val: '16' },
+                          { cx: 200, cy: 45, month: 'Apr', val: '22' },
+                          { cx: 250, cy: 30, month: 'May', val: '28' },
+                          { cx: 300, cy: 20, month: 'Jun', val: '34' },
+                        ].map((pt, i) => (
+                          <circle
+                            key={i}
+                            cx={pt.cx}
+                            cy={pt.cy}
+                            r={hoveredMonth === pt.month ? 5 : 3.5}
+                            fill={hoveredMonth === pt.month ? '#8B0032' : '#ffffff'}
+                            stroke="#8B0032"
+                            strokeWidth="2"
+                            className="cursor-pointer transition-all"
+                            onMouseEnter={() => setHoveredMonth(pt.month)}
+                            onMouseLeave={() => setHoveredMonth(null)}
+                          />
+                        ))}
+                      </svg>
+                    </div>
+
+                    {/* Months bar */}
+                    <div className="flex justify-between text-[8px] font-bold text-slate-400 pt-1 border-t border-slate-100">
+                      <span>Jan</span>
+                      <span>Feb</span>
+                      <span>Mar</span>
+                      <span>Apr</span>
+                      <span>May</span>
+                      <span>Jun</span>
+                    </div>
+                  </div>
+
+                  {/* Right: Service Status Gauge (Animated 0 to 92%) */}
+                  <div className="col-span-4 bg-white rounded-xl p-2 sm:p-2.5 border border-slate-200/80 shadow-2xs flex flex-col items-center justify-between text-center">
+                    <span className="text-[10px] font-black text-slate-800">Service Status</span>
+
+                    {/* Circular Percentage Ring */}
+                    <div className="relative w-16 h-16 sm:w-18 sm:h-18 flex items-center justify-center my-1">
+                      <svg className="w-full h-full -rotate-90" viewBox="0 0 36 36">
+                        <path
+                          className="text-slate-100"
+                          strokeWidth="3.5"
+                          stroke="currentColor"
+                          fill="none"
+                          d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                        />
+                        <path
+                          className="text-[#8B0032] transition-all duration-1000 ease-out"
+                          strokeDasharray={`${satisfaction}, 100`}
+                          strokeWidth="3.5"
+                          strokeLinecap="round"
+                          stroke="currentColor"
+                          fill="none"
+                          d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                        />
+                      </svg>
+                      <div className="absolute text-center">
+                        <span className="text-xs sm:text-sm font-black text-slate-900 font-display">
+                          {satisfaction}%
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="text-[8px] font-extrabold text-slate-500 uppercase tracking-tight">
+                      Client Satisfaction
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+            )}
+
+            {/* TAB CONTENT: TICKETS QUEUE */}
+            {activeTab === 'tickets' && (
+              <div className="space-y-1.5 pt-2 text-[10px] overflow-y-auto">
+                {[
+                  { id: '#1024', client: 'Sterling Cloud', subject: 'Firewall Policy Block', prio: 'High', status: 'In Progress' },
+                  { id: '#1023', client: 'Acme Corp', subject: 'Outlook Auth Error', prio: 'Normal', status: 'Resolved' },
+                  { id: '#1022', client: 'Apex Logistics', subject: 'NAS Sync Failure', prio: 'Critical', status: 'Investigating' },
+                ].map((item, idx) => (
+                  <div key={idx} className="p-2 rounded-lg bg-white border border-slate-200 flex items-center justify-between">
+                    <div>
+                      <div className="font-extrabold text-slate-900">{item.id} · {item.subject}</div>
+                      <div className="text-[9px] text-slate-400">{item.client}</div>
+                    </div>
+                    <span className="px-1.5 py-0.5 rounded text-[8px] font-bold bg-pink-50 text-brand-800">
+                      {item.status}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* TAB CONTENT: QUOTES */}
+            {activeTab === 'quotes' && (
+              <div className="space-y-1.5 pt-2 text-[10px]">
+                {[
+                  { id: 'Q-804', client: 'Apex Logistics', amount: '$1,250', desc: 'Hardware Firewall Upgrade', status: 'Approved' },
+                  { id: 'Q-805', client: 'Sterling Cloud', amount: '$3,400', desc: 'Azure AD Migration', status: 'Sent' },
+                ].map((q, idx) => (
+                  <div key={idx} className="p-2 rounded-lg bg-white border border-slate-200 flex items-center justify-between">
+                    <div>
+                      <div className="font-extrabold text-slate-900">{q.id} · {q.desc}</div>
+                      <div className="text-[9px] text-slate-400">{q.client} · {q.amount}</div>
+                    </div>
+                    <span className="px-1.5 py-0.5 rounded text-[8px] font-bold bg-emerald-50 text-emerald-700">
+                      {q.status}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* TAB CONTENT: PAYMENTS */}
+            {activeTab === 'payments' && (
+              <div className="space-y-1.5 pt-2 text-[10px]">
+                {[
+                  { client: 'Acme Corp', amount: '$850.00', date: 'Nov 18', status: 'Paid via Stripe' },
+                  { client: 'Apex Logistics', amount: '$450.00', date: 'Nov 19', status: 'Paid via Apple Pay' },
+                  { client: 'Sterling Cloud', amount: '$1,200.00', date: 'Due Nov 25', status: 'Pending' },
+                ].map((p, idx) => (
+                  <div key={idx} className="p-2 rounded-lg bg-white border border-slate-200 flex items-center justify-between">
+                    <div>
+                      <div className="font-extrabold text-slate-900">{p.client}</div>
+                      <div className="text-[9px] text-slate-400">{p.date} · {p.status}</div>
+                    </div>
+                    <span className="font-extrabold text-slate-900">{p.amount}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* TAB CONTENT: CLIENTS */}
+            {activeTab === 'clients' && (
+              <div className="space-y-1.5 pt-2 text-[10px]">
+                {[
+                  { name: 'Apex Logistics LLC', endpoints: '42 Endpoints', mrr: '$450/mo' },
+                  { name: 'Sterling Cloud Systems', endpoints: '98 Endpoints', mrr: '$1,200/mo' },
+                  { name: 'Acme Industrial Corp', endpoints: '64 Endpoints', mrr: '$850/mo' },
+                ].map((c, idx) => (
+                  <div key={idx} className="p-2 rounded-lg bg-white border border-slate-200 flex items-center justify-between">
+                    <div>
+                      <div className="font-extrabold text-slate-900">{c.name}</div>
+                      <div className="text-[9px] text-slate-400">{c.endpoints}</div>
+                    </div>
+                    <span className="font-extrabold text-brand-900">{c.mrr}</span>
+                  </div>
+                ))}
+              </div>
+            )}
 
           </div>
 
         </div>
+
       </div>
 
-      {/* Laptop Base / Keyboard Deck */}
-      <div className="relative mx-auto h-[12px] sm:h-[14px] bg-gradient-to-b from-[#2d2c33] to-[#1a191f] rounded-b-[16px] sm:rounded-b-[20px] shadow-[0_15px_30px_rgba(0,0,0,0.4)] flex items-center justify-center">
-        {/* Thumb Opening Notch */}
-        <div className="w-16 h-[3px] bg-slate-600 rounded-b-md" />
+      {/* Laptop Bottom Base / Keyboard lip */}
+      <div className="relative h-3 sm:h-3.5 bg-gradient-to-b from-[#25242b] via-[#1a191e] to-[#121115] rounded-b-[10px] sm:rounded-b-[14px] shadow-md border-t border-white/10 flex items-center justify-center">
+        <div className="w-16 sm:w-20 h-1 bg-[#0f0e13] rounded-full" />
       </div>
 
-      {/* Foreground Floating 3D Glowing Glass Security Shield */}
-      <div className="absolute -bottom-4 right-1 sm:-right-4 z-20 flex items-center justify-center animate-bounce-subtle">
-        <div className="relative p-2.5 sm:p-3 rounded-2xl glass-shield shadow-[0_15px_35px_rgba(230,0,80,0.4)] flex items-center justify-center">
-          <ShieldCheck className="w-8 h-8 sm:w-10 sm:h-10 text-white drop-shadow-[0_2px_8px_rgba(255,255,255,0.7)]" />
+      {/* Glowing 3D Red Shield next to the laptop matching A4 reference */}
+      <div className="absolute -right-3 sm:-right-5 bottom-4 sm:bottom-6 z-20 pointer-events-none select-none">
+        <div className="relative w-11 h-12 sm:w-14 sm:h-16 flex items-center justify-center filter drop-shadow-[0_10px_20px_rgba(180,0,50,0.5)]">
+          <div className="absolute inset-0 bg-gradient-to-br from-[#FF1A66] via-[#B80045] to-[#500018] rounded-2xl rotate-45 transform scale-90 border-2 border-white/60 shadow-inner" />
+          <Check className="relative w-6 h-6 sm:w-7 sm:h-7 text-white stroke-[3.5] z-10" />
         </div>
       </div>
 

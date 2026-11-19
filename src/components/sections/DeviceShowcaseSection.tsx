@@ -94,11 +94,11 @@ export const DeviceShowcaseSection: React.FC<DeviceShowcaseSectionProps> = ({ on
         {/* 5 Feature Pills Row */}
         <FeaturePills onSelect={onOpenBooking} />
 
-        {/* Call to action below showcase */}
+        {/* Call to action below showcase matching A4 glossy ruby button */}
         <div className="text-center mt-6">
           <button
             onClick={onOpenBooking}
-            className="cta-glow-btn px-6 sm:px-8 py-2.5 sm:py-3 rounded-full text-white font-bold text-xs sm:text-sm inline-flex items-center gap-2 cursor-pointer shadow-md hover:shadow-lg transition-all"
+            className="px-7 sm:px-9 py-3 sm:py-3.5 rounded-full text-white font-extrabold text-xs sm:text-sm inline-flex items-center gap-2.5 cursor-pointer bg-gradient-to-r from-[#990036] via-[#B80045] to-[#7A0026] hover:from-[#AA003D] hover:via-[#C8004E] hover:to-[#8B0032] shadow-[0_10px_28px_rgba(153,0,54,0.42)] active:scale-[0.98] border-t border-white/35 transition-all duration-200"
           >
             <span>Explore The Workspace Live — Book Demo</span>
             <ArrowRight className="w-4 h-4" />
