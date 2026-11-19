@@ -3,28 +3,70 @@
 import React from 'react';
 import Image from 'next/image';
 import { HeroHdVisual } from './HeroHdVisual';
-import { Calendar, ArrowRight, Info, Users, Headphones } from 'lucide-react';
+import {
+  Calendar,
+  ArrowRight,
+  Info,
+  Users,
+  Zap,
+  FileCheck,
+  CreditCard,
+  TrendingUp,
+  Star
+} from 'lucide-react';
 
 interface HeroSectionProps {
   onOpenBooking: () => void;
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenBooking }) => {
+  const featureBoxes = [
+    {
+      icon: Zap,
+      label: 'Instant Support Requests',
+    },
+    {
+      icon: FileCheck,
+      label: 'Approve Quotes Online',
+    },
+    {
+      icon: CreditCard,
+      label: 'Secure Payments',
+    },
+    {
+      icon: TrendingUp,
+      label: 'Real-Time Tracking',
+    },
+    {
+      icon: Star,
+      label: 'Your Brand, Your Portal',
+    },
+  ];
+
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-[#FCF7FA] via-[#FAF3F6] to-[#F5ECF0] pt-6 sm:pt-8 pb-0 text-slate-900">
       
-      {/* Background Decor: Clean corner wave on far top-left (Does NOT touch or obscure logo) */}
-      <div className="absolute -top-10 -left-10 w-[140px] sm:w-[220px] h-[130px] sm:h-[200px] pointer-events-none select-none overflow-hidden z-0 opacity-80">
-        <svg viewBox="0 0 300 280" fill="none" className="w-full h-full">
+      {/* Background Decor: Rich 3D Organic Satin Ribbon in Upper-Left (Matching Poster) */}
+      <div className="absolute -top-12 -left-12 w-[180px] sm:w-[280px] h-[170px] sm:h-[260px] pointer-events-none select-none overflow-hidden z-0 opacity-90">
+        <svg viewBox="0 0 350 320" fill="none" className="w-full h-full">
           <path
-            d="M-20 -20 C100 30, 140 160, 20 220 C-30 250, -60 160, -70 110 Z"
-            fill="url(#wineRibbonCorner)"
+            d="M-30 -30 C120 40, 180 180, 40 260 C-20 290, -70 200, -80 140 Z"
+            fill="url(#satinRibbon1)"
+          />
+          <path
+            d="M-50 -10 C90 80, 150 140, 240 70 C270 40, 220 -20, 180 -40 Z"
+            fill="url(#satinRibbon2)"
+            opacity="0.85"
           />
           <defs>
-            <linearGradient id="wineRibbonCorner" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#7A0026" />
-              <stop offset="60%" stopColor="#8B0032" />
-              <stop offset="100%" stopColor="#52001A" />
+            <linearGradient id="satinRibbon1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="#9E0A3E" />
+              <stop offset="50%" stopColor="#67001F" />
+              <stop offset="100%" stopColor="#380010" />
+            </linearGradient>
+            <linearGradient id="satinRibbon2" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="#FF3377" />
+              <stop offset="100%" stopColor="#8B0032" />
             </linearGradient>
           </defs>
         </svg>
@@ -33,39 +75,39 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenBooking }) => {
       {/* Background Decor: Dot Grids on Far Top-Right */}
       <div className="absolute top-4 right-4 sm:right-10 w-20 h-20 bg-dots opacity-40 pointer-events-none" />
 
-      {/* Main Container: Fully Centered, Clean Spacing */}
+      {/* Main Container */}
       <div className="relative z-10 max-w-5xl mx-auto px-4 flex flex-col items-center text-center">
         
-        {/* Official Brand Header (Exact A4 Hierarchy: Headset / Emblem + JIT HELPDESK + Jewar Byline) */}
-        <div className="flex flex-col items-center mb-3 sm:mb-4.5">
-          <div className="flex items-center justify-center gap-2.5">
-            {/* Official Jewar Emblem in Sleek Circular Container */}
-            <div className="relative w-8 h-8 sm:w-10 sm:h-10 shrink-0 rounded-full bg-white/90 p-1 border border-brand-200/80 shadow-xs flex items-center justify-center hover:scale-105 transition-transform">
+        {/* Official Brand Header (Exact A4 Poster Match: Headset Agent Emblem + JIT HELPDESK + Byline) */}
+        <div className="flex flex-col items-center mb-3 sm:mb-4">
+          <div className="flex items-center justify-center gap-2.5 sm:gap-3">
+            {/* Poster Exact Agent Headset Emblem */}
+            <div className="relative w-9 h-9 sm:w-11 sm:h-11 shrink-0 flex items-center justify-center drop-shadow-sm hover:scale-105 transition-transform">
               <Image
-                src="/brand/jewar_emblem.png"
-                alt="Jewar International Technologies Logo"
-                width={36}
-                height={36}
+                src="/brand/jit_headset_emblem_transparent.png"
+                alt="JIT Helpdesk Logo Emblem"
+                width={48}
+                height={48}
                 className="w-full h-full object-contain"
                 priority
               />
             </div>
             
-            <h1 className="text-xl sm:text-2xl md:text-3xl font-black tracking-tight text-[#7A0026] font-display">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-[#6F0D34] font-display">
               JIT HELPDESK
             </h1>
           </div>
 
-          {/* Subtitle Byline with Crisp Symmetrical Dividers */}
+          {/* Subtitle Byline with Thin Elegant Dividers */}
           <div className="flex items-center justify-center gap-2 sm:gap-3 mt-1 text-[11px] sm:text-xs text-slate-500 font-medium">
-            <span className="w-8 sm:w-12 h-[1px] bg-slate-300" />
+            <span className="w-8 sm:w-14 h-[1px] bg-slate-300" />
             <span className="font-bold text-slate-700 tracking-wide">by Jewar International Technologies</span>
-            <span className="w-8 sm:w-12 h-[1px] bg-slate-300" />
+            <span className="w-8 sm:w-14 h-[1px] bg-slate-300" />
           </div>
         </div>
 
-        {/* Audience Kicker Pill */}
-        <div className="inline-flex items-center px-4 py-1 rounded-full bg-[#FAF0F4] border border-[#F3D2DF] text-brand-900 text-[10px] sm:text-[11px] font-extrabold tracking-wider uppercase mb-3 shadow-xs">
+        {/* Audience Kicker Pill (Exact A4 Poster Styling) */}
+        <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-[#EED9E3] border border-[#DEBDCC] text-[#6F0D34] text-[10px] sm:text-[11px] font-black tracking-wider uppercase mb-3 shadow-2xs">
           FOR IT SUPPORT BUSINESSES &amp; GROWING MSPS
         </div>
 
@@ -82,57 +124,87 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenBooking }) => {
           Give your IT business its own branded mobile app and customer web portal—so clients can request help, approve quotes, make payments, and track progress, all under your business name.
         </p>
 
-        {/* Enlarged, Brighter, High-Definition 3D Visual Graphic */}
+        {/* Ultra-Crisp Transparent 3D Showcase Image */}
         <HeroHdVisual />
 
-        {/* Primary CTA Area: Rich Glowing Ruby Button & Pricing */}
-        <div className="flex flex-col items-center text-center mt-2 mb-8 sm:mb-10 w-full max-w-md">
+        {/* 5 Feature Boxes (Placed Directly Above the CTA, exactly like the A4 Poster) */}
+        <div className="w-full max-w-4xl mx-auto my-4 sm:my-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2.5 sm:gap-3.5">
+            {featureBoxes.map((item, idx) => {
+              const Icon = item.icon;
+              return (
+                <div
+                  key={idx}
+                  onClick={onOpenBooking}
+                  className="group cursor-pointer bg-white rounded-2xl p-3.5 sm:p-4 border border-pink-100 shadow-[0_6px_20px_rgba(139,0,50,0.06)] hover:shadow-[0_12px_28px_rgba(139,0,50,0.12)] hover:-translate-y-1 active:scale-[0.98] transition-all duration-200 flex flex-col items-center text-center justify-center min-h-[96px]"
+                >
+                  <div className="w-9 h-9 rounded-xl bg-[#FAF0F4] group-hover:bg-[#F5DDE6] text-[#8B0032] flex items-center justify-center mb-1.5 transition-colors shadow-2xs">
+                    <Icon className="w-5 h-5 stroke-[2.3]" />
+                  </div>
+                  <span className="text-[11px] sm:text-xs font-black text-slate-800 leading-snug tracking-tight">
+                    {item.label}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Primary CTA Area: Glowing Neon Ruby Pill Button & Pricing */}
+        <div className="flex flex-col items-center text-center mt-1 mb-8 sm:mb-10 w-full max-w-lg">
           
-          {/* Glossy Rich Glowing Pill Button */}
+          {/* Glowing Neon Ruby Capsule Button (A4 Exact Match) */}
           <button
             onClick={onOpenBooking}
-            className="w-full sm:w-auto px-7 sm:px-9 py-3 sm:py-3.5 rounded-full text-white font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2.5 cursor-pointer bg-gradient-to-r from-[#990036] via-[#B80045] to-[#7A0026] hover:from-[#AA003D] hover:via-[#C8004E] hover:to-[#8B0032] shadow-[0_10px_28px_rgba(153,0,54,0.42)] active:scale-[0.98] border-t border-white/35 transition-all duration-200"
+            className="poster-glow-btn w-full sm:w-auto px-8 sm:px-11 py-3.5 sm:py-4 rounded-full text-white font-black text-xs sm:text-sm flex items-center justify-center gap-3 cursor-pointer"
           >
-            <div className="w-5 h-5 rounded-md bg-white/20 flex items-center justify-center shrink-0">
-              <Calendar className="w-3.5 h-3.5 text-white" />
+            <div className="w-6 h-6 rounded-lg bg-white/25 border border-white/30 flex items-center justify-center shrink-0 shadow-inner">
+              <Calendar className="w-3.5 h-3.5 text-white stroke-[2.5]" />
             </div>
-            <span>Book Your Free Personalized Demo</span>
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            <span className="tracking-wide text-white drop-shadow-sm font-extrabold text-[13px] sm:text-[15px]">
+              Book Your Free Personalized Demo
+            </span>
+            <ArrowRight className="w-4 h-4 stroke-[2.5] transition-transform group-hover:translate-x-1" />
           </button>
 
-          {/* Pricing Details Below CTA */}
-          <div className="flex items-center justify-center gap-2 sm:gap-3 mt-3.5 text-slate-800 font-bold">
-            <span className="w-6 sm:w-10 h-[1.5px] bg-slate-300" />
+          {/* Pricing Details Below CTA (Exact A4 Pills) */}
+          <div className="flex items-center justify-center gap-2 sm:gap-3 mt-4 text-slate-800 font-bold">
+            <span className="w-8 sm:w-16 h-[1.5px] bg-[#D4A5B8]" />
             
-            <div className="flex items-center gap-1.5 sm:gap-2">
-              <span className="px-3 py-1 rounded-full bg-[#52001A] text-white text-[10px] sm:text-[11px] font-extrabold shadow-xs">
+            <div className="flex items-center gap-2">
+              <span className="px-4 py-1.5 rounded-full bg-[#5E0229] text-white text-[11px] sm:text-xs font-black tracking-wide shadow-md">
                 $400 One-Time Setup
               </span>
-              <span className="text-slate-400 font-bold text-xs">+</span>
-              <span className="px-3 py-1 rounded-full bg-[#52001A] text-white text-[10px] sm:text-[11px] font-extrabold shadow-xs">
+              <span className="text-slate-500 font-black text-sm">+</span>
+              <span className="px-4 py-1.5 rounded-full bg-[#5E0229] text-white text-[11px] sm:text-xs font-black tracking-wide shadow-md">
                 $200 / Month
               </span>
             </div>
 
-            <span className="w-6 sm:w-10 h-[1.5px] bg-slate-300" />
+            <span className="w-8 sm:w-16 h-[1.5px] bg-[#D4A5B8]" />
           </div>
 
-          {/* Micro-copy Note */}
-          <div className="flex items-center justify-center gap-1.5 mt-2.5 text-[10px] sm:text-[11px] text-slate-500 font-medium">
-            <Info className="w-3.5 h-3.5 text-[#8B0032] shrink-0" />
+          {/* Micro-copy Info Note with Circular Icon */}
+          <div className="flex items-center justify-center gap-1.5 mt-3 text-[11px] sm:text-xs text-slate-600 font-medium">
+            <div className="w-4 h-4 rounded-full bg-[#6F0D34] text-white flex items-center justify-center shrink-0 text-[10px] font-black">
+              i
+            </div>
             <span>See the customer experience and owner dashboard in action. No obligation.</span>
           </div>
         </div>
 
       </div>
 
-      {/* Bottom Ribbon Wave */}
-      <div className="relative w-full bg-gradient-to-r from-[#4A0016] via-[#6B0024] to-[#4A0016] text-white py-2.5 sm:py-3 px-4 shadow-inner">
-        <div className="max-w-5xl mx-auto flex items-center justify-center gap-2 text-[10px] sm:text-xs font-semibold tracking-wide text-center">
-          <div className="w-4 h-4 rounded-full bg-white/10 flex items-center justify-center text-pink-300">
-            <Users className="w-2.5 h-2.5" />
+      {/* Bottom Ribbon Wave Banner (Exact A4 Match with 3-People Gold Icon) */}
+      <div className="relative w-full bg-gradient-to-r from-[#3B0014] via-[#5C0020] to-[#3B0014] text-white py-3 sm:py-3.5 px-4 shadow-inner">
+        <div className="max-w-5xl mx-auto flex flex-col items-center justify-center gap-1.5 text-[11px] sm:text-xs font-extrabold tracking-wide text-center">
+          {/* Symmetrical 3-People Gold Icon */}
+          <div className="w-6 h-6 rounded-full bg-[#FFD700]/20 border border-[#FFD700]/40 flex items-center justify-center text-[#FFD700] mb-0.5">
+            <Users className="w-3.5 h-3.5" />
           </div>
-          <span>Your Brand. Your Customers. One Connected Support Experience.</span>
+          <span className="tracking-wide text-pink-100 font-bold">
+            Your Brand. Your Customers. One Connected Support Experience.
+          </span>
         </div>
       </div>
 
