@@ -1,5 +1,74 @@
 [
   {
+    "id": "lead_1795118049930_ssunk1",
+    "created_at": "2026-11-19T19:54:09.930Z",
+    "full_name": "Internal Corp User",
+    "email": "internal@corpexample.com",
+    "phone": "(555) 000-1111",
+    "company_name": "Corp Internal IT",
+    "survey_answers": {
+      "business_type": "Internal corporate IT department",
+      "role": "Other",
+      "serving_paying_clients": "Not yet",
+      "budget_fit": "No",
+      "timeline": "Later / researching"
+    },
+    "is_qualified": false,
+    "qualification_notes": "Not yet serving paying clients. Platform is designed for businesses with active customer billing.",
+    "status": "unqualified",
+    "utm_params": {},
+    "internal_notes": "",
+    "updated_at": "2026-11-19T19:54:09.949Z"
+  },
+  {
+    "id": "lead_1795118049876_kj1zzx",
+    "created_at": "2026-11-19T19:54:09.876Z",
+    "full_name": "Marcus Sterling",
+    "email": "marcus@sterling-msp.com",
+    "phone": "(415) 890-1234",
+    "company_name": "Sterling Cloud & Managed IT",
+    "survey_answers": {
+      "business_type": "IT support / Managed IT services",
+      "role": "Owner / Founder",
+      "serving_paying_clients": "Yes, regularly",
+      "budget_fit": "Yes",
+      "timeline": "Within 30 days"
+    },
+    "is_qualified": true,
+    "qualification_notes": "Regularly serves paying IT clients (+30) | Budget approved ($400 + $200/mo) (+30) | Target business type: IT support / Managed IT services (+20) | Key decision maker: Owner / Founder (+15) | Immediate timeline: within 30 days (+15)",
+    "status": "meeting_booked",
+    "utm_params": {
+      "utm_source": "meta_ads",
+      "utm_campaign": "us_msp_scale_nov2026",
+      "utm_content": "video_ad_6_chasing_updates"
+    },
+    "internal_notes": "",
+    "updated_at": "2026-11-19T19:54:10.127Z"
+  },
+  {
+    "id": "lead_1795117213387_qa2ffd",
+    "created_at": "2026-11-19T19:40:13.387Z",
+    "full_name": "cfg",
+    "email": "xfabdjb@gamail.com",
+    "phone": "88888888888888",
+    "company_name": "fty",
+    "survey_answers": {
+      "business_type": "Internal corporate IT department",
+      "role": "Operations / Support Manager",
+      "serving_paying_clients": "Yes, regularly",
+      "budget_fit": "Possibly, after a demo",
+      "timeline": "Later / researching"
+    },
+    "is_qualified": false,
+    "qualification_notes": "Internal corporate IT department. Platform is for customer-facing commercial IT providers.",
+    "status": "unqualified",
+    "utm_params": {
+      "landing_page_url": "http://localhost:3000/"
+    },
+    "internal_notes": "",
+    "updated_at": "2026-11-19T19:40:28.590Z"
+  },
+  {
     "id": "lead_1795117092519_zzv8po",
     "created_at": "2026-11-19T19:38:12.519Z",
     "full_name": "Internal Corp User",

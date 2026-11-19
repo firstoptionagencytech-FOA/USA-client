@@ -5,12 +5,14 @@ import {
   LayoutDashboard,
   Users,
   Calendar,
+  CalendarDays,
   ClipboardCheck,
   Settings,
   Search,
   Filter,
   RefreshCw,
   ExternalLink,
+  ChevronLeft,
   ChevronRight,
   X,
   Phone,
@@ -30,7 +32,9 @@ import {
   ShieldCheck,
   Menu,
   Sparkles,
-  ArrowRight
+  ArrowRight,
+  List,
+  Check
 } from 'lucide-react';
 import Link from 'next/link';
 import { Lead, Booking, AdminSettings, LeadStatus } from '@/types';
@@ -41,6 +45,7 @@ export default function AdminDashboardPage() {
   const [activeTab, setActiveTab] = useState<AdminTab>('overview');
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [leads, setLeads] = useState<Lead[]>([]);
+  const [bookings, setBookings] = useState<Booking[]>([]);
   const [settings, setSettings] = useState<AdminSettings | null>(null);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
@@ -53,16 +58,24 @@ export default function AdminDashboardPage() {
   const [settingsSaving, setSettingsSaving] = useState(false);
   const [toastMessage, setToastMessage] = useState<string>('');
 
+  // Interactive Calendar State
+  const [calendarMonth, setCalendarMonth] = useState<Date>(new Date(2026, 10, 1));
+  const [selectedDate, setSelectedDate] = useState<string>('2026-11-23');
+  const [selectedBooking, setSelectedBooking] = useState<Booking | null>(null);
+  const [calendarViewMode, setCalendarViewMode] = useState<'grid' | 'agenda'>('grid');
+
   const loadAllData = async () => {
     setLoading(true);
     try {
-      const [leadsRes, settingsRes] = await Promise.all([
+      const [leadsRes, settingsRes, bookingsRes] = await Promise.all([
         fetch('/api/leads'),
         fetch('/api/admin/settings'),
+        fetch('/api/admin/bookings'),
       ]);
 
       const leadsData = await leadsRes.json();
       const settingsData = await settingsRes.json();
+      const bookingsData = await bookingsRes.json();
 
       if (leadsData.success) {
         setLeads(leadsData.leads || []);
@@ -71,10 +84,36 @@ export default function AdminDashboardPage() {
         setSettings(settingsData.settings);
         setSettingsDraft(settingsData.settings);
       }
+      if (bookingsData.success) {
+        setBookings(bookingsData.bookings || []);
+        if (bookingsData.bookings?.length > 0) {
+          setSelectedBooking(bookingsData.bookings[0]);
+        }
+      }
     } catch (err) {
       console.error('Failed to load CRM data:', err);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleUpdateBookingStatus = async (bookingId: string, status: Booking['status']) => {
+    try {
+      const res = await fetch(`/api/admin/bookings/${bookingId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setBookings(prev => prev.map(b => (b.id === bookingId ? { ...b, status } : b)));
+        if (selectedBooking?.id === bookingId) {
+          setSelectedBooking(prev => (prev ? { ...prev, status } : null));
+        }
+        showToast(`Meeting status marked as ${status}.`);
+      }
+    } catch (e) {
+      console.error('Failed to update booking status:', e);
     }
   };
 
@@ -833,92 +872,502 @@ export default function AdminDashboardPage() {
             </div>
           )}
 
-          {/* TAB 3: DEMO APPOINTMENTS & MEETINGS */}
-          {activeTab === 'meetings' && (
-            <div className="bg-white rounded-2xl border border-slate-200/80 shadow-xs p-6 space-y-6 animate-in fade-in duration-200">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100">
-                <div>
-                  <h3 className="text-base font-extrabold text-slate-900">
-                    Confirmed Google Calendar Appointments
-                  </h3>
-                  <p className="text-xs text-slate-500">
-                    Live FreeBusy availability synchronizing directly with the connected admin Google Calendar.
-                  </p>
-                </div>
+          {/* TAB 3: DEMO APPOINTMENTS & INTERACTIVE GOOGLE CALENDAR */}
+          {activeTab === 'meetings' && (() => {
+            // Calendar calculation helpers
+            const year = calendarMonth.getFullYear();
+            const month = calendarMonth.getMonth();
+            const monthName = calendarMonth.toLocaleString('en-US', { month: 'long', year: 'numeric' });
 
-                <div className="flex items-center gap-2">
-                  <span className="px-3 py-1 rounded-full bg-brand-50 text-brand-800 border border-brand-200 text-xs font-bold">
-                    Admin Timezone: {settings?.business_timezone || 'America/New_York'}
-                  </span>
-                </div>
-              </div>
+            const firstDayIndex = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const daysInPrevMonth = new Date(year, month, 0).getDate();
 
-              {/* Bookings List */}
-              <div className="space-y-4">
-                {leads.filter(l => l.status === 'meeting_booked').length === 0 ? (
-                  <div className="py-12 text-center text-slate-400 text-xs border border-dashed border-slate-200 rounded-2xl">
-                    No confirmed meetings yet. When qualified prospects complete the calendar step, appointments appear here automatically with Google Meet links.
+            type DayCell = {
+              date: Date;
+              dayNum: number;
+              dateString: string;
+              isCurrentMonth: boolean;
+              isToday: boolean;
+            };
+
+            const cells: DayCell[] = [];
+            const todayStr = new Date().toISOString().split('T')[0];
+
+            // Trailing days of previous month
+            for (let i = firstDayIndex - 1; i >= 0; i--) {
+              const dNum = daysInPrevMonth - i;
+              const d = new Date(year, month - 1, dNum);
+              const dStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(dNum).padStart(2, '0')}`;
+              cells.push({
+                date: d,
+                dayNum: dNum,
+                dateString: dStr,
+                isCurrentMonth: false,
+                isToday: dStr === todayStr,
+              });
+            }
+
+            // Current month days
+            for (let i = 1; i <= daysInMonth; i++) {
+              const d = new Date(year, month, i);
+              const dStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
+              cells.push({
+                date: d,
+                dayNum: i,
+                dateString: dStr,
+                isCurrentMonth: true,
+                isToday: dStr === todayStr,
+              });
+            }
+
+            // Leading days of next month
+            const remaining = (7 - (cells.length % 7)) % 7;
+            for (let i = 1; i <= remaining; i++) {
+              const d = new Date(year, month + 1, i);
+              const dStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
+              cells.push({
+                date: d,
+                dayNum: i,
+                dateString: dStr,
+                isCurrentMonth: false,
+                isToday: dStr === todayStr,
+              });
+            }
+
+            // Selected date appointments
+            const selectedDayBookings = bookings.filter(b => {
+              const bDate = b.meeting_start ? b.meeting_start.split('T')[0] : '';
+              return bDate === selectedDate;
+            });
+
+            const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+            return (
+              <div className="space-y-6 animate-in fade-in duration-200">
+                {/* Calendar Header with Controls */}
+                <div className="bg-white rounded-2xl border border-slate-200/80 shadow-xs p-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-brand-50 border border-brand-200 flex items-center justify-center text-brand-700">
+                      <CalendarDays className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <h2 className="text-lg font-black text-slate-900 font-display">{monthName}</h2>
+                        <span className="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-bold inline-flex items-center gap-1">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                          Live GCal Sync
+                        </span>
+                      </div>
+                      <p className="text-xs text-slate-500">
+                        Admin Timezone: <strong className="text-slate-700">{settings?.business_timezone || 'America/New_York'}</strong> · {bookings.length} Total Booked Sessions
+                      </p>
+                    </div>
                   </div>
-                ) : (
-                  leads
-                    .filter(l => l.status === 'meeting_booked')
-                    .map(lead => (
-                      <div
-                        key={lead.id}
-                        className="p-5 rounded-2xl border border-pink-100 bg-[#FCFAFB] hover:border-pink-300 transition-all flex flex-col md:flex-row md:items-center justify-between gap-4"
-                      >
-                        <div className="space-y-1.5">
-                          <div className="flex items-center gap-2">
-                            <span className="text-sm font-black text-slate-900 font-display">{lead.full_name}</span>
-                            <span className="text-xs font-semibold text-slate-600">({lead.company_name || 'Independent'})</span>
-                            <span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold">
-                              Confirmed
-                            </span>
-                          </div>
 
-                          <div className="flex flex-wrap items-center gap-3 text-xs text-slate-500">
-                            <span className="flex items-center gap-1">
-                              <Mail className="w-3.5 h-3.5 text-brand-700" />
-                              <a href={`mailto:${lead.email}`} className="text-brand-800 font-semibold hover:underline">
-                                {lead.email}
-                              </a>
-                            </span>
-                            <span>·</span>
-                            <span className="flex items-center gap-1">
-                              <Phone className="w-3.5 h-3.5 text-brand-700" />
-                              <span>{lead.phone}</span>
-                            </span>
-                            <span>·</span>
-                            <span className="font-semibold text-slate-700">
-                              Timeline: {lead.survey_answers?.timeline || 'Immediate'}
-                            </span>
+                  <div className="flex flex-wrap items-center gap-2">
+                    {/* Month Nav Buttons */}
+                    <div className="flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200">
+                      <button
+                        onClick={() => setCalendarMonth(new Date(year, month - 1, 1))}
+                        className="p-1.5 rounded-lg hover:bg-white text-slate-700 transition-colors cursor-pointer"
+                        title="Previous Month"
+                      >
+                        <ChevronLeft className="w-4 h-4" />
+                      </button>
+                      <button
+                        onClick={() => {
+                          const now = new Date();
+                          setCalendarMonth(new Date(now.getFullYear(), now.getMonth(), 1));
+                          setSelectedDate(now.toISOString().split('T')[0]);
+                        }}
+                        className="px-2.5 py-1 text-xs font-bold text-slate-700 hover:bg-white rounded-lg transition-colors cursor-pointer"
+                      >
+                        Today
+                      </button>
+                      <button
+                        onClick={() => setCalendarMonth(new Date(year, month + 1, 1))}
+                        className="p-1.5 rounded-lg hover:bg-white text-slate-700 transition-colors cursor-pointer"
+                        title="Next Month"
+                      >
+                        <ChevronRight className="w-4 h-4" />
+                      </button>
+                    </div>
+
+                    {/* View Switcher: Grid vs Agenda */}
+                    <div className="flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200">
+                      <button
+                        onClick={() => setCalendarViewMode('grid')}
+                        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                          calendarViewMode === 'grid'
+                            ? 'bg-white text-brand-800 shadow-2xs'
+                            : 'text-slate-600 hover:text-slate-900'
+                        }`}
+                      >
+                        <CalendarDays className="w-3.5 h-3.5" />
+                        <span>Grid</span>
+                      </button>
+                      <button
+                        onClick={() => setCalendarViewMode('agenda')}
+                        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                          calendarViewMode === 'agenda'
+                            ? 'bg-white text-brand-800 shadow-2xs'
+                            : 'text-slate-600 hover:text-slate-900'
+                        }`}
+                      >
+                        <List className="w-3.5 h-3.5" />
+                        <span>Agenda</span>
+                      </button>
+                    </div>
+
+                    <button
+                      onClick={loadAllData}
+                      className="p-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-600 transition-colors cursor-pointer"
+                      title="Refresh FreeBusy data"
+                    >
+                      <RefreshCw className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+
+                {calendarViewMode === 'grid' ? (
+                  /* ================= MONTH GRID VIEW + SIDE AGENDA ================= */
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                    
+                    {/* Left: 7-Column Interactive Month Grid */}
+                    <div className="lg:col-span-8 bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden">
+                      {/* Day Names Bar */}
+                      <div className="grid grid-cols-7 border-b border-slate-200 bg-slate-50/80 text-center py-2.5 text-[11px] font-extrabold text-slate-600 uppercase tracking-wider">
+                        {dayNames.map(d => (
+                          <div key={d} className={d === 'Sun' || d === 'Sat' ? 'text-slate-400' : ''}>
+                            {d}
                           </div>
+                        ))}
+                      </div>
+
+                      {/* Days Grid */}
+                      <div className="grid grid-cols-7 divide-x divide-y divide-slate-100">
+                        {cells.map((cell, idx) => {
+                          const cellBookings = bookings.filter(b => {
+                            const bDate = b.meeting_start ? b.meeting_start.split('T')[0] : '';
+                            return bDate === cell.dateString;
+                          });
+                          const isSelected = selectedDate === cell.dateString;
+
+                          return (
+                            <div
+                              key={idx}
+                              onClick={() => {
+                                setSelectedDate(cell.dateString);
+                                if (cellBookings.length > 0) {
+                                  setSelectedBooking(cellBookings[0]);
+                                }
+                              }}
+                              className={`min-h-[96px] p-2 flex flex-col justify-between transition-all cursor-pointer ${
+                                !cell.isCurrentMonth
+                                  ? 'bg-slate-50/40 text-slate-300'
+                                  : isSelected
+                                  ? 'bg-pink-50/50 ring-2 ring-inset ring-brand-700/80'
+                                  : 'hover:bg-slate-50/70 text-slate-800 bg-white'
+                              }`}
+                            >
+                              <div className="flex items-center justify-between">
+                                <span
+                                  className={`text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center ${
+                                    cell.isToday
+                                      ? 'bg-brand-700 text-white font-extrabold shadow-xs'
+                                      : isSelected
+                                      ? 'text-brand-900 font-black'
+                                      : cell.isCurrentMonth
+                                      ? 'text-slate-800'
+                                      : 'text-slate-300'
+                                  }`}
+                                >
+                                  {cell.dayNum}
+                                </span>
+
+                                {cellBookings.length > 0 && (
+                                  <span className="w-2 h-2 rounded-full bg-emerald-500 ring-2 ring-emerald-200" />
+                                )}
+                              </div>
+
+                              {/* Meeting Chips on Date */}
+                              <div className="space-y-1 mt-1">
+                                {cellBookings.slice(0, 2).map(b => {
+                                  const leadObj = b.lead || leads.find(l => l.id === b.lead_id);
+                                  const timeFormatted = new Date(b.meeting_start).toLocaleTimeString('en-US', {
+                                    hour: 'numeric',
+                                    minute: '2-digit',
+                                    hour12: true,
+                                  });
+
+                                  return (
+                                    <div
+                                      key={b.id}
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        setSelectedDate(cell.dateString);
+                                        setSelectedBooking(b);
+                                      }}
+                                      className="px-1.5 py-0.5 rounded text-[10px] font-bold truncate transition-colors flex items-center gap-1 bg-[#8B0032] text-white hover:bg-[#680026] shadow-2xs"
+                                      title={`${timeFormatted} - ${leadObj?.company_name || leadObj?.full_name || 'Prospect'}`}
+                                    >
+                                      <Clock className="w-2.5 h-2.5 shrink-0 opacity-80" />
+                                      <span className="truncate">{timeFormatted}</span>
+                                    </div>
+                                  );
+                                })}
+
+                                {cellBookings.length > 2 && (
+                                  <div className="text-[9px] font-bold text-slate-500 text-right pr-1">
+                                    +{cellBookings.length - 2} more
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    {/* Right: Selected Date Agenda Detail Panel */}
+                    <div className="lg:col-span-4 space-y-4">
+                      <div className="bg-white rounded-2xl border border-slate-200/80 shadow-xs p-5">
+                        <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+                          <div>
+                            <div className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400">
+                              Selected Date
+                            </div>
+                            <h3 className="text-sm font-black text-slate-900">
+                              {new Date(selectedDate + 'T00:00:00').toLocaleDateString('en-US', {
+                                weekday: 'short',
+                                month: 'short',
+                                day: 'numeric',
+                                year: 'numeric',
+                              })}
+                            </h3>
+                          </div>
+                          <span className="px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-bold">
+                            {selectedDayBookings.length} {selectedDayBookings.length === 1 ? 'Meeting' : 'Meetings'}
+                          </span>
                         </div>
 
-                        <div className="flex items-center gap-2.5">
-                          <a
-                            href={`https://meet.google.com`}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="px-3.5 py-2 rounded-xl bg-brand-700 hover:bg-brand-800 text-white text-xs font-bold flex items-center gap-1.5 shadow-xs transition-colors"
-                          >
-                            <Video className="w-3.5 h-3.5" />
-                            <span>Open Google Meet</span>
-                          </a>
+                        {/* Meetings on Selected Day */}
+                        <div className="mt-4 space-y-3">
+                          {selectedDayBookings.length === 0 ? (
+                            <div className="py-8 text-center text-slate-400 text-xs border border-dashed border-slate-200 rounded-xl">
+                              No demo appointments scheduled for this date.
+                            </div>
+                          ) : (
+                            selectedDayBookings.map(b => {
+                              const leadObj = b.lead || leads.find(l => l.id === b.lead_id);
+                              const isCur = selectedBooking?.id === b.id;
 
-                          <button
-                            onClick={() => setSelectedLead(lead)}
-                            className="px-3.5 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-xs font-bold text-slate-700 transition-colors"
-                          >
-                            View Record
-                          </button>
+                              const startTime = new Date(b.meeting_start).toLocaleTimeString('en-US', {
+                                hour: 'numeric',
+                                minute: '2-digit',
+                                hour12: true,
+                              });
+                              const endTime = new Date(b.meeting_end).toLocaleTimeString('en-US', {
+                                hour: 'numeric',
+                                minute: '2-digit',
+                                hour12: true,
+                              });
+
+                              return (
+                                <div
+                                  key={b.id}
+                                  onClick={() => setSelectedBooking(b)}
+                                  className={`p-3.5 rounded-xl border transition-all cursor-pointer ${
+                                    isCur
+                                      ? 'border-brand-700 bg-pink-50/40 shadow-xs'
+                                      : 'border-slate-200 bg-slate-50/40 hover:bg-slate-50'
+                                  }`}
+                                >
+                                  <div className="flex items-center justify-between mb-1.5">
+                                    <div className="flex items-center gap-1.5 text-xs font-extrabold text-brand-900">
+                                      <Clock className="w-3.5 h-3.5 text-brand-700" />
+                                      <span>{startTime} – {endTime}</span>
+                                    </div>
+                                    <span
+                                      className={`text-[9px] font-extrabold uppercase px-2 py-0.5 rounded-full ${
+                                        b.status === 'confirmed'
+                                          ? 'bg-emerald-100 text-emerald-800'
+                                          : b.status === 'completed'
+                                          ? 'bg-slate-200 text-slate-700'
+                                          : 'bg-rose-100 text-rose-800'
+                                      }`}
+                                    >
+                                      {b.status}
+                                    </span>
+                                  </div>
+
+                                  <div className="text-xs font-bold text-slate-900">
+                                    {leadObj?.full_name || 'Prospect'}
+                                  </div>
+                                  <div className="text-[11px] text-slate-500 mb-2">
+                                    {leadObj?.company_name || 'IT Support Business'}
+                                  </div>
+
+                                  <div className="flex items-center gap-2 pt-2 border-t border-slate-200/60">
+                                    {b.meeting_link && (
+                                      <a
+                                        href={b.meeting_link}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        className="flex-1 py-1.5 px-2 bg-brand-700 hover:bg-brand-800 text-white rounded-lg text-[11px] font-bold flex items-center justify-center gap-1 transition-colors"
+                                      >
+                                        <Video className="w-3 h-3" />
+                                        <span>Google Meet</span>
+                                      </a>
+                                    )}
+
+                                    {leadObj && (
+                                      <button
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          setSelectedLead(leadObj);
+                                        }}
+                                        className="py-1.5 px-2.5 border border-slate-200 hover:bg-white rounded-lg text-[11px] font-bold text-slate-700 transition-colors cursor-pointer"
+                                      >
+                                        Lead Record
+                                      </button>
+                                    )}
+                                  </div>
+                                </div>
+                              );
+                            })
+                          )}
                         </div>
                       </div>
-                    ))
+
+                      {/* Active Booking Detailed Card */}
+                      {selectedBooking && (
+                        <div className="bg-white rounded-2xl border border-slate-200/80 shadow-xs p-5 space-y-3">
+                          <div className="text-xs font-extrabold text-slate-900 pb-2 border-b border-slate-100 flex items-center justify-between">
+                            <span>Meeting Control & Actions</span>
+                            <span className="text-[10px] text-slate-400 font-mono">ID: {selectedBooking.id.slice(0, 10)}</span>
+                          </div>
+
+                          <div className="text-xs space-y-1.5 text-slate-600">
+                            <div>
+                              <strong>Title:</strong> {selectedBooking.meeting_title}
+                            </div>
+                            <div>
+                              <strong>Prospect Zone:</strong> {selectedBooking.prospect_timezone}
+                            </div>
+                            <div>
+                              <strong>Admin Zone:</strong> {selectedBooking.admin_timezone}
+                            </div>
+                          </div>
+
+                          <div className="pt-2 flex flex-col gap-2">
+                            <div className="text-[10px] uppercase font-bold text-slate-400">Update Booking State</div>
+                            <div className="grid grid-cols-2 gap-2">
+                              <button
+                                onClick={() => handleUpdateBookingStatus(selectedBooking.id, 'completed')}
+                                className="px-2.5 py-1.5 rounded-lg bg-emerald-50 text-emerald-700 hover:bg-emerald-100 text-xs font-bold border border-emerald-200 transition-colors flex items-center justify-center gap-1 cursor-pointer"
+                              >
+                                <Check className="w-3.5 h-3.5" />
+                                <span>Completed</span>
+                              </button>
+                              <button
+                                onClick={() => handleUpdateBookingStatus(selectedBooking.id, 'no_show')}
+                                className="px-2.5 py-1.5 rounded-lg bg-rose-50 text-rose-700 hover:bg-rose-100 text-xs font-bold border border-rose-200 transition-colors flex items-center justify-center gap-1 cursor-pointer"
+                              >
+                                <X className="w-3.5 h-3.5" />
+                                <span>No-Show</span>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
+                  </div>
+                ) : (
+                  /* ================= AGENDA CHRONOLOGICAL LIST VIEW ================= */
+                  <div className="bg-white rounded-2xl border border-slate-200/80 shadow-xs p-6 space-y-4">
+                    <div className="text-sm font-extrabold text-slate-900 pb-3 border-b border-slate-100">
+                      Chronological Agenda ({bookings.length} Confirmed Appointments)
+                    </div>
+
+                    {bookings.length === 0 ? (
+                      <div className="py-12 text-center text-slate-400 text-xs border border-dashed border-slate-200 rounded-2xl">
+                        No meetings booked yet.
+                      </div>
+                    ) : (
+                      <div className="space-y-3">
+                        {bookings.map(b => {
+                          const leadObj = b.lead || leads.find(l => l.id === b.lead_id);
+                          const dateObj = new Date(b.meeting_start);
+                          const dateFormatted = dateObj.toLocaleDateString('en-US', {
+                            weekday: 'short',
+                            month: 'short',
+                            day: 'numeric',
+                            year: 'numeric',
+                          });
+                          const timeFormatted = dateObj.toLocaleTimeString('en-US', {
+                            hour: 'numeric',
+                            minute: '2-digit',
+                            hour12: true,
+                          });
+
+                          return (
+                            <div
+                              key={b.id}
+                              className="p-4 rounded-xl border border-slate-200 bg-slate-50/50 hover:border-pink-300 transition-all flex flex-col md:flex-row md:items-center justify-between gap-4"
+                            >
+                              <div className="space-y-1">
+                                <div className="flex items-center gap-2">
+                                  <span className="text-xs font-black text-brand-900 bg-brand-50 px-2 py-0.5 rounded border border-brand-200">
+                                    {dateFormatted} · {timeFormatted}
+                                  </span>
+                                  <span className="text-sm font-extrabold text-slate-900">
+                                    {leadObj?.full_name || 'Prospect'}
+                                  </span>
+                                  <span className="text-xs text-slate-500">
+                                    ({leadObj?.company_name || 'MSP'})
+                                  </span>
+                                </div>
+                                <div className="text-xs text-slate-500 flex items-center gap-3">
+                                  <span>Email: <strong className="text-slate-700">{leadObj?.email || 'N/A'}</strong></span>
+                                  <span>Phone: <strong className="text-slate-700">{leadObj?.phone || 'N/A'}</strong></span>
+                                </div>
+                              </div>
+
+                              <div className="flex items-center gap-2">
+                                {b.meeting_link && (
+                                  <a
+                                    href={b.meeting_link}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="px-3 py-1.5 rounded-lg bg-brand-700 hover:bg-brand-800 text-white text-xs font-bold flex items-center gap-1.5 transition-colors"
+                                  >
+                                    <Video className="w-3.5 h-3.5" />
+                                    <span>Google Meet</span>
+                                  </a>
+                                )}
+                                {leadObj && (
+                                  <button
+                                    onClick={() => setSelectedLead(leadObj)}
+                                    className="px-3 py-1.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-xs font-bold text-slate-700 transition-colors"
+                                  >
+                                    Lead Profile
+                                  </button>
+                                )}
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
                 )}
+
               </div>
-            </div>
-          )}
+            );
+          })()}
 
           {/* TAB 4: SURVEY ENGINE & QUESTION CONFIG (3 VS 5 QUESTIONS) */}
           {activeTab === 'survey_config' && (
