@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #FCF9FA;
+  --foreground: #111827;
+  --brand-wine: #8B0032;
+  --brand-wine-dark: #67001F;
+  --brand-wine-light: #B02B5E;
+  --brand-rose: #FAF0F4;
+  --brand-border: #F1D4E0;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F8F3F6;
+}
+::-webkit-scrollbar-thumb {
+  background: #D9AABF;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #B02B5E;
+}
+
+/* Dot pattern background */
+.bg-dots {
+  background-image: radial-gradient(#D9AABF 1.2px, transparent 1.2px);
+  background-size: 18px 18px;
+}
+
+/* Glassmorphism */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(241, 212, 224, 0.6);
+}
+
+.glass-shield {
+  background: linear-gradient(135deg, rgba(255, 46, 126, 0.25), rgba(139, 0, 50, 0.65));
+  backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 10px 30px rgba(225, 29, 88, 0.35);
+}
+
+/* CTA Pill Glow */
+.cta-glow-btn {
+  background: linear-gradient(180deg, #9C093B 0%, #750025 100%);
+  box-shadow: 0 6px 24px rgba(139, 0, 50, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cta-glow-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(139, 0, 50, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+}
+
+.cta-glow-btn:active {
+  transform: translateY(1px);
+}

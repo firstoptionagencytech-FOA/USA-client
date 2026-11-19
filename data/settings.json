@@ -1,0 +1,24 @@
+{
+  "id": "default",
+  "google_calendar_connected": true,
+  "google_calendar_id": "primary",
+  "business_timezone": "America/New_York",
+  "working_hours_start": "09:00",
+  "working_hours_end": "17:00",
+  "working_days": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "meeting_duration_minutes": 30,
+  "buffer_before_minutes": 15,
+  "buffer_after_minutes": 15,
+  "min_notice_hours": 4,
+  "booking_window_days": 14,
+  "survey_mode": "5_questions",
+  "pricing_package_visible": true,
+  "meta_pixel_id": "",
+  "updated_at": "2026-11-19T18:52:53.311Z"
+}

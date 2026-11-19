@@ -1,0 +1,248 @@
+JIT HELPDESK — LANDING PAGE DEVELOPMENT TASK
+Project: US Market Lead Generation Landing PageProduct: JIT Helpdesk — Branded Mobile App & Web PortalCampaign: Meta Ads → Landing Page → Qualification Survey → Calendar BookingPrimary Goal: Generate high-quality demo appointments from US IT service business owners.
+Priority: High — Required before launching paid advertising.
+TASK 1 — Build a High-Converting Hero Section
+Objective: Visitors must understand the product and its main benefit within 5 seconds.
+Headline
+Your Clients Shouldn't Have to Chase You for IT Support Updates.
+Subheadline
+Give your IT business its own branded mobile app and customer web portal—so clients can request help, approve quotes, make payments, and track progress, all under your business name.
+Pricing
+$400 One-Time Setup + $200/Month
+Primary CTA
+Book Your Free Personalized Demo
+Design Requirements
+Show a real branded mobile app and web portal side by side.
+Include a preview of the owner admin dashboard.
+Use actual JIT Helpdesk screenshots, not generic software images.
+Display the CTA prominently without requiring scrolling.
+Design for mobile devices first.
+Make the product branding and pricing immediately visible.
+Expected result: A visitor immediately understands what JIT Helpdesk offers, who it serves, and why they should request a demo.
+TASK 2 — Add a Real Product Demonstration
+Objective: Build trust by showing the software in action.
+Video Requirements
+Create a 30–45-second product walkthrough, using actual software footage.
+Show the following sequence:
+Customer opens the branded mobile app or web portal.
+Customer submits an IT support request.
+Business owner reviews the request.
+Customer receives and approves a quote.
+Customer completes the configured payment process.
+Customer checks the progress of the request.
+Business owner manages requests through the admin dashboard.
+Development Requirements
+Add readable on-screen captions.
+Video should work without sound.
+Use a lightweight video player with a preview image.
+Avoid slowing down the landing page.
+Include a CTA immediately below the video.
+CTA: See How JIT Helpdesk Works — Book a Demo
+Important: Use only genuine, demonstrable product workflows. If payments or integrations are shown using demo data, label them clearly.
+TASK 3 — Create the Pain Points Section
+Section Heading:
+Great IT Support Shouldn't Feel Disorganized.
+Create three visually attractive cards.
+Card 1 — Scattered Customer Requests
+Problem: Customer requests arrive through calls, texts, and different communication channels.
+Solution: Give customers a dedicated branded place to submit and follow requests.
+Card 2 — Endless Follow-Ups
+Problem: Customers repeatedly ask for updates because they don't know the status of their work.
+Solution: Let customers check service progress through their own portal.
+Card 3 — Quotes and Payment Confusion
+Problem: Quotes, approvals, and payment information become difficult to track.
+Solution: Bring the supported quote, approval, and payment workflows into one connected experience.
+Design: Use simple icons and short text. Avoid long paragraphs.
+TASK 4 — Show the Business Benefits
+Section Heading:
+Don't Just Manage Support. Build a Better Customer Experience.
+Create four benefit blocks:
+1. Save Administrative Time
+Reduce dependence on scattered messages and repetitive status updates.
+2. Create a Professional Brand Experience
+Give customers a mobile app and web portal displaying your business identity.
+3. Make Customer Approvals Easier
+Provide a clearer process for reviewing quotes, approving work, and completing payment steps.
+4. Support Repeat Business
+Highlight available loyalty and referral features that can help businesses encourage returning customers.
+Important: Do not promise guaranteed revenue increases, customer retention, or time savings.
+TASK 5 — Add Pricing and an Illustrative Profitability Example
+Pricing Section
+Your Own Branded Mobile App & Web Portal
+$400 One-Time Setup + $200/Month
+Display the confirmed package features:
+Branded mobile app
+Branded web portal
+Owner admin dashboard
+Service request management
+Quotes and approvals
+Payment workflows
+Progress tracking
+Unlimited agents
+Hosting, maintenance, and updates
+CTA: Book Your Free Personalized Demo
+Business Value Example
+Heading: What Would It Take to Cover the Cost?
+Display two comparison cards:
+First-Year Platform Cost
+Illustrative Additional Annual Contribution
+$2,800
+$3,000
+$400 setup + 12 × $200
+12 extra jobs × $250 contribution each
+Supporting copy:
+If your business gained just one additional completed service job per month, with $250 contribution profit per job, that would represent $3,000 in additional annual contribution—enough to cover the $2,800 first-year platform fee.
+Mandatory disclaimer:
+Illustrative example only. JIT Helpdesk does not guarantee additional customers, jobs, revenue, or profit. Actual results depend on business performance, operating costs, and implementation.
+Critical Approval Requirement
+The client has confirmed that both mobile and web apps are included in this package. However, the previously reviewed public product page displayed different mobile-app pricing.
+Do not publish the pricing section until the client confirms the complete package terms in writing and the public website is consistent.
+Also verify any app-store publishing fees, third-party integration costs, transaction fees, and usage limits.
+TASK 6 — Build the Qualification Survey
+Objective: Filter irrelevant visitors before they reach the sales calendar.
+The CTA should redirect visitors to a short survey.
+Required Questions
+Q1. What type of business do you operate?
+IT support / Managed IT services
+Computer repair / Onsite IT services
+Independent IT consultant
+Internal corporate IT department
+Other
+Q2. What is your role?
+Owner / Founder
+Partner / Director
+Operations / Support Manager
+Other
+Q3. Do you currently serve paying IT support customers?
+Yes, regularly
+Yes, occasionally
+Not yet
+Q4. Is $400 setup + $200/month within your budget?
+Yes
+Possibly, after a demo
+No
+Q5. When are you considering implementation?
+Within 30 days
+Within 1–3 months
+Later / researching
+Survey Requirements
+Clean, fast, mobile-friendly layout.
+Progress indicator.
+Avoid unnecessary fields.
+Capture name, business name, work email, and phone number where appropriate.
+Store answers with the lead record.
+Apply agreed qualification rules before calendar access.
+Provide a polite alternative response for prospects who are not qualified.
+Include appropriate privacy and consent notices.
+TASK 7 — Integrate the Calendar Booking System
+Required Flow:
+Meta Video Ad → Landing Page → Survey → Qualified Lead → Calendar → Booking Confirmation
+Requirements
+Show the calendar after successful qualification.
+Offer meeting times suitable for US time zones.
+Collect prospect details and survey answers.
+Prevent duplicate or incomplete bookings.
+Show a confirmation page after a successful booking.
+Send booking confirmation and reminders where configured.
+Notify the sales team when a qualified demo is booked.
+Success event: A confirmed appointment—not simply a click on the calendar.
+TASK 8 — Install Meta Pixel and Conversion Tracking
+Objective: Measure the full funnel and help optimise for meaningful leads.
+Events to Track
+Visitor Action
+Tracking Event
+Landing page opened
+PageView
+Survey started
+Custom SurveyStart
+Valid survey submitted
+Lead
+Prospect meets qualification criteria
+QualifiedLead / CRM status
+Appointment successfully booked
+Schedule
+Demo attended
+CRM attended status
+Additional Requirements
+Configure Meta Pixel correctly.
+Add Conversions API if technically feasible.
+Deduplicate browser and server events.
+Capture UTM campaign and creative identifiers.
+Track Scripts #6, #7, and #8 separately.
+Test events using Meta Events Manager.
+Ensure privacy disclosures and consent handling are appropriate.
+Main reporting KPI: Cost per qualified booked demo.
+TASK 9 — Match the Landing Page to the Three Video Ads
+All three ads should lead to the same core product offer.
+Ad #6 — Clients Chasing Updates
+Landing-page message: Make it easier for clients to check service progress.
+Ad #7 — Missed Requests
+Landing-page message: Organize requests and service workflows through one dashboard.
+Ad #8 — Competitive Advantage
+Landing-page message: Give customers a more professional experience through your branded mobile app and web portal.
+The landing page must communicate all three benefits clearly.
+If technically simple, support creative-specific headline variations through URL parameters. This is optional; accurate tracking and one strong page are higher priorities.
+TASK 10 — Mobile Design, Speed and Trust
+Mobile Requirements
+Responsive design for mobile, tablet, and desktop.
+Clear hero headline and visible CTA on small screens.
+Optional sticky bottom CTA on mobile.
+Readable typography and large touch targets.
+Optimized screenshots, images, and video.
+No intrusive popups.
+Performance Requirements
+Target Core Web Vitals: LCP within 2.5 seconds, INP within 200 milliseconds, and CLS no higher than 0.1 at the 75th percentile.
+Test on real mobile devices and slower connections.
+Check all CTA links, survey steps, and calendar redirects.
+Trust Requirements
+Use genuine product screenshots.
+Clearly describe onboarding and implementation.
+Include relevant FAQs.
+Explain integration requirements.
+Add only genuine testimonials or customer logos with permission.
+Include Privacy Policy, Terms, and company contact information.
+Keep all pricing and product claims consistent with the approved offer.
+TASK 11 — Final Page Layout
+The landing page should follow this order:
+Hero: Pain-point headline, mobile + web visual, price, CTA.
+Problem: Scattered requests, repeated follow-ups, quote confusion.
+Product Demo: 30–45-second actual software walkthrough.
+Solution: Mobile app, web portal, owner dashboard.
+Business Benefits: Time, professionalism, approvals, repeat business.
+How It Works: Request → Quote → Approval → Payment → Progress.
+Pricing: $400 setup + $200/month.
+Illustrative Business Case: First-year cost versus possible additional contribution.
+Who It's For: IT service companies, MSPs, computer repair businesses.
+FAQs and Trust: Implementation, support, integrations, package details.
+Final CTA: Book Your Free Personalized Demo.
+TASK 12 — Final Testing and Delivery
+Before launch, developer must complete:
+Mobile and desktop landing page finished.
+Actual product screenshots uploaded.
+Product demo video working correctly.
+Pricing and package claims approved.
+All CTA buttons working.
+Survey responses saved correctly.
+Qualification rules tested.
+Calendar booking and confirmation tested.
+Meta Pixel events verified.
+Conversion tracking and UTMs tested.
+Mobile speed and layout tested.
+Privacy, contact, and trust information added.
+Client reviews and approves final page.
+Final Deliverables
+Deliverable 1: Live responsive landing page.
+Deliverable 2: Working qualification survey.
+Deliverable 3: Connected calendar booking and confirmation flow.
+Deliverable 4: Meta Pixel / conversion tracking setup.
+Deliverable 5: Tested, launch-ready funnel for the three Meta video ads.
+PROJECT SUCCESS CRITERIA
+The page is successful from a development perspective when:
+A US IT service business owner can understand the offer within five seconds.
+The mobile app, web portal, and owner dashboard are clearly demonstrated.
+The pricing and included features are accurate.
+A visitor can complete the survey and book a demo without errors.
+The team can distinguish qualified leads from unqualified visitors.
+Meta Ads tracking accurately records survey submissions and confirmed bookings.
+Primary business objective: Generate qualified sales appointments—not simply website traffic.
+Project: JIT Helpdesk — US Performance Marketing FunnelPrepared for: Landing Page Design & Development Team
