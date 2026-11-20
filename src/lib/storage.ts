@@ -1,8 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { Lead, Booking, AdminSettings } from '@/types';
-import { rtdb } from './firebase';
-import { ref, get, set, update } from 'firebase/database';
+import { rtdbAdminFetch } from './firebase';
 
 const DATA_DIR = path.join(process.cwd(), 'data');
 const LEADS_FILE = path.join(DATA_DIR, 'leads.json');
@@ -59,13 +58,11 @@ function writeJsonFile<T>(filePath: string, data: T) {
 // ================= LEAD OPERATIONS =================
 export async function getLeads(): Promise<Lead[]> {
   try {
-    const snapshot = await get(ref(rtdb, 'leads'));
-    if (snapshot.exists()) {
-      const val = snapshot.val();
+    const val = await rtdbAdminFetch<Record<string, Lead>>('leads');
+    if (val && typeof val === 'object') {
       const list: Lead[] = Array.isArray(val)
         ? val.filter(Boolean)
         : Object.values(val);
-      // Sort by created_at desc
       return list.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
     }
   } catch (e) {
@@ -76,10 +73,8 @@ export async function getLeads(): Promise<Lead[]> {
 
 export async function getLeadById(id: string): Promise<Lead | null> {
   try {
-    const snapshot = await get(ref(rtdb, `leads/${id}`));
-    if (snapshot.exists()) {
-      return snapshot.val() as Lead;
-    }
+    const lead = await rtdbAdminFetch<Lead>(`leads/${id}`);
+    if (lead) return lead;
   } catch (e) {
     console.warn('Firebase RTDB getLeadById warning:', e);
   }
@@ -97,16 +92,16 @@ export async function saveLead(leadData: Omit<Lead, 'id' | 'created_at' | 'updat
 
   const newLead: Lead = {
     survey_answers: {},
-    is_qualified: false,
+    is_qualified: true,
     ...leadData,
     id,
     created_at: now,
     updated_at: now,
   };
 
-  // 1. Save to Firebase Realtime Database
+  // 1. Save to Firebase Realtime Database with master admin bypass
   try {
-    await set(ref(rtdb, `leads/${id}`), newLead);
+    await rtdbAdminFetch(`leads/${id}`, { method: 'PUT', body: newLead });
   } catch (e) {
     console.error('Firebase RTDB saveLead error:', e);
   }
@@ -129,7 +124,7 @@ export async function updateLead(id: string, updates: Partial<Lead>): Promise<Le
 
   // 1. Update in Firebase Realtime Database
   try {
-    await update(ref(rtdb, `leads/${id}`), leadUpdates);
+    await rtdbAdminFetch(`leads/${id}`, { method: 'PATCH', body: leadUpdates });
   } catch (e) {
     console.error('Firebase RTDB updateLead error:', e);
   }
@@ -157,9 +152,8 @@ export async function updateLeadStatus(id: string, status: Lead['status'], inter
 // ================= BOOKING OPERATIONS =================
 export async function getBookings(): Promise<Booking[]> {
   try {
-    const snapshot = await get(ref(rtdb, 'bookings'));
-    if (snapshot.exists()) {
-      const val = snapshot.val();
+    const val = await rtdbAdminFetch<Record<string, Booking>>('bookings');
+    if (val && typeof val === 'object') {
       const list: Booking[] = Array.isArray(val)
         ? val.filter(Boolean)
         : Object.values(val);
@@ -173,10 +167,8 @@ export async function getBookings(): Promise<Booking[]> {
 
 export async function getBookingById(id: string): Promise<Booking | null> {
   try {
-    const snapshot = await get(ref(rtdb, `bookings/${id}`));
-    if (snapshot.exists()) {
-      return snapshot.val() as Booking;
-    }
+    const booking = await rtdbAdminFetch<Booking>(`bookings/${id}`);
+    if (booking) return booking;
   } catch (e) {
     console.warn('Firebase RTDB getBookingById warning:', e);
   }
@@ -200,7 +192,7 @@ export async function saveBooking(bookingData: Omit<Booking, 'id' | 'created_at'
 
   // 1. Save to Firebase Realtime Database
   try {
-    await set(ref(rtdb, `bookings/${id}`), newBooking);
+    await rtdbAdminFetch(`bookings/${id}`, { method: 'PUT', body: newBooking });
   } catch (e) {
     console.error('Firebase RTDB saveBooking error:', e);
   }
@@ -223,7 +215,7 @@ export async function updateBooking(id: string, updates: Partial<Booking>): Prom
 
   // 1. Update in Firebase Realtime Database
   try {
-    await update(ref(rtdb, `bookings/${id}`), bookingUpdates);
+    await rtdbAdminFetch(`bookings/${id}`, { method: 'PATCH', body: bookingUpdates });
   } catch (e) {
     console.error('Firebase RTDB updateBooking error:', e);
   }
@@ -251,9 +243,9 @@ export async function updateBookingStatus(id: string, status: Booking['status'],
 // ================= SETTINGS OPERATIONS =================
 export async function getSettings(): Promise<AdminSettings> {
   try {
-    const snapshot = await get(ref(rtdb, 'settings'));
-    if (snapshot.exists()) {
-      return { ...DEFAULT_SETTINGS, ...snapshot.val() };
+    const val = await rtdbAdminFetch<AdminSettings>('settings');
+    if (val && typeof val === 'object' && Object.keys(val).length > 0) {
+      return { ...DEFAULT_SETTINGS, ...val };
     }
   } catch (e) {
     console.warn('Firebase RTDB getSettings warning:', e);
@@ -271,7 +263,7 @@ export async function updateSettings(updates: Partial<AdminSettings>): Promise<A
 
   // 1. Save to Firebase Realtime Database
   try {
-    await set(ref(rtdb, 'settings'), updated);
+    await rtdbAdminFetch('settings', { method: 'PATCH', body: updated });
   } catch (e) {
     console.error('Firebase RTDB updateSettings error:', e);
   }
