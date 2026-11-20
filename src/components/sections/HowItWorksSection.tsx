@@ -42,7 +42,7 @@ export const HowItWorksSection: React.FC<HowItWorksProps> = ({ onOpenBooking }) 
   ];
 
   return (
-    <section className="py-20 px-4 bg-[#F8FAFC] relative">
+    <section className="py-20 px-4 bg-[#f6f6ef] relative">
       <div className="max-w-6xl mx-auto">
         
         {/* Section Header */}
@@ -61,7 +61,7 @@ export const HowItWorksSection: React.FC<HowItWorksProps> = ({ onOpenBooking }) 
         {/* 5-Step Connected Timeline */}
         <div className="relative">
           {/* Connector Line (Desktop) */}
-          <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-blue-200 via-blue-400 to-blue-200 -translate-y-8 z-0" />
+          <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-[#dce3d4] via-[#274c3b] to-[#dce3d4] -translate-y-8 z-0" />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 relative z-10">
             {steps.map((s, idx) => {

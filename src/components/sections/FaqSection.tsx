@@ -39,7 +39,7 @@ export const FaqSection: React.FC = () => {
         
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-blue-50 border border-blue-200 text-brand-800 text-xs font-bold uppercase tracking-wider mb-4">
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#edf3e3] border border-[#dce3d4] text-brand-800 text-xs font-bold uppercase tracking-wider mb-4">
             <HelpCircle className="w-3.5 h-3.5 text-brand-700" />
             <span>Answers to Common Questions</span>
           </div>
@@ -58,17 +58,17 @@ export const FaqSection: React.FC = () => {
             return (
               <div
                 key={idx}
-                className="bg-[#F8FAFC] rounded-2xl border border-slate-200 overflow-hidden transition-all duration-200"
+                className="bg-[#f6f6ef] rounded-2xl border border-slate-200 overflow-hidden transition-all duration-200"
               >
                 <button
                   onClick={() => setOpenIdx(isOpen ? null : idx)}
-                  className="w-full py-4.5 px-6 flex items-center justify-between text-left gap-4 hover:bg-blue-50/50 transition-colors cursor-pointer"
+                  className="w-full py-4.5 px-6 flex items-center justify-between text-left gap-4 hover:bg-[#edf3e3]/50 transition-colors cursor-pointer"
                 >
                   <span className="text-sm sm:text-base font-extrabold text-slate-900 tracking-tight">
                     {item.q}
                   </span>
                   <div
-                    className={`w-7 h-7 rounded-full bg-white border border-blue-200 flex items-center justify-center shrink-0 transition-transform duration-200 ${
+                    className={`w-7 h-7 rounded-full bg-white border border-[#dce3d4] flex items-center justify-center shrink-0 transition-transform duration-200 ${
                       isOpen ? 'rotate-180 bg-brand-50 text-brand-700' : 'text-slate-500'
                     }`}
                   >

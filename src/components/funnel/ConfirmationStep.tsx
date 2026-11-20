@@ -52,7 +52,7 @@ export const ConfirmationStep: React.FC<ConfirmationStepProps> = ({ booking, onC
       </p>
 
       {/* Appointment Summary Card */}
-      <div className="bg-[#F8FAFC] rounded-2xl p-5 border border-slate-200 text-left max-w-md mx-auto mb-6 space-y-3">
+      <div className="bg-[#f6f6ef] rounded-2xl p-5 border border-slate-200 text-left max-w-md mx-auto mb-6 space-y-3">
         <div className="flex items-start gap-3">
           <Calendar className="w-4 h-4 text-brand-700 shrink-0 mt-0.5" />
           <div>

@@ -10,7 +10,7 @@ interface FinalCtaSectionProps {
 
 export const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({ onOpenBooking }) => {
   return (
-    <footer className="relative bg-gradient-to-b from-[#0B0F19] via-[#0F172A] to-[#020617] text-white pt-20 pb-12 px-4 overflow-hidden">
+    <footer className="relative bg-gradient-to-b from-[#11201b] via-[#182c26] to-[#0b1512] text-white pt-20 pb-12 px-4 overflow-hidden">
       
       {/* Decorative ambient glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-brand-700/25 blur-[120px] pointer-events-none rounded-full" />
@@ -18,7 +18,7 @@ export const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({ onOpenBooking 
       <div className="max-w-4xl mx-auto relative z-10 text-center">
         
         {/* Brand Kicker with Official Jewar Logo */}
-        <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/10 text-blue-300 text-xs font-bold uppercase tracking-wider mb-6">
+        <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/10 text-[#d2f56d] text-xs font-bold uppercase tracking-wider mb-6">
           <img src="/brand/jewar_emblem.png" alt="Jewar Logo" className="w-4 h-4 object-contain" />
           <span>Jewar International Technologies</span>
         </div>
@@ -48,13 +48,13 @@ export const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({ onOpenBooking 
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </button>
 
-          <span className="text-xs text-blue-200/70 font-medium">
+          <span className="text-xs text-[#edf3e3]/70 font-medium">
             For IT service business owners and decision-makers exploring a branded customer experience.
           </span>
         </div>
 
         {/* Bottom Legal & Navigation Bar */}
-        <div className="pt-10 border-t border-white/15 flex flex-col sm:flex-row items-center justify-between text-xs text-blue-200/60 gap-4">
+        <div className="pt-10 border-t border-white/15 flex flex-col sm:flex-row items-center justify-between text-xs text-[#edf3e3]/60 gap-4">
           <div className="flex items-center gap-2">
             <img src="/brand/jewar_emblem.png" alt="Jewar Logo" className="w-4 h-4 object-contain inline shrink-0" />
             <span>© {new Date().getFullYear()} JIT Helpdesk. A product by Jewar International Technologies.</span>
@@ -66,7 +66,7 @@ export const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({ onOpenBooking 
             <span className="hover:text-white cursor-pointer">Security Safeguards</span>
             <Link
               href="/admin"
-              className="inline-flex items-center gap-1 text-blue-400 hover:text-white font-semibold underline underline-offset-4"
+              className="inline-flex items-center gap-1 text-[#d2f56d] hover:text-white font-semibold underline underline-offset-4"
             >
               <Lock className="w-3 h-3" />
               <span>CRM Portal</span>

@@ -14,7 +14,7 @@ export const BusinessCaseSection: React.FC<BusinessCaseSectionProps> = ({ onOpen
         
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-blue-50 border border-blue-200 text-brand-800 text-xs font-bold uppercase tracking-wider mb-4">
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#edf3e3] border border-[#dce3d4] text-brand-800 text-xs font-bold uppercase tracking-wider mb-4">
             <Calculator className="w-3.5 h-3.5 text-brand-700" />
             <span>Illustrative Business Case</span>
           </div>
@@ -30,7 +30,7 @@ export const BusinessCaseSection: React.FC<BusinessCaseSectionProps> = ({ onOpen
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           
           {/* Card 1: First-Year Platform Cost */}
-          <div className="bg-[#F1F5F9] rounded-3xl p-7 sm:p-8 border border-slate-200 shadow-xs flex flex-col justify-between">
+          <div className="bg-[#edf3e3] rounded-3xl p-7 sm:p-8 border border-slate-200 shadow-xs flex flex-col justify-between">
             <div>
               <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
                 Annual Investment
@@ -53,10 +53,10 @@ export const BusinessCaseSection: React.FC<BusinessCaseSectionProps> = ({ onOpen
           </div>
 
           {/* Card 2: Illustrative Additional Annual Contribution */}
-          <div className="bg-gradient-to-br from-[#0B0F19] via-[#0F172A] to-[#1E293B] rounded-3xl p-7 sm:p-8 text-white shadow-xl flex flex-col justify-between">
+          <div className="bg-gradient-to-br from-[#11201b] via-[#182c26] to-[#274c3b] rounded-3xl p-7 sm:p-8 text-white shadow-xl flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold uppercase tracking-wider text-blue-300">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#d2f56d]">
                   Illustrative Potential
                 </span>
                 <span className="p-1.5 rounded-full bg-white/10 text-emerald-300">
@@ -84,7 +84,7 @@ export const BusinessCaseSection: React.FC<BusinessCaseSectionProps> = ({ onOpen
         </div>
 
         {/* Supporting Copy Box */}
-        <div className="bg-[#F8FAFC] rounded-2xl p-6 border border-slate-200/80 mb-6 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="bg-[#f6f6ef] rounded-2xl p-6 border border-slate-200/80 mb-6 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">
             If your business gained just <strong>one additional completed service job per month</strong>, with $250 contribution profit per job, that would represent <strong>$3,000 in additional annual contribution</strong>—enough to cover the $2,800 first-year platform fee.
           </p>

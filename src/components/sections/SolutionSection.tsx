@@ -73,7 +73,7 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenBooking 
             return (
               <div
                 key={idx}
-                className="bg-[#F8FAFC] rounded-3xl p-6 sm:p-8 border border-slate-200 hover:border-blue-400 hover:shadow-card-soft transition-all duration-300 flex flex-col justify-between"
+                className="bg-[#f6f6ef] rounded-3xl p-6 sm:p-8 border border-slate-200 hover:border-[#274c3b] hover:shadow-card-soft transition-all duration-300 flex flex-col justify-between"
               >
                 <div>
                   <div className="w-12 h-12 rounded-2xl bg-white border border-slate-200 text-brand-700 shadow-xs flex items-center justify-center mb-6">
@@ -98,9 +98,9 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenBooking 
           })}
 
           {/* 6th Card: Custom Package Summary CTA */}
-          <div className="bg-gradient-to-br from-[#0B0F19] to-[#1E293B] rounded-3xl p-6 sm:p-8 text-white flex flex-col justify-between shadow-xl">
+          <div className="bg-gradient-to-br from-[#182c26] to-[#274c3b] rounded-3xl p-6 sm:p-8 text-white flex flex-col justify-between shadow-xl">
             <div>
-              <span className="px-3 py-1 rounded-full bg-white/10 text-blue-300 text-xs font-bold tracking-wider uppercase mb-4 inline-block">
+              <span className="px-3 py-1 rounded-full bg-white/10 text-[#d2f56d] text-xs font-bold tracking-wider uppercase mb-4 inline-block">
                 All-Inclusive Setup
               </span>
               <h3 className="text-xl sm:text-2xl font-black font-display mb-3">
@@ -114,7 +114,7 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenBooking 
             <div className="pt-6">
               <button
                 onClick={onOpenBooking}
-                className="w-full py-3.5 px-6 rounded-full bg-white hover:bg-blue-50 text-brand-900 font-extrabold text-xs sm:text-sm transition-colors shadow-md cursor-pointer"
+                className="w-full py-3.5 px-6 rounded-full bg-white hover:bg-[#edf3e3] text-brand-900 font-extrabold text-xs sm:text-sm transition-colors shadow-md cursor-pointer"
               >
                 See JIT Helpdesk in Action →
               </button>

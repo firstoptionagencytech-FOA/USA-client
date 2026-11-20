@@ -100,12 +100,12 @@ export const ProductDemoSection: React.FC<ProductDemoSectionProps> = ({ onOpenBo
   ];
 
   return (
-    <section className="py-20 px-4 bg-[#F8FAFC] border-y border-slate-200 relative">
+    <section className="py-20 px-4 bg-[#f6f6ef] border-y border-slate-200 relative">
       <div className="max-w-6xl mx-auto">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white border border-blue-200 text-brand-700 text-xs font-bold uppercase tracking-wider mb-4 shadow-2xs">
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white border border-[#dce3d4] text-brand-700 text-xs font-bold uppercase tracking-wider mb-4 shadow-2xs">
             <Sparkles className="w-3.5 h-3.5 text-brand-700" />
             <span>Interactive Software Walkthrough</span>
           </div>
@@ -156,7 +156,7 @@ export const ProductDemoSection: React.FC<ProductDemoSectionProps> = ({ onOpenBo
               </span>
             </div>
             
-            <span className="px-2.5 py-0.5 rounded-full bg-brand-800/80 text-blue-300 text-[10px] font-bold tracking-wider uppercase">
+            <span className="px-2.5 py-0.5 rounded-full bg-brand-800/80 text-[#d2f56d] text-[10px] font-bold tracking-wider uppercase">
               Illustrative Interactive Preview
             </span>
           </div>

@@ -77,23 +77,23 @@ export const LaptopMockup: React.FC = () => {
       
       {/* Floating Interactive Badge */}
       <div className="absolute -top-3.5 right-6 z-30">
-        <div className="px-3 py-1 rounded-full bg-[#0F172A] text-white text-[10px] font-extrabold shadow-md flex items-center gap-1.5 border border-blue-400/40">
-          <Sparkles className="w-3 h-3 text-blue-400" />
+        <div className="px-3 py-1 rounded-full bg-[#182c26] text-[#d2f56d] text-[10px] font-extrabold shadow-md flex items-center gap-1.5 border border-[#d2f56d]/30">
+          <Sparkles className="w-3 h-3 text-[#d2f56d]" />
           <span>Interactive Owner Portal</span>
         </div>
       </div>
 
-      {/* Laptop Screen Outer Bezel */}
-      <div className="relative rounded-t-[18px] sm:rounded-t-[22px] bg-[#0F172A] p-2 sm:p-2.5 shadow-[0_30px_70px_-20px_rgba(15,23,42,0.45)] border-t border-x border-slate-700/50">
+      {/* Laptop Screen Outer Bezel - Jewar Pine Obsidian */}
+      <div className="relative rounded-t-[18px] sm:rounded-t-[22px] bg-[#182c26] p-2 sm:p-2.5 shadow-[0_30px_70px_-20px_rgba(24,44,38,0.45)] border-t border-x border-[#274c3b]/50">
         
         {/* Webcam dot */}
-        <div className="absolute top-1.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-slate-800 ring-1 ring-slate-700/50" />
+        <div className="absolute top-1.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#0b1512] ring-1 ring-[#274c3b]" />
 
         {/* Inner Screen Surface */}
-        <div className="relative overflow-hidden rounded-t-[12px] sm:rounded-t-[14px] bg-[#F8FAFC] flex h-[350px] sm:h-[380px] border border-slate-200 text-slate-800">
+        <div className="relative overflow-hidden rounded-t-[12px] sm:rounded-t-[14px] bg-[#f6f6ef] flex h-[350px] sm:h-[380px] border border-[#dce3d4] text-[#182c26]">
           
-          {/* Admin Sidebar - High Aura Midnight Executive */}
-          <div className="w-[125px] sm:w-[140px] bg-[#0B0F19] text-slate-200 flex flex-col justify-between py-3 px-2 sm:px-2.5 shrink-0 border-r border-slate-800">
+          {/* Admin Sidebar - Jewar Deskora Midnight Pine */}
+          <div className="w-[125px] sm:w-[140px] bg-[#182c26] text-[#edf3e3] flex flex-col justify-between py-3 px-2 sm:px-2.5 shrink-0 border-r border-[#274c3b]">
             <div>
               {/* Brand Header */}
               <div className="flex items-center gap-1.5 mb-4 px-1 pt-1">
@@ -115,8 +115,8 @@ export const LaptopMockup: React.FC = () => {
                   onClick={() => setActiveTab('dashboard')}
                   className={`w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-left transition-all cursor-pointer ${
                     activeTab === 'dashboard'
-                      ? 'bg-blue-600 text-white font-extrabold shadow-sm'
-                      : 'text-slate-300 hover:bg-white/10'
+                      ? 'bg-[#274c3b] text-[#d2f56d] font-extrabold shadow-sm border-l-3 border-[#d2f56d]'
+                      : 'text-[#dce3d4] hover:bg-white/10'
                   }`}
                 >
                   <LayoutDashboard className="w-3.5 h-3.5" />
@@ -127,8 +127,8 @@ export const LaptopMockup: React.FC = () => {
                   onClick={() => setActiveTab('tickets')}
                   className={`w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-left transition-all cursor-pointer ${
                     activeTab === 'tickets'
-                      ? 'bg-blue-600 text-white font-extrabold shadow-sm'
-                      : 'text-slate-300 hover:bg-white/10'
+                      ? 'bg-[#274c3b] text-[#d2f56d] font-extrabold shadow-sm border-l-3 border-[#d2f56d]'
+                      : 'text-[#dce3d4] hover:bg-white/10'
                   }`}
                 >
                   <Ticket className="w-3.5 h-3.5" />
@@ -139,8 +139,8 @@ export const LaptopMockup: React.FC = () => {
                   onClick={() => setActiveTab('quotes')}
                   className={`w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-left transition-all cursor-pointer ${
                     activeTab === 'quotes'
-                      ? 'bg-blue-600 text-white font-extrabold shadow-sm'
-                      : 'text-slate-300 hover:bg-white/10'
+                      ? 'bg-[#274c3b] text-[#d2f56d] font-extrabold shadow-sm border-l-3 border-[#d2f56d]'
+                      : 'text-[#dce3d4] hover:bg-white/10'
                   }`}
                 >
                   <FileText className="w-3.5 h-3.5" />
@@ -151,8 +151,8 @@ export const LaptopMockup: React.FC = () => {
                   onClick={() => setActiveTab('payments')}
                   className={`w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-left transition-all cursor-pointer ${
                     activeTab === 'payments'
-                      ? 'bg-blue-600 text-white font-extrabold shadow-sm'
-                      : 'text-slate-300 hover:bg-white/10'
+                      ? 'bg-[#274c3b] text-[#d2f56d] font-extrabold shadow-sm border-l-3 border-[#d2f56d]'
+                      : 'text-[#dce3d4] hover:bg-white/10'
                   }`}
                 >
                   <CreditCard className="w-3.5 h-3.5" />
@@ -163,8 +163,8 @@ export const LaptopMockup: React.FC = () => {
                   onClick={() => setActiveTab('clients')}
                   className={`w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-left transition-all cursor-pointer ${
                     activeTab === 'clients'
-                      ? 'bg-blue-600 text-white font-extrabold shadow-sm'
-                      : 'text-slate-300 hover:bg-white/10'
+                      ? 'bg-[#274c3b] text-[#d2f56d] font-extrabold shadow-sm border-l-3 border-[#d2f56d]'
+                      : 'text-[#dce3d4] hover:bg-white/10'
                   }`}
                 >
                   <Users className="w-3.5 h-3.5" />
@@ -174,26 +174,26 @@ export const LaptopMockup: React.FC = () => {
             </div>
 
             {/* Bottom branding tag */}
-            <div className="px-2 pt-2 border-t border-slate-800 text-[9px] text-blue-300/70 font-mono">
-              v2.4 MSP US
+            <div className="px-2 pt-2 border-t border-[#274c3b] text-[9px] text-[#d2f56d]/70 font-mono">
+              Deskora Core v2.4
             </div>
           </div>
 
           {/* Main Dashboard Canvas */}
-          <div className="flex-1 flex flex-col p-3 sm:p-3.5 overflow-hidden bg-slate-50/70">
+          <div className="flex-1 flex flex-col p-3 sm:p-3.5 overflow-hidden bg-[#f6f6ef]">
             
             {/* Topbar */}
-            <div className="flex items-center justify-between pb-2.5 border-b border-slate-200/70 shrink-0">
-              <h3 className="font-extrabold text-xs sm:text-sm text-slate-900 tracking-tight capitalize">
+            <div className="flex items-center justify-between pb-2.5 border-b border-[#dce3d4] shrink-0">
+              <h3 className="font-extrabold text-xs sm:text-sm text-[#182c26] tracking-tight capitalize">
                 {activeTab} Overview
               </h3>
               
-              <div className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-white border border-slate-200 shadow-xs">
-                <div className="w-4 h-4 rounded-full bg-blue-600 text-white font-bold text-[8px] flex items-center justify-center">
+              <div className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-white border border-[#dce3d4] shadow-xs">
+                <div className="w-4 h-4 rounded-full bg-[#182c26] text-[#d2f56d] font-bold text-[8px] flex items-center justify-center">
                   JD
                 </div>
-                <span className="text-[10px] font-bold text-slate-700">John Doe</span>
-                <ChevronDown className="w-3 h-3 text-slate-400" />
+                <span className="text-[10px] font-bold text-[#182c26]">John Doe</span>
+                <ChevronDown className="w-3 h-3 text-[#61705f]" />
               </div>
             </div>
 
@@ -203,23 +203,23 @@ export const LaptopMockup: React.FC = () => {
                 
                 {/* 3 Metric Summary Cards (Animated Numbers on Scroll) */}
                 <div className="grid grid-cols-3 gap-2 shrink-0">
-                  <div className="bg-white rounded-xl p-2 sm:p-2.5 border border-slate-200 shadow-2xs">
-                    <div className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Total Tickets</div>
-                    <div className="text-base sm:text-lg font-black text-slate-900 font-display">
+                  <div className="bg-white rounded-xl p-2 sm:p-2.5 border border-[#dce3d4] shadow-2xs">
+                    <div className="text-[9px] font-bold text-[#61705f] uppercase tracking-wider">Total Tickets</div>
+                    <div className="text-base sm:text-lg font-black text-[#182c26] font-display">
                       {totalTickets}
                     </div>
                   </div>
 
-                  <div className="bg-white rounded-xl p-2 sm:p-2.5 border border-purple-100 shadow-2xs">
-                    <div className="text-[9px] font-bold text-purple-600 uppercase tracking-wider">Resolved</div>
-                    <div className="text-base sm:text-lg font-black text-purple-900 font-display">
+                  <div className="bg-white rounded-xl p-2 sm:p-2.5 border border-[#dce3d4] shadow-2xs">
+                    <div className="text-[9px] font-bold text-emerald-700 uppercase tracking-wider">Resolved</div>
+                    <div className="text-base sm:text-lg font-black text-emerald-900 font-display">
                       {resolvedTickets}
                     </div>
                   </div>
 
-                  <div className="bg-white rounded-xl p-2 sm:p-2.5 border border-emerald-100 shadow-2xs">
-                    <div className="text-[9px] font-bold text-emerald-600 uppercase tracking-wider">In Progress</div>
-                    <div className="text-base sm:text-lg font-black text-emerald-900 font-display">
+                  <div className="bg-white rounded-xl p-2 sm:p-2.5 border border-[#dce3d4] shadow-2xs">
+                    <div className="text-[9px] font-bold text-[#8c5e13] uppercase tracking-wider">In Progress</div>
+                    <div className="text-base sm:text-lg font-black text-[#8c5e13] font-display">
                       {inProgressTickets}
                     </div>
                   </div>
@@ -229,10 +229,10 @@ export const LaptopMockup: React.FC = () => {
                 <div className="grid grid-cols-12 gap-2 my-2 flex-1 items-stretch">
                   
                   {/* Left: Support Overview Curve (Animated bottom to top) */}
-                  <div className="col-span-8 bg-white rounded-xl p-2.5 border border-slate-200/80 shadow-2xs flex flex-col justify-between">
+                  <div className="col-span-8 bg-white rounded-xl p-2.5 border border-[#dce3d4] shadow-2xs flex flex-col justify-between">
                     <div className="flex items-center justify-between pb-1">
-                      <span className="text-[10px] font-black text-slate-800">Support Overview</span>
-                      <span className="text-[9px] font-extrabold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">
+                      <span className="text-[10px] font-black text-[#182c26]">Support Overview</span>
+                      <span className="text-[9px] font-extrabold text-[#274c3b] bg-[#edf3e3] px-1.5 py-0.5 rounded border border-[#dce3d4]">
                         +{growth}% This Month
                       </span>
                     </div>
@@ -246,28 +246,28 @@ export const LaptopMockup: React.FC = () => {
                         } origin-bottom`}
                       >
                         <defs>
-                          <linearGradient id="chartGradientBlue" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stopColor="#2563EB" stopOpacity="0.35" />
-                            <stop offset="100%" stopColor="#2563EB" stopOpacity="0.0" />
+                          <linearGradient id="chartGradientJewar" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#274c3b" stopOpacity="0.3" />
+                            <stop offset="100%" stopColor="#274c3b" stopOpacity="0.0" />
                           </linearGradient>
                         </defs>
 
                         {/* Background Grid Lines */}
-                        <line x1="0" y1="20" x2="300" y2="20" stroke="#f1f5f9" strokeDasharray="3 3" />
-                        <line x1="0" y1="60" x2="300" y2="60" stroke="#f1f5f9" strokeDasharray="3 3" />
-                        <line x1="0" y1="100" x2="300" y2="100" stroke="#f1f5f9" strokeDasharray="3 3" />
+                        <line x1="0" y1="20" x2="300" y2="20" stroke="#f0f3eb" strokeDasharray="3 3" />
+                        <line x1="0" y1="60" x2="300" y2="60" stroke="#f0f3eb" strokeDasharray="3 3" />
+                        <line x1="0" y1="100" x2="300" y2="100" stroke="#f0f3eb" strokeDasharray="3 3" />
 
                         {/* Area Fill */}
                         <path
                           d="M0 100 C 40 85, 70 95, 100 70 C 130 50, 160 80, 200 45 C 240 25, 270 40, 300 20 L 300 120 L 0 120 Z"
-                          fill="url(#chartGradientBlue)"
+                          fill="url(#chartGradientJewar)"
                         />
 
                         {/* Foreground Line */}
                         <path
                           d="M0 100 C 40 85, 70 95, 100 70 C 130 50, 160 80, 200 45 C 240 25, 270 40, 300 20"
                           fill="none"
-                          stroke="#2563EB"
+                          stroke="#274c3b"
                           strokeWidth="3"
                           strokeLinecap="round"
                         />
@@ -286,8 +286,8 @@ export const LaptopMockup: React.FC = () => {
                             cx={pt.cx}
                             cy={pt.cy}
                             r={hoveredMonth === pt.month ? 5 : 3.5}
-                            fill={hoveredMonth === pt.month ? '#2563EB' : '#ffffff'}
-                            stroke="#2563EB"
+                            fill={hoveredMonth === pt.month ? '#d2f56d' : '#274c3b'}
+                            stroke="#182c26"
                             strokeWidth="2"
                             className="cursor-pointer transition-all"
                             onMouseEnter={() => setHoveredMonth(pt.month)}
@@ -298,7 +298,7 @@ export const LaptopMockup: React.FC = () => {
                     </div>
 
                     {/* Months bar */}
-                    <div className="flex justify-between text-[8px] font-bold text-slate-400 pt-1 border-t border-slate-100">
+                    <div className="flex justify-between text-[8px] font-bold text-[#61705f] pt-1 border-t border-[#dce3d4]">
                       <span>Jan</span>
                       <span>Feb</span>
                       <span>Mar</span>
@@ -309,21 +309,21 @@ export const LaptopMockup: React.FC = () => {
                   </div>
 
                   {/* Right: Service Status Gauge (Animated 0 to 92%) */}
-                  <div className="col-span-4 bg-white rounded-xl p-2 sm:p-2.5 border border-slate-200/80 shadow-2xs flex flex-col items-center justify-between text-center">
-                    <span className="text-[10px] font-black text-slate-800">Service Status</span>
+                  <div className="col-span-4 bg-white rounded-xl p-2 sm:p-2.5 border border-[#dce3d4] shadow-2xs flex flex-col items-center justify-between text-center">
+                    <span className="text-[10px] font-black text-[#182c26]">Service Status</span>
 
                     {/* Circular Percentage Ring */}
                     <div className="relative w-16 h-16 sm:w-18 sm:h-18 flex items-center justify-center my-1">
                       <svg className="w-full h-full -rotate-90" viewBox="0 0 36 36">
                         <path
-                          className="text-slate-100"
+                          className="text-[#edf3e3]"
                           strokeWidth="3.5"
                           stroke="currentColor"
                           fill="none"
                           d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
                         />
                         <path
-                          className="text-blue-600 transition-all duration-1000 ease-out"
+                          className="text-[#274c3b] transition-all duration-1000 ease-out"
                           strokeDasharray={`${satisfaction}, 100`}
                           strokeWidth="3.5"
                           strokeLinecap="round"
@@ -333,13 +333,13 @@ export const LaptopMockup: React.FC = () => {
                         />
                       </svg>
                       <div className="absolute text-center">
-                        <span className="text-xs sm:text-sm font-black text-slate-900 font-display">
+                        <span className="text-xs sm:text-sm font-black text-[#182c26] font-display">
                           {satisfaction}%
                         </span>
                       </div>
                     </div>
 
-                    <div className="text-[8px] font-extrabold text-slate-500 uppercase tracking-tight">
+                    <div className="text-[8px] font-extrabold text-[#61705f] uppercase tracking-tight">
                       Client Satisfaction
                     </div>
                   </div>
@@ -357,12 +357,12 @@ export const LaptopMockup: React.FC = () => {
                   { id: '#1023', client: 'Acme Corp', subject: 'Outlook Auth Error', prio: 'Normal', status: 'Resolved' },
                   { id: '#1022', client: 'Apex Logistics', subject: 'NAS Sync Failure', prio: 'Critical', status: 'Investigating' },
                 ].map((item, idx) => (
-                  <div key={idx} className="p-2 rounded-lg bg-white border border-slate-200 flex items-center justify-between">
+                  <div key={idx} className="p-2 rounded-lg bg-white border border-[#dce3d4] flex items-center justify-between">
                     <div>
-                      <div className="font-extrabold text-slate-900">{item.id} · {item.subject}</div>
-                      <div className="text-[9px] text-slate-400">{item.client}</div>
+                      <div className="font-extrabold text-[#182c26]">{item.id} · {item.subject}</div>
+                      <div className="text-[9px] text-[#61705f]">{item.client}</div>
                     </div>
-                    <span className="px-1.5 py-0.5 rounded text-[8px] font-bold bg-blue-50 text-blue-700">
+                    <span className="px-1.5 py-0.5 rounded text-[8px] font-bold bg-[#edf3e3] text-[#274c3b]">
                       {item.status}
                     </span>
                   </div>
@@ -377,12 +377,12 @@ export const LaptopMockup: React.FC = () => {
                   { id: 'Q-804', client: 'Apex Logistics', amount: '$1,250', desc: 'Hardware Firewall Upgrade', status: 'Approved' },
                   { id: 'Q-805', client: 'Sterling Cloud', amount: '$3,400', desc: 'Azure AD Migration', status: 'Sent' },
                 ].map((q, idx) => (
-                  <div key={idx} className="p-2 rounded-lg bg-white border border-slate-200 flex items-center justify-between">
+                  <div key={idx} className="p-2 rounded-lg bg-white border border-[#dce3d4] flex items-center justify-between">
                     <div>
-                      <div className="font-extrabold text-slate-900">{q.id} · {q.desc}</div>
-                      <div className="text-[9px] text-slate-400">{q.client} · {q.amount}</div>
+                      <div className="font-extrabold text-[#182c26]">{q.id} · {q.desc}</div>
+                      <div className="text-[9px] text-[#61705f]">{q.client} · {q.amount}</div>
                     </div>
-                    <span className="px-1.5 py-0.5 rounded text-[8px] font-bold bg-emerald-50 text-emerald-700">
+                    <span className="px-1.5 py-0.5 rounded text-[8px] font-bold bg-[#edf3e3] text-emerald-800">
                       {q.status}
                     </span>
                   </div>
@@ -398,12 +398,12 @@ export const LaptopMockup: React.FC = () => {
                   { client: 'Apex Logistics', amount: '$450.00', date: 'Nov 19', status: 'Paid via Apple Pay' },
                   { client: 'Sterling Cloud', amount: '$1,200.00', date: 'Due Nov 25', status: 'Pending' },
                 ].map((p, idx) => (
-                  <div key={idx} className="p-2 rounded-lg bg-white border border-slate-200 flex items-center justify-between">
+                  <div key={idx} className="p-2 rounded-lg bg-white border border-[#dce3d4] flex items-center justify-between">
                     <div>
-                      <div className="font-extrabold text-slate-900">{p.client}</div>
-                      <div className="text-[9px] text-slate-400">{p.date} · {p.status}</div>
+                      <div className="font-extrabold text-[#182c26]">{p.client}</div>
+                      <div className="text-[9px] text-[#61705f]">{p.date} · {p.status}</div>
                     </div>
-                    <span className="font-extrabold text-slate-900">{p.amount}</span>
+                    <span className="font-extrabold text-[#182c26]">{p.amount}</span>
                   </div>
                 ))}
               </div>
@@ -417,12 +417,12 @@ export const LaptopMockup: React.FC = () => {
                   { name: 'Sterling Cloud Systems', endpoints: '98 Endpoints', mrr: '$1,200/mo' },
                   { name: 'Acme Industrial Corp', endpoints: '64 Endpoints', mrr: '$850/mo' },
                 ].map((c, idx) => (
-                  <div key={idx} className="p-2 rounded-lg bg-white border border-slate-200 flex items-center justify-between">
+                  <div key={idx} className="p-2 rounded-lg bg-white border border-[#dce3d4] flex items-center justify-between">
                     <div>
-                      <div className="font-extrabold text-slate-900">{c.name}</div>
-                      <div className="text-[9px] text-slate-400">{c.endpoints}</div>
+                      <div className="font-extrabold text-[#182c26]">{c.name}</div>
+                      <div className="text-[9px] text-[#61705f]">{c.endpoints}</div>
                     </div>
-                    <span className="font-extrabold text-blue-900">{c.mrr}</span>
+                    <span className="font-extrabold text-[#274c3b]">{c.mrr}</span>
                   </div>
                 ))}
               </div>
@@ -435,15 +435,15 @@ export const LaptopMockup: React.FC = () => {
       </div>
 
       {/* Laptop Bottom Base / Keyboard lip */}
-      <div className="relative h-3 sm:h-3.5 bg-gradient-to-b from-[#1E293B] via-[#0F172A] to-[#020617] rounded-b-[10px] sm:rounded-b-[14px] shadow-md border-t border-white/10 flex items-center justify-center">
-        <div className="w-16 sm:w-20 h-1 bg-[#0B0F19] rounded-full" />
+      <div className="relative h-3 sm:h-3.5 bg-gradient-to-b from-[#182c26] via-[#11201b] to-[#0b1512] rounded-b-[10px] sm:rounded-b-[14px] shadow-md border-t border-[#d2f56d]/20 flex items-center justify-center">
+        <div className="w-16 sm:w-20 h-1 bg-[#d2f56d]/30 rounded-full" />
       </div>
 
-      {/* Glowing 3D Tech Cobalt Shield */}
+      {/* Glowing 3D Tech Lime & Pine Shield */}
       <div className="absolute -right-3 sm:-right-5 bottom-4 sm:bottom-6 z-20 pointer-events-none select-none">
-        <div className="relative w-11 h-12 sm:w-14 sm:h-16 flex items-center justify-center filter drop-shadow-[0_10px_20px_rgba(37,99,235,0.45)]">
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-400 via-blue-600 to-indigo-900 rounded-2xl rotate-45 transform scale-90 border-2 border-white/60 shadow-inner" />
-          <Check className="relative w-6 h-6 sm:w-7 sm:h-7 text-white stroke-[3.5] z-10" />
+        <div className="relative w-11 h-12 sm:w-14 sm:h-16 flex items-center justify-center filter drop-shadow-[0_10px_20px_rgba(39,76,59,0.45)]">
+          <div className="absolute inset-0 bg-gradient-to-br from-[#d2f56d] via-[#274c3b] to-[#182c26] rounded-2xl rotate-45 transform scale-90 border-2 border-white/60 shadow-inner" />
+          <Check className="relative w-6 h-6 sm:w-7 sm:h-7 text-[#d2f56d] stroke-[3.5] z-10" />
         </div>
       </div>
 

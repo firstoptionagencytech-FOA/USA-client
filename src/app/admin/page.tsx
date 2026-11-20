@@ -269,7 +269,7 @@ export default function AdminDashboardPage() {
   ];
 
   return (
-    <div className="h-screen overflow-hidden bg-[#0B0F19] text-slate-800 flex flex-col lg:flex-row font-sans">
+    <div className="h-screen overflow-hidden bg-[#182c26] text-slate-800 flex flex-col lg:flex-row font-sans">
       
       {/* Toast Notification */}
       {toastMessage && (
@@ -280,7 +280,7 @@ export default function AdminDashboardPage() {
       )}
 
       {/* MOBILE TOPBAR */}
-      <div className="lg:hidden bg-[#0B0F19] text-white px-4 py-3 flex items-center justify-between sticky top-0 z-40 border-b border-slate-800">
+      <div className="lg:hidden bg-[#182c26] text-white px-4 py-3 flex items-center justify-between sticky top-0 z-40 border-b border-slate-800">
         <div className="flex items-center gap-2.5">
           <div className="w-7 h-7 shrink-0 flex items-center justify-center">
             <img
@@ -304,7 +304,7 @@ export default function AdminDashboardPage() {
       {/* LEFT EXECUTIVE SIDEBAR (Fixed & Beautifully Arranged)    */}
       {/* ======================================================== */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 w-64 sm:w-72 bg-[#0B0F19] text-slate-200 flex flex-col justify-between transition-transform duration-300 lg:translate-x-0 lg:static lg:h-full lg:shrink-0 border-r border-slate-800/80 shadow-2xl ${
+        className={`fixed inset-y-0 left-0 z-50 w-64 sm:w-72 bg-[#182c26] text-slate-200 flex flex-col justify-between transition-transform duration-300 lg:translate-x-0 lg:static lg:h-full lg:shrink-0 border-r border-slate-800/80 shadow-2xl ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
@@ -326,7 +326,7 @@ export default function AdminDashboardPage() {
                 </h2>
                 <div className="flex items-center gap-1.5 mt-0.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  <span className="text-[10px] text-pink-200/80 font-bold">Jewar Technologies</span>
+                  <span className="text-[10px] text-[#d2f56d]/90 font-bold">Jewar Technologies</span>
                 </div>
               </div>
             </div>
@@ -344,7 +344,7 @@ export default function AdminDashboardPage() {
             
             {/* Group 1: Pipeline */}
             <div>
-              <div className="px-3 mb-2 text-[10px] font-extrabold uppercase tracking-wider text-pink-300/50">
+              <div className="px-3 mb-2 text-[10px] font-extrabold uppercase tracking-wider text-[#dce3d4]/60">
                 Pipeline Management
               </div>
               <nav className="space-y-1">
@@ -357,12 +357,12 @@ export default function AdminDashboardPage() {
                   }}
                   className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                     activeTab === 'overview'
-                      ? 'bg-blue-600 text-white shadow-md shadow-blue-900/40'
+                      ? 'bg-[#274c3b] text-[#d2f56d] border-l-2 border-[#d2f56d] shadow-md shadow-[#0b1512]/50'
                       : 'text-slate-300 hover:bg-slate-800/70 hover:text-white'
                   }`}
                 >
                   <div className="flex items-center gap-2.5">
-                    <LayoutDashboard className="w-4 h-4 text-blue-400" />
+                    <LayoutDashboard className="w-4 h-4 text-[#d2f56d]" />
                     <span>Overview Dashboard</span>
                   </div>
                   <span className="text-[10px] bg-slate-800 px-1.5 py-0.5 rounded text-slate-300">
@@ -378,12 +378,12 @@ export default function AdminDashboardPage() {
                   }}
                   className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                     activeTab === 'leads'
-                      ? 'bg-blue-600 text-white shadow-md shadow-blue-900/40'
+                      ? 'bg-[#274c3b] text-[#d2f56d] border-l-2 border-[#d2f56d] shadow-md shadow-[#0b1512]/50'
                       : 'text-slate-300 hover:bg-slate-800/70 hover:text-white'
                   }`}
                 >
                   <div className="flex items-center gap-2.5">
-                    <Users className="w-4 h-4 text-blue-400" />
+                    <Users className="w-4 h-4 text-[#d2f56d]" />
                     <span>All Leads & Prospects</span>
                   </div>
                   <span className="text-[10px] font-black bg-slate-800 text-slate-300 px-2 py-0.5 rounded-full border border-slate-700">
@@ -399,12 +399,12 @@ export default function AdminDashboardPage() {
                   }}
                   className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                     activeTab === 'meetings'
-                      ? 'bg-blue-600 text-white shadow-md shadow-blue-900/40'
+                      ? 'bg-[#274c3b] text-[#d2f56d] border-l-2 border-[#d2f56d] shadow-md shadow-[#0b1512]/50'
                       : 'text-slate-300 hover:bg-slate-800/70 hover:text-white'
                   }`}
                 >
                   <div className="flex items-center gap-2.5">
-                    <Calendar className="w-4 h-4 text-blue-400" />
+                    <Calendar className="w-4 h-4 text-[#d2f56d]" />
                     <span>Demo Appointments</span>
                   </div>
                   {bookedMeetings > 0 && (
@@ -432,12 +432,12 @@ export default function AdminDashboardPage() {
                   }}
                   className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                     activeTab === 'survey_config'
-                      ? 'bg-blue-600 text-white shadow-md shadow-blue-900/40'
+                      ? 'bg-[#274c3b] text-[#d2f56d] border-l-2 border-[#d2f56d] shadow-md shadow-[#0b1512]/50'
                       : 'text-slate-300 hover:bg-slate-800/70 hover:text-white'
                   }`}
                 >
                   <div className="flex items-center gap-2.5">
-                    <ClipboardCheck className="w-4 h-4 text-blue-400" />
+                    <ClipboardCheck className="w-4 h-4 text-[#d2f56d]" />
                     <span>Survey Engine (3 vs 5)</span>
                   </div>
                   <span className="text-[9px] uppercase font-bold text-emerald-400 bg-emerald-950/60 px-1.5 py-0.5 rounded border border-emerald-500/30">
@@ -453,12 +453,12 @@ export default function AdminDashboardPage() {
                   }}
                   className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                     activeTab === 'settings'
-                      ? 'bg-blue-600 text-white shadow-md shadow-blue-900/40'
+                      ? 'bg-[#274c3b] text-[#d2f56d] border-l-2 border-[#d2f56d] shadow-md shadow-[#0b1512]/50'
                       : 'text-slate-300 hover:bg-slate-800/70 hover:text-white'
                   }`}
                 >
                   <div className="flex items-center gap-2.5">
-                    <Settings className="w-4 h-4 text-blue-400" />
+                    <Settings className="w-4 h-4 text-[#d2f56d]" />
                     <span>Calendar & Settings</span>
                   </div>
                 </button>
@@ -490,7 +490,7 @@ export default function AdminDashboardPage() {
         {/* Bottom Admin User Box */}
         <div className="p-4 border-t border-slate-800/80 bg-[#060911]">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-blue-600 text-white font-black text-xs flex items-center justify-center border border-white/20">
+            <div className="w-8 h-8 rounded-full bg-[#274c3b] text-[#d2f56d] border-l-2 border-[#d2f56d] font-black text-xs flex items-center justify-center border border-white/20">
               JD
             </div>
             <div className="overflow-hidden">
@@ -555,7 +555,7 @@ export default function AdminDashboardPage() {
 
                 <div className="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-xs">
                   <span className="text-[10px] font-bold text-blue-500 uppercase tracking-wider block">New Inbound</span>
-                  <div className="text-2xl font-black text-blue-600 mt-1 font-display">{newLeads}</div>
+                  <div className="text-2xl font-black text-[#274c3b] mt-1 font-display">{newLeads}</div>
                   <span className="text-[10px] text-blue-500 mt-0.5 block">Awaiting Review</span>
                 </div>
 
@@ -614,7 +614,7 @@ export default function AdminDashboardPage() {
                     <div className="text-lg font-black text-slate-900 mt-0.5">{qualifiedLeads + unqualifiedLeads} Completed</div>
                     <div className="w-full h-1.5 bg-slate-200 rounded-full mt-2">
                       <div
-                        className="h-full bg-blue-600 rounded-full"
+                        className="h-full bg-[#274c3b] rounded-full"
                         style={{ width: totalLeads > 0 ? `${((qualifiedLeads + unqualifiedLeads) / totalLeads) * 100}%` : '0%' }}
                       />
                     </div>
@@ -1075,7 +1075,7 @@ export default function AdminDashboardPage() {
                                 <span
                                   className={`text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center ${
                                     cell.isToday
-                                      ? 'bg-blue-600 text-white font-extrabold shadow-xs'
+                                      ? 'bg-[#274c3b] text-[#d2f56d] border-l-2 border-[#d2f56d] font-extrabold shadow-xs'
                                       : isSelected
                                       ? 'text-blue-900 font-black'
                                       : cell.isCurrentMonth
@@ -1109,7 +1109,7 @@ export default function AdminDashboardPage() {
                                         setSelectedDate(cell.dateString);
                                         setSelectedBooking(b);
                                       }}
-                                      className="px-1.5 py-0.5 rounded text-[10px] font-bold truncate transition-colors flex items-center gap-1 bg-slate-900 text-white hover:bg-blue-600 shadow-2xs"
+                                      className="px-1.5 py-0.5 rounded text-[10px] font-bold truncate transition-colors flex items-center gap-1 bg-slate-900 text-white hover:bg-[#274c3b] shadow-2xs"
                                       title={`${timeFormatted} - ${leadObj?.company_name || leadObj?.full_name || 'Prospect'}`}
                                     >
                                       <Clock className="w-2.5 h-2.5 shrink-0 opacity-80" />
@@ -1180,13 +1180,13 @@ export default function AdminDashboardPage() {
                                   onClick={() => setSelectedBooking(b)}
                                   className={`p-3.5 rounded-xl border transition-all cursor-pointer ${
                                     isCur
-                                      ? 'border-blue-600 bg-blue-50/40 shadow-xs'
+                                      ? 'border-[#274c3b] bg-[#edf3e3]/60 shadow-xs'
                                       : 'border-slate-200 bg-slate-50/40 hover:bg-slate-50'
                                   }`}
                                 >
                                   <div className="flex items-center justify-between mb-1.5">
                                     <div className="flex items-center gap-1.5 text-xs font-extrabold text-slate-900">
-                                      <Clock className="w-3.5 h-3.5 text-blue-600" />
+                                      <Clock className="w-3.5 h-3.5 text-[#274c3b]" />
                                       <span>{startTime} – {endTime}</span>
                                     </div>
                                     <span
@@ -1215,7 +1215,7 @@ export default function AdminDashboardPage() {
                                         href={b.meeting_link}
                                         target="_blank"
                                         rel="noreferrer"
-                                        className="flex-1 py-1.5 px-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-[11px] font-bold flex items-center justify-center gap-1 transition-colors"
+                                        className="flex-1 py-1.5 px-2 bg-[#182c26] hover:bg-[#274c3b] border border-[#d2f56d]/30 text-[#d2f56d] text-white rounded-lg text-[11px] font-bold flex items-center justify-center gap-1 transition-colors"
                                       >
                                         <Video className="w-3 h-3" />
                                         <span>Google Meet</span>

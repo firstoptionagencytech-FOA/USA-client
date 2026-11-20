@@ -11,25 +11,25 @@ interface DeviceShowcaseSectionProps {
 
 export const DeviceShowcaseSection: React.FC<DeviceShowcaseSectionProps> = ({ onOpenBooking }) => {
   return (
-    <section className="py-16 sm:py-20 px-4 bg-gradient-to-b from-[#E2E8F0] via-white to-[#F8FAFC] relative overflow-hidden">
+    <section className="py-16 sm:py-20 px-4 bg-gradient-to-b from-[#e7ece0] via-[#f6f6ef] to-[#ffffff] relative overflow-hidden">
       
       {/* Background Decor */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-blue-500/5 blur-[100px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-[#d2f56d]/10 blur-[110px] rounded-full pointer-events-none" />
 
       <div className="max-w-6xl mx-auto relative z-10">
         
         {/* Section Intro */}
         <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-blue-50 border border-blue-200/80 text-blue-900 text-xs font-bold uppercase tracking-wider mb-3 shadow-xs">
-            <Sparkles className="w-3.5 h-3.5 text-blue-600" />
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#edf3e3] border border-[#dce3d4] text-[#274c3b] text-xs font-bold uppercase tracking-wider mb-3 shadow-xs">
+            <Sparkles className="w-3.5 h-3.5 text-[#274c3b]" />
             <span>Interactive Multi-Platform Showcase</span>
           </div>
 
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight font-display mb-3">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#182c26] tracking-tight font-display mb-3">
             Branded Mobile App &amp; Owner Admin Dashboard.
           </h2>
 
-          <p className="text-xs sm:text-sm md:text-base text-slate-600 leading-relaxed">
+          <p className="text-xs sm:text-sm md:text-base text-[#61705f] leading-relaxed">
             Experience the dual interface that powers your IT business: your clients get their own intuitive branded app and web portal, while your team operates through a real-time command dashboard.
           </p>
         </div>
@@ -42,25 +42,25 @@ export const DeviceShowcaseSection: React.FC<DeviceShowcaseSectionProps> = ({ on
             <PhoneMockup />
           </div>
 
-          {/* Elegant Divider Line Between Mobile and Laptop */}
+          {/* Elegant Connected Divider Line Between Mobile and Laptop */}
           <div className="hidden lg:flex flex-col items-center justify-center px-4 self-stretch z-10 select-none min-h-[420px]">
-            <div className="w-[1.5px] flex-1 bg-gradient-to-b from-transparent via-blue-300 to-blue-600" />
+            <div className="w-[1.5px] flex-1 bg-gradient-to-b from-transparent via-[#dce3d4] to-[#274c3b]" />
             
-            <div className="my-4 px-3 py-1 rounded-full bg-white border border-blue-200 text-blue-900 text-[10px] font-extrabold shadow-sm flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
+            <div className="my-4 px-3 py-1 rounded-full bg-[#182c26] border border-[#d2f56d]/30 text-[#d2f56d] text-[10px] font-extrabold shadow-sm flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-[#d2f56d] live-indicator" />
               <span>CONNECTED</span>
             </div>
             
-            <div className="w-[1.5px] flex-1 bg-gradient-to-b from-blue-600 via-blue-300 to-transparent" />
+            <div className="w-[1.5px] flex-1 bg-gradient-to-b from-[#274c3b] via-[#dce3d4] to-transparent" />
           </div>
 
           {/* Mobile Divider Line (Horizontal) */}
           <div className="lg:hidden flex items-center justify-center w-full my-3 z-10">
-            <div className="h-[1.5px] flex-1 max-w-[100px] bg-gradient-to-r from-transparent to-blue-300" />
-            <div className="mx-3 px-3 py-1 rounded-full bg-white border border-blue-200 text-blue-900 text-[10px] font-extrabold shadow-xs">
+            <div className="h-[1.5px] flex-1 max-w-[100px] bg-gradient-to-r from-transparent to-[#274c3b]" />
+            <div className="mx-3 px-3 py-1 rounded-full bg-[#182c26] border border-[#d2f56d]/30 text-[#d2f56d] text-[10px] font-extrabold shadow-xs">
               One Connected System
             </div>
-            <div className="h-[1.5px] flex-1 max-w-[100px] bg-gradient-to-l from-transparent to-blue-300" />
+            <div className="h-[1.5px] flex-1 max-w-[100px] bg-gradient-to-l from-transparent to-[#274c3b]" />
           </div>
 
           {/* Right: Laptop Mockup */}
@@ -78,9 +78,9 @@ export const DeviceShowcaseSection: React.FC<DeviceShowcaseSectionProps> = ({ on
             ].map((text, i) => (
               <div
                 key={i}
-                className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/95 backdrop-blur-md border border-slate-200/90 shadow-card-soft text-xs font-bold text-slate-800"
+                className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/95 backdrop-blur-md border border-[#dce3d4] shadow-card-soft text-xs font-bold text-[#182c26] hover:border-[#274c3b] transition-colors"
               >
-                <div className="w-4 h-4 rounded-full bg-blue-600 text-white flex items-center justify-center shrink-0">
+                <div className="w-4 h-4 rounded-full bg-[#274c3b] text-[#d2f56d] flex items-center justify-center shrink-0">
                   <CheckCircle2 className="w-3 h-3 stroke-[2.5]" />
                 </div>
                 <span>{text}</span>
@@ -94,10 +94,10 @@ export const DeviceShowcaseSection: React.FC<DeviceShowcaseSectionProps> = ({ on
         <div className="text-center mt-8">
           <button
             onClick={onOpenBooking}
-            className="px-7 sm:px-9 py-3 sm:py-3.5 rounded-full text-white font-extrabold text-xs sm:text-sm inline-flex items-center gap-2.5 cursor-pointer bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-900 hover:from-blue-500 hover:via-blue-600 hover:to-indigo-800 shadow-[0_10px_28px_rgba(37,99,235,0.4)] active:scale-[0.98] border-t border-white/35 transition-all duration-200"
+            className="px-7 sm:px-9 py-3 sm:py-3.5 rounded-full text-white font-extrabold text-xs sm:text-sm inline-flex items-center gap-2.5 cursor-pointer bg-gradient-to-r from-[#182c26] via-[#274c3b] to-[#11201b] hover:from-[#203e30] hover:via-[#2f5a46] hover:to-[#182c26] border border-[#d2f56d] shadow-[0_10px_28px_rgba(24,44,38,0.4)] active:scale-[0.98] transition-all duration-200 group"
           >
             <span>Explore The Workspace Live — Book Demo</span>
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight className="w-4 h-4 text-[#d2f56d] transition-transform group-hover:translate-x-1" />
           </button>
         </div>
 
