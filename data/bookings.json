@@ -9,11 +9,11 @@
     "meeting_end": "2026-11-23T04:00:00.000Z",
     "admin_timezone": "America/New_York",
     "prospect_timezone": "America/New_York",
-    "status": "confirmed",
+    "status": "no_show",
     "meeting_link": "https://meet.google.com/jit-lkm8-s4u",
     "reschedule_token": "d7g249dbpy",
     "cancellation_reason": "",
-    "updated_at": "2026-11-19T18:53:15.532Z"
+    "updated_at": "2026-11-20T11:25:56.022Z"
   },
   {
     "id": "book_1795115530621_62kt9f",
