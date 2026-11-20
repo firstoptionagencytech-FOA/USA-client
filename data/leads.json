@@ -1,5 +1,55 @@
 [
   {
+    "survey_answers": {},
+    "is_qualified": false,
+    "full_name": "Pre-Deploy Health Check",
+    "email": "deploy_check@test.com",
+    "phone": "+1 (555) 999-0000",
+    "company_name": "Vercel Deployment Verification",
+    "utm_params": {},
+    "status": "new",
+    "id": "lead_1795195595438_kc5rse",
+    "created_at": "2026-11-20T17:26:35.438Z",
+    "updated_at": "2026-11-20T17:26:35.438Z"
+  },
+  {
+    "survey_answers": {
+      "business_type": "IT support / Managed IT services",
+      "role": "Partner / Director",
+      "serving_paying_clients": "Not yet",
+      "budget_fit": "Yes",
+      "timeline": "Later / researching"
+    },
+    "is_qualified": false,
+    "company_name": "fghnjm",
+    "created_at": "2026-11-20T16:58:33.915Z",
+    "email": "ramzanarsalan36@gmail.coms",
+    "full_name": "dfbjk",
+    "id": "lead_1795193906697_u4lmp6",
+    "phone": "9960997808",
+    "status": "unqualified",
+    "updated_at": "2026-11-20T16:58:33.915Z",
+    "utm_params": {
+      "landing_page_url": "http://localhost:3000/"
+    },
+    "qualification_notes": "Not yet serving paying clients. Platform is designed for businesses with active customer billing."
+  },
+  {
+    "survey_answers": {},
+    "is_qualified": false,
+    "full_name": "dfbjk",
+    "email": "ramzanarsalan36@gmail.coms",
+    "phone": "9960997808",
+    "company_name": "fghnjm",
+    "utm_params": {
+      "landing_page_url": "http://localhost:3000/"
+    },
+    "status": "new",
+    "id": "lead_1795193906697_u4lmp6",
+    "created_at": "2026-11-20T16:58:26.697Z",
+    "updated_at": "2026-11-20T16:58:26.697Z"
+  },
+  {
     "survey_answers": {
       "business_type": "Internal corporate IT department",
       "role": "Other",
