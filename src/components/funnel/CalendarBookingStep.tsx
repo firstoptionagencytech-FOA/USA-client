@@ -224,7 +224,7 @@ export const CalendarBookingStep: React.FC<CalendarBookingStepProps> = ({ leadId
                     : 'bg-white hover:bg-slate-50 border-slate-200 text-slate-800'
                 }`}
               >
-                <span className={`text-[10px] font-bold uppercase ${isSelected ? 'text-pink-200' : 'text-slate-400'}`}>
+                <span className={`text-[10px] font-bold uppercase ${isSelected ? 'text-blue-300' : 'text-slate-400'}`}>
                   {item.dayName}
                 </span>
                 <span className="text-xs font-extrabold mt-0.5">

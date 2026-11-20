@@ -52,7 +52,7 @@ export const ConfirmationStep: React.FC<ConfirmationStepProps> = ({ booking, onC
       </p>
 
       {/* Appointment Summary Card */}
-      <div className="bg-[#FAF7F9] rounded-2xl p-5 border border-pink-100 text-left max-w-md mx-auto mb-6 space-y-3">
+      <div className="bg-[#F8FAFC] rounded-2xl p-5 border border-slate-200 text-left max-w-md mx-auto mb-6 space-y-3">
         <div className="flex items-start gap-3">
           <Calendar className="w-4 h-4 text-brand-700 shrink-0 mt-0.5" />
           <div>
@@ -80,7 +80,7 @@ export const ConfirmationStep: React.FC<ConfirmationStepProps> = ({ booking, onC
         </div>
 
         {booking.meeting_link && (
-          <div className="flex items-start gap-3 pt-2 border-t border-pink-200/50">
+          <div className="flex items-start gap-3 pt-2 border-t border-slate-200">
             <Video className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
             <div>
               <div className="text-[10px] font-bold uppercase text-slate-400">Video Conference</div>

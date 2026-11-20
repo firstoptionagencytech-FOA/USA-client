@@ -59,9 +59,9 @@ export const BenefitsSection: React.FC = () => {
             return (
               <div
                 key={idx}
-                className="bg-[#FCF9FB] rounded-3xl p-7 sm:p-9 border border-pink-100 hover:border-pink-300 transition-all duration-200 flex gap-5 items-start"
+                className="bg-[#F8FAFC] rounded-3xl p-7 sm:p-9 border border-slate-200 hover:border-blue-400 transition-all duration-200 flex gap-5 items-start"
               >
-                <div className="w-12 h-12 rounded-2xl bg-white border border-pink-200 text-brand-700 shadow-xs flex items-center justify-center shrink-0">
+                <div className="w-12 h-12 rounded-2xl bg-white border border-blue-200 text-brand-700 shadow-xs flex items-center justify-center shrink-0">
                   <Icon className="w-6 h-6 stroke-[2]" />
                 </div>
                 <div>

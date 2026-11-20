@@ -36,12 +36,12 @@ export const WhoItIsForSection: React.FC<WhoItIsForSectionProps> = ({ onOpenBook
   ];
 
   return (
-    <section className="py-20 px-4 bg-[#FAF6F8] relative">
+    <section className="py-20 px-4 bg-[#F8FAFC] relative">
       <div className="max-w-6xl mx-auto">
         
         {/* Fit Analysis Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center px-3.5 py-1 rounded-full bg-white border border-pink-200 text-brand-800 text-xs font-bold uppercase tracking-wider mb-4 shadow-xs">
+          <div className="inline-flex items-center px-3.5 py-1 rounded-full bg-white border border-blue-200 text-brand-800 text-xs font-bold uppercase tracking-wider mb-4 shadow-xs">
             Audience Qualification
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight font-display mb-4">
@@ -53,7 +53,7 @@ export const WhoItIsForSection: React.FC<WhoItIsForSectionProps> = ({ onOpenBook
         </div>
 
         {/* Strong Fit Checklist Card */}
-        <div className="bg-white rounded-3xl p-8 sm:p-12 border border-pink-200/80 shadow-md max-w-4xl mx-auto mb-16">
+        <div className="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200 shadow-md max-w-4xl mx-auto mb-16">
           <h3 className="text-xl font-extrabold text-slate-900 mb-6 font-display">
             A Strong Strategic Fit If You:
           </h3>
@@ -88,7 +88,7 @@ export const WhoItIsForSection: React.FC<WhoItIsForSectionProps> = ({ onOpenBook
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
             {walkthroughItems.map((item, idx) => (
-              <div key={idx} className="p-6 rounded-2xl bg-[#FCFAFB] border border-pink-100/80">
+              <div key={idx} className="p-6 rounded-2xl bg-[#F8FAFC] border border-slate-200">
                 <div className="flex items-center gap-2 mb-2">
                   <div className="w-5 h-5 rounded-full bg-brand-700 text-white text-[11px] font-bold flex items-center justify-center">
                     {idx + 1}

@@ -21,12 +21,12 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onOpenBooking })
   ];
 
   return (
-    <section className="py-20 px-4 bg-[#FAF5F8] relative" id="pricing">
+    <section className="py-20 px-4 bg-[#F1F5F9] relative" id="pricing">
       <div className="max-w-4xl mx-auto">
         
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <div className="inline-flex items-center px-3.5 py-1 rounded-full bg-white border border-pink-200 text-brand-800 text-xs font-bold uppercase tracking-wider mb-4 shadow-xs">
+          <div className="inline-flex items-center px-3.5 py-1 rounded-full bg-white border border-blue-200 text-brand-800 text-xs font-bold uppercase tracking-wider mb-4 shadow-xs">
             Simple, Transparent Pricing
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight font-display mb-4">

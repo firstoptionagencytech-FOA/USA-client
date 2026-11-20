@@ -10,7 +10,7 @@ interface FinalCtaSectionProps {
 
 export const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({ onOpenBooking }) => {
   return (
-    <footer className="relative bg-gradient-to-b from-[#2E0010] via-[#3D0015] to-[#1F000A] text-white pt-20 pb-12 px-4 overflow-hidden">
+    <footer className="relative bg-gradient-to-b from-[#0B0F19] via-[#0F172A] to-[#020617] text-white pt-20 pb-12 px-4 overflow-hidden">
       
       {/* Decorative ambient glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-brand-700/25 blur-[120px] pointer-events-none rounded-full" />
@@ -18,7 +18,7 @@ export const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({ onOpenBooking 
       <div className="max-w-4xl mx-auto relative z-10 text-center">
         
         {/* Brand Kicker with Official Jewar Logo */}
-        <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/10 text-pink-200 text-xs font-bold uppercase tracking-wider mb-6">
+        <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/10 text-blue-300 text-xs font-bold uppercase tracking-wider mb-6">
           <img src="/brand/jewar_emblem.png" alt="Jewar Logo" className="w-4 h-4 object-contain" />
           <span>Jewar International Technologies</span>
         </div>
@@ -27,7 +27,7 @@ export const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({ onOpenBooking 
           Your IT Business Deserves More Than Scattered Messages.
         </h2>
 
-        <p className="text-base sm:text-lg text-pink-100/90 leading-relaxed max-w-2xl mx-auto mb-4">
+        <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl mx-auto mb-4">
           Give customers a professional, branded place to work with you. Give your team a clearer way to manage service requests. And give yourself more room to focus on the work that matters.
         </p>
 
@@ -48,13 +48,13 @@ export const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({ onOpenBooking 
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </button>
 
-          <span className="text-xs text-pink-200/70 font-medium">
+          <span className="text-xs text-blue-200/70 font-medium">
             For IT service business owners and decision-makers exploring a branded customer experience.
           </span>
         </div>
 
         {/* Bottom Legal & Navigation Bar */}
-        <div className="pt-10 border-t border-white/15 flex flex-col sm:flex-row items-center justify-between text-xs text-pink-200/60 gap-4">
+        <div className="pt-10 border-t border-white/15 flex flex-col sm:flex-row items-center justify-between text-xs text-blue-200/60 gap-4">
           <div className="flex items-center gap-2">
             <img src="/brand/jewar_emblem.png" alt="Jewar Logo" className="w-4 h-4 object-contain inline shrink-0" />
             <span>© {new Date().getFullYear()} JIT Helpdesk. A product by Jewar International Technologies.</span>
@@ -66,7 +66,7 @@ export const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({ onOpenBooking 
             <span className="hover:text-white cursor-pointer">Security Safeguards</span>
             <Link
               href="/admin"
-              className="inline-flex items-center gap-1 text-pink-300 hover:text-white font-semibold underline underline-offset-4"
+              className="inline-flex items-center gap-1 text-blue-400 hover:text-white font-semibold underline underline-offset-4"
             >
               <Lock className="w-3 h-3" />
               <span>CRM Portal</span>

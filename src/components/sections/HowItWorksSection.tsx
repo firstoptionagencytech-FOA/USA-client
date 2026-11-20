@@ -42,7 +42,7 @@ export const HowItWorksSection: React.FC<HowItWorksProps> = ({ onOpenBooking }) 
   ];
 
   return (
-    <section className="py-20 px-4 bg-[#FCF8FA] relative">
+    <section className="py-20 px-4 bg-[#F8FAFC] relative">
       <div className="max-w-6xl mx-auto">
         
         {/* Section Header */}
@@ -61,7 +61,7 @@ export const HowItWorksSection: React.FC<HowItWorksProps> = ({ onOpenBooking }) 
         {/* 5-Step Connected Timeline */}
         <div className="relative">
           {/* Connector Line (Desktop) */}
-          <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-pink-200 via-brand-300 to-pink-200 -translate-y-8 z-0" />
+          <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-blue-200 via-blue-400 to-blue-200 -translate-y-8 z-0" />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 relative z-10">
             {steps.map((s, idx) => {
@@ -69,7 +69,7 @@ export const HowItWorksSection: React.FC<HowItWorksProps> = ({ onOpenBooking }) 
               return (
                 <div
                   key={idx}
-                  className="bg-white rounded-3xl p-6 border border-pink-100/90 shadow-xs hover:shadow-card-soft transition-all duration-200 flex flex-col justify-between"
+                  className="bg-white rounded-3xl p-6 border border-slate-200 shadow-xs hover:shadow-card-soft transition-all duration-200 flex flex-col justify-between"
                 >
                   <div>
                     <div className="flex items-center justify-between mb-4">

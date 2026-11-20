@@ -14,7 +14,7 @@ export const BusinessCaseSection: React.FC<BusinessCaseSectionProps> = ({ onOpen
         
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-pink-50 border border-pink-200 text-brand-800 text-xs font-bold uppercase tracking-wider mb-4">
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-blue-50 border border-blue-200 text-brand-800 text-xs font-bold uppercase tracking-wider mb-4">
             <Calculator className="w-3.5 h-3.5 text-brand-700" />
             <span>Illustrative Business Case</span>
           </div>
@@ -30,7 +30,7 @@ export const BusinessCaseSection: React.FC<BusinessCaseSectionProps> = ({ onOpen
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           
           {/* Card 1: First-Year Platform Cost */}
-          <div className="bg-[#FAF5F7] rounded-3xl p-7 sm:p-8 border border-pink-200/80 shadow-xs flex flex-col justify-between">
+          <div className="bg-[#F1F5F9] rounded-3xl p-7 sm:p-8 border border-slate-200 shadow-xs flex flex-col justify-between">
             <div>
               <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
                 Annual Investment
@@ -47,16 +47,16 @@ export const BusinessCaseSection: React.FC<BusinessCaseSectionProps> = ({ onOpen
               </p>
             </div>
 
-            <div className="pt-6 mt-6 border-t border-pink-200/60 text-xs text-slate-500">
+            <div className="pt-6 mt-6 border-t border-slate-200 text-xs text-slate-500">
               Includes branded mobile apps, customer web portal, unlimited support agents, hosting & ongoing maintenance.
             </div>
           </div>
 
           {/* Card 2: Illustrative Additional Annual Contribution */}
-          <div className="bg-gradient-to-br from-brand-900 via-brand-800 to-[#52001A] rounded-3xl p-7 sm:p-8 text-white shadow-xl flex flex-col justify-between">
+          <div className="bg-gradient-to-br from-[#0B0F19] via-[#0F172A] to-[#1E293B] rounded-3xl p-7 sm:p-8 text-white shadow-xl flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold uppercase tracking-wider text-pink-200">
+                <span className="text-xs font-bold uppercase tracking-wider text-blue-300">
                   Illustrative Potential
                 </span>
                 <span className="p-1.5 rounded-full bg-white/10 text-emerald-300">
@@ -71,12 +71,12 @@ export const BusinessCaseSection: React.FC<BusinessCaseSectionProps> = ({ onOpen
               <div className="text-4xl sm:text-5xl font-black text-white font-display mb-2">
                 $3,000
               </div>
-              <p className="text-xs font-semibold text-pink-100">
+              <p className="text-xs font-semibold text-slate-200">
                 12 extra completed jobs × $250 contribution each
               </p>
             </div>
 
-            <div className="pt-6 mt-6 border-t border-white/15 text-xs text-pink-100/90">
+            <div className="pt-6 mt-6 border-t border-white/15 text-xs text-slate-300">
               Just 1 additional retained or approved job per month generates more than enough contribution to cover the entire year.
             </div>
           </div>
@@ -84,7 +84,7 @@ export const BusinessCaseSection: React.FC<BusinessCaseSectionProps> = ({ onOpen
         </div>
 
         {/* Supporting Copy Box */}
-        <div className="bg-[#FAF8F9] rounded-2xl p-6 border border-slate-200/80 mb-6 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="bg-[#F8FAFC] rounded-2xl p-6 border border-slate-200/80 mb-6 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">
             If your business gained just <strong>one additional completed service job per month</strong>, with $250 contribution profit per job, that would represent <strong>$3,000 in additional annual contribution</strong>—enough to cover the $2,800 first-year platform fee.
           </p>

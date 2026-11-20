@@ -7,12 +7,6 @@ import {
   FileText,
   CreditCard,
   Users,
-  Settings,
-  BarChart3,
-  CheckCircle2,
-  Clock,
-  TrendingUp,
-  ShieldCheck,
   ChevronDown,
   Sparkles,
   Check
@@ -83,30 +77,30 @@ export const LaptopMockup: React.FC = () => {
       
       {/* Floating Interactive Badge */}
       <div className="absolute -top-3.5 right-6 z-30">
-        <div className="px-3 py-1 rounded-full bg-[#8B0032] text-white text-[10px] font-extrabold shadow-md flex items-center gap-1.5 border border-pink-300/40">
-          <Sparkles className="w-3 h-3 text-pink-300" />
+        <div className="px-3 py-1 rounded-full bg-[#0F172A] text-white text-[10px] font-extrabold shadow-md flex items-center gap-1.5 border border-blue-400/40">
+          <Sparkles className="w-3 h-3 text-blue-400" />
           <span>Interactive Owner Portal</span>
         </div>
       </div>
 
       {/* Laptop Screen Outer Bezel */}
-      <div className="relative rounded-t-[18px] sm:rounded-t-[22px] bg-[#1a191f] p-2 sm:p-2.5 shadow-[0_30px_70px_-20px_rgba(20,5,15,0.45)] border-t border-x border-slate-700/50">
+      <div className="relative rounded-t-[18px] sm:rounded-t-[22px] bg-[#0F172A] p-2 sm:p-2.5 shadow-[0_30px_70px_-20px_rgba(15,23,42,0.45)] border-t border-x border-slate-700/50">
         
         {/* Webcam dot */}
         <div className="absolute top-1.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-slate-800 ring-1 ring-slate-700/50" />
 
         {/* Inner Screen Surface */}
-        <div className="relative overflow-hidden rounded-t-[12px] sm:rounded-t-[14px] bg-[#FAF8F9] flex h-[350px] sm:h-[380px] border border-slate-200 text-slate-800">
+        <div className="relative overflow-hidden rounded-t-[12px] sm:rounded-t-[14px] bg-[#F8FAFC] flex h-[350px] sm:h-[380px] border border-slate-200 text-slate-800">
           
-          {/* Admin Sidebar */}
-          <div className="w-[125px] sm:w-[140px] bg-[#3B0014] text-slate-200 flex flex-col justify-between py-3 px-2 sm:px-2.5 shrink-0">
+          {/* Admin Sidebar - High Aura Midnight Executive */}
+          <div className="w-[125px] sm:w-[140px] bg-[#0B0F19] text-slate-200 flex flex-col justify-between py-3 px-2 sm:px-2.5 shrink-0 border-r border-slate-800">
             <div>
               {/* Brand Header */}
               <div className="flex items-center gap-1.5 mb-4 px-1 pt-1">
                 <div className="w-5 h-5 shrink-0 flex items-center justify-center">
                   <img
-                    src="/brand/jewar_emblem.png"
-                    alt="Jewar Logo"
+                    src="/brand/jit_headset_emblem_transparent.png"
+                    alt="JIT Helpdesk Logo"
                     className="w-full h-full object-contain drop-shadow-xs"
                   />
                 </div>
@@ -121,7 +115,7 @@ export const LaptopMockup: React.FC = () => {
                   onClick={() => setActiveTab('dashboard')}
                   className={`w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-left transition-all cursor-pointer ${
                     activeTab === 'dashboard'
-                      ? 'bg-[#8B0032] text-white font-extrabold shadow-sm'
+                      ? 'bg-blue-600 text-white font-extrabold shadow-sm'
                       : 'text-slate-300 hover:bg-white/10'
                   }`}
                 >
@@ -133,7 +127,7 @@ export const LaptopMockup: React.FC = () => {
                   onClick={() => setActiveTab('tickets')}
                   className={`w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-left transition-all cursor-pointer ${
                     activeTab === 'tickets'
-                      ? 'bg-[#8B0032] text-white font-extrabold shadow-sm'
+                      ? 'bg-blue-600 text-white font-extrabold shadow-sm'
                       : 'text-slate-300 hover:bg-white/10'
                   }`}
                 >
@@ -145,7 +139,7 @@ export const LaptopMockup: React.FC = () => {
                   onClick={() => setActiveTab('quotes')}
                   className={`w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-left transition-all cursor-pointer ${
                     activeTab === 'quotes'
-                      ? 'bg-[#8B0032] text-white font-extrabold shadow-sm'
+                      ? 'bg-blue-600 text-white font-extrabold shadow-sm'
                       : 'text-slate-300 hover:bg-white/10'
                   }`}
                 >
@@ -157,7 +151,7 @@ export const LaptopMockup: React.FC = () => {
                   onClick={() => setActiveTab('payments')}
                   className={`w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-left transition-all cursor-pointer ${
                     activeTab === 'payments'
-                      ? 'bg-[#8B0032] text-white font-extrabold shadow-sm'
+                      ? 'bg-blue-600 text-white font-extrabold shadow-sm'
                       : 'text-slate-300 hover:bg-white/10'
                   }`}
                 >
@@ -169,7 +163,7 @@ export const LaptopMockup: React.FC = () => {
                   onClick={() => setActiveTab('clients')}
                   className={`w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-left transition-all cursor-pointer ${
                     activeTab === 'clients'
-                      ? 'bg-[#8B0032] text-white font-extrabold shadow-sm'
+                      ? 'bg-blue-600 text-white font-extrabold shadow-sm'
                       : 'text-slate-300 hover:bg-white/10'
                   }`}
                 >
@@ -180,7 +174,7 @@ export const LaptopMockup: React.FC = () => {
             </div>
 
             {/* Bottom branding tag */}
-            <div className="px-2 pt-2 border-t border-white/10 text-[9px] text-pink-200/60 font-mono">
+            <div className="px-2 pt-2 border-t border-slate-800 text-[9px] text-blue-300/70 font-mono">
               v2.4 MSP US
             </div>
           </div>
@@ -195,7 +189,7 @@ export const LaptopMockup: React.FC = () => {
               </h3>
               
               <div className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-white border border-slate-200 shadow-xs">
-                <div className="w-4 h-4 rounded-full bg-[#8B0032] text-white font-bold text-[8px] flex items-center justify-center">
+                <div className="w-4 h-4 rounded-full bg-blue-600 text-white font-bold text-[8px] flex items-center justify-center">
                   JD
                 </div>
                 <span className="text-[10px] font-bold text-slate-700">John Doe</span>
@@ -209,7 +203,7 @@ export const LaptopMockup: React.FC = () => {
                 
                 {/* 3 Metric Summary Cards (Animated Numbers on Scroll) */}
                 <div className="grid grid-cols-3 gap-2 shrink-0">
-                  <div className="bg-white rounded-xl p-2 sm:p-2.5 border border-pink-100 shadow-2xs">
+                  <div className="bg-white rounded-xl p-2 sm:p-2.5 border border-slate-200 shadow-2xs">
                     <div className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Total Tickets</div>
                     <div className="text-base sm:text-lg font-black text-slate-900 font-display">
                       {totalTickets}
@@ -252,9 +246,9 @@ export const LaptopMockup: React.FC = () => {
                         } origin-bottom`}
                       >
                         <defs>
-                          <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stopColor="#8B0032" stopOpacity="0.35" />
-                            <stop offset="100%" stopColor="#8B0032" stopOpacity="0.0" />
+                          <linearGradient id="chartGradientBlue" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#2563EB" stopOpacity="0.35" />
+                            <stop offset="100%" stopColor="#2563EB" stopOpacity="0.0" />
                           </linearGradient>
                         </defs>
 
@@ -266,14 +260,14 @@ export const LaptopMockup: React.FC = () => {
                         {/* Area Fill */}
                         <path
                           d="M0 100 C 40 85, 70 95, 100 70 C 130 50, 160 80, 200 45 C 240 25, 270 40, 300 20 L 300 120 L 0 120 Z"
-                          fill="url(#chartGradient)"
+                          fill="url(#chartGradientBlue)"
                         />
 
                         {/* Foreground Line */}
                         <path
                           d="M0 100 C 40 85, 70 95, 100 70 C 130 50, 160 80, 200 45 C 240 25, 270 40, 300 20"
                           fill="none"
-                          stroke="#8B0032"
+                          stroke="#2563EB"
                           strokeWidth="3"
                           strokeLinecap="round"
                         />
@@ -292,8 +286,8 @@ export const LaptopMockup: React.FC = () => {
                             cx={pt.cx}
                             cy={pt.cy}
                             r={hoveredMonth === pt.month ? 5 : 3.5}
-                            fill={hoveredMonth === pt.month ? '#8B0032' : '#ffffff'}
-                            stroke="#8B0032"
+                            fill={hoveredMonth === pt.month ? '#2563EB' : '#ffffff'}
+                            stroke="#2563EB"
                             strokeWidth="2"
                             className="cursor-pointer transition-all"
                             onMouseEnter={() => setHoveredMonth(pt.month)}
@@ -329,7 +323,7 @@ export const LaptopMockup: React.FC = () => {
                           d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
                         />
                         <path
-                          className="text-[#8B0032] transition-all duration-1000 ease-out"
+                          className="text-blue-600 transition-all duration-1000 ease-out"
                           strokeDasharray={`${satisfaction}, 100`}
                           strokeWidth="3.5"
                           strokeLinecap="round"
@@ -368,7 +362,7 @@ export const LaptopMockup: React.FC = () => {
                       <div className="font-extrabold text-slate-900">{item.id} · {item.subject}</div>
                       <div className="text-[9px] text-slate-400">{item.client}</div>
                     </div>
-                    <span className="px-1.5 py-0.5 rounded text-[8px] font-bold bg-pink-50 text-brand-800">
+                    <span className="px-1.5 py-0.5 rounded text-[8px] font-bold bg-blue-50 text-blue-700">
                       {item.status}
                     </span>
                   </div>
@@ -428,7 +422,7 @@ export const LaptopMockup: React.FC = () => {
                       <div className="font-extrabold text-slate-900">{c.name}</div>
                       <div className="text-[9px] text-slate-400">{c.endpoints}</div>
                     </div>
-                    <span className="font-extrabold text-brand-900">{c.mrr}</span>
+                    <span className="font-extrabold text-blue-900">{c.mrr}</span>
                   </div>
                 ))}
               </div>
@@ -441,14 +435,14 @@ export const LaptopMockup: React.FC = () => {
       </div>
 
       {/* Laptop Bottom Base / Keyboard lip */}
-      <div className="relative h-3 sm:h-3.5 bg-gradient-to-b from-[#25242b] via-[#1a191e] to-[#121115] rounded-b-[10px] sm:rounded-b-[14px] shadow-md border-t border-white/10 flex items-center justify-center">
-        <div className="w-16 sm:w-20 h-1 bg-[#0f0e13] rounded-full" />
+      <div className="relative h-3 sm:h-3.5 bg-gradient-to-b from-[#1E293B] via-[#0F172A] to-[#020617] rounded-b-[10px] sm:rounded-b-[14px] shadow-md border-t border-white/10 flex items-center justify-center">
+        <div className="w-16 sm:w-20 h-1 bg-[#0B0F19] rounded-full" />
       </div>
 
-      {/* Glowing 3D Red Shield next to the laptop matching A4 reference */}
+      {/* Glowing 3D Tech Cobalt Shield */}
       <div className="absolute -right-3 sm:-right-5 bottom-4 sm:bottom-6 z-20 pointer-events-none select-none">
-        <div className="relative w-11 h-12 sm:w-14 sm:h-16 flex items-center justify-center filter drop-shadow-[0_10px_20px_rgba(180,0,50,0.5)]">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#FF1A66] via-[#B80045] to-[#500018] rounded-2xl rotate-45 transform scale-90 border-2 border-white/60 shadow-inner" />
+        <div className="relative w-11 h-12 sm:w-14 sm:h-16 flex items-center justify-center filter drop-shadow-[0_10px_20px_rgba(37,99,235,0.45)]">
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-400 via-blue-600 to-indigo-900 rounded-2xl rotate-45 transform scale-90 border-2 border-white/60 shadow-inner" />
           <Check className="relative w-6 h-6 sm:w-7 sm:h-7 text-white stroke-[3.5] z-10" />
         </div>
       </div>

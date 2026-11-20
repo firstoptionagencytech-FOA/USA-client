@@ -73,10 +73,10 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenBooking 
             return (
               <div
                 key={idx}
-                className="bg-[#FCF9FB] rounded-3xl p-6 sm:p-8 border border-pink-100 hover:border-pink-300 hover:shadow-card-soft transition-all duration-300 flex flex-col justify-between"
+                className="bg-[#F8FAFC] rounded-3xl p-6 sm:p-8 border border-slate-200 hover:border-blue-400 hover:shadow-card-soft transition-all duration-300 flex flex-col justify-between"
               >
                 <div>
-                  <div className="w-12 h-12 rounded-2xl bg-white border border-pink-200/80 text-brand-700 shadow-xs flex items-center justify-center mb-6">
+                  <div className="w-12 h-12 rounded-2xl bg-white border border-slate-200 text-brand-700 shadow-xs flex items-center justify-center mb-6">
                     <Icon className="w-6 h-6 stroke-[2]" />
                   </div>
                   
@@ -89,7 +89,7 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenBooking 
                   </p>
                 </div>
 
-                <div className="pt-4 border-t border-pink-100/70 flex items-center gap-2 text-xs font-bold text-slate-800">
+                <div className="pt-4 border-t border-slate-200 flex items-center gap-2 text-xs font-bold text-slate-800">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
                   <span>{p.bullet}</span>
                 </div>
@@ -98,15 +98,15 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenBooking 
           })}
 
           {/* 6th Card: Custom Package Summary CTA */}
-          <div className="bg-gradient-to-br from-brand-900 to-[#52001A] rounded-3xl p-6 sm:p-8 text-white flex flex-col justify-between shadow-xl">
+          <div className="bg-gradient-to-br from-[#0B0F19] to-[#1E293B] rounded-3xl p-6 sm:p-8 text-white flex flex-col justify-between shadow-xl">
             <div>
-              <span className="px-3 py-1 rounded-full bg-white/10 text-pink-200 text-xs font-bold tracking-wider uppercase mb-4 inline-block">
+              <span className="px-3 py-1 rounded-full bg-white/10 text-blue-300 text-xs font-bold tracking-wider uppercase mb-4 inline-block">
                 All-Inclusive Setup
               </span>
               <h3 className="text-xl sm:text-2xl font-black font-display mb-3">
                 One connected service experience. Built around your business.
               </h3>
-              <p className="text-xs sm:text-sm text-pink-100/90 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
                 Everything is branded with your company name, color palette, and logo. Your customers only ever see your brand.
               </p>
             </div>
@@ -114,7 +114,7 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenBooking 
             <div className="pt-6">
               <button
                 onClick={onOpenBooking}
-                className="w-full py-3.5 px-6 rounded-full bg-white hover:bg-pink-50 text-brand-900 font-extrabold text-xs sm:text-sm transition-colors shadow-md cursor-pointer"
+                className="w-full py-3.5 px-6 rounded-full bg-white hover:bg-blue-50 text-brand-900 font-extrabold text-xs sm:text-sm transition-colors shadow-md cursor-pointer"
               >
                 See JIT Helpdesk in Action →
               </button>

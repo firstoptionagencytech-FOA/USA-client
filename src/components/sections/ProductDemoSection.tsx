@@ -100,12 +100,12 @@ export const ProductDemoSection: React.FC<ProductDemoSectionProps> = ({ onOpenBo
   ];
 
   return (
-    <section className="py-20 px-4 bg-[#FAF7F9] border-y border-pink-100/70 relative">
+    <section className="py-20 px-4 bg-[#F8FAFC] border-y border-slate-200 relative">
       <div className="max-w-6xl mx-auto">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white border border-pink-200 text-brand-700 text-xs font-bold uppercase tracking-wider mb-4 shadow-2xs">
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white border border-blue-200 text-brand-700 text-xs font-bold uppercase tracking-wider mb-4 shadow-2xs">
             <Sparkles className="w-3.5 h-3.5 text-brand-700" />
             <span>Interactive Software Walkthrough</span>
           </div>
@@ -141,7 +141,7 @@ export const ProductDemoSection: React.FC<ProductDemoSectionProps> = ({ onOpenBo
         </div>
 
         {/* Software Walkthrough Stage */}
-        <div className="bg-white rounded-3xl border border-pink-200/80 shadow-xl overflow-hidden max-w-4xl mx-auto">
+        <div className="bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden max-w-4xl mx-auto">
           
           {/* Top Browser Bar */}
           <div className="bg-slate-900 text-slate-300 px-5 py-3 flex items-center justify-between text-xs border-b border-slate-800">
@@ -156,13 +156,13 @@ export const ProductDemoSection: React.FC<ProductDemoSectionProps> = ({ onOpenBo
               </span>
             </div>
             
-            <span className="px-2.5 py-0.5 rounded-full bg-brand-800/80 text-pink-200 text-[10px] font-bold tracking-wider uppercase">
+            <span className="px-2.5 py-0.5 rounded-full bg-brand-800/80 text-blue-300 text-[10px] font-bold tracking-wider uppercase">
               Illustrative Interactive Preview
             </span>
           </div>
 
           {/* Main Stage Display */}
-          <div className="p-6 sm:p-10 bg-gradient-to-br from-[#FAF8F9] to-white min-h-[340px] flex flex-col justify-between">
+          <div className="p-6 sm:p-10 bg-gradient-to-br from-[#F8FAFC] to-white min-h-[340px] flex flex-col justify-between">
             
             <div>
               <div className="flex flex-wrap items-center justify-between gap-2 mb-4">

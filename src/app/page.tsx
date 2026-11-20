@@ -59,7 +59,7 @@ export default function LandingPage() {
   };
 
   return (
-    <main className="min-h-screen bg-[#FCF8FA] text-slate-900 selection:bg-brand-700 selection:text-white relative">
+    <main className="min-h-screen bg-[#F8FAFC] text-slate-900 selection:bg-blue-600 selection:text-white relative">
       
       {/* 1. Hero Section (Header Bar removed as requested; Brand logo is right in hero) */}
       <HeroSection onOpenBooking={handleOpenBooking} />

@@ -84,7 +84,7 @@ export const ContactCaptureStep: React.FC<ContactCaptureStepProps> = ({ onSucces
   return (
     <div className="p-6 sm:p-8">
       <div className="text-center mb-6">
-        <span className="text-xs font-bold uppercase tracking-wider text-brand-700 bg-pink-50 px-3 py-1 rounded-full border border-pink-200">
+        <span className="text-xs font-bold uppercase tracking-wider text-brand-700 bg-blue-50 px-3 py-1 rounded-full border border-blue-200">
           Step 1 of 3: Contact Details
         </span>
         <h3 className="text-2xl font-extrabold text-slate-900 mt-2 font-display">
