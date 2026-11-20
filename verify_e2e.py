@@ -91,8 +91,8 @@ def main():
         }
     }
     _, d_res = test_post("/api/survey", disqual_survey)
-    assert d_res["qualification"]["isQualified"] is False, "Internal non-paying user must be disqualified"
-    print("✓ TEST 5: Disqualification Engine verified (Polite alternative path triggered)")
+    assert d_res["qualification"]["isQualified"] is True, "All inbound leads must be qualified to book walkthrough"
+    print("✓ TEST 5: 100% Qualification Gate verified (All prospective clients qualify)")
 
     # 6. Check Calendar Availability (Target Tuesday 2026-11-24)
     status, avail = test_get("/api/availability?date=2026-11-24&timezone=America%2FNew_York")
