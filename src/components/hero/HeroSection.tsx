@@ -127,21 +127,21 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenBooking }) => {
         {/* Ultra-Crisp Transparent 3D Showcase Image */}
         <HeroHdVisual />
 
-        {/* 5 Feature Boxes (Placed Directly Above the CTA, exactly like the A4 Poster) */}
-        <div className="w-full max-w-4xl mx-auto my-4 sm:my-6">
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2.5 sm:gap-3.5">
+        {/* 5 Feature Boxes in ONE SINGLE LINE (Exact A4 Poster Match) */}
+        <div className="w-full max-w-4xl mx-auto my-4 sm:my-6 px-1">
+          <div className="grid grid-cols-5 gap-1.5 sm:gap-2.5 md:gap-3.5">
             {featureBoxes.map((item, idx) => {
               const Icon = item.icon;
               return (
                 <div
                   key={idx}
                   onClick={onOpenBooking}
-                  className="group cursor-pointer bg-white rounded-2xl p-3.5 sm:p-4 border border-pink-100 shadow-[0_6px_20px_rgba(139,0,50,0.06)] hover:shadow-[0_12px_28px_rgba(139,0,50,0.12)] hover:-translate-y-1 active:scale-[0.98] transition-all duration-200 flex flex-col items-center text-center justify-center min-h-[96px]"
+                  className="group cursor-pointer bg-white rounded-xl sm:rounded-2xl p-2 sm:p-3.5 border border-slate-200/90 shadow-[0_4px_16px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 flex flex-col items-center text-center justify-center min-h-[84px] sm:min-h-[96px]"
                 >
-                  <div className="w-9 h-9 rounded-xl bg-[#FAF0F4] group-hover:bg-[#F5DDE6] text-[#8B0032] flex items-center justify-center mb-1.5 transition-colors shadow-2xs">
-                    <Icon className="w-5 h-5 stroke-[2.3]" />
+                  <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-slate-100 group-hover:bg-brand-50 text-[#8B0032] flex items-center justify-center mb-1 sm:mb-1.5 transition-colors shadow-2xs">
+                    <Icon className="w-3.5 h-3.5 sm:w-5 sm:h-5 stroke-[2.3]" />
                   </div>
-                  <span className="text-[11px] sm:text-xs font-black text-slate-800 leading-snug tracking-tight">
+                  <span className="text-[8px] sm:text-[11px] md:text-xs font-black text-slate-800 leading-tight tracking-tight">
                     {item.label}
                   </span>
                 </div>
