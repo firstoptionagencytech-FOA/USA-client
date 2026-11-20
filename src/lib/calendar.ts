@@ -3,10 +3,10 @@ import { getSettings, getBookings } from './storage';
 import { TimeSlot, Lead } from '@/types';
 
 // Helper to obtain an authenticated Google Calendar API client
-export function getGoogleCalendarClient() {
-  const clientId = process.env.GOOGLE_CLIENT_ID;
-  const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
-  const refreshToken = process.env.GOOGLE_REFRESH_TOKEN;
+export function getGoogleCalendarClient(settings?: any) {
+  const clientId = process.env.GOOGLE_CLIENT_ID || settings?.google_client_id;
+  const clientSecret = process.env.GOOGLE_CLIENT_SECRET || settings?.google_client_secret;
+  const refreshToken = process.env.GOOGLE_REFRESH_TOKEN || settings?.google_refresh_token;
   const redirectUri = process.env.GOOGLE_REDIRECT_URI || 'http://localhost:3000/api/auth/google/callback';
 
   if (!clientId || !clientSecret || !refreshToken) {
@@ -59,7 +59,7 @@ export async function getAvailableSlots(params: AvailabilityParams): Promise<Tim
 
   // 1. Fetch busy intervals from Google Calendar FreeBusy API if connected
   const busyIntervals: { start: Date; end: Date }[] = [];
-  const calendarClient = getGoogleCalendarClient();
+  const calendarClient = getGoogleCalendarClient(settings);
 
   if (calendarClient) {
     try {
@@ -205,7 +205,8 @@ export async function createGoogleCalendarEvent(params: {
   timezone: string;
 }) {
   const { lead, meetingStart, meetingEnd, timezone } = params;
-  const calendarClient = getGoogleCalendarClient();
+  const settings = await getSettings();
+  const calendarClient = getGoogleCalendarClient(settings);
 
   const title = `JIT Helpdesk Personalized Demo: ${lead.company_name || lead.full_name}`;
   const description = `

@@ -119,6 +119,18 @@ export default function AdminDashboardPage() {
 
   useEffect(() => {
     loadAllData();
+
+    // Check for OAuth callback status
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('calendar') === 'connected') {
+        showToast('Google Calendar connected successfully! Real-time sync is now active.');
+      } else if (urlParams.get('error') === 'missing_credentials') {
+        showToast('Please enter your Google Client ID and Secret below, then click Connect.');
+      } else if (urlParams.get('error')) {
+        showToast(`Google Calendar Auth Notice: ${urlParams.get('error')}`);
+      }
+    }
   }, []);
 
   useEffect(() => {
@@ -1509,6 +1521,74 @@ export default function AdminDashboardPage() {
               </div>
 
               <div className="space-y-4">
+                
+                {/* 1-Click Google Calendar OAuth Connection Box */}
+                <div className="p-5 rounded-2xl bg-gradient-to-br from-[#182c26] to-[#11201b] text-white border border-[#d2f56d]/30 shadow-lg mb-6">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div className="space-y-1">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-9 h-9 rounded-xl bg-[#274c3b] flex items-center justify-center text-[#d2f56d] border border-[#d2f56d]/30 shrink-0">
+                          <Calendar className="w-5 h-5 stroke-[2.2]" />
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <h4 className="text-sm font-black text-white font-display">
+                              Google Calendar 1-Click Sync
+                            </h4>
+                            <span className="w-2 h-2 rounded-full bg-[#d2f56d] live-indicator" />
+                          </div>
+                          <span className="text-[11px] text-[#dce3d4] block">
+                            {settings?.google_calendar_connected
+                              ? `Active Calendar: ${settings?.google_calendar_id || 'primary'}`
+                              : 'Connect your personal Google Calendar for real-time demo booking & Google Meet generation'}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-2 shrink-0">
+                      <a
+                        href="/api/auth/google"
+                        className="px-5 py-2.5 rounded-xl bg-[#d2f56d] hover:bg-[#bfe259] text-[#182c26] font-black text-xs inline-flex items-center gap-2 shadow-md hover:scale-105 active:scale-95 transition-all cursor-pointer"
+                      >
+                        <Calendar className="w-3.5 h-3.5 stroke-[2.5]" />
+                        <span>{settings?.google_calendar_connected ? 'Reconnect Calendar' : 'Connect Google Calendar'}</span>
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* Client ID / Secret configuration fields */}
+                  <div className="mt-4 pt-4 border-t border-[#274c3b] grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                    <div>
+                      <label className="block text-[10px] font-bold uppercase tracking-wider text-[#dce3d4] mb-1">
+                        Google Client ID (Google Cloud Console)
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="e.g. 123456789-xyz.apps.googleusercontent.com"
+                        value={(settingsDraft as any).google_client_id || ''}
+                        onChange={e => setSettingsDraft(prev => ({ ...prev, google_client_id: e.target.value } as any))}
+                        className="w-full text-xs font-mono bg-[#0b1512] border border-[#274c3b] rounded-xl p-2.5 text-white focus:border-[#d2f56d] focus:outline-none"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] font-bold uppercase tracking-wider text-[#dce3d4] mb-1">
+                        Google Client Secret
+                      </label>
+                      <input
+                        type="password"
+                        placeholder="GOCSPX-..."
+                        value={(settingsDraft as any).google_client_secret || ''}
+                        onChange={e => setSettingsDraft(prev => ({ ...prev, google_client_secret: e.target.value } as any))}
+                        className="w-full text-xs font-mono bg-[#0b1512] border border-[#274c3b] rounded-xl p-2.5 text-white focus:border-[#d2f56d] focus:outline-none"
+                      />
+                    </div>
+                  </div>
+                  <div className="mt-2 text-[10px] text-[#61705f]">
+                    Tip: OAuth Redirect URI for your Google Console: <span className="text-[#dce3d4] font-mono">http://localhost:3000/api/auth/google/callback</span>
+                  </div>
+                </div>
                 
                 {/* Business Timezone */}
                 <div>
