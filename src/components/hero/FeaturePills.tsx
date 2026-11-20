@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Zap, FileCheck, CreditCard, TrendingUp, Star } from 'lucide-react';
+import { Zap, FileCheck2, CreditCard, TrendingUp, Star } from 'lucide-react';
 
 interface FeaturePillsProps {
   onSelect?: () => void;
@@ -10,60 +10,66 @@ interface FeaturePillsProps {
 export const FeaturePills: React.FC<FeaturePillsProps> = ({ onSelect }) => {
   const features = [
     {
-      icon: '/brand/feature_icon_1_transparent.png',
-      fallbackIcon: Zap,
+      icon: Zap,
       title: 'Instant Support',
       subtitle: 'Requests',
+      badge: 'Sub-2m',
     },
     {
-      icon: '/brand/feature_icon_2_transparent.png',
-      fallbackIcon: FileCheck,
+      icon: FileCheck2,
       title: 'Approve Quotes',
       subtitle: 'Online',
+      badge: '1-Click',
     },
     {
-      icon: '/brand/feature_icon_3_transparent.png',
-      fallbackIcon: CreditCard,
+      icon: CreditCard,
       title: 'Secure',
       subtitle: 'Payments',
+      badge: 'Apple Pay',
     },
     {
-      icon: '/brand/feature_icon_4_transparent.png',
-      fallbackIcon: TrendingUp,
+      icon: TrendingUp,
       title: 'Real-Time',
       subtitle: 'Tracking',
+      badge: 'Live SLA',
     },
     {
-      icon: '/brand/feature_icon_5_transparent.png',
-      fallbackIcon: Star,
+      icon: Star,
       title: 'Your Brand,',
       subtitle: 'Your Portal',
+      badge: 'White-Label',
     },
   ];
 
   return (
     <div className="w-full max-w-5xl mx-auto px-2 sm:px-4 my-6 sm:my-8">
-      <div className="flex sm:grid sm:grid-cols-5 gap-2 sm:gap-3 overflow-x-auto no-scrollbar py-2 px-1 justify-start sm:justify-center">
-        {features.map((item, idx) => (
-          <div
-            key={idx}
-            onClick={onSelect}
-            className="group cursor-pointer bg-white rounded-2xl py-3 px-2 sm:py-3.5 sm:px-3 border border-slate-200/80 shadow-[0_4px_16px_rgba(0,0,0,0.04)] hover:shadow-[0_10px_24px_rgba(139,0,50,0.1)] hover:-translate-y-1 active:scale-[0.98] transition-all duration-200 flex flex-col items-center text-center justify-center w-[120px] sm:w-auto shrink-0 sm:shrink min-h-[86px] sm:min-h-[96px]"
-          >
-            {/* Transparent Icon directly on card, NO grey nested box */}
-            <div className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center mb-1.5 transition-transform group-hover:scale-110">
-              <img
-                src={item.icon}
-                alt={item.title}
-                className="w-full h-full object-contain filter drop-shadow-2xs"
-              />
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 py-2 px-1">
+        {features.map((item, idx) => {
+          const IconComp = item.icon;
+          return (
+            <div
+              key={idx}
+              onClick={onSelect}
+              className="group cursor-pointer bg-white rounded-2xl py-4 px-3 sm:py-5 sm:px-4 border border-[#dce3d4] shadow-xs hover:shadow-[0_12px_24px_rgba(24,44,38,0.12)] hover:border-[#274c3b] hover:-translate-y-1 active:scale-[0.98] transition-all duration-200 flex flex-col items-center text-center justify-between min-h-[110px] sm:min-h-[120px] relative overflow-hidden"
+            >
+              {/* Micro Kicker Badge */}
+              <span className="text-[9px] font-black uppercase tracking-wider text-[#61705f] group-hover:text-[#274c3b] transition-colors mb-2">
+                {item.badge}
+              </span>
+
+              {/* 3D Glass Badge - Jewar Pine & Lime */}
+              <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-tr from-[#11201b] via-[#182c26] to-[#274c3b] text-[#d2f56d] border border-[#d2f56d]/30 shadow-xs flex items-center justify-center mb-2 group-hover:scale-110 group-hover:border-[#d2f56d] transition-transform duration-200">
+                <IconComp className="w-5 h-5 stroke-[2.2]" />
+              </div>
+
+              {/* Label */}
+              <div className="text-[11px] sm:text-xs font-black text-[#182c26] leading-tight tracking-tight group-hover:text-[#274c3b] transition-colors font-display">
+                <div>{item.title}</div>
+                <div>{item.subtitle}</div>
+              </div>
             </div>
-            <div className="text-[10px] sm:text-[11px] md:text-xs font-black text-slate-800 leading-tight tracking-tight">
-              <div>{item.title}</div>
-              <div>{item.subtitle}</div>
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

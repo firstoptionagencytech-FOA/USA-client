@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
 import { Smartphone, Eye, CheckSquare, CreditCard, Award, ArrowRight, Calendar } from 'lucide-react';
 
 interface HowItWorksProps {
@@ -14,31 +13,36 @@ export const HowItWorksSection: React.FC<HowItWorksProps> = ({ onOpenBooking }) 
       num: '01',
       title: 'A Customer Needs IT Help',
       body: 'They open your branded mobile app or web portal and submit a service request with device details and symptoms.',
-      image: '/brand/feature_icon_1_transparent.png',
+      icon: Smartphone,
+      tag: '1-Tap Submit',
     },
     {
       num: '02',
       title: 'You Review the Request',
       body: 'Your team triages the ticket from the owner dashboard, prepares an itemized quote, and sets clear delivery expectations.',
-      image: '/brand/feature_icon_2_transparent.png',
+      icon: Eye,
+      tag: 'Instant Triage',
     },
     {
       num: '03',
       title: 'The Customer Approves',
       body: 'The client reviews the scope on their smartphone, approves the pricing, or requests changes without phone tag.',
-      image: '/brand/feature_icon_4_transparent.png',
+      icon: CheckSquare,
+      tag: 'Digital Sign-Off',
     },
     {
       num: '04',
       title: 'Payment & Progress Stay Connected',
       body: 'With payment gateway configured, customers complete checkout and track technician progress in real time.',
-      image: '/brand/feature_icon_3_transparent.png',
+      icon: CreditCard,
+      tag: 'Auto-Billing',
     },
     {
       num: '05',
       title: 'You Complete the Work',
       body: 'The customer inspects and signs off on the resolved ticket. Your system maintains an audit trail and triggers referral options.',
-      image: '/brand/feature_icon_5_transparent.png',
+      icon: Award,
+      tag: 'Verified SLA',
     },
   ];
 
@@ -60,13 +64,14 @@ export const HowItWorksSection: React.FC<HowItWorksProps> = ({ onOpenBooking }) 
           </p>
         </div>
 
-        {/* 5-Step Connected Timeline with Without-BG Visual Badges & Hover Lift */}
+        {/* 5-Step Connected Timeline with 3D Vector Glass Badges & Hover Lift */}
         <div className="relative">
           {/* Connector Line (Desktop) */}
           <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-[#dce3d4] via-[#274c3b] to-[#dce3d4] -translate-y-8 z-0" />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 relative z-10">
             {steps.map((s, idx) => {
+              const IconComp = s.icon;
               return (
                 <div
                   key={idx}
@@ -77,18 +82,17 @@ export const HowItWorksSection: React.FC<HowItWorksProps> = ({ onOpenBooking }) 
                       <span className="text-2xl font-black text-[#182c26] font-display group-hover:text-[#274c3b] transition-colors">
                         {s.num}
                       </span>
-                      <div className="w-12 h-12 rounded-xl bg-[#edf3e3] border border-[#dce3d4] p-2 flex items-center justify-center group-hover:scale-110 group-hover:border-[#d2f56d] transition-all duration-300">
-                        <Image unoptimized
-                          src={s.image}
-                          alt={s.title}
-                          width={36}
-                          height={36}
-                          className="w-full h-full object-contain filter drop-shadow-xs"
-                        />
+                      {/* 3D Pine & Lime Glass Badge */}
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-[#11201b] via-[#182c26] to-[#274c3b] text-[#d2f56d] border border-[#d2f56d]/30 p-2.5 flex items-center justify-center group-hover:scale-110 group-hover:border-[#d2f56d] transition-all duration-300 shadow-xs">
+                        <IconComp className="w-6 h-6 stroke-[2.2]" />
                       </div>
                     </div>
 
-                    <h3 className="text-sm font-extrabold text-[#182c26] mb-2 leading-tight group-hover:text-[#274c3b] transition-colors">
+                    <div className="text-[10px] font-black uppercase tracking-wider text-[#274c3b] mb-1">
+                      {s.tag}
+                    </div>
+
+                    <h3 className="text-sm font-extrabold text-[#182c26] mb-2 leading-tight group-hover:text-[#274c3b] transition-colors font-display">
                       {s.title}
                     </h3>
 

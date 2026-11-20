@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { HeroSection } from '@/components/hero/HeroSection';
 import { DeviceShowcaseSection } from '@/components/sections/DeviceShowcaseSection';
+import { CoreCapabilitiesSection } from '@/components/sections/CoreCapabilitiesSection';
+import { MspRoiCalculator } from '@/components/sections/MspRoiCalculator';
 import { ProblemSection } from '@/components/sections/ProblemSection';
 import { ProductDemoSection } from '@/components/sections/ProductDemoSection';
 import { SolutionSection } from '@/components/sections/SolutionSection';
@@ -61,60 +63,66 @@ export default function LandingPage() {
   return (
     <main className="min-h-screen bg-[#f6f6ef] text-[#182c26] selection:bg-[#274c3b] selection:text-[#d2f56d] relative">
       
-      {/* 1. Hero Section (Header Bar removed as requested; Brand logo is right in hero) */}
+      {/* 1. Hero Section (Official Jewar Emblem + 3D Product Visual + Headline + Direct CTA) */}
       <HeroSection onOpenBooking={handleOpenBooking} />
 
-      {/* 2. Device Showcase Section (Phone & Laptop detailed view moved to second section) */}
+      {/* 2. Device Showcase Section (Phone & Laptop Detailed View) */}
       <DeviceShowcaseSection onOpenBooking={handleOpenBooking} />
 
-      {/* 3. Customer Problems / Pain Points */}
+      {/* 3. 5 Core Capabilities (The Redesigned Cards: Instant Support, Quotes, Payments, Tracking, Branded Portal) */}
+      <CoreCapabilitiesSection onOpenBooking={handleOpenBooking} />
+
+      {/* 4. Interactive Time & Cost Savings ROI Calculator */}
+      <MspRoiCalculator onOpenBooking={handleOpenBooking} />
+
+      {/* 5. Customer Problems / Pain Points */}
       <ProblemSection onOpenBooking={handleOpenBooking} />
 
-      {/* 4. Product Walkthrough Demonstration */}
+      {/* 6. Product Walkthrough Demonstration */}
       <ProductDemoSection onOpenBooking={handleOpenBooking} />
 
-      {/* 5. Product Solution Pillars */}
+      {/* 7. Product Solution Pillars */}
       <SolutionSection onOpenBooking={handleOpenBooking} />
 
-      {/* 6. How It Works (Step 1-5) */}
+      {/* 8. How It Works (Step 1-5) */}
       <HowItWorksSection onOpenBooking={handleOpenBooking} />
 
-      {/* 7. Business Benefits */}
+      {/* 9. Commercial Business Benefits */}
       <BenefitsSection />
 
-      {/* 8. Transparent Pricing Package */}
+      {/* 10. Transparent Pricing Package */}
       <PricingSection onOpenBooking={handleOpenBooking} />
 
-      {/* 9. Illustrative Business Case */}
+      {/* 11. Illustrative Business Case */}
       <BusinessCaseSection onOpenBooking={handleOpenBooking} />
 
-      {/* 10. Who It Is For & Personalized Walkthrough Expectations */}
+      {/* 12. Who It Is For & Personalized Walkthrough Expectations */}
       <WhoItIsForSection onOpenBooking={handleOpenBooking} />
 
-      {/* 11. Approved FAQs */}
+      {/* 13. Approved FAQs */}
       <FaqSection />
 
-      {/* 12. Final Call to Action & Footer */}
+      {/* 14. Final Call to Action & Footer */}
       <FinalCtaSection onOpenBooking={handleOpenBooking} />
 
       {/* Sticky Bottom Floating Bar for Mobile */}
       {showStickyBar && (
-        <div className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-pink-200/80 p-3 sm:hidden shadow-[0_-5px_20px_rgba(0,0,0,0.1)] flex items-center justify-between gap-3 animate-in slide-in-from-bottom-2">
+        <div className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-[#dce3d4] p-3 sm:hidden shadow-[0_-5px_20px_rgba(0,0,0,0.1)] flex items-center justify-between gap-3 animate-in slide-in-from-bottom-2">
           <div className="flex flex-col">
-            <span className="text-[11px] font-black text-slate-900 font-display leading-tight">
+            <span className="text-[11px] font-black text-[#182c26] font-display leading-tight">
               JIT Helpdesk Demo
             </span>
-            <span className="text-[10px] text-brand-700 font-bold">
+            <span className="text-[10px] text-[#274c3b] font-bold">
               $400 setup + $200/mo
             </span>
           </div>
 
           <button
             onClick={handleOpenBooking}
-            className="cta-glow-btn px-5 py-2.5 rounded-full text-white font-extrabold text-xs flex items-center gap-1.5 cursor-pointer shrink-0"
+            className="poster-glow-btn px-5 py-2.5 rounded-full text-white font-extrabold text-xs flex items-center gap-1.5 cursor-pointer shrink-0"
           >
             <span>Book Free Demo</span>
-            <ArrowRight className="w-3.5 h-3.5" />
+            <ArrowRight className="w-3.5 h-3.5 text-[#d2f56d]" />
           </button>
         </div>
       )}
