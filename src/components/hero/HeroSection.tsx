@@ -58,13 +58,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenBooking }) => {
         {/* Official Brand Header (Headset Agent Emblem + JIT HELPDESK + Byline) */}
         <div className="flex flex-col items-center mb-3 sm:mb-4">
           <div className="flex items-center justify-center gap-2.5 sm:gap-3">
-            {/* Poster Exact Agent Headset Emblem */}
-            <div className="relative w-9 h-9 sm:w-11 sm:h-11 shrink-0 flex items-center justify-center drop-shadow-sm hover:scale-105 transition-transform duration-300">
-              <Image
-                src="/brand/jit_headset_emblem_transparent.png"
-                alt="JIT Helpdesk Logo Emblem"
-                width={48}
-                height={48}
+            {/* Official Jewar Emblem */}
+            <div className="relative w-10 h-10 sm:w-12 sm:h-12 shrink-0 flex items-center justify-center drop-shadow-md hover:scale-105 transition-transform duration-300">
+              <Image unoptimized
+                src="/brand/jewar_emblem.png"
+                alt="Jewar International Technologies Emblem"
+                width={56}
+                height={56}
                 className="w-full h-full object-contain"
                 priority
               />

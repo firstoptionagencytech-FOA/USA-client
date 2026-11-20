@@ -97,8 +97,8 @@ export const PhoneMockup: React.FC = () => {
             <div className="flex items-center gap-2">
               <div className="w-6 h-6 shrink-0 flex items-center justify-center">
                 <img
-                  src="/brand/jit_headset_emblem_transparent.png"
-                  alt="JIT Helpdesk Logo"
+                  src="/brand/jewar_emblem.png"
+                  alt="Jewar Logo"
                   className="w-full h-full object-contain drop-shadow-xs"
                 />
               </div>

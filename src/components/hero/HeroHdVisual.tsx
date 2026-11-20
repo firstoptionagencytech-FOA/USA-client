@@ -14,11 +14,12 @@ export const HeroHdVisual: React.FC = () => {
       {/* Ultra-Crisp Transparent 3D Product Showcase Graphic */}
       <div className="relative w-full flex items-center justify-center transform hover:scale-[1.015] transition-transform duration-300">
         <Image
-          src="/hero-product-showcase-transparent.png"
+          src="/brand/hero_deskora_showcase_transparent.png"
           alt="JIT Helpdesk Branded Mobile App and Admin Dashboard"
-          width={1200}
-          height={900}
+          width={1376}
+          height={768}
           priority
+          unoptimized
           className="w-full h-auto object-contain drop-shadow-[0_25px_45px_rgba(24,44,38,0.25)] filter brightness-[1.03] contrast-[1.03]"
         />
       </div>

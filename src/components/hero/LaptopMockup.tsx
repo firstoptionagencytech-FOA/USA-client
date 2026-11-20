@@ -99,8 +99,8 @@ export const LaptopMockup: React.FC = () => {
               <div className="flex items-center gap-1.5 mb-4 px-1 pt-1">
                 <div className="w-5 h-5 shrink-0 flex items-center justify-center">
                   <img
-                    src="/brand/jit_headset_emblem_transparent.png"
-                    alt="JIT Helpdesk Logo"
+                    src="/brand/jewar_emblem.png"
+                    alt="Jewar Logo"
                     className="w-full h-full object-contain drop-shadow-xs"
                   />
                 </div>
