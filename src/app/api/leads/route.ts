@@ -29,6 +29,7 @@ export async function POST(req: NextRequest) {
       company_name: company_name || '',
       utm_params: utm_params || {},
       status: 'new',
+      is_qualified: true,
     });
 
     return NextResponse.json({ success: true, lead });

@@ -978,32 +978,38 @@ export default function AdminDashboardPage() {
                   </div>
 
                   <div className="flex flex-wrap items-center gap-2">
-                    {/* Month Nav Buttons */}
-                    <div className="flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200">
-                      <button
-                        onClick={() => setCalendarMonth(new Date(year, month - 1, 1))}
-                        className="p-1.5 rounded-lg hover:bg-white text-slate-700 transition-colors cursor-pointer"
-                        title="Previous Month"
-                      >
-                        <ChevronLeft className="w-4 h-4" />
-                      </button>
+                    {/* Month Nav Buttons with Separate Today & Visible Month Name */}
+                    <div className="flex items-center gap-2">
                       <button
                         onClick={() => {
                           const now = new Date();
                           setCalendarMonth(new Date(now.getFullYear(), now.getMonth(), 1));
                           setSelectedDate(now.toISOString().split('T')[0]);
                         }}
-                        className="px-2.5 py-1 text-xs font-bold text-slate-700 hover:bg-white rounded-lg transition-colors cursor-pointer"
+                        className="px-3 py-1.5 text-xs font-extrabold text-slate-700 bg-white hover:bg-slate-50 border border-slate-200 rounded-xl transition-colors shadow-2xs cursor-pointer"
                       >
                         Today
                       </button>
-                      <button
-                        onClick={() => setCalendarMonth(new Date(year, month + 1, 1))}
-                        className="p-1.5 rounded-lg hover:bg-white text-slate-700 transition-colors cursor-pointer"
-                        title="Next Month"
-                      >
-                        <ChevronRight className="w-4 h-4" />
-                      </button>
+
+                      <div className="flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200 shadow-inner">
+                        <button
+                          onClick={() => setCalendarMonth(new Date(year, month - 1, 1))}
+                          className="p-1.5 rounded-lg hover:bg-white text-slate-700 transition-colors cursor-pointer"
+                          title="Previous Month"
+                        >
+                          <ChevronLeft className="w-4 h-4" />
+                        </button>
+                        <span className="px-3 text-xs sm:text-sm font-black text-slate-900 font-display min-w-[140px] text-center select-none">
+                          {monthName}
+                        </span>
+                        <button
+                          onClick={() => setCalendarMonth(new Date(year, month + 1, 1))}
+                          className="p-1.5 rounded-lg hover:bg-white text-slate-700 transition-colors cursor-pointer"
+                          title="Next Month"
+                        >
+                          <ChevronRight className="w-4 h-4" />
+                        </button>
+                      </div>
                     </div>
 
                     {/* View Switcher: Grid vs Agenda */}
