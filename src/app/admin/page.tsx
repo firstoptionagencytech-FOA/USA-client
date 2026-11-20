@@ -1585,8 +1585,89 @@ export default function AdminDashboardPage() {
                       />
                     </div>
                   </div>
-                  <div className="mt-2 text-[10px] text-[#61705f]">
-                    Tip: OAuth Redirect URI for your Google Console: <span className="text-[#dce3d4] font-mono">http://localhost:3000/api/auth/google/callback</span>
+
+                  {/* Redirect URI Bar with 1-Click Copy */}
+                  <div className="mt-3 p-3 rounded-xl bg-[#0b1512] border border-[#274c3b] flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
+                    <div className="flex items-center gap-2 overflow-hidden">
+                      <span className="text-[10px] font-black uppercase text-[#d2f56d] shrink-0">Redirect URI:</span>
+                      <span className="font-mono text-[11px] text-[#edf3e3] truncate">
+                        http://localhost:3000/api/auth/google/callback
+                      </span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        if (typeof navigator !== 'undefined') {
+                          navigator.clipboard.writeText('http://localhost:3000/api/auth/google/callback');
+                          showToast('Redirect URI copied to clipboard!');
+                        }
+                      }}
+                      className="px-3 py-1 rounded-lg bg-[#274c3b] hover:bg-[#34654f] text-[#d2f56d] text-[10px] font-extrabold uppercase shrink-0 transition-colors cursor-pointer"
+                    >
+                      Copy URI
+                    </button>
+                  </div>
+
+                  {/* Step-by-Step Instructions Guide */}
+                  <div className="mt-4 pt-4 border-t border-[#274c3b]/80">
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-xs font-black uppercase tracking-wider text-[#d2f56d] flex items-center gap-1.5">
+                        <Sparkles className="w-3.5 h-3.5" />
+                        How to get Google Client ID &amp; Secret (2-Minute Steps):
+                      </span>
+                      <a
+                        href="https://console.cloud.google.com/apis/credentials"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-[11px] font-bold text-[#d2f56d] hover:underline flex items-center gap-1"
+                      >
+                        <span>Open Google Console ↗</span>
+                      </a>
+                    </div>
+
+                    <div className="space-y-2 text-[11px] text-[#dce3d4]">
+                      <div className="flex items-start gap-2">
+                        <span className="w-4 h-4 rounded-full bg-[#274c3b] text-[#d2f56d] font-black flex items-center justify-center shrink-0 text-[10px]">1</span>
+                        <span>
+                          <a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noreferrer" className="text-white font-bold underline">console.cloud.google.com</a> par jao aur ek project create karo (ya existing select karo).
+                        </span>
+                      </div>
+
+                      <div className="flex items-start gap-2">
+                        <span className="w-4 h-4 rounded-full bg-[#274c3b] text-[#d2f56d] font-black flex items-center justify-center shrink-0 text-[10px]">2</span>
+                        <span>
+                          <a href="https://console.cloud.google.com/apis/library/calendar-json.googleapis.com" target="_blank" rel="noreferrer" className="text-white font-bold underline">Google Calendar API</a> ko search karke <strong>ENABLE</strong> karo.
+                        </span>
+                      </div>
+
+                      <div className="flex items-start gap-2">
+                        <span className="w-4 h-4 rounded-full bg-[#274c3b] text-[#d2f56d] font-black flex items-center justify-center shrink-0 text-[10px]">3</span>
+                        <span>
+                          <strong>OAuth Consent Screen</strong> mein ja kar <strong>User Type: External</strong> chuno aur App Name me <em>JIT Helpdesk</em> likh kar Save karo.
+                        </span>
+                      </div>
+
+                      <div className="flex items-start gap-2">
+                        <span className="w-4 h-4 rounded-full bg-[#274c3b] text-[#d2f56d] font-black flex items-center justify-center shrink-0 text-[10px]">4</span>
+                        <span>
+                          <strong>Credentials</strong> &gt; <strong>Create Credentials</strong> &gt; <strong>OAuth Client ID</strong> &gt; Application Type: <strong>Web application</strong> select karo.
+                        </span>
+                      </div>
+
+                      <div className="flex items-start gap-2">
+                        <span className="w-4 h-4 rounded-full bg-[#274c3b] text-[#d2f56d] font-black flex items-center justify-center shrink-0 text-[10px]">5</span>
+                        <span>
+                          <strong>Authorized redirect URIs</strong> mein upar diya gaya URI paste karo (<code className="text-[#d2f56d] font-mono">http://localhost:3000/api/auth/google/callback</code>).
+                        </span>
+                      </div>
+
+                      <div className="flex items-start gap-2">
+                        <span className="w-4 h-4 rounded-full bg-[#274c3b] text-[#d2f56d] font-black flex items-center justify-center shrink-0 text-[10px]">6</span>
+                        <span>
+                          Create par click karte hi aapko <strong>Client ID</strong> aur <strong>Client Secret</strong> mil jayega. Unhe upar paste karo, <strong>Save Settings</strong> dabao aur <strong>[Connect Google Calendar]</strong> par click karo!
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 
