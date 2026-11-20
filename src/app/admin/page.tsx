@@ -269,7 +269,7 @@ export default function AdminDashboardPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#F6F8FA] text-slate-800 flex flex-col lg:flex-row font-sans">
+    <div className="h-screen overflow-hidden bg-[#0B0F19] text-slate-800 flex flex-col lg:flex-row font-sans">
       
       {/* Toast Notification */}
       {toastMessage && (
@@ -280,7 +280,7 @@ export default function AdminDashboardPage() {
       )}
 
       {/* MOBILE TOPBAR */}
-      <div className="lg:hidden bg-[#3D0014] text-white px-4 py-3 flex items-center justify-between sticky top-0 z-40 border-b border-brand-900">
+      <div className="lg:hidden bg-[#0B0F19] text-white px-4 py-3 flex items-center justify-between sticky top-0 z-40 border-b border-slate-800">
         <div className="flex items-center gap-2.5">
           <div className="w-7 h-7 shrink-0 flex items-center justify-center">
             <img
@@ -304,7 +304,7 @@ export default function AdminDashboardPage() {
       {/* LEFT EXECUTIVE SIDEBAR (Fixed & Beautifully Arranged)    */}
       {/* ======================================================== */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 w-64 sm:w-72 bg-[#2D000F] text-slate-200 flex flex-col justify-between transition-transform duration-300 lg:translate-x-0 lg:static lg:h-screen lg:shrink-0 border-r border-[#420015] shadow-2xl ${
+        className={`fixed inset-y-0 left-0 z-50 w-64 sm:w-72 bg-[#0B0F19] text-slate-200 flex flex-col justify-between transition-transform duration-300 lg:translate-x-0 lg:static lg:h-full lg:shrink-0 border-r border-slate-800/80 shadow-2xl ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
@@ -357,15 +357,15 @@ export default function AdminDashboardPage() {
                   }}
                   className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                     activeTab === 'overview'
-                      ? 'bg-brand-700 text-white shadow-md shadow-brand-950/40'
-                      : 'text-slate-300 hover:bg-white/5 hover:text-white'
+                      ? 'bg-blue-600 text-white shadow-md shadow-blue-900/40'
+                      : 'text-slate-300 hover:bg-slate-800/70 hover:text-white'
                   }`}
                 >
                   <div className="flex items-center gap-2.5">
-                    <LayoutDashboard className="w-4 h-4 text-pink-300" />
+                    <LayoutDashboard className="w-4 h-4 text-blue-400" />
                     <span>Overview Dashboard</span>
                   </div>
-                  <span className="text-[10px] bg-white/10 px-1.5 py-0.5 rounded text-pink-200">
+                  <span className="text-[10px] bg-slate-800 px-1.5 py-0.5 rounded text-slate-300">
                     Live
                   </span>
                 </button>
@@ -378,15 +378,15 @@ export default function AdminDashboardPage() {
                   }}
                   className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                     activeTab === 'leads'
-                      ? 'bg-brand-700 text-white shadow-md shadow-brand-950/40'
-                      : 'text-slate-300 hover:bg-white/5 hover:text-white'
+                      ? 'bg-blue-600 text-white shadow-md shadow-blue-900/40'
+                      : 'text-slate-300 hover:bg-slate-800/70 hover:text-white'
                   }`}
                 >
                   <div className="flex items-center gap-2.5">
-                    <Users className="w-4 h-4 text-pink-300" />
+                    <Users className="w-4 h-4 text-blue-400" />
                     <span>All Leads & Prospects</span>
                   </div>
-                  <span className="text-[10px] font-black bg-brand-900/90 text-pink-200 px-2 py-0.5 rounded-full border border-pink-400/20">
+                  <span className="text-[10px] font-black bg-slate-800 text-slate-300 px-2 py-0.5 rounded-full border border-slate-700">
                     {totalLeads}
                   </span>
                 </button>
@@ -399,12 +399,12 @@ export default function AdminDashboardPage() {
                   }}
                   className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                     activeTab === 'meetings'
-                      ? 'bg-brand-700 text-white shadow-md shadow-brand-950/40'
-                      : 'text-slate-300 hover:bg-white/5 hover:text-white'
+                      ? 'bg-blue-600 text-white shadow-md shadow-blue-900/40'
+                      : 'text-slate-300 hover:bg-slate-800/70 hover:text-white'
                   }`}
                 >
                   <div className="flex items-center gap-2.5">
-                    <Calendar className="w-4 h-4 text-pink-300" />
+                    <Calendar className="w-4 h-4 text-blue-400" />
                     <span>Demo Appointments</span>
                   </div>
                   {bookedMeetings > 0 && (
@@ -419,7 +419,7 @@ export default function AdminDashboardPage() {
 
             {/* Group 2: Funnel Architecture */}
             <div>
-              <div className="px-3 mb-2 text-[10px] font-extrabold uppercase tracking-wider text-pink-300/50">
+              <div className="px-3 mb-2 text-[10px] font-extrabold uppercase tracking-wider text-slate-500">
                 Funnel & Qualification
               </div>
               <nav className="space-y-1">
@@ -432,12 +432,12 @@ export default function AdminDashboardPage() {
                   }}
                   className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                     activeTab === 'survey_config'
-                      ? 'bg-brand-700 text-white shadow-md shadow-brand-950/40'
-                      : 'text-slate-300 hover:bg-white/5 hover:text-white'
+                      ? 'bg-blue-600 text-white shadow-md shadow-blue-900/40'
+                      : 'text-slate-300 hover:bg-slate-800/70 hover:text-white'
                   }`}
                 >
                   <div className="flex items-center gap-2.5">
-                    <ClipboardCheck className="w-4 h-4 text-pink-300" />
+                    <ClipboardCheck className="w-4 h-4 text-blue-400" />
                     <span>Survey Engine (3 vs 5)</span>
                   </div>
                   <span className="text-[9px] uppercase font-bold text-emerald-400 bg-emerald-950/60 px-1.5 py-0.5 rounded border border-emerald-500/30">
@@ -453,12 +453,12 @@ export default function AdminDashboardPage() {
                   }}
                   className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                     activeTab === 'settings'
-                      ? 'bg-brand-700 text-white shadow-md shadow-brand-950/40'
-                      : 'text-slate-300 hover:bg-white/5 hover:text-white'
+                      ? 'bg-blue-600 text-white shadow-md shadow-blue-900/40'
+                      : 'text-slate-300 hover:bg-slate-800/70 hover:text-white'
                   }`}
                 >
                   <div className="flex items-center gap-2.5">
-                    <Settings className="w-4 h-4 text-pink-300" />
+                    <Settings className="w-4 h-4 text-blue-400" />
                     <span>Calendar & Settings</span>
                   </div>
                 </button>
@@ -468,16 +468,16 @@ export default function AdminDashboardPage() {
 
             {/* Group 3: External */}
             <div>
-              <div className="px-3 mb-2 text-[10px] font-extrabold uppercase tracking-wider text-pink-300/50">
+              <div className="px-3 mb-2 text-[10px] font-extrabold uppercase tracking-wider text-slate-500">
                 Live Site
               </div>
               <Link
                 href="/"
                 target="_blank"
-                className="w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-bold text-slate-300 hover:bg-white/5 hover:text-white transition-all"
+                className="w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-bold text-slate-300 hover:bg-slate-800/70 hover:text-white transition-all"
               >
                 <div className="flex items-center gap-2.5">
-                  <ExternalLink className="w-4 h-4 text-pink-300" />
+                  <ExternalLink className="w-4 h-4 text-slate-400" />
                   <span>View Landing Page</span>
                 </div>
                 <ArrowRight className="w-3.5 h-3.5 opacity-60" />
@@ -488,14 +488,14 @@ export default function AdminDashboardPage() {
         </div>
 
         {/* Bottom Admin User Box */}
-        <div className="p-4 border-t border-white/10 bg-[#22000B]">
+        <div className="p-4 border-t border-slate-800/80 bg-[#060911]">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-brand-700 text-white font-black text-xs flex items-center justify-center border border-white/20">
+            <div className="w-8 h-8 rounded-full bg-blue-600 text-white font-black text-xs flex items-center justify-center border border-white/20">
               JD
             </div>
             <div className="overflow-hidden">
               <div className="text-xs font-bold text-white truncate">John Doe (Admin)</div>
-              <div className="text-[10px] text-pink-200/60 truncate">jewarinternational.com</div>
+              <div className="text-[10px] text-slate-400 truncate">jewarinternational.com</div>
             </div>
           </div>
         </div>
@@ -505,7 +505,7 @@ export default function AdminDashboardPage() {
       {/* ======================================================== */}
       {/* MAIN CONTENT WORKSPACE                                  */}
       {/* ======================================================== */}
-      <div className="flex-1 flex flex-col min-w-0 overflow-y-auto">
+      <div className="flex-1 h-screen overflow-y-auto flex flex-col min-w-0 bg-[#F1F5F9]">
         
         {/* Workspace Top Header Bar */}
         <header className="bg-white border-b border-slate-200/80 px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 sticky top-0 z-30 shadow-2xs">
@@ -1067,7 +1067,7 @@ export default function AdminDashboardPage() {
                                 !cell.isCurrentMonth
                                   ? 'bg-slate-50/40 text-slate-300'
                                   : isSelected
-                                  ? 'bg-pink-50/50 ring-2 ring-inset ring-brand-700/80'
+                                  ? 'bg-blue-50/60 ring-2 ring-inset ring-blue-600'
                                   : 'hover:bg-slate-50/70 text-slate-800 bg-white'
                               }`}
                             >
@@ -1075,9 +1075,9 @@ export default function AdminDashboardPage() {
                                 <span
                                   className={`text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center ${
                                     cell.isToday
-                                      ? 'bg-brand-700 text-white font-extrabold shadow-xs'
+                                      ? 'bg-blue-600 text-white font-extrabold shadow-xs'
                                       : isSelected
-                                      ? 'text-brand-900 font-black'
+                                      ? 'text-blue-900 font-black'
                                       : cell.isCurrentMonth
                                       ? 'text-slate-800'
                                       : 'text-slate-300'
@@ -1109,7 +1109,7 @@ export default function AdminDashboardPage() {
                                         setSelectedDate(cell.dateString);
                                         setSelectedBooking(b);
                                       }}
-                                      className="px-1.5 py-0.5 rounded text-[10px] font-bold truncate transition-colors flex items-center gap-1 bg-[#8B0032] text-white hover:bg-[#680026] shadow-2xs"
+                                      className="px-1.5 py-0.5 rounded text-[10px] font-bold truncate transition-colors flex items-center gap-1 bg-slate-900 text-white hover:bg-blue-600 shadow-2xs"
                                       title={`${timeFormatted} - ${leadObj?.company_name || leadObj?.full_name || 'Prospect'}`}
                                     >
                                       <Clock className="w-2.5 h-2.5 shrink-0 opacity-80" />
@@ -1152,8 +1152,8 @@ export default function AdminDashboardPage() {
                           </span>
                         </div>
 
-                        {/* Meetings on Selected Day */}
-                        <div className="mt-4 space-y-3">
+                        {/* Meetings on Selected Day (Clean scrollable list to match grid height) */}
+                        <div className="mt-4 space-y-2.5 max-h-[460px] overflow-y-auto pr-1">
                           {selectedDayBookings.length === 0 ? (
                             <div className="py-8 text-center text-slate-400 text-xs border border-dashed border-slate-200 rounded-xl">
                               No demo appointments scheduled for this date.
@@ -1180,13 +1180,13 @@ export default function AdminDashboardPage() {
                                   onClick={() => setSelectedBooking(b)}
                                   className={`p-3.5 rounded-xl border transition-all cursor-pointer ${
                                     isCur
-                                      ? 'border-brand-700 bg-pink-50/40 shadow-xs'
+                                      ? 'border-blue-600 bg-blue-50/40 shadow-xs'
                                       : 'border-slate-200 bg-slate-50/40 hover:bg-slate-50'
                                   }`}
                                 >
                                   <div className="flex items-center justify-between mb-1.5">
-                                    <div className="flex items-center gap-1.5 text-xs font-extrabold text-brand-900">
-                                      <Clock className="w-3.5 h-3.5 text-brand-700" />
+                                    <div className="flex items-center gap-1.5 text-xs font-extrabold text-slate-900">
+                                      <Clock className="w-3.5 h-3.5 text-blue-600" />
                                       <span>{startTime} – {endTime}</span>
                                     </div>
                                     <span
@@ -1215,7 +1215,7 @@ export default function AdminDashboardPage() {
                                         href={b.meeting_link}
                                         target="_blank"
                                         rel="noreferrer"
-                                        className="flex-1 py-1.5 px-2 bg-brand-700 hover:bg-brand-800 text-white rounded-lg text-[11px] font-bold flex items-center justify-center gap-1 transition-colors"
+                                        className="flex-1 py-1.5 px-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-[11px] font-bold flex items-center justify-center gap-1 transition-colors"
                                       >
                                         <Video className="w-3 h-3" />
                                         <span>Google Meet</span>
