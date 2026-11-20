@@ -1,5 +1,224 @@
 [
   {
+    "survey_answers": {
+      "business_type": "Internal corporate IT department",
+      "role": "Other",
+      "serving_paying_clients": "Not yet",
+      "budget_fit": "No",
+      "timeline": "Later / researching"
+    },
+    "is_qualified": false,
+    "company_name": "Corp Internal IT",
+    "created_at": "2026-11-20T16:49:09.849Z",
+    "email": "internal@corpexample.com",
+    "full_name": "Internal Corp User",
+    "id": "lead_1795193346950_a14l5m",
+    "phone": "(555) 000-1111",
+    "status": "unqualified",
+    "updated_at": "2026-11-20T16:49:09.849Z",
+    "qualification_notes": "Not yet serving paying clients. Platform is designed for businesses with active customer billing."
+  },
+  {
+    "survey_answers": {},
+    "is_qualified": false,
+    "full_name": "Internal Corp User",
+    "email": "internal@corpexample.com",
+    "phone": "(555) 000-1111",
+    "company_name": "Corp Internal IT",
+    "utm_params": {},
+    "status": "new",
+    "id": "lead_1795193346950_a14l5m",
+    "created_at": "2026-11-20T16:49:06.950Z",
+    "updated_at": "2026-11-20T16:49:06.950Z"
+  },
+  {
+    "survey_answers": {
+      "business_type": "IT support / Managed IT services",
+      "role": "Owner / Founder",
+      "serving_paying_clients": "Yes, regularly",
+      "budget_fit": "Yes",
+      "timeline": "Within 30 days"
+    },
+    "is_qualified": true,
+    "company_name": "Sterling Cloud & Managed IT",
+    "created_at": "2026-11-20T16:49:04.610Z",
+    "email": "marcus@sterling-msp.com",
+    "full_name": "Marcus Sterling",
+    "id": "lead_1795193340929_w4lkfy",
+    "phone": "(415) 890-1234",
+    "status": "meeting_booked",
+    "updated_at": "2026-11-20T16:49:17.192Z",
+    "utm_params": {
+      "utm_campaign": "us_msp_scale_nov2026",
+      "utm_content": "video_ad_6_chasing_updates",
+      "utm_source": "meta_ads"
+    },
+    "qualification_notes": "Regularly serves paying IT clients (+30) | Budget approved ($400 + $200/mo) (+30) | Target business type: IT support / Managed IT services (+20) | Key decision maker: Owner / Founder (+15) | Immediate timeline: within 30 days (+15)"
+  },
+  {
+    "survey_answers": {},
+    "is_qualified": false,
+    "full_name": "Marcus Sterling",
+    "email": "marcus@sterling-msp.com",
+    "phone": "(415) 890-1234",
+    "company_name": "Sterling Cloud & Managed IT",
+    "utm_params": {
+      "utm_source": "meta_ads",
+      "utm_campaign": "us_msp_scale_nov2026",
+      "utm_content": "video_ad_6_chasing_updates"
+    },
+    "status": "new",
+    "id": "lead_1795193340929_w4lkfy",
+    "created_at": "2026-11-20T16:49:00.929Z",
+    "updated_at": "2026-11-20T16:49:00.929Z"
+  },
+  {
+    "survey_answers": {
+      "business_type": "Internal corporate IT department",
+      "role": "Other",
+      "serving_paying_clients": "Not yet",
+      "budget_fit": "No",
+      "timeline": "Later / researching"
+    },
+    "is_qualified": false,
+    "company_name": "Corp Internal IT",
+    "created_at": "2026-11-20T16:38:56.003Z",
+    "email": "internal@corpexample.com",
+    "full_name": "Internal Corp User",
+    "id": "lead_1795192733108_cygcml",
+    "phone": "(555) 000-1111",
+    "status": "unqualified",
+    "updated_at": "2026-11-20T16:38:56.003Z",
+    "qualification_notes": "Not yet serving paying clients. Platform is designed for businesses with active customer billing."
+  },
+  {
+    "survey_answers": {},
+    "is_qualified": false,
+    "full_name": "Internal Corp User",
+    "email": "internal@corpexample.com",
+    "phone": "(555) 000-1111",
+    "company_name": "Corp Internal IT",
+    "utm_params": {},
+    "status": "new",
+    "id": "lead_1795192733108_cygcml",
+    "created_at": "2026-11-20T16:38:53.108Z",
+    "updated_at": "2026-11-20T16:38:53.108Z"
+  },
+  {
+    "survey_answers": {
+      "business_type": "IT support / Managed IT services",
+      "role": "Owner / Founder",
+      "serving_paying_clients": "Yes, regularly",
+      "budget_fit": "Yes",
+      "timeline": "Within 30 days"
+    },
+    "is_qualified": true,
+    "company_name": "Sterling Cloud & Managed IT",
+    "created_at": "2026-11-20T16:38:50.727Z",
+    "email": "marcus@sterling-msp.com",
+    "full_name": "Marcus Sterling",
+    "id": "lead_1795192727818_po463v",
+    "phone": "(415) 890-1234",
+    "status": "qualified",
+    "updated_at": "2026-11-20T16:38:50.727Z",
+    "utm_params": {
+      "utm_campaign": "us_msp_scale_nov2026",
+      "utm_content": "video_ad_6_chasing_updates",
+      "utm_source": "meta_ads"
+    },
+    "qualification_notes": "Regularly serves paying IT clients (+30) | Budget approved ($400 + $200/mo) (+30) | Target business type: IT support / Managed IT services (+20) | Key decision maker: Owner / Founder (+15) | Immediate timeline: within 30 days (+15)"
+  },
+  {
+    "survey_answers": {},
+    "is_qualified": false,
+    "full_name": "Marcus Sterling",
+    "email": "marcus@sterling-msp.com",
+    "phone": "(415) 890-1234",
+    "company_name": "Sterling Cloud & Managed IT",
+    "utm_params": {
+      "utm_source": "meta_ads",
+      "utm_campaign": "us_msp_scale_nov2026",
+      "utm_content": "video_ad_6_chasing_updates"
+    },
+    "status": "new",
+    "id": "lead_1795192727818_po463v",
+    "created_at": "2026-11-20T16:38:47.818Z",
+    "updated_at": "2026-11-20T16:38:47.818Z"
+  },
+  {
+    "survey_answers": {
+      "business_type": "Internal corporate IT department",
+      "role": "Other",
+      "serving_paying_clients": "Not yet",
+      "budget_fit": "No",
+      "timeline": "Later / researching"
+    },
+    "is_qualified": false,
+    "company_name": "Corp Internal IT",
+    "created_at": "2026-11-20T16:36:43.436Z",
+    "email": "internal@corpexample.com",
+    "full_name": "Internal Corp User",
+    "id": "lead_1795192600573_ylyta0",
+    "phone": "(555) 000-1111",
+    "status": "unqualified",
+    "updated_at": "2026-11-20T16:36:43.436Z",
+    "qualification_notes": "Not yet serving paying clients. Platform is designed for businesses with active customer billing."
+  },
+  {
+    "survey_answers": {},
+    "is_qualified": false,
+    "full_name": "Internal Corp User",
+    "email": "internal@corpexample.com",
+    "phone": "(555) 000-1111",
+    "company_name": "Corp Internal IT",
+    "utm_params": {},
+    "status": "new",
+    "id": "lead_1795192600573_ylyta0",
+    "created_at": "2026-11-20T16:36:40.573Z",
+    "updated_at": "2026-11-20T16:36:40.573Z"
+  },
+  {
+    "survey_answers": {
+      "business_type": "IT support / Managed IT services",
+      "role": "Owner / Founder",
+      "serving_paying_clients": "Yes, regularly",
+      "budget_fit": "Yes",
+      "timeline": "Within 30 days"
+    },
+    "is_qualified": true,
+    "company_name": "Sterling Cloud & Managed IT",
+    "created_at": "2026-11-20T16:36:38.251Z",
+    "email": "marcus@sterling-msp.com",
+    "full_name": "Marcus Sterling",
+    "id": "lead_1795192594671_m4bluk",
+    "phone": "(415) 890-1234",
+    "status": "qualified",
+    "updated_at": "2026-11-20T16:36:38.251Z",
+    "utm_params": {
+      "utm_campaign": "us_msp_scale_nov2026",
+      "utm_content": "video_ad_6_chasing_updates",
+      "utm_source": "meta_ads"
+    },
+    "qualification_notes": "Regularly serves paying IT clients (+30) | Budget approved ($400 + $200/mo) (+30) | Target business type: IT support / Managed IT services (+20) | Key decision maker: Owner / Founder (+15) | Immediate timeline: within 30 days (+15)"
+  },
+  {
+    "survey_answers": {},
+    "is_qualified": false,
+    "full_name": "Marcus Sterling",
+    "email": "marcus@sterling-msp.com",
+    "phone": "(415) 890-1234",
+    "company_name": "Sterling Cloud & Managed IT",
+    "utm_params": {
+      "utm_source": "meta_ads",
+      "utm_campaign": "us_msp_scale_nov2026",
+      "utm_content": "video_ad_6_chasing_updates"
+    },
+    "status": "new",
+    "id": "lead_1795192594671_m4bluk",
+    "created_at": "2026-11-20T16:36:34.671Z",
+    "updated_at": "2026-11-20T16:36:34.671Z"
+  },
+  {
     "id": "lead_1795186898264_op72rh",
     "created_at": "2026-11-20T15:01:38.264Z",
     "full_name": "Internal Corp User",

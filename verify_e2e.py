@@ -94,14 +94,14 @@ def main():
     assert d_res["qualification"]["isQualified"] is False, "Internal non-paying user must be disqualified"
     print("✓ TEST 5: Disqualification Engine verified (Polite alternative path triggered)")
 
-    # 6. Check Calendar Availability
-    status, avail = test_get("/api/availability?date=2026-11-23&timezone=America%2FNew_York")
+    # 6. Check Calendar Availability (Target Tuesday 2026-11-24)
+    status, avail = test_get("/api/availability?date=2026-11-24&timezone=America%2FNew_York")
     avail_data = json.loads(avail)
     assert status == 200 and avail_data.get("success"), f"Availability failed: {avail_data}"
     slots = avail_data.get("slots", [])
     assert len(slots) > 0, "Slots should be returned for business day"
     chosen_slot = slots[0]
-    print(f"✓ TEST 6: Google Calendar FreeBusy Availability verified ({len(slots)} slots available on 2026-11-23)")
+    print(f"✓ TEST 6: Google Calendar FreeBusy Availability verified ({len(slots)} slots available on 2026-11-24)")
 
     # 7. Book Meeting
     book_payload = {

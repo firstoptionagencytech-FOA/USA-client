@@ -1,7 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 import { Lead, Booking, AdminSettings } from '@/types';
-import { createClient } from '@supabase/supabase-js';
+import { rtdb } from './firebase';
+import { ref, get, set, update } from 'firebase/database';
 
 const DATA_DIR = path.join(process.cwd(), 'data');
 const LEADS_FILE = path.join(DATA_DIR, 'leads.json');
@@ -17,12 +18,12 @@ function ensureDataDir() {
 // Initial Default Settings
 export const DEFAULT_SETTINGS: AdminSettings = {
   id: 'default',
-  google_calendar_connected: true, // Connected with automated Google FreeBusy availability engine
+  google_calendar_connected: true,
   google_calendar_id: 'primary',
-  business_timezone: 'America/New_York', // Standard US Eastern Time
+  business_timezone: 'America/New_York',
   working_hours_start: '09:00',
   working_hours_end: '17:00',
-  working_days: [1, 2, 3, 4, 5], // Monday through Friday
+  working_days: [1, 2, 3, 4, 5],
   meeting_duration_minutes: 30,
   buffer_before_minutes: 15,
   buffer_after_minutes: 15,
@@ -33,20 +34,6 @@ export const DEFAULT_SETTINGS: AdminSettings = {
   meta_pixel_id: process.env.NEXT_PUBLIC_META_PIXEL_ID || '',
   updated_at: new Date().toISOString(),
 };
-
-// Supabase client initialization helper
-function getSupabaseClient() {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-  if (url && key) {
-    try {
-      return createClient(url, key);
-    } catch (e) {
-      console.warn('Could not initialize Supabase client:', e);
-    }
-  }
-  return null;
-}
 
 // File system fallback helpers
 function readJsonFile<T>(filePath: string, defaultValue: T): T {
@@ -71,215 +58,225 @@ function writeJsonFile<T>(filePath: string, data: T) {
 
 // ================= LEAD OPERATIONS =================
 export async function getLeads(): Promise<Lead[]> {
-  const supabase = getSupabaseClient();
-  if (supabase) {
-    try {
-      const { data, error } = await supabase
-        .from('leads')
-        .select('*')
-        .order('created_at', { ascending: false });
-      if (!error && data) {
-        return data as Lead[];
-      }
-    } catch (e) {
-      console.warn('Supabase getLeads error, falling back to local file storage:', e);
+  try {
+    const snapshot = await get(ref(rtdb, 'leads'));
+    if (snapshot.exists()) {
+      const val = snapshot.val();
+      const list: Lead[] = Array.isArray(val)
+        ? val.filter(Boolean)
+        : Object.values(val);
+      // Sort by created_at desc
+      return list.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
     }
+  } catch (e) {
+    console.warn('Firebase RTDB getLeads warning, falling back to local file:', e);
   }
   return readJsonFile<Lead[]>(LEADS_FILE, []);
 }
 
 export async function getLeadById(id: string): Promise<Lead | null> {
-  const supabase = getSupabaseClient();
-  if (supabase) {
-    try {
-      const { data, error } = await supabase
-        .from('leads')
-        .select('*')
-        .eq('id', id)
-        .single();
-      if (!error && data) return data as Lead;
-    } catch (e) {
-      console.warn('Supabase getLeadById error:', e);
+  try {
+    const snapshot = await get(ref(rtdb, `leads/${id}`));
+    if (snapshot.exists()) {
+      return snapshot.val() as Lead;
     }
+  } catch (e) {
+    console.warn('Firebase RTDB getLeadById warning:', e);
   }
   const leads = readJsonFile<Lead[]>(LEADS_FILE, []);
   return leads.find(l => l.id === id) || null;
 }
 
-export async function saveLead(leadData: Partial<Lead>): Promise<Lead> {
+export async function saveLead(leadData: Omit<Lead, 'id' | 'created_at' | 'updated_at' | 'survey_answers' | 'is_qualified'> & {
+  id?: string;
+  survey_answers?: any;
+  is_qualified?: boolean;
+}): Promise<Lead> {
   const now = new Date().toISOString();
   const id = leadData.id || `lead_${Date.now()}_${Math.random().toString(36).substring(2, 8)}`;
-  const lead: Lead = {
+
+  const newLead: Lead = {
+    survey_answers: {},
+    is_qualified: false,
+    ...leadData,
     id,
-    created_at: leadData.created_at || now,
-    full_name: leadData.full_name || '',
-    email: leadData.email || '',
-    phone: leadData.phone || '',
-    company_name: leadData.company_name || '',
-    survey_answers: leadData.survey_answers || {},
-    is_qualified: leadData.is_qualified ?? false,
-    qualification_notes: leadData.qualification_notes || '',
-    status: leadData.status || (leadData.is_qualified ? 'qualified' : 'new'),
-    utm_params: leadData.utm_params || {},
-    internal_notes: leadData.internal_notes || '',
+    created_at: now,
     updated_at: now,
   };
 
-  const supabase = getSupabaseClient();
-  if (supabase) {
-    try {
-      const { error } = await supabase.from('leads').upsert(lead);
-      if (!error) return lead;
-    } catch (e) {
-      console.warn('Supabase saveLead error, using local fallback:', e);
-    }
+  // 1. Save to Firebase Realtime Database
+  try {
+    await set(ref(rtdb, `leads/${id}`), newLead);
+  } catch (e) {
+    console.error('Firebase RTDB saveLead error:', e);
   }
 
-  const leads = readJsonFile<Lead[]>(LEADS_FILE, []);
-  const index = leads.findIndex(l => l.id === lead.id);
-  if (index >= 0) {
-    leads[index] = { ...leads[index], ...lead, updated_at: now };
-  } else {
-    leads.unshift(lead);
+  // 2. Also keep local JSON in sync
+  try {
+    const leads = readJsonFile<Lead[]>(LEADS_FILE, []);
+    leads.unshift(newLead);
+    writeJsonFile(LEADS_FILE, leads);
+  } catch (err) {
+    console.error('Local JSON saveLead error:', err);
   }
-  writeJsonFile(LEADS_FILE, leads);
-  return lead;
+
+  return newLead;
+}
+
+export async function updateLead(id: string, updates: Partial<Lead>): Promise<Lead | null> {
+  const now = new Date().toISOString();
+  const leadUpdates = { ...updates, updated_at: now };
+
+  // 1. Update in Firebase Realtime Database
+  try {
+    await update(ref(rtdb, `leads/${id}`), leadUpdates);
+  } catch (e) {
+    console.error('Firebase RTDB updateLead error:', e);
+  }
+
+  // 2. Update local JSON
+  const leads = readJsonFile<Lead[]>(LEADS_FILE, []);
+  const index = leads.findIndex(l => l.id === id);
+  if (index !== -1) {
+    leads[index] = { ...leads[index], ...leadUpdates };
+    writeJsonFile(LEADS_FILE, leads);
+    return leads[index];
+  }
+
+  return (await getLeadById(id)) || null;
 }
 
 export async function updateLeadStatus(id: string, status: Lead['status'], internal_notes?: string): Promise<Lead | null> {
-  const lead = await getLeadById(id);
-  if (!lead) return null;
-  lead.status = status;
+  const updates: Partial<Lead> = { status };
   if (internal_notes !== undefined) {
-    lead.internal_notes = internal_notes;
+    updates.internal_notes = internal_notes;
   }
-  lead.updated_at = new Date().toISOString();
-  return await saveLead(lead);
+  return updateLead(id, updates);
 }
 
 // ================= BOOKING OPERATIONS =================
 export async function getBookings(): Promise<Booking[]> {
-  const supabase = getSupabaseClient();
-  if (supabase) {
-    try {
-      const { data, error } = await supabase
-        .from('bookings')
-        .select('*, leads(*)')
-        .order('meeting_start', { ascending: true });
-      if (!error && data) {
-        return data as Booking[];
-      }
-    } catch (e) {
-      console.warn('Supabase getBookings error:', e);
+  try {
+    const snapshot = await get(ref(rtdb, 'bookings'));
+    if (snapshot.exists()) {
+      const val = snapshot.val();
+      const list: Booking[] = Array.isArray(val)
+        ? val.filter(Boolean)
+        : Object.values(val);
+      return list.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
     }
+  } catch (e) {
+    console.warn('Firebase RTDB getBookings warning, falling back to local file:', e);
   }
-  const bookings = readJsonFile<Booking[]>(BOOKINGS_FILE, []);
-  const leads = readJsonFile<Lead[]>(LEADS_FILE, []);
-  return bookings.map(b => ({
-    ...b,
-    lead: leads.find(l => l.id === b.lead_id),
-  }));
+  return readJsonFile<Booking[]>(BOOKINGS_FILE, []);
 }
 
-export async function saveBooking(bookingData: Partial<Booking>): Promise<Booking> {
+export async function getBookingById(id: string): Promise<Booking | null> {
+  try {
+    const snapshot = await get(ref(rtdb, `bookings/${id}`));
+    if (snapshot.exists()) {
+      return snapshot.val() as Booking;
+    }
+  } catch (e) {
+    console.warn('Firebase RTDB getBookingById warning:', e);
+  }
+  const bookings = readJsonFile<Booking[]>(BOOKINGS_FILE, []);
+  return bookings.find(b => b.id === id) || null;
+}
+
+export async function saveBooking(bookingData: Omit<Booking, 'id' | 'created_at' | 'updated_at' | 'reschedule_token'> & { id?: string; reschedule_token?: string }): Promise<Booking> {
   const now = new Date().toISOString();
   const id = bookingData.id || `book_${Date.now()}_${Math.random().toString(36).substring(2, 8)}`;
-  const booking: Booking = {
+
+  const newBooking: Booking = {
+    ...bookingData,
     id,
-    created_at: bookingData.created_at || now,
-    lead_id: bookingData.lead_id || '',
-    google_calendar_event_id: bookingData.google_calendar_event_id || '',
-    meeting_title: bookingData.meeting_title || 'JIT Helpdesk Demo & Solution Walkthrough',
-    meeting_start: bookingData.meeting_start || now,
-    meeting_end: bookingData.meeting_end || now,
-    admin_timezone: bookingData.admin_timezone || 'America/New_York',
-    prospect_timezone: bookingData.prospect_timezone || 'America/New_York',
-    status: bookingData.status || 'confirmed',
-    meeting_link: bookingData.meeting_link || `https://meet.google.com/jit-${Math.random().toString(36).substring(2, 6)}-${Math.random().toString(36).substring(2, 5)}`,
-    reschedule_token: bookingData.reschedule_token || Math.random().toString(36).substring(2, 12),
-    cancellation_reason: bookingData.cancellation_reason || '',
+    created_at: now,
     updated_at: now,
+    google_calendar_event_id: bookingData.google_calendar_event_id || '',
+    meeting_link: bookingData.meeting_link || '',
+    reschedule_token: bookingData.reschedule_token || Math.random().toString(36).substring(2, 12),
   };
 
-  const supabase = getSupabaseClient();
-  if (supabase) {
-    try {
-      await supabase.from('bookings').upsert({
-        ...booking,
-        lead: undefined,
-      });
-    } catch (e) {
-      console.warn('Supabase saveBooking error:', e);
-    }
+  // 1. Save to Firebase Realtime Database
+  try {
+    await set(ref(rtdb, `bookings/${id}`), newBooking);
+  } catch (e) {
+    console.error('Firebase RTDB saveBooking error:', e);
   }
 
-  const bookings = readJsonFile<Booking[]>(BOOKINGS_FILE, []);
-  const index = bookings.findIndex(b => b.id === booking.id);
-  if (index >= 0) {
-    bookings[index] = booking;
-  } else {
-    bookings.push(booking);
-  }
-  writeJsonFile(BOOKINGS_FILE, bookings);
-
-  // Update lead status to meeting_booked
-  if (booking.lead_id) {
-    await updateLeadStatus(booking.lead_id, 'meeting_booked');
+  // 2. Also keep local JSON in sync
+  try {
+    const bookings = readJsonFile<Booking[]>(BOOKINGS_FILE, []);
+    bookings.unshift(newBooking);
+    writeJsonFile(BOOKINGS_FILE, bookings);
+  } catch (err) {
+    console.error('Local JSON saveBooking error:', err);
   }
 
-  return booking;
+  return newBooking;
 }
 
-export async function updateBookingStatus(
-  id: string,
-  status: Booking['status'],
-  cancellation_reason?: string
-): Promise<Booking | null> {
-  const bookings = await getBookings();
-  const booking = bookings.find(b => b.id === id);
-  if (!booking) return null;
-  booking.status = status;
-  if (cancellation_reason) booking.cancellation_reason = cancellation_reason;
-  booking.updated_at = new Date().toISOString();
-  await saveBooking(booking);
-  return booking;
+export async function updateBooking(id: string, updates: Partial<Booking>): Promise<Booking | null> {
+  const now = new Date().toISOString();
+  const bookingUpdates = { ...updates, updated_at: now };
+
+  // 1. Update in Firebase Realtime Database
+  try {
+    await update(ref(rtdb, `bookings/${id}`), bookingUpdates);
+  } catch (e) {
+    console.error('Firebase RTDB updateBooking error:', e);
+  }
+
+  // 2. Update local JSON
+  const bookings = readJsonFile<Booking[]>(BOOKINGS_FILE, []);
+  const index = bookings.findIndex(b => b.id === id);
+  if (index !== -1) {
+    bookings[index] = { ...bookings[index], ...bookingUpdates };
+    writeJsonFile(BOOKINGS_FILE, bookings);
+    return bookings[index];
+  }
+
+  return (await getBookingById(id)) || null;
+}
+
+export async function updateBookingStatus(id: string, status: Booking['status'], cancellation_reason?: string): Promise<Booking | null> {
+  const updates: Partial<Booking> = { status };
+  if (cancellation_reason !== undefined) {
+    updates.cancellation_reason = cancellation_reason;
+  }
+  return updateBooking(id, updates);
 }
 
 // ================= SETTINGS OPERATIONS =================
 export async function getSettings(): Promise<AdminSettings> {
-  const supabase = getSupabaseClient();
-  if (supabase) {
-    try {
-      const { data, error } = await supabase
-        .from('admin_settings')
-        .select('*')
-        .eq('id', 'default')
-        .single();
-      if (!error && data) return data as AdminSettings;
-    } catch (e) {
-      console.warn('Supabase getSettings error:', e);
+  try {
+    const snapshot = await get(ref(rtdb, 'settings'));
+    if (snapshot.exists()) {
+      return { ...DEFAULT_SETTINGS, ...snapshot.val() };
     }
+  } catch (e) {
+    console.warn('Firebase RTDB getSettings warning:', e);
   }
   return readJsonFile<AdminSettings>(SETTINGS_FILE, DEFAULT_SETTINGS);
 }
 
-export async function updateSettings(settingsData: Partial<AdminSettings>): Promise<AdminSettings> {
+export async function updateSettings(updates: Partial<AdminSettings>): Promise<AdminSettings> {
   const current = await getSettings();
   const updated: AdminSettings = {
     ...current,
-    ...settingsData,
+    ...updates,
     updated_at: new Date().toISOString(),
   };
 
-  const supabase = getSupabaseClient();
-  if (supabase) {
-    try {
-      await supabase.from('admin_settings').upsert(updated);
-    } catch (e) {
-      console.warn('Supabase updateSettings error:', e);
-    }
+  // 1. Save to Firebase Realtime Database
+  try {
+    await set(ref(rtdb, 'settings'), updated);
+  } catch (e) {
+    console.error('Firebase RTDB updateSettings error:', e);
   }
 
+  // 2. Update local JSON
   writeJsonFile(SETTINGS_FILE, updated);
   return updated;
 }

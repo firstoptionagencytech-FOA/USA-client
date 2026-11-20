@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { verifySlotStillAvailable, createGoogleCalendarEvent } from '@/lib/calendar';
-import { getLeadById, saveBooking, getSettings } from '@/lib/storage';
+import { getLeadById, saveBooking, getSettings, updateLeadStatus } from '@/lib/storage';
 
 export async function POST(req: NextRequest) {
   try {
@@ -54,6 +54,9 @@ export async function POST(req: NextRequest) {
       meeting_link: calendarResult.meetingLink,
       status: 'confirmed',
     });
+
+    // Update lead status to meeting_booked
+    await updateLeadStatus(lead_id, 'meeting_booked');
 
     return NextResponse.json({
       success: true,
