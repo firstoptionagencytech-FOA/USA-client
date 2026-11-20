@@ -46,15 +46,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenBooking }) => {
       {/* Main Container */}
       <div className="relative z-10 max-w-5xl mx-auto px-4 flex flex-col items-center text-center">
         
-        {/* Live Telemetry Ticker Ribbon */}
-        <div className="inline-flex items-center gap-2.5 px-3.5 py-1 rounded-full bg-white/80 backdrop-blur-md border border-[#dce3d4] shadow-xs text-[10px] sm:text-[11px] font-bold text-[#182c26] mb-3">
-          <span className="w-2 h-2 rounded-full bg-[#274c3b] live-indicator" />
-          <span className="text-[#274c3b] font-black uppercase tracking-wider">US MSP CLOUD INFRASTRUCTURE</span>
-          <span className="text-[#dce3d4]">|</span>
-          <span className="text-[#61705f] hidden sm:inline">Deskora Architecture · 99.98% Uptime</span>
-          <span className="text-[#61705f] sm:hidden">99.98% Uptime</span>
-        </div>
-
         {/* Official Brand Header (Headset Agent Emblem + JIT HELPDESK + Byline) */}
         <div className="flex flex-col items-center mb-3 sm:mb-4">
           <div className="flex items-center justify-center gap-2.5 sm:gap-3">
