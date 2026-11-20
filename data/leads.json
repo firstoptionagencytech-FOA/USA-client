@@ -1,5 +1,224 @@
 [
   {
+    "survey_answers": {
+      "business_type": "Internal corporate IT department",
+      "role": "Other",
+      "serving_paying_clients": "Not yet",
+      "budget_fit": "No",
+      "timeline": "Later / researching"
+    },
+    "is_qualified": true,
+    "company_name": "Corp Internal IT",
+    "created_at": "2026-11-20T18:11:58.271Z",
+    "email": "internal@corpexample.com",
+    "full_name": "Internal Corp User",
+    "id": "lead_1795198315006_voz17l",
+    "phone": "(555) 000-1111",
+    "status": "qualified",
+    "updated_at": "2026-11-20T18:11:58.271Z",
+    "qualification_notes": "Qualified for personalized demo walkthrough."
+  },
+  {
+    "survey_answers": {},
+    "is_qualified": true,
+    "full_name": "Internal Corp User",
+    "email": "internal@corpexample.com",
+    "phone": "(555) 000-1111",
+    "company_name": "Corp Internal IT",
+    "utm_params": {},
+    "status": "new",
+    "id": "lead_1795198315006_voz17l",
+    "created_at": "2026-11-20T18:11:55.005Z",
+    "updated_at": "2026-11-20T18:11:55.005Z"
+  },
+  {
+    "survey_answers": {
+      "business_type": "IT support / Managed IT services",
+      "role": "Owner / Founder",
+      "serving_paying_clients": "Yes, regularly",
+      "budget_fit": "Yes",
+      "timeline": "Within 30 days"
+    },
+    "is_qualified": true,
+    "company_name": "Sterling Cloud & Managed IT",
+    "created_at": "2026-11-20T18:11:52.656Z",
+    "email": "marcus@sterling-msp.com",
+    "full_name": "Marcus Sterling",
+    "id": "lead_1795198308323_e30u1p",
+    "phone": "(415) 890-1234",
+    "status": "meeting_booked",
+    "updated_at": "2026-11-20T18:12:05.701Z",
+    "utm_params": {
+      "utm_campaign": "us_msp_scale_nov2026",
+      "utm_content": "video_ad_6_chasing_updates",
+      "utm_source": "meta_ads"
+    },
+    "qualification_notes": "Qualified for personalized demo walkthrough."
+  },
+  {
+    "survey_answers": {},
+    "is_qualified": true,
+    "full_name": "Marcus Sterling",
+    "email": "marcus@sterling-msp.com",
+    "phone": "(415) 890-1234",
+    "company_name": "Sterling Cloud & Managed IT",
+    "utm_params": {
+      "utm_source": "meta_ads",
+      "utm_campaign": "us_msp_scale_nov2026",
+      "utm_content": "video_ad_6_chasing_updates"
+    },
+    "status": "new",
+    "id": "lead_1795198308323_e30u1p",
+    "created_at": "2026-11-20T18:11:48.323Z",
+    "updated_at": "2026-11-20T18:11:48.323Z"
+  },
+  {
+    "survey_answers": {
+      "business_type": "Internal corporate IT department",
+      "role": "Other",
+      "serving_paying_clients": "Not yet",
+      "budget_fit": "No",
+      "timeline": "Later / researching"
+    },
+    "is_qualified": true,
+    "company_name": "Corp Internal IT",
+    "created_at": "2026-11-20T17:56:18.514Z",
+    "email": "internal@corpexample.com",
+    "full_name": "Internal Corp User",
+    "id": "lead_1795197375231_thosf6",
+    "phone": "(555) 000-1111",
+    "status": "qualified",
+    "updated_at": "2026-11-20T17:56:18.514Z",
+    "qualification_notes": "Qualified for personalized demo walkthrough."
+  },
+  {
+    "survey_answers": {},
+    "is_qualified": true,
+    "full_name": "Internal Corp User",
+    "email": "internal@corpexample.com",
+    "phone": "(555) 000-1111",
+    "company_name": "Corp Internal IT",
+    "utm_params": {},
+    "status": "new",
+    "id": "lead_1795197375231_thosf6",
+    "created_at": "2026-11-20T17:56:15.231Z",
+    "updated_at": "2026-11-20T17:56:15.231Z"
+  },
+  {
+    "survey_answers": {
+      "business_type": "IT support / Managed IT services",
+      "role": "Owner / Founder",
+      "serving_paying_clients": "Yes, regularly",
+      "budget_fit": "Yes",
+      "timeline": "Within 30 days"
+    },
+    "is_qualified": true,
+    "company_name": "Sterling Cloud & Managed IT",
+    "created_at": "2026-11-20T17:56:12.904Z",
+    "email": "marcus@sterling-msp.com",
+    "full_name": "Marcus Sterling",
+    "id": "lead_1795197369421_tepjf5",
+    "phone": "(415) 890-1234",
+    "status": "meeting_booked",
+    "updated_at": "2026-11-20T17:56:25.516Z",
+    "utm_params": {
+      "utm_campaign": "us_msp_scale_nov2026",
+      "utm_content": "video_ad_6_chasing_updates",
+      "utm_source": "meta_ads"
+    },
+    "qualification_notes": "Qualified for personalized demo walkthrough."
+  },
+  {
+    "survey_answers": {},
+    "is_qualified": true,
+    "full_name": "Marcus Sterling",
+    "email": "marcus@sterling-msp.com",
+    "phone": "(415) 890-1234",
+    "company_name": "Sterling Cloud & Managed IT",
+    "utm_params": {
+      "utm_source": "meta_ads",
+      "utm_campaign": "us_msp_scale_nov2026",
+      "utm_content": "video_ad_6_chasing_updates"
+    },
+    "status": "new",
+    "id": "lead_1795197369421_tepjf5",
+    "created_at": "2026-11-20T17:56:09.421Z",
+    "updated_at": "2026-11-20T17:56:09.421Z"
+  },
+  {
+    "survey_answers": {
+      "business_type": "Internal corporate IT department",
+      "role": "Other",
+      "serving_paying_clients": "Not yet",
+      "budget_fit": "No",
+      "timeline": "Later / researching"
+    },
+    "is_qualified": true,
+    "company_name": "Corp Internal IT",
+    "created_at": "2026-11-20T17:55:24.296Z",
+    "email": "internal@corpexample.com",
+    "full_name": "Internal Corp User",
+    "id": "lead_1795197321080_lsywqw",
+    "phone": "(555) 000-1111",
+    "status": "qualified",
+    "updated_at": "2026-11-20T17:55:24.296Z",
+    "qualification_notes": "Qualified for personalized demo walkthrough."
+  },
+  {
+    "survey_answers": {},
+    "is_qualified": true,
+    "full_name": "Internal Corp User",
+    "email": "internal@corpexample.com",
+    "phone": "(555) 000-1111",
+    "company_name": "Corp Internal IT",
+    "utm_params": {},
+    "status": "new",
+    "id": "lead_1795197321080_lsywqw",
+    "created_at": "2026-11-20T17:55:21.080Z",
+    "updated_at": "2026-11-20T17:55:21.080Z"
+  },
+  {
+    "survey_answers": {
+      "business_type": "IT support / Managed IT services",
+      "role": "Owner / Founder",
+      "serving_paying_clients": "Yes, regularly",
+      "budget_fit": "Yes",
+      "timeline": "Within 30 days"
+    },
+    "is_qualified": true,
+    "company_name": "Sterling Cloud & Managed IT",
+    "created_at": "2026-11-20T17:55:18.720Z",
+    "email": "marcus@sterling-msp.com",
+    "full_name": "Marcus Sterling",
+    "id": "lead_1795197315047_5y3fo8",
+    "phone": "(415) 890-1234",
+    "status": "qualified",
+    "updated_at": "2026-11-20T17:55:18.720Z",
+    "utm_params": {
+      "utm_campaign": "us_msp_scale_nov2026",
+      "utm_content": "video_ad_6_chasing_updates",
+      "utm_source": "meta_ads"
+    },
+    "qualification_notes": "Qualified for personalized demo walkthrough."
+  },
+  {
+    "survey_answers": {},
+    "is_qualified": true,
+    "full_name": "Marcus Sterling",
+    "email": "marcus@sterling-msp.com",
+    "phone": "(415) 890-1234",
+    "company_name": "Sterling Cloud & Managed IT",
+    "utm_params": {
+      "utm_source": "meta_ads",
+      "utm_campaign": "us_msp_scale_nov2026",
+      "utm_content": "video_ad_6_chasing_updates"
+    },
+    "status": "new",
+    "id": "lead_1795197315047_5y3fo8",
+    "created_at": "2026-11-20T17:55:15.047Z",
+    "updated_at": "2026-11-20T17:55:15.047Z"
+  },
+  {
     "survey_answers": {},
     "is_qualified": false,
     "full_name": "Pre-Deploy Health Check",

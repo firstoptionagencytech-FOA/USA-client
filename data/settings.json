@@ -17,8 +17,8 @@
   "buffer_after_minutes": 15,
   "min_notice_hours": 4,
   "booking_window_days": 14,
-  "survey_mode": "5_questions",
+  "survey_mode": "3_questions",
   "pricing_package_visible": true,
   "meta_pixel_id": "",
-  "updated_at": "2026-11-20T17:28:18.508Z"
+  "updated_at": "2026-11-20T17:28:23.482Z"
 }

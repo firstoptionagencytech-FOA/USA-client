@@ -1,5 +1,35 @@
 [
   {
+    "lead_id": "lead_1795198308323_e30u1p",
+    "meeting_title": "JIT Helpdesk Demo: Sterling Cloud & Managed IT",
+    "meeting_start": "2026-11-24T06:30:00.000Z",
+    "meeting_end": "2026-11-24T07:00:00.000Z",
+    "admin_timezone": "America/New_York",
+    "prospect_timezone": "America/New_York",
+    "google_calendar_event_id": "mock_gcal_1795198325370",
+    "meeting_link": "https://meet.google.com/jit-7h6k-e2g",
+    "status": "confirmed",
+    "id": "book_1795198325371_sihbyi",
+    "created_at": "2026-11-20T18:12:05.371Z",
+    "updated_at": "2026-11-20T18:12:05.371Z",
+    "reschedule_token": "x1h6y2mbej"
+  },
+  {
+    "lead_id": "lead_1795197369421_tepjf5",
+    "meeting_title": "JIT Helpdesk Demo: Sterling Cloud & Managed IT",
+    "meeting_start": "2026-11-24T05:30:00.000Z",
+    "meeting_end": "2026-11-24T06:00:00.000Z",
+    "admin_timezone": "America/New_York",
+    "prospect_timezone": "America/New_York",
+    "google_calendar_event_id": "mock_gcal_1795197385219",
+    "meeting_link": "https://meet.google.com/jit-suba-506",
+    "status": "confirmed",
+    "id": "book_1795197385219_4fo8sc",
+    "created_at": "2026-11-20T17:56:25.219Z",
+    "updated_at": "2026-11-20T17:56:25.219Z",
+    "reschedule_token": "724397zzs5"
+  },
+  {
     "lead_id": "lead_1795193340929_w4lkfy",
     "meeting_title": "JIT Helpdesk Demo: Sterling Cloud & Managed IT",
     "meeting_start": "2026-11-24T04:30:00.000Z",
@@ -39,11 +69,11 @@
     "meeting_end": "2026-11-23T04:00:00.000Z",
     "admin_timezone": "America/New_York",
     "prospect_timezone": "America/New_York",
-    "status": "no_show",
+    "status": "completed",
     "meeting_link": "https://meet.google.com/jit-lkm8-s4u",
     "reschedule_token": "d7g249dbpy",
     "cancellation_reason": "",
-    "updated_at": "2026-11-20T11:25:56.022Z"
+    "updated_at": "2026-11-20T17:29:06.114Z"
   },
   {
     "id": "book_1795115530621_62kt9f",
