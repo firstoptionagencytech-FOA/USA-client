@@ -17,7 +17,7 @@ import { FaqSection } from '@/components/sections/FaqSection';
 import { FinalCtaSection } from '@/components/sections/FinalCtaSection';
 import { FunnelModal } from '@/components/funnel/FunnelModal';
 import { ArrowRight } from 'lucide-react';
-import { trackMetaEvent } from '@/lib/meta-pixel';
+import { trackMetaEvent, initMetaPixel } from '@/lib/meta-pixel';
 
 export default function LandingPage() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -34,8 +34,13 @@ export default function LandingPage() {
       try {
         const res = await fetch('/api/admin/settings');
         const data = await res.json();
-        if (data.success && data.settings?.survey_mode) {
-          setSurveyMode(data.settings.survey_mode);
+        if (data.success && data.settings) {
+          if (data.settings.survey_mode) {
+            setSurveyMode(data.settings.survey_mode);
+          }
+          if (data.settings.meta_pixel_id) {
+            initMetaPixel(data.settings.meta_pixel_id);
+          }
         }
       } catch (e) {
         // use default

@@ -233,23 +233,25 @@ Implementation Timeline: ${lead.survey_answers?.timeline || 'N/A'}
 • Live Q&A and Deployment Roadmap
   `.trim();
 
+  const customMeetLink = settings.google_meet_link?.trim();
+
   if (!calendarClient) {
     // Simulated event for development and verification without Google credentials
     return {
       eventId: `mock_gcal_${Date.now()}`,
-      meetingLink: `https://meet.google.com/jit-${Math.random().toString(36).substring(2, 6)}-${Math.random().toString(36).substring(2, 5)}`,
+      meetingLink: customMeetLink || `https://meet.google.com/jit-${Math.random().toString(36).substring(2, 6)}-${Math.random().toString(36).substring(2, 5)}`,
     };
   }
 
   try {
-    const settings = await getSettings();
     const event = await calendarClient.events.insert({
       calendarId: settings.google_calendar_id || 'primary',
-      conferenceDataVersion: 1,
+      conferenceDataVersion: customMeetLink ? 0 : 1,
       sendUpdates: 'all',
       requestBody: {
         summary: title,
-        description,
+        description: customMeetLink ? `${description}\n\nJoin Google Meet: ${customMeetLink}` : description,
+        location: customMeetLink || undefined,
         start: {
           dateTime: meetingStart,
           timeZone: timezone,
@@ -261,12 +263,14 @@ Implementation Timeline: ${lead.survey_answers?.timeline || 'N/A'}
         attendees: [
           { email: lead.email, displayName: lead.full_name },
         ],
-        conferenceData: {
-          createRequest: {
-            requestId: `req-${Date.now()}`,
-            conferenceSolutionKey: { type: 'hangoutsMeet' },
+        ...(!customMeetLink ? {
+          conferenceData: {
+            createRequest: {
+              requestId: `req-${Date.now()}`,
+              conferenceSolutionKey: { type: 'hangoutsMeet' },
+            },
           },
-        },
+        } : {}),
         reminders: {
           useDefault: false,
           overrides: [
@@ -278,7 +282,7 @@ Implementation Timeline: ${lead.survey_answers?.timeline || 'N/A'}
     });
 
     const eventId = event.data.id || '';
-    const meetingLink = event.data.hangoutLink || event.data.conferenceData?.entryPoints?.[0]?.uri || 'https://meet.google.com';
+    const meetingLink = customMeetLink || event.data.hangoutLink || event.data.conferenceData?.entryPoints?.[0]?.uri || 'https://meet.google.com';
 
     return { eventId, meetingLink };
   } catch (error) {

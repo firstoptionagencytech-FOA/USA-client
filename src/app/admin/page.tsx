@@ -1592,6 +1592,24 @@ export default function AdminDashboardPage() {
                     </div>
                   </div>
 
+                  {/* Permanent Google Meet Link Input */}
+                  <div className="mt-3 pt-3 border-t border-[#274c3b]">
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-[#d2f56d] mb-1 flex items-center gap-1.5">
+                      <Video className="w-3.5 h-3.5" />
+                      Permanent Google Meet Link (Shared With All Prospects)
+                    </label>
+                    <input
+                      type="url"
+                      placeholder="https://meet.google.com/xyz-abcd-efg"
+                      value={settingsDraft.google_meet_link || ''}
+                      onChange={e => setSettingsDraft(prev => ({ ...prev, google_meet_link: e.target.value }))}
+                      className="w-full text-xs font-mono bg-[#0b1512] border border-[#274c3b] rounded-xl p-2.5 text-white focus:border-[#d2f56d] focus:outline-none"
+                    />
+                    <span className="text-[10px] text-[#dce3d4] mt-1 block">
+                      Enter your fixed Google Meet room URL. Every prospect who books a demo will automatically receive this exact link in their confirmation &amp; calendar invite.
+                    </span>
+                  </div>
+
                   {/* Redirect URI Bar with 1-Click Copy */}
                   <div className="mt-3 p-3 rounded-xl bg-[#0b1512] border border-[#274c3b] flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
                     <div className="flex items-center gap-2 overflow-hidden">
@@ -1758,17 +1776,25 @@ export default function AdminDashboardPage() {
                 </div>
 
                 {/* Meta Pixel Tracking ID */}
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">
-                    Meta Pixel Tracking ID
-                  </label>
+                <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/90 space-y-1.5">
+                  <div className="flex items-center justify-between">
+                    <label className="block text-xs font-bold text-slate-800">
+                      Meta Pixel Tracking ID (Facebook Ads)
+                    </label>
+                    <span className="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full">
+                      Auto-Syncs with Landing Page
+                    </span>
+                  </div>
                   <input
                     type="text"
                     placeholder="e.g. 1234567890123456"
                     value={settingsDraft.meta_pixel_id || ''}
                     onChange={e => setSettingsDraft(prev => ({ ...prev, meta_pixel_id: e.target.value }))}
-                    className="w-full text-xs font-bold border border-slate-200 rounded-xl p-2.5 text-slate-800"
+                    className="w-full text-xs font-mono border border-slate-200 rounded-xl p-2.5 text-slate-900 bg-white focus:ring-2 focus:ring-[#274c3b]"
                   />
+                  <p className="text-[11px] text-slate-500">
+                    Saved directly to Firebase. The landing page automatically loads this pixel for PageView, Lead, and Schedule conversion tracking.
+                  </p>
                 </div>
 
                 {/* Save Button */}

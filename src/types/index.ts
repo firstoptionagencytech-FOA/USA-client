@@ -100,6 +100,9 @@ export interface AdminSettings {
   id: string;
   google_calendar_connected: boolean;
   google_calendar_id: string;
+  google_client_id?: string;
+  google_client_secret?: string;
+  google_meet_link?: string;
   business_timezone: string; // e.g. "America/New_York", "America/Chicago", "America/Los_Angeles"
   working_hours_start: string; // e.g. "09:00"
   working_hours_end: string;   // e.g. "17:00"

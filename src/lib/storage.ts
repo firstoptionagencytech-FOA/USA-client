@@ -30,6 +30,7 @@ export const DEFAULT_SETTINGS: AdminSettings = {
   booking_window_days: 14,
   survey_mode: '5_questions',
   pricing_package_visible: true,
+  google_meet_link: '',
   meta_pixel_id: process.env.NEXT_PUBLIC_META_PIXEL_ID || '',
   updated_at: new Date().toISOString(),
 };
