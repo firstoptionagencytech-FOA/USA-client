@@ -5,11 +5,11 @@ import { getLeadById, saveBooking, getSettings, updateLeadStatus } from '@/lib/s
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { lead_id, start_time, end_time, prospect_timezone, mode } = body;
+    const { lead_id, start_time, end_time, prospect_timezone } = body;
 
-    if (!lead_id) {
+    if (!lead_id || !start_time || !end_time) {
       return NextResponse.json(
-        { success: false, error: 'Lead ID is required.' },
+        { success: false, error: 'Lead ID, start time, and end time are required.' },
         { status: 400 }
       );
     }
@@ -20,35 +20,7 @@ export async function POST(req: NextRequest) {
     }
 
     const settings = await getSettings();
-    const timezone = prospect_timezone || settings.business_timezone || 'America/New_York';
-
-    // Handle Google Appointment Scheduling direct confirmation
-    if (mode === 'google_schedule_confirm' || (!start_time && !end_time)) {
-      const now = new Date();
-      const defaultStart = start_time || now.toISOString();
-      const defaultEnd = end_time || new Date(now.getTime() + 30 * 60000).toISOString();
-      const meetingLink = settings.google_meet_link || 'https://calendar.app.google/wnp1kHMUuZ4UPv3y5';
-
-      const booking = await saveBooking({
-        lead_id,
-        meeting_title: `Google Calendar Demo: ${lead.company_name || lead.full_name}`,
-        meeting_start: defaultStart,
-        meeting_end: defaultEnd,
-        admin_timezone: settings.business_timezone,
-        prospect_timezone: timezone,
-        google_calendar_event_id: 'gcal_appointment_schedule',
-        meeting_link: meetingLink,
-        status: 'confirmed',
-      });
-
-      await updateLeadStatus(lead_id, 'meeting_booked');
-
-      return NextResponse.json({
-        success: true,
-        booking,
-        message: 'Google Calendar Appointment successfully recorded!',
-      });
-    }
+    const timezone = prospect_timezone || settings.business_timezone;
 
     // Concurrency Guard: Check if slot was just taken by another user
     const isAvailable = await verifySlotStillAvailable(start_time, end_time);

@@ -24,7 +24,6 @@ export const FunnelModal: React.FC<FunnelModalProps> = ({
 }) => {
   const [stage, setStage] = useState<FunnelStage>('contact');
   const [leadId, setLeadId] = useState<string>('');
-  const [leadData, setLeadData] = useState<{ full_name: string; email: string; phone: string; company_name: string } | null>(null);
   const [disqualificationReason, setDisqualificationReason] = useState<string>('');
   const [confirmedBooking, setConfirmedBooking] = useState<Booking | null>(null);
 
@@ -33,7 +32,6 @@ export const FunnelModal: React.FC<FunnelModalProps> = ({
   const handleResetAndClose = () => {
     setStage('contact');
     setLeadId('');
-    setLeadData(null);
     setDisqualificationReason('');
     setConfirmedBooking(null);
     onClose();
@@ -43,7 +41,7 @@ export const FunnelModal: React.FC<FunnelModalProps> = ({
     <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4">
       
       {/* Modal Card */}
-      <div className={`relative w-full ${stage === 'calendar' ? 'max-w-3xl sm:max-w-4xl' : 'max-w-xl'} bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden animate-in fade-in zoom-in-95 duration-200 transition-all`}>
+      <div className="relative w-full max-w-xl bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
         
         {/* Close Button */}
         <button
@@ -56,9 +54,8 @@ export const FunnelModal: React.FC<FunnelModalProps> = ({
         {/* Funnel Stage Render */}
         {stage === 'contact' && (
           <ContactCaptureStep
-            onSuccess={(id, data) => {
+            onSuccess={(id) => {
               setLeadId(id);
-              setLeadData(data);
               setStage('survey');
             }}
           />
@@ -90,7 +87,6 @@ export const FunnelModal: React.FC<FunnelModalProps> = ({
         {stage === 'calendar' && (
           <CalendarBookingStep
             leadId={leadId}
-            leadData={leadData}
             onBack={() => setStage('survey')}
             onSuccess={(booking) => {
               setConfirmedBooking(booking);
