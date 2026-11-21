@@ -34,14 +34,23 @@ import {
   Sparkles,
   ArrowRight,
   List,
-  Check
+  Check,
+  LogOut,
+  Loader2
 } from 'lucide-react';
 import Link from 'next/link';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { auth } from '@/lib/firebase';
+import { AdminLoginGate } from '@/components/admin/AdminLoginGate';
 import { Lead, Booking, AdminSettings, LeadStatus } from '@/types';
 
 type AdminTab = 'overview' | 'leads' | 'meetings' | 'survey_config' | 'settings';
 
 export default function AdminDashboardPage() {
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [authChecking, setAuthChecking] = useState<boolean>(true);
+  const [adminUser, setAdminUser] = useState<{ email?: string; uid?: string; authType: string } | null>(null);
+
   const [activeTab, setActiveTab] = useState<AdminTab>('overview');
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [leads, setLeads] = useState<Lead[]>([]);
@@ -63,6 +72,54 @@ export default function AdminDashboardPage() {
   const [selectedDate, setSelectedDate] = useState<string>('2026-11-23');
   const [selectedBooking, setSelectedBooking] = useState<Booking | null>(null);
   const [calendarViewMode, setCalendarViewMode] = useState<'grid' | 'agenda'>('grid');
+
+  // Verify Session & Auth Listener
+  useEffect(() => {
+    // 1. Check local session
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('deskora_admin_session');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (parsed && (parsed.uid || parsed.email)) {
+            setAdminUser(parsed);
+            setIsAuthenticated(true);
+          }
+        } catch (e) {
+          console.warn('Session parse error:', e);
+        }
+      }
+    }
+
+    // 2. Firebase Auth State Listener
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const info = { email: user.email || 'Admin', uid: user.uid, authType: 'firebase_auth' };
+        setAdminUser(info);
+        setIsAuthenticated(true);
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('deskora_admin_session', JSON.stringify(info));
+        }
+      }
+      setAuthChecking(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+    } catch (e) {
+      console.warn('SignOut error:', e);
+    }
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('deskora_admin_session');
+    }
+    setIsAuthenticated(false);
+    setAdminUser(null);
+    showToast('Securely signed out of admin dashboard.');
+  };
 
   const loadAllData = async () => {
     setLoading(true);
@@ -118,20 +175,22 @@ export default function AdminDashboardPage() {
   };
 
   useEffect(() => {
-    loadAllData();
+    if (isAuthenticated) {
+      loadAllData();
 
-    // Check for OAuth callback status
-    if (typeof window !== 'undefined') {
-      const urlParams = new URLSearchParams(window.location.search);
-      if (urlParams.get('calendar') === 'connected') {
-        showToast('Google Calendar connected successfully! Real-time sync is now active.');
-      } else if (urlParams.get('error') === 'missing_credentials') {
-        showToast('Please enter your Google Client ID and Secret below, then click Connect.');
-      } else if (urlParams.get('error')) {
-        showToast(`Google Calendar Auth Notice: ${urlParams.get('error')}`);
+      // Check for OAuth callback status
+      if (typeof window !== 'undefined') {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('calendar') === 'connected') {
+          showToast('Google Calendar connected successfully! Real-time sync is now active.');
+        } else if (urlParams.get('error') === 'missing_credentials') {
+          showToast('Please enter your Google Client ID and Secret below, then click Connect.');
+        } else if (urlParams.get('error')) {
+          showToast(`Google Calendar Auth Notice: ${urlParams.get('error')}`);
+        }
       }
     }
-  }, []);
+  }, [isAuthenticated]);
 
   useEffect(() => {
     if (selectedLead) {
@@ -280,6 +339,34 @@ export default function AdminDashboardPage() {
     },
   ];
 
+  // 1. Loading screen while checking authentication session
+  if (authChecking) {
+    return (
+      <div className="min-h-screen bg-[#0e1b17] flex flex-col items-center justify-center p-4 font-sans">
+        <div className="w-14 h-14 rounded-2xl bg-[#182c26] border border-[#274c3b] flex items-center justify-center mb-3 shadow-xl p-2.5 animate-pulse">
+          <img src="/brand/jewar_emblem.png" alt="Logo" className="w-full h-full object-contain" />
+        </div>
+        <div className="flex items-center gap-2 text-xs font-bold text-[#d2f56d]">
+          <Loader2 className="w-4 h-4 animate-spin text-[#d2f56d]" />
+          <span>Verifying security credentials...</span>
+        </div>
+      </div>
+    );
+  }
+
+  // 2. Unauthenticated: render the secure login gate
+  if (!isAuthenticated) {
+    return (
+      <AdminLoginGate
+        onAuthenticated={(info) => {
+          setAdminUser(info);
+          setIsAuthenticated(true);
+          showToast(`Welcome back, ${info.email || 'Admin'}!`);
+        }}
+      />
+    );
+  }
+
   return (
     <div className="h-screen overflow-hidden bg-[#182c26] text-slate-800 flex flex-col lg:flex-row font-sans">
       
@@ -304,12 +391,22 @@ export default function AdminDashboardPage() {
           <span className="font-extrabold text-sm font-display tracking-tight">JIT Helpdesk CRM</span>
         </div>
 
-        <button
-          onClick={() => setSidebarOpen(!sidebarOpen)}
-          className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white"
-        >
-          <Menu className="w-5 h-5" />
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={handleSignOut}
+            title="Sign Out"
+            className="p-1.5 rounded-lg bg-rose-500/20 text-rose-300 hover:text-white border border-rose-500/30"
+          >
+            <LogOut className="w-4 h-4" />
+          </button>
+          <button
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+            className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white"
+          >
+            <Menu className="w-5 h-5" />
+          </button>
+        </div>
       </div>
 
       {/* ======================================================== */}
@@ -499,17 +596,29 @@ export default function AdminDashboardPage() {
           </div>
         </div>
 
-        {/* Bottom Admin User Box */}
-        <div className="p-4 border-t border-slate-800/80 bg-[#060911]">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-[#274c3b] text-[#d2f56d] border-l-2 border-[#d2f56d] font-black text-xs flex items-center justify-center border border-white/20">
-              JD
+        {/* Bottom Authenticated Admin User Box */}
+        <div className="p-4 border-t border-slate-800/80 bg-[#060911] flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2.5 overflow-hidden">
+            <div className="w-8 h-8 rounded-full bg-[#274c3b] text-[#d2f56d] border border-[#d2f56d]/30 font-black text-xs flex items-center justify-center shrink-0">
+              {adminUser?.email ? adminUser.email.substring(0, 2).toUpperCase() : 'AD'}
             </div>
             <div className="overflow-hidden">
-              <div className="text-xs font-bold text-white truncate">John Doe (Admin)</div>
-              <div className="text-[10px] text-slate-400 truncate">jewarinternational.com</div>
+              <div className="text-xs font-bold text-white truncate">
+                {adminUser?.email || 'Authorized Admin'}
+              </div>
+              <div className="text-[10px] text-emerald-400 font-mono truncate">
+                {adminUser?.uid ? `${adminUser.uid.substring(0, 10)}...` : 'Verified Session'}
+              </div>
             </div>
           </div>
+          <button
+            type="button"
+            onClick={handleSignOut}
+            title="Secure Sign Out"
+            className="p-2 rounded-xl bg-white/5 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 border border-white/10 hover:border-rose-500/30 transition-colors cursor-pointer shrink-0"
+          >
+            <LogOut className="w-4 h-4" />
+          </button>
         </div>
 
       </aside>

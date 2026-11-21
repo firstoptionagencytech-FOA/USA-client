@@ -1,5 +1,6 @@
 import { initializeApp, getApps, getApp } from 'firebase/app';
 import { getDatabase } from 'firebase/database';
+import { getAuth } from 'firebase/auth';
 
 export const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || 'AIzaSyCGxlQbDYR2floRae-mgNBBkSOZzNAKasM',
@@ -15,6 +16,7 @@ export const firebaseConfig = {
 // Singleton initialization for Next.js SSR and client
 export const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
 export const rtdb = getDatabase(app);
+export const auth = getAuth(app);
 
 // Master Database Secret for authenticated server-side REST operations
 export const FIREBASE_DATABASE_SECRET = process.env.FIREBASE_DATABASE_SECRET || 'OgLqJ3uJSjhvAeGVdbLYibbBzRjWLDdgoxT9shyM';
