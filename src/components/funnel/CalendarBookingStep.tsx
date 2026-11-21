@@ -12,7 +12,7 @@ interface CalendarBookingStepProps {
   onBack: () => void;
 }
 
-// Compute upcoming weekdays (Mon-Fri) synchronously to prevent blank initial render
+// Compute upcoming weekdays (Mon-Fri) synchronously to avoid blank initial render
 function computeUpcomingWeekdays(count = 10): { dateStr: string; display: string; dayName: string; fullDate: string }[] {
   const dates: { dateStr: string; display: string; dayName: string; fullDate: string }[] = [];
   const curr = new Date();
@@ -27,7 +27,7 @@ function computeUpcomingWeekdays(count = 10): { dateStr: string; display: string
       const dateStr = `${yyyy}-${mm}-${dd}`;
       const dayName = curr.toLocaleDateString('en-US', { weekday: 'short' });
       const display = curr.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-      const fullDate = curr.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
+      const fullDate = curr.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
       dates.push({ dateStr, display, dayName, fullDate });
     }
     curr.setDate(curr.getDate() + 1);
@@ -36,18 +36,18 @@ function computeUpcomingWeekdays(count = 10): { dateStr: string; display: string
 }
 
 export const CalendarBookingStep: React.FC<CalendarBookingStepProps> = ({ leadId, onSuccess, onBack }) => {
-  // Common US Business Timezones (Exclusively USA)
+  // Common US Business Timezones (Strictly US Only on Landing Page)
   const usTimezones = [
-    { label: 'Eastern Time (ET / US & Canada)', short: 'Eastern Time', code: 'ET', value: 'America/New_York' },
-    { label: 'Central Time (CT / US & Canada)', short: 'Central Time', code: 'CT', value: 'America/Chicago' },
-    { label: 'Mountain Time (MT / US & Canada)', short: 'Mountain Time', code: 'MT', value: 'America/Denver' },
-    { label: 'Pacific Time (PT / US & Canada)', short: 'Pacific Time', code: 'PT', value: 'America/Los_Angeles' },
+    { label: 'Eastern Time (ET)', short: 'Eastern', code: 'ET', value: 'America/New_York' },
+    { label: 'Central Time (CT)', short: 'Central', code: 'CT', value: 'America/Chicago' },
+    { label: 'Mountain Time (MT)', short: 'Mountain', code: 'MT', value: 'America/Denver' },
+    { label: 'Pacific Time (PT)', short: 'Pacific', code: 'PT', value: 'America/Los_Angeles' },
   ];
 
   // Initialize available dates synchronously
   const availableDates = useMemo(() => computeUpcomingWeekdays(10), []);
 
-  // Timezone state - Default to Eastern Time (US Standard), with option to toggle US zone
+  // Timezone state - Default to Eastern Time (US Standard)
   const [selectedTimezone, setSelectedTimezone] = useState<string>('America/New_York');
 
   const [selectedDate, setSelectedDate] = useState<string>(() => availableDates[0]?.dateStr || '');
@@ -58,15 +58,13 @@ export const CalendarBookingStep: React.FC<CalendarBookingStepProps> = ({ leadId
   const [bookingFailed, setBookingFailed] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
 
-  // Active US Timezone info
   const currentUsZone = usTimezones.find(t => t.value === selectedTimezone) || usTimezones[0];
   const activeDateInfo = availableDates.find(d => d.dateStr === selectedDate) || availableDates[0];
 
-  // Slot Loader with Option 2 Client-Side Instant Cache Check
+  // Fast Slot Loader with Client-Side Instant Cache Check (Option 2)
   const loadSlotsForDate = async (dateStr: string, tz: string, forceFresh = false) => {
     if (!dateStr) return;
 
-    // 1. Instant check from Option 2 background-prefetched client cache (0ms!)
     if (!forceFresh) {
       const cached = getCachedSlots(dateStr, tz);
       if (cached && cached.length > 0) {
@@ -100,17 +98,15 @@ export const CalendarBookingStep: React.FC<CalendarBookingStepProps> = ({ leadId
     }
   };
 
-  // Fetch or retrieve from cache on date or timezone change
   useEffect(() => {
     setSelectedSlot(null);
     setBookingFailed(false);
     loadSlotsForDate(selectedDate, selectedTimezone);
   }, [selectedDate, selectedTimezone]);
 
-  // Handle final booking confirmation
   const handleConfirmBooking = async () => {
     if (!selectedSlot) {
-      setError('Please select an available appointment time.');
+      setError('Please select an appointment time.');
       return;
     }
 
@@ -132,17 +128,14 @@ export const CalendarBookingStep: React.FC<CalendarBookingStepProps> = ({ leadId
 
       const data = await res.json();
 
-      // Handle race condition or booking failure
       if (res.status === 409 || !res.ok || !data.success) {
         setBookingFailed(true);
-        // Clear cached slots and re-fetch fresh availability
         clearSlotsCache();
         await loadSlotsForDate(selectedDate, selectedTimezone, true);
         setSelectedSlot(null);
-        throw new Error(data.error || 'This slot was just reserved or is no longer available. Please select another time.');
+        throw new Error(data.error || 'This slot was just reserved. Please pick another available time.');
       }
 
-      // Track Meta Pixel Schedule event
       trackMetaEvent('Schedule', {
         content_name: 'JIT Helpdesk Confirmed Demo',
         lead_id: leadId,
@@ -158,7 +151,6 @@ export const CalendarBookingStep: React.FC<CalendarBookingStepProps> = ({ leadId
     }
   };
 
-  // Human readable time for selected slot in US Timezone
   const selectedSlotDisplayTime = selectedSlot ? new Date(selectedSlot.start).toLocaleTimeString('en-US', {
     hour: 'numeric',
     minute: '2-digit',
@@ -167,91 +159,71 @@ export const CalendarBookingStep: React.FC<CalendarBookingStepProps> = ({ leadId
   }) : '';
 
   return (
-    <div className="p-4 sm:p-7">
+    <div className="p-3.5 sm:p-7">
       
-      {/* Header */}
-      <div className="text-center mb-5">
-        <span className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
-          ✓ Qualified · Step 3 of 3: Reserve Demo
+      {/* Compact Header (Zero scroll on mobile) */}
+      <div className="text-center mb-2.5 sm:mb-4">
+        <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
+          ✓ Step 3 of 3: Reserve Demo
         </span>
-        <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 mt-2 font-display">
+        <h3 className="text-base sm:text-2xl font-extrabold text-slate-900 mt-1 font-display leading-tight">
           Select Your Personalized Demo Time
         </h3>
-        <p className="text-xs sm:text-sm text-slate-500 mt-1">
+        <p className="text-xs text-slate-500 mt-0.5 hidden sm:block">
           Live availability synced with our US engineering schedule via Google Calendar.
         </p>
       </div>
 
-      {/* Booking Conflict / Try Again Card */}
+      {/* Booking Conflict Alert */}
       {bookingFailed && (
-        <div className="mb-4 p-3.5 rounded-2xl bg-rose-50 border border-rose-200 text-rose-800 text-xs animate-in fade-in">
-          <div className="flex items-start gap-2.5">
-            <AlertCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
-            <div className="flex-1">
-              <span className="font-extrabold block text-rose-900">Slot Unavailable or Not Confirmed</span>
-              <p className="text-[11px] text-rose-700 mt-0.5 mb-2 leading-relaxed">
-                {error || 'That slot was just reserved by another attendee. We have refreshed the calendar with live available slots.'}
-              </p>
-              <button
-                type="button"
-                onClick={() => {
-                  setBookingFailed(false);
-                  setError('');
-                  loadSlotsForDate(selectedDate, selectedTimezone, true);
-                }}
-                className="px-3 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs inline-flex items-center gap-1.5 cursor-pointer transition-colors shadow-2xs"
-              >
-                <RefreshCw className="w-3 h-3" />
-                <span>Try Another Slot</span>
-              </button>
+        <div className="mb-2.5 p-2.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs animate-in fade-in">
+          <div className="flex items-center justify-between gap-2">
+            <div className="flex items-center gap-1.5 font-bold">
+              <AlertCircle className="w-3.5 h-3.5 text-rose-600 shrink-0" />
+              <span>Slot taken. Please choose another.</span>
             </div>
+            <button
+              type="button"
+              onClick={() => {
+                setBookingFailed(false);
+                setError('');
+                loadSlotsForDate(selectedDate, selectedTimezone, true);
+              }}
+              className="px-2 py-0.5 rounded bg-rose-600 text-white font-bold text-[10px] cursor-pointer"
+            >
+              Refresh
+            </button>
           </div>
         </div>
       )}
 
-      {/* Normal Error Alert (if not bookingFailed) */}
-      {!bookingFailed && error && (
-        <div className="mb-4 p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-semibold flex items-center justify-between gap-2">
-          <div className="flex items-center gap-2">
-            <AlertCircle className="w-4 h-4 shrink-0" />
-            <span>{error}</span>
-          </div>
-          <button
-            type="button"
-            onClick={() => loadSlotsForDate(selectedDate, selectedTimezone, true)}
-            className="text-[11px] underline font-bold shrink-0 hover:text-rose-900 cursor-pointer"
+      {/* Date & US Timezone Inline Row (Saves 50px vertical height!) */}
+      <div className="flex items-center justify-between mb-1.5 sm:mb-2 text-xs">
+        <span className="font-bold text-slate-700 flex items-center gap-1">
+          <CalendarIcon className="w-3.5 h-3.5 text-brand-700" />
+          <span>Select Date:</span>
+        </span>
+
+        {/* Compact US Timezone Selector */}
+        <div className="flex items-center gap-1 bg-slate-50 px-2 py-0.5 rounded-lg border border-slate-200 shadow-2xs">
+          <Globe className="w-3 h-3 text-brand-700 shrink-0" />
+          <select
+            value={selectedTimezone}
+            onChange={e => setSelectedTimezone(e.target.value)}
+            className="text-[11px] font-bold text-slate-800 bg-transparent focus:outline-none cursor-pointer"
           >
-            Retry
-          </button>
+            {usTimezones.map(tz => (
+              <option key={tz.value} value={tz.value}>
+                {tz.label}
+              </option>
+            ))}
+          </select>
         </div>
-      )}
-
-      {/* Clean USA Timezone Selector (Strictly US Only) */}
-      <div className="mb-5 p-3 sm:p-3.5 bg-slate-50 rounded-2xl border border-slate-200/80 flex items-center justify-between gap-2">
-        <div className="flex items-center gap-2 text-xs font-bold text-slate-800">
-          <Globe className="w-4 h-4 text-brand-700 shrink-0" />
-          <span>US Timezone:</span>
-        </div>
-
-        <select
-          value={selectedTimezone}
-          onChange={e => setSelectedTimezone(e.target.value)}
-          className="text-xs font-bold bg-white text-slate-900 border border-slate-200 rounded-lg px-2.5 py-1.5 focus:outline-none focus:ring-2 focus:ring-brand-700 max-w-[230px] truncate shadow-2xs cursor-pointer"
-        >
-          {usTimezones.map(tz => (
-            <option key={tz.value} value={tz.value}>
-              {tz.label}
-            </option>
-          ))}
-        </select>
       </div>
 
-      {/* Date Horizontal Picker */}
-      <div className="mb-5">
-        <label className="block text-xs font-bold text-slate-700 mb-2">
-          Select Date:
-        </label>
-        <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-none snap-x -mx-1 px-1 sm:mx-0 sm:px-0">
+      {/* Date Horizontal Picker (Compact Pills) */}
+      <div className="mb-2.5 sm:mb-4">
+        <div className="flex gap-1.5 sm:gap-2 overflow-x-auto pb-1.5 scrollbar-none snap-x -mx-1 px-1 sm:mx-0 sm:px-0">
           {availableDates.map(item => {
             const isSelected = selectedDate === item.dateStr;
             return (
@@ -259,16 +231,16 @@ export const CalendarBookingStep: React.FC<CalendarBookingStepProps> = ({ leadId
                 key={item.dateStr}
                 type="button"
                 onClick={() => setSelectedDate(item.dateStr)}
-                className={`snap-start flex flex-col items-center justify-center min-w-[68px] sm:min-w-[72px] py-2 px-1.5 sm:py-2.5 sm:px-2 rounded-xl border transition-all cursor-pointer ${
+                className={`snap-start flex flex-col items-center justify-center min-w-[54px] sm:min-w-[68px] py-1.5 px-1 sm:py-2.5 sm:px-2 rounded-lg sm:rounded-xl border transition-all cursor-pointer ${
                   isSelected
                     ? 'bg-brand-700 text-white border-brand-700 shadow-sm'
                     : 'bg-white hover:bg-slate-50 border-slate-200 text-slate-800'
                 }`}
               >
-                <span className={`text-[10px] font-bold uppercase tracking-wider ${isSelected ? 'text-[#d2f56d]' : 'text-slate-400'}`}>
+                <span className={`text-[9px] sm:text-[10px] font-bold uppercase tracking-wider ${isSelected ? 'text-[#d2f56d]' : 'text-slate-400'}`}>
                   {item.dayName}
                 </span>
-                <span className="text-xs sm:text-sm font-extrabold mt-0.5">
+                <span className="text-xs sm:text-sm font-extrabold mt-0.2">
                   {item.display}
                 </span>
               </button>
@@ -277,31 +249,32 @@ export const CalendarBookingStep: React.FC<CalendarBookingStepProps> = ({ leadId
         </div>
       </div>
 
-      {/* Available Slots Grid (Clean USA Times Only) */}
-      <div className="mb-5">
-        <div className="flex items-center justify-between mb-2">
-          <label className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
-            <Clock className="w-3.5 h-3.5 text-brand-700" />
-            <span>Available 30-Minute Slots ({currentUsZone.code}):</span>
-          </label>
-          {loadingSlots && (
-            <span className="text-[11px] text-slate-400 flex items-center gap-1 font-medium">
-              <Loader2 className="w-3 h-3 animate-spin text-brand-700" /> Syncing...
-            </span>
-          )}
-        </div>
+      {/* Available Slots Header */}
+      <div className="flex items-center justify-between mb-1.5">
+        <label className="text-[11px] sm:text-xs font-bold text-slate-700 flex items-center gap-1">
+          <Clock className="w-3 h-3 text-brand-700" />
+          <span>Available Slots ({currentUsZone.code}):</span>
+        </label>
+        {loadingSlots && (
+          <span className="text-[10px] text-slate-400 flex items-center gap-1 font-medium">
+            <Loader2 className="w-2.5 h-2.5 animate-spin text-brand-700" /> Syncing...
+          </span>
+        )}
+      </div>
 
+      {/* Available Slots Grid (3 Columns on Mobile & Desktop) */}
+      <div className="mb-2 sm:mb-3">
         {loadingSlots && slots.length === 0 ? (
-          <div className="py-10 flex flex-col items-center justify-center text-slate-400 text-xs">
-            <Loader2 className="w-6 h-6 animate-spin text-brand-700 mb-2" />
-            <span>Consulting Google Calendar schedule...</span>
+          <div className="py-8 flex flex-col items-center justify-center text-slate-400 text-xs">
+            <Loader2 className="w-5 h-5 animate-spin text-brand-700 mb-1.5" />
+            <span className="text-[11px]">Checking availability...</span>
           </div>
         ) : slots.length === 0 ? (
-          <div className="py-8 px-4 rounded-2xl bg-slate-50 border border-slate-200 text-center text-xs text-slate-500">
-            No remaining slots available on this date. Please select another date above.
+          <div className="py-6 px-3 rounded-xl bg-slate-50 border border-slate-200 text-center text-xs text-slate-500">
+            No slots remaining on this date. Please pick another date above.
           </div>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-2.5 max-h-[190px] sm:max-h-[220px] overflow-y-auto pr-1 overscroll-contain">
+          <div className="grid grid-cols-3 gap-1.5 sm:gap-2 max-h-[145px] sm:max-h-[190px] overflow-y-auto pr-1 overscroll-contain">
             {slots.map((slot, idx) => {
               const isSelected = selectedSlot?.start === slot.start;
               const slotDate = new Date(slot.start);
@@ -321,16 +294,16 @@ export const CalendarBookingStep: React.FC<CalendarBookingStepProps> = ({ leadId
                     setBookingFailed(false);
                     setError('');
                   }}
-                  className={`min-h-[46px] py-2 px-3 rounded-xl border transition-all text-center cursor-pointer flex items-center justify-between ${
+                  className={`min-h-[38px] sm:min-h-[44px] py-1 px-1.5 sm:py-2 sm:px-2 rounded-lg sm:rounded-xl border transition-all text-center cursor-pointer flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-1.5 ${
                     isSelected
                       ? 'bg-brand-700 text-white border-brand-700 shadow-sm ring-2 ring-[#d2f56d]'
                       : 'bg-white hover:border-brand-400 border-slate-200 text-slate-800 hover:bg-slate-50'
                   }`}
                 >
-                  <span className="font-extrabold text-xs sm:text-sm">
+                  <span className="font-extrabold text-[11px] sm:text-xs">
                     {usTime}
                   </span>
-                  <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${
+                  <span className={`text-[9px] font-bold px-1 rounded ${
                     isSelected ? 'bg-white/20 text-[#d2f56d]' : 'bg-slate-100 text-slate-500'
                   }`}>
                     {currentUsZone.code}
@@ -342,45 +315,45 @@ export const CalendarBookingStep: React.FC<CalendarBookingStepProps> = ({ leadId
         )}
       </div>
 
-      {/* Selected Slot Highlight Banner */}
+      {/* Selected Slot Highlight Banner (Ultra Compact) */}
       {selectedSlot && (
-        <div className="mb-5 p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-xs font-bold flex items-center justify-between animate-in fade-in">
-          <div className="flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-            <span>Selected: {activeDateInfo.fullDate} · {selectedSlotDisplayTime} ({currentUsZone.code})</span>
+        <div className="mb-2.5 sm:mb-3 p-2 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-900 text-[11px] sm:text-xs font-bold flex items-center justify-between animate-in fade-in">
+          <div className="flex items-center gap-1.5 truncate">
+            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+            <span className="truncate">{activeDateInfo.fullDate} · {selectedSlotDisplayTime} ({currentUsZone.code})</span>
           </div>
-          <span className="text-[10px] uppercase tracking-wider text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded font-black shrink-0">
-            Ready
+          <span className="text-[9px] uppercase tracking-wider text-emerald-700 bg-emerald-100 px-1.5 py-0.2 rounded font-black shrink-0">
+            Selected
           </span>
         </div>
       )}
 
-      {/* Controls */}
-      <div className="pt-4 border-t border-slate-100 flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-between gap-3">
+      {/* Controls (Side-by-side on Mobile) */}
+      <div className="pt-2 sm:pt-4 border-t border-slate-100 flex items-center justify-between gap-2">
         <button
           type="button"
           onClick={onBack}
-          className="min-h-[44px] px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-100 flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+          className="min-h-[38px] px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100 flex items-center justify-center gap-1 transition-colors cursor-pointer"
         >
-          <ArrowLeft className="w-3.5 h-3.5" />
-          <span>Back to Survey</span>
+          <ArrowLeft className="w-3 h-3" />
+          <span>Back</span>
         </button>
 
         <button
           type="button"
           disabled={!selectedSlot || bookingLoading}
           onClick={handleConfirmBooking}
-          className="cta-glow-btn w-full sm:w-auto min-h-[48px] px-6 py-3 rounded-full text-white font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 cursor-pointer disabled:opacity-40 disabled:pointer-events-none"
+          className="cta-glow-btn flex-1 sm:flex-initial min-h-[42px] sm:min-h-[44px] px-5 py-2 rounded-full text-white font-extrabold text-xs sm:text-sm flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-40 disabled:pointer-events-none shadow-md"
         >
           {bookingLoading ? (
             <>
-              <Loader2 className="w-4 h-4 animate-spin" />
-              <span>Reserving on Google Meet...</span>
+              <Loader2 className="w-3.5 h-3.5 animate-spin" />
+              <span>Reserving...</span>
             </>
           ) : (
             <>
-              <span>Confirm Appointment</span>
-              <ArrowRight className="w-4 h-4" />
+              <span>Confirm Demo</span>
+              <ArrowRight className="w-3.5 h-3.5" />
             </>
           )}
         </button>

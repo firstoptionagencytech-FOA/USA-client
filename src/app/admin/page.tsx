@@ -72,6 +72,7 @@ export default function AdminDashboardPage() {
   const [selectedDate, setSelectedDate] = useState<string>('2026-11-23');
   const [selectedBooking, setSelectedBooking] = useState<Booking | null>(null);
   const [calendarViewMode, setCalendarViewMode] = useState<'grid' | 'agenda'>('grid');
+  const [adminViewTimezone, setAdminViewTimezone] = useState<string>('Asia/Kolkata'); // Default to India Standard Time (IST) as requested
 
   // Verify Session & Auth Listener
   useEffect(() => {
@@ -1081,12 +1082,31 @@ export default function AdminDashboardPage() {
                         </span>
                       </div>
                       <p className="text-xs text-slate-500">
-                        Admin Timezone: <strong className="text-slate-700">{settings?.business_timezone || 'America/New_York'}</strong> · {bookings.length} Total Booked Sessions
+                        Admin Timezone: <strong className="text-slate-700">{settings?.business_timezone || 'Asia/Kolkata'}</strong> · {bookings.length} Total Booked Sessions
                       </p>
                     </div>
                   </div>
 
                   <div className="flex flex-wrap items-center gap-2">
+                    {/* Timezone Filter for Viewing Sessions (Default: India IST) */}
+                    <div className="flex items-center gap-1.5 bg-slate-100 p-1 rounded-xl border border-slate-200">
+                      <Globe className="w-3.5 h-3.5 text-brand-700 ml-1.5 shrink-0" />
+                      <span className="text-[11px] font-bold text-slate-500">Zone:</span>
+                      <select
+                        value={adminViewTimezone}
+                        onChange={e => setAdminViewTimezone(e.target.value)}
+                        className="text-xs font-bold bg-white text-slate-800 border border-slate-200 rounded-lg px-2 py-1 focus:ring-1 focus:ring-brand-700 cursor-pointer shadow-2xs"
+                      >
+                        <option value="Asia/Kolkata">🇮🇳 India (IST)</option>
+                        <option value="America/New_York">🇺🇸 Eastern (ET)</option>
+                        <option value="America/Chicago">🇺🇸 Central (CT)</option>
+                        <option value="America/Denver">🇺🇸 Mountain (MT)</option>
+                        <option value="America/Los_Angeles">🇺🇸 Pacific (PT)</option>
+                        <option value="Europe/London">🇬🇧 London (GMT)</option>
+                        <option value="UTC">🌐 UTC</option>
+                      </select>
+                    </div>
+
                     {/* Month Nav Buttons with Separate Today & Visible Month Name */}
                     <div className="flex items-center gap-2">
                       <button
@@ -1226,6 +1246,7 @@ export default function AdminDashboardPage() {
                                     hour: 'numeric',
                                     minute: '2-digit',
                                     hour12: true,
+                                    timeZone: adminViewTimezone,
                                   });
 
                                   return (
@@ -1294,11 +1315,13 @@ export default function AdminDashboardPage() {
                                 hour: 'numeric',
                                 minute: '2-digit',
                                 hour12: true,
+                                timeZone: adminViewTimezone,
                               });
                               const endTime = new Date(b.meeting_end).toLocaleTimeString('en-US', {
                                 hour: 'numeric',
                                 minute: '2-digit',
                                 hour12: true,
+                                timeZone: adminViewTimezone,
                               });
 
                               return (
@@ -1433,11 +1456,13 @@ export default function AdminDashboardPage() {
                             month: 'short',
                             day: 'numeric',
                             year: 'numeric',
+                            timeZone: adminViewTimezone,
                           });
                           const timeFormatted = dateObj.toLocaleTimeString('en-US', {
                             hour: 'numeric',
                             minute: '2-digit',
                             hour12: true,
+                            timeZone: adminViewTimezone,
                           });
 
                           return (
