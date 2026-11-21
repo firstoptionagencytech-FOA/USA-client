@@ -14,8 +14,8 @@ export async function GET(req: NextRequest) {
     }
 
     const settings = await getSettings();
-    const clientId = process.env.GOOGLE_CLIENT_ID || (settings as any).google_client_id;
-    const clientSecret = process.env.GOOGLE_CLIENT_SECRET || (settings as any).google_client_secret;
+    const clientId = (process.env.GOOGLE_CLIENT_ID || (settings as any).google_client_id || '').trim();
+    const clientSecret = (process.env.GOOGLE_CLIENT_SECRET || (settings as any).google_client_secret || '').trim();
 
     const protocol = req.headers.get('x-forwarded-proto') || 'http';
     const host = req.headers.get('host') || 'localhost:3000';
