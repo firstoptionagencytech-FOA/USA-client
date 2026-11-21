@@ -24,6 +24,7 @@ export const FunnelModal: React.FC<FunnelModalProps> = ({
 }) => {
   const [stage, setStage] = useState<FunnelStage>('contact');
   const [leadId, setLeadId] = useState<string>('');
+  const [leadData, setLeadData] = useState<{ full_name: string; email: string; phone: string; company_name: string } | null>(null);
   const [disqualificationReason, setDisqualificationReason] = useState<string>('');
   const [confirmedBooking, setConfirmedBooking] = useState<Booking | null>(null);
 
@@ -32,6 +33,7 @@ export const FunnelModal: React.FC<FunnelModalProps> = ({
   const handleResetAndClose = () => {
     setStage('contact');
     setLeadId('');
+    setLeadData(null);
     setDisqualificationReason('');
     setConfirmedBooking(null);
     onClose();
@@ -54,8 +56,9 @@ export const FunnelModal: React.FC<FunnelModalProps> = ({
         {/* Funnel Stage Render */}
         {stage === 'contact' && (
           <ContactCaptureStep
-            onSuccess={(id) => {
+            onSuccess={(id, data) => {
               setLeadId(id);
+              setLeadData(data);
               setStage('survey');
             }}
           />
@@ -87,6 +90,7 @@ export const FunnelModal: React.FC<FunnelModalProps> = ({
         {stage === 'calendar' && (
           <CalendarBookingStep
             leadId={leadId}
+            leadData={leadData}
             onBack={() => setStage('survey')}
             onSuccess={(booking) => {
               setConfirmedBooking(booking);
