@@ -1807,17 +1807,20 @@ export default function AdminDashboardPage() {
                 {/* Business Timezone */}
                 <div>
                   <label className="block text-xs font-bold text-slate-700 mb-1">
-                    Admin Business Timezone (US)
+                    Admin Business Timezone (Default: India IST)
                   </label>
                   <select
-                    value={settingsDraft.business_timezone || 'America/New_York'}
+                    value={settingsDraft.business_timezone || 'Asia/Kolkata'}
                     onChange={e => setSettingsDraft(prev => ({ ...prev, business_timezone: e.target.value }))}
                     className="w-full text-xs font-bold border border-slate-200 rounded-xl p-2.5 text-slate-800 focus:ring-2 focus:ring-brand-700 bg-white"
                   >
-                    <option value="America/New_York">Eastern Time (America/New_York)</option>
-                    <option value="America/Chicago">Central Time (America/Chicago)</option>
-                    <option value="America/Denver">Mountain Time (America/Denver)</option>
-                    <option value="America/Los_Angeles">Pacific Time (America/Los_Angeles)</option>
+                    <option value="Asia/Kolkata">🇮🇳 India Standard Time (Asia/Kolkata · IST)</option>
+                    <option value="America/New_York">🇺🇸 Eastern Time (America/New_York · ET)</option>
+                    <option value="America/Chicago">🇺🇸 Central Time (America/Chicago · CT)</option>
+                    <option value="America/Denver">🇺🇸 Mountain Time (America/Denver · MT)</option>
+                    <option value="America/Los_Angeles">🇺🇸 Pacific Time (America/Los_Angeles · PT)</option>
+                    <option value="Europe/London">🇬🇧 United Kingdom (Europe/London · GMT/BST)</option>
+                    <option value="UTC">🌐 Coordinated Universal Time (UTC)</option>
                   </select>
                 </div>
 

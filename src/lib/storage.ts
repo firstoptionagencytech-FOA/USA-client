@@ -19,14 +19,14 @@ export const DEFAULT_SETTINGS: AdminSettings = {
   id: 'default',
   google_calendar_connected: true,
   google_calendar_id: 'primary',
-  business_timezone: 'America/New_York',
+  business_timezone: 'Asia/Kolkata', // Default to India (Asia/Kolkata · IST)
   working_hours_start: '09:00',
-  working_hours_end: '17:00',
+  working_hours_end: '18:00',
   working_days: [1, 2, 3, 4, 5],
   meeting_duration_minutes: 30,
   buffer_before_minutes: 15,
   buffer_after_minutes: 15,
-  min_notice_hours: 4,
+  min_notice_hours: 2,
   booking_window_days: 14,
   survey_mode: '5_questions',
   pricing_package_visible: true,
@@ -242,25 +242,43 @@ export async function updateBookingStatus(id: string, status: Booking['status'],
 }
 
 // ================= SETTINGS OPERATIONS =================
-export async function getSettings(): Promise<AdminSettings> {
+let cachedSettings: AdminSettings | null = null;
+let settingsCacheTime = 0;
+const SETTINGS_CACHE_TTL = 60 * 1000; // 60s cache
+
+export async function getSettings(forceRefresh = false): Promise<AdminSettings> {
+  const now = Date.now();
+  if (!forceRefresh && cachedSettings && now - settingsCacheTime < SETTINGS_CACHE_TTL) {
+    return cachedSettings;
+  }
+
   try {
     const val = await rtdbAdminFetch<AdminSettings>('settings');
     if (val && typeof val === 'object' && Object.keys(val).length > 0) {
-      return { ...DEFAULT_SETTINGS, ...val };
+      cachedSettings = { ...DEFAULT_SETTINGS, ...val };
+      settingsCacheTime = now;
+      return cachedSettings;
     }
   } catch (e) {
     console.warn('Firebase RTDB getSettings warning:', e);
   }
-  return readJsonFile<AdminSettings>(SETTINGS_FILE, DEFAULT_SETTINGS);
+
+  cachedSettings = readJsonFile<AdminSettings>(SETTINGS_FILE, DEFAULT_SETTINGS);
+  settingsCacheTime = now;
+  return cachedSettings;
 }
 
 export async function updateSettings(updates: Partial<AdminSettings>): Promise<AdminSettings> {
-  const current = await getSettings();
+  const current = await getSettings(true);
   const updated: AdminSettings = {
     ...current,
     ...updates,
     updated_at: new Date().toISOString(),
   };
+
+  // Invalidate in-memory settings cache
+  cachedSettings = updated;
+  settingsCacheTime = Date.now();
 
   // 1. Save to Firebase Realtime Database
   try {

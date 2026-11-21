@@ -82,12 +82,12 @@ export const ContactCaptureStep: React.FC<ContactCaptureStepProps> = ({ onSucces
   };
 
   return (
-    <div className="p-6 sm:p-8">
-      <div className="text-center mb-6">
-        <span className="text-xs font-bold uppercase tracking-wider text-brand-700 bg-[#edf3e3] px-3 py-1 rounded-full border border-[#dce3d4]">
+    <div className="p-4 sm:p-8">
+      <div className="text-center mb-5 sm:mb-6">
+        <span className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-brand-700 bg-[#edf3e3] px-3 py-1 rounded-full border border-[#dce3d4]">
           Step 1 of 3: Contact Details
         </span>
-        <h3 className="text-2xl font-extrabold text-slate-900 mt-2 font-display">
+        <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 mt-2 font-display">
           Schedule Your Free Personalized Demo
         </h3>
         <p className="text-xs sm:text-sm text-slate-500 mt-1">
@@ -101,7 +101,7 @@ export const ContactCaptureStep: React.FC<ContactCaptureStepProps> = ({ onSucces
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-3.5 sm:space-y-4">
         {/* Full Name */}
         <div>
           <label className="block text-xs font-bold text-slate-700 mb-1">
@@ -115,7 +115,7 @@ export const ContactCaptureStep: React.FC<ContactCaptureStepProps> = ({ onSucces
               value={fullName}
               onChange={e => setFullName(e.target.value)}
               placeholder="e.g. David Miller"
-              className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-700 focus:border-brand-700 transition-all text-slate-900 placeholder:text-slate-400"
+              className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-brand-700 focus:border-brand-700 transition-all text-slate-900 placeholder:text-slate-400"
             />
           </div>
         </div>
@@ -133,7 +133,7 @@ export const ContactCaptureStep: React.FC<ContactCaptureStepProps> = ({ onSucces
               value={email}
               onChange={e => setEmail(e.target.value)}
               placeholder="e.g. david@apex-it-services.com"
-              className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-700 focus:border-brand-700 transition-all text-slate-900 placeholder:text-slate-400"
+              className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-brand-700 focus:border-brand-700 transition-all text-slate-900 placeholder:text-slate-400"
             />
           </div>
         </div>
@@ -151,7 +151,7 @@ export const ContactCaptureStep: React.FC<ContactCaptureStepProps> = ({ onSucces
               value={phone}
               onChange={e => setPhone(e.target.value)}
               placeholder="e.g. (555) 345-6789"
-              className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-700 focus:border-brand-700 transition-all text-slate-900 placeholder:text-slate-400"
+              className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-brand-700 focus:border-brand-700 transition-all text-slate-900 placeholder:text-slate-400"
             />
           </div>
         </div>
@@ -168,13 +168,13 @@ export const ContactCaptureStep: React.FC<ContactCaptureStepProps> = ({ onSucces
               value={companyName}
               onChange={e => setCompanyName(e.target.value)}
               placeholder="e.g. Apex Managed Systems"
-              className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-700 focus:border-brand-700 transition-all text-slate-900 placeholder:text-slate-400"
+              className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-brand-700 focus:border-brand-700 transition-all text-slate-900 placeholder:text-slate-400"
             />
           </div>
         </div>
 
         {/* Security and Privacy Assurance */}
-        <div className="flex items-center gap-1.5 text-[11px] text-slate-500 pt-1">
+        <div className="flex items-center gap-1.5 text-[11px] text-slate-500 pt-0.5">
           <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
           <span>Your contact info is strictly confidential. Zero spam.</span>
         </div>
@@ -183,7 +183,7 @@ export const ContactCaptureStep: React.FC<ContactCaptureStepProps> = ({ onSucces
         <button
           type="submit"
           disabled={loading}
-          className="cta-glow-btn w-full py-4 rounded-xl text-white font-extrabold text-sm flex items-center justify-center gap-2 cursor-pointer mt-4"
+          className="cta-glow-btn w-full min-h-[48px] py-3.5 rounded-xl text-white font-extrabold text-sm flex items-center justify-center gap-2 cursor-pointer mt-3"
         >
           <span>{loading ? 'Securing Spot...' : 'Continue to Quick Qualification'}</span>
           <ArrowRight className="w-4 h-4" />

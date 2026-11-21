@@ -148,7 +148,7 @@ export const SurveyStep: React.FC<SurveyStepProps> = ({
   };
 
   return (
-    <div className="p-6 sm:p-8 flex flex-col justify-between min-h-[460px] animate-in fade-in duration-200">
+    <div className="p-4 sm:p-8 flex flex-col justify-between min-h-[420px] sm:min-h-[460px] animate-in fade-in duration-200">
       
       {/* Top Header & Progress */}
       <div>
@@ -161,18 +161,18 @@ export const SurveyStep: React.FC<SurveyStepProps> = ({
         </div>
 
         {/* Fluid Progress Bar */}
-        <div className="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden mb-6">
+        <div className="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden mb-4 sm:mb-6">
           <div
-            className="h-full bg-gradient-to-r from-brand-700 to-rose-600 transition-all duration-300 rounded-full"
+            className="h-full bg-gradient-to-r from-brand-700 to-emerald-600 transition-all duration-300 rounded-full"
             style={{ width: `${progressPercent}%` }}
           />
         </div>
 
         {/* Current Question */}
-        <h3 className="text-xl sm:text-2xl font-black text-slate-900 font-display mb-1.5 leading-snug">
+        <h3 className="text-lg sm:text-2xl font-black text-slate-900 font-display mb-1.5 leading-snug">
           {currentQ.question}
         </h3>
-        <p className="text-xs sm:text-sm text-slate-500 mb-5">
+        <p className="text-xs sm:text-sm text-slate-500 mb-4 sm:mb-5">
           {currentQ.description}
         </p>
 
@@ -183,7 +183,7 @@ export const SurveyStep: React.FC<SurveyStepProps> = ({
         )}
 
         {/* Instant 1-Click Option Selection List */}
-        <div className="space-y-2.5">
+        <div className="space-y-2 sm:space-y-2.5">
           {currentQ.options.map((opt, idx) => {
             const isSelected = selectedInCurrentQ === opt || answers[currentQ.key] === opt;
             const letter = optionKeys[idx] || String(idx + 1);
@@ -194,16 +194,16 @@ export const SurveyStep: React.FC<SurveyStepProps> = ({
                 type="button"
                 disabled={submitting}
                 onClick={() => handleOptionClick(opt)}
-                className={`group w-full text-left p-3.5 sm:p-4 rounded-2xl border text-xs sm:text-sm font-bold transition-all duration-150 flex items-center justify-between cursor-pointer ${
+                className={`group w-full text-left p-3 sm:p-4 rounded-xl sm:rounded-2xl border text-xs sm:text-sm font-bold transition-all duration-150 flex items-center justify-between cursor-pointer min-h-[46px] ${
                   isSelected
                     ? 'border-brand-700 bg-brand-50/80 text-brand-900 shadow-sm scale-[1.01]'
                     : 'border-slate-200/90 hover:border-brand-400 hover:bg-slate-50/80 bg-white text-slate-800 hover:scale-[1.005]'
                 }`}
               >
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2.5 sm:gap-3">
                   {/* Keyboard Badge (A, B, C, D) */}
                   <span
-                    className={`w-6 h-6 rounded-lg text-[10px] font-black flex items-center justify-center transition-colors shrink-0 ${
+                    className={`w-5 h-5 sm:w-6 sm:h-6 rounded-lg text-[10px] font-black flex items-center justify-center transition-colors shrink-0 ${
                       isSelected
                         ? 'bg-brand-700 text-white'
                         : 'bg-slate-100 text-slate-500 group-hover:bg-brand-100 group-hover:text-brand-800'
@@ -211,7 +211,7 @@ export const SurveyStep: React.FC<SurveyStepProps> = ({
                   >
                     {letter}
                   </span>
-                  <span>{opt}</span>
+                  <span className="leading-tight">{opt}</span>
                 </div>
 
                 <div
@@ -231,14 +231,14 @@ export const SurveyStep: React.FC<SurveyStepProps> = ({
 
       {/* Submitting Loading Overlay */}
       {submitting && (
-        <div className="py-4 flex items-center justify-center gap-2 text-xs font-bold text-brand-800">
+        <div className="py-3 flex items-center justify-center gap-2 text-xs font-bold text-brand-800">
           <Loader2 className="w-4 h-4 animate-spin text-brand-700" />
           <span>Evaluating qualification & loading calendar...</span>
         </div>
       )}
 
       {/* Bottom Back Button & Micro-guide */}
-      <div className="pt-5 mt-5 border-t border-slate-100 flex items-center justify-between">
+      <div className="pt-4 sm:pt-5 mt-4 sm:mt-5 border-t border-slate-100 flex items-center justify-between">
         <button
           type="button"
           disabled={submitting}

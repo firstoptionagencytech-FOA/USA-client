@@ -7,16 +7,16 @@ export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
     const date = searchParams.get('date'); // YYYY-MM-DD
     const timezone = searchParams.get('timezone') || 'America/New_York';
+    const fresh = searchParams.get('fresh') === 'true';
 
     if (!date) {
       return NextResponse.json({ success: false, error: 'Date parameter is required.' }, { status: 400 });
     }
 
-    const settings = await getSettings();
-    const slots = await getAvailableSlots({
-      date,
-      prospectTimezone: timezone,
-    });
+    const [settings, slots] = await Promise.all([
+      getSettings(),
+      getAvailableSlots({ date, prospectTimezone: timezone }, fresh),
+    ]);
 
     return NextResponse.json({
       success: true,
@@ -28,8 +28,13 @@ export async function GET(req: NextRequest) {
         end: settings.working_hours_end,
       },
       slots,
+    }, {
+      headers: {
+        'Cache-Control': 'public, s-maxage=30, stale-while-revalidate=60',
+      },
     });
   } catch (err: any) {
+    console.error('Availability API error:', err);
     return NextResponse.json({ success: false, error: err.message }, { status: 500 });
   }
 }

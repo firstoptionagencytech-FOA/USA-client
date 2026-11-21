@@ -24,12 +24,100 @@ export interface AvailabilityParams {
   prospectTimezone: string;
 }
 
+// In-memory availability cache
+interface AvailabilityCacheItem {
+  timestamp: number;
+  slots: TimeSlot[];
+}
+
+const availabilityCache = new Map<string, AvailabilityCacheItem>();
+const CACHE_TTL_MS = 40 * 1000; // 40 seconds TTL
+const inFlightRequests = new Map<string, Promise<TimeSlot[]>>();
+
+/**
+ * Invalidates the availability cache immediately.
+ * Called automatically when an appointment is booked or settings change.
+ */
+export function invalidateAvailabilityCache() {
+  availabilityCache.clear();
+  inFlightRequests.clear();
+}
+
 /**
  * Generates and verifies available meeting slots for a given date,
  * strictly consulting working hours, min notice, buffers, existing bookings,
  * and the Google Calendar FreeBusy API.
+ * Uses in-memory caching and request deduplication to ensure instant (<10ms) responses.
  */
-export async function getAvailableSlots(params: AvailabilityParams): Promise<TimeSlot[]> {
+export async function getAvailableSlots(params: AvailabilityParams, forceRefresh = false): Promise<TimeSlot[]> {
+  const { date, prospectTimezone } = params;
+  const cacheKey = `${date}__${prospectTimezone}`;
+  const nowTime = Date.now();
+
+  // Return from in-memory cache if fresh
+  if (!forceRefresh) {
+    const cached = availabilityCache.get(cacheKey);
+    if (cached && nowTime - cached.timestamp < CACHE_TTL_MS) {
+      return cached.slots;
+    }
+  }
+
+  // Deduplicate concurrent requests for the same date & timezone
+  let requestPromise = inFlightRequests.get(cacheKey);
+  if (!requestPromise) {
+    requestPromise = computeAvailableSlots(params).finally(() => {
+      inFlightRequests.delete(cacheKey);
+    });
+    inFlightRequests.set(cacheKey, requestPromise);
+  }
+
+  const computedSlots = await requestPromise;
+  availabilityCache.set(cacheKey, {
+    timestamp: Date.now(),
+    slots: computedSlots,
+  });
+
+  return computedSlots;
+}
+
+/**
+ * Creates a UTC Date object matching a specific date and time string in a target IANA timezone.
+ * Resolves local server timezone discrepancies (e.g. running on Indian machine vs US business hours).
+ */
+export function createDateInTz(dateStr: string, timeStr: string, timeZone: string): Date {
+  const [year, month, day] = dateStr.split('-').map(Number);
+  const [hour, min] = timeStr.split(':').map(Number);
+  const utcGuess = new Date(Date.UTC(year, month - 1, day, hour, min, 0));
+
+  const formatter = new Intl.DateTimeFormat('en-US', {
+    timeZone,
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false,
+  });
+
+  const parts = formatter.formatToParts(utcGuess);
+  const m: Record<string, string> = {};
+  for (const p of parts) m[p.type] = p.value;
+
+  const inTzDate = new Date(Date.UTC(
+    Number(m.year),
+    Number(m.month) - 1,
+    Number(m.day),
+    Number(m.hour === '24' ? '0' : m.hour),
+    Number(m.minute),
+    Number(m.second)
+  ));
+
+  const diff = utcGuess.getTime() - inTzDate.getTime();
+  return new Date(utcGuess.getTime() + diff);
+}
+
+async function computeAvailableSlots(params: AvailabilityParams): Promise<TimeSlot[]> {
   const { date, prospectTimezone } = params;
   const settings = await getSettings();
 
@@ -37,22 +125,20 @@ export async function getAvailableSlots(params: AvailabilityParams): Promise<Tim
   const slotDurationMin = settings.meeting_duration_minutes || 30;
   const bufferBeforeMin = settings.buffer_before_minutes || 15;
   const bufferAfterMin = settings.buffer_after_minutes || 15;
-  const minNoticeHours = settings.min_notice_hours || 4;
+  const minNoticeHours = settings.min_notice_hours || 2;
 
-  const targetDate = new Date(`${date}T00:00:00`);
-  const dayOfWeek = targetDate.getDay(); // 0 is Sunday, 1 is Monday...
+  // Determine weekday in business timezone
+  const noonInBusinessTz = createDateInTz(date, '12:00', businessTz);
+  const dayOfWeek = noonInBusinessTz.getDay(); // 0 is Sunday, 1 is Monday...
 
   // Check if target day is in configured working days
   if (!settings.working_days.includes(dayOfWeek)) {
     return [];
   }
 
-  // Define working hours in business timezone
-  const [startHour, startMinute] = settings.working_hours_start.split(':').map(Number);
-  const [endHour, endMinute] = settings.working_hours_end.split(':').map(Number);
-
-  const dayStartTime = new Date(`${date}T${String(startHour).padStart(2, '0')}:${String(startMinute).padStart(2, '0')}:00`);
-  const dayEndTime = new Date(`${date}T${String(endHour).padStart(2, '0')}:${String(endMinute).padStart(2, '0')}:00`);
+  // Define working hours strictly in business timezone (America/New_York)
+  const dayStartTime = createDateInTz(date, settings.working_hours_start, businessTz);
+  const dayEndTime = createDateInTz(date, settings.working_hours_end, businessTz);
 
   const now = new Date();
   const minBookingTime = new Date(now.getTime() + minNoticeHours * 60 * 60 * 1000);

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { verifySlotStillAvailable, createGoogleCalendarEvent } from '@/lib/calendar';
+import { verifySlotStillAvailable, createGoogleCalendarEvent, invalidateAvailabilityCache } from '@/lib/calendar';
 import { getLeadById, saveBooking, getSettings, updateLeadStatus } from '@/lib/storage';
 
 export async function POST(req: NextRequest) {
@@ -57,6 +57,9 @@ export async function POST(req: NextRequest) {
 
     // Update lead status to meeting_booked
     await updateLeadStatus(lead_id, 'meeting_booked');
+
+    // Invalidate availability cache so booked slot is purged for all users immediately
+    invalidateAvailabilityCache();
 
     return NextResponse.json({
       success: true,

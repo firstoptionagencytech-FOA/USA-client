@@ -10,18 +10,18 @@ interface DisqualifiedStepProps {
 
 export const DisqualifiedStep: React.FC<DisqualifiedStepProps> = ({ reason, onClose }) => {
   return (
-    <div className="p-6 sm:p-8 text-center">
+    <div className="p-4 sm:p-8 text-center">
       
       {/* Icon Badge */}
-      <div className="w-14 h-14 rounded-2xl bg-brand-50 text-brand-700 border border-brand-200/60 flex items-center justify-center mx-auto mb-4">
-        <BookOpen className="w-7 h-7 stroke-[2]" />
+      <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-brand-50 text-brand-700 border border-brand-200/60 flex items-center justify-center mx-auto mb-3 sm:mb-4">
+        <BookOpen className="w-6 h-6 sm:w-7 sm:h-7 stroke-[2]" />
       </div>
 
-      <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 font-display mb-2">
+      <h3 className="text-lg sm:text-2xl font-extrabold text-slate-900 font-display mb-2">
         Thank You for Your Interest in JIT Helpdesk
       </h3>
 
-      <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-600 leading-relaxed max-w-md mx-auto mb-6">
+      <div className="p-3.5 sm:p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-600 leading-relaxed max-w-md mx-auto mb-5 sm:mb-6">
         {reason ||
           'At this time, JIT Helpdesk live onboarding is dedicated exclusively to commercial IT support providers and MSPs with active paying customer bases.'}
       </div>

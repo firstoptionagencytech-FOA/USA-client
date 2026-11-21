@@ -32,27 +32,27 @@ export const ConfirmationStep: React.FC<ConfirmationStepProps> = ({ booking, onC
   const gcalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${gcalTitle}&dates=${gcalDates}&details=${gcalDetails}&location=${encodeURIComponent(booking.meeting_link || 'Google Meet')}`;
 
   return (
-    <div className="p-6 sm:p-8 text-center">
+    <div className="p-4 sm:p-8 text-center">
       
       {/* Success Badge */}
-      <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto mb-4 shadow-sm animate-bounce-subtle">
-        <CheckCircle2 className="w-9 h-9 stroke-[2.2]" />
+      <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto mb-3 sm:mb-4 shadow-sm animate-bounce-subtle">
+        <CheckCircle2 className="w-8 h-8 sm:w-9 sm:h-9 stroke-[2.2]" />
       </div>
 
-      <span className="text-xs font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-3.5 py-1 rounded-full border border-emerald-200">
+      <span className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-3.5 py-1 rounded-full border border-emerald-200">
         Demo Appointment Confirmed
       </span>
 
-      <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 font-display mb-1">
+      <h3 className="text-xl sm:text-3xl font-extrabold text-slate-900 mt-2 font-display mb-1">
         We Look Forward to Meeting You!
       </h3>
       
-      <p className="text-xs sm:text-sm text-slate-500 mb-6 max-w-md mx-auto">
+      <p className="text-xs sm:text-sm text-slate-500 mb-5 sm:mb-6 max-w-md mx-auto">
         A calendar invitation with your secure Google Meet link has been dispatched to your email.
       </p>
 
       {/* Appointment Summary Card */}
-      <div className="bg-[#f6f6ef] rounded-2xl p-5 border border-slate-200 text-left max-w-md mx-auto mb-6 space-y-3">
+      <div className="bg-[#f6f6ef] rounded-2xl p-4 sm:p-5 border border-slate-200 text-left max-w-md mx-auto mb-5 sm:mb-6 space-y-3">
         <div className="flex items-start gap-3">
           <Calendar className="w-4 h-4 text-brand-700 shrink-0 mt-0.5" />
           <div>
