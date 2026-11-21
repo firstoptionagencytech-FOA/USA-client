@@ -606,8 +606,8 @@ export default function AdminDashboardPage() {
               <div className="text-xs font-bold text-white truncate">
                 {adminUser?.email || 'Authorized Admin'}
               </div>
-              <div className="text-[10px] text-emerald-400 font-mono truncate">
-                {adminUser?.uid ? `${adminUser.uid.substring(0, 10)}...` : 'Verified Session'}
+              <div className="text-[10px] text-emerald-400 font-bold truncate">
+                Administrator Session
               </div>
             </div>
           </div>
