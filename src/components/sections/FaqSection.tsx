@@ -8,28 +8,32 @@ export const FaqSection: React.FC = () => {
 
   const faqs = [
     {
+      q: 'Does it work with Autotask / my current PSA tools?',
+      a: 'Yes. JIT Helpdesk is not built to replace your internal backend ticketing engines or PSA software like Autotask, ConnectWise, or HaloPSA. Instead, JIT Helpdesk acts as the high-end, client-facing mobile app and web portal layer that sits in front of your clients. Your clients get a sleek, branded app on their phone with loyalty points and push notifications, while you and your techs can continue running your backend operations smoothly.',
+    },
+    {
       q: 'Is this platform branded for my IT business?',
-      a: 'Yes. JIT Helpdesk is offered as a customizable customer experience using your business identity. Branding, logos, colors, and implementation details are confirmed during setup.',
+      a: 'Yes, 100%. The mobile apps, web portal, email notifications, and quote PDFs all showcase your company logo, custom brand colors, and your own domain (e.g. support.youritcompany.com). To your clients, it looks and feels like proprietary enterprise software built exclusively by your IT team.',
     },
     {
       q: 'Can my customers use both mobile and web?',
-      a: 'Yes, under the mobile-and-web package discussed for this offer. Supported devices, app distribution, and publishing arrangements are confirmed in the project proposal.',
+      a: 'Yes. Clients can download your native app from the iOS App Store and Google Play Store to receive push notifications and 1-tap support, or log in from any desktop web browser to approve large quotes, review endpoint hardware inventories, and settle invoices.',
     },
     {
-      q: 'How many agents can use it?',
-      a: 'The offered package supports unlimited agents. You can add your technicians and administrative staff without per-seat penalty fees. Usage terms and technical limits should be confirmed in the agreement.',
+      q: 'How many technicians or agents can use it?',
+      a: 'Unlimited. Unlike legacy MSP tools that penalize your business with rising per-seat license fees every time you hire a technician or dispatcher, JIT Helpdesk includes unlimited agent seats under the flat $200/month plan.',
     },
     {
       q: 'Can customers approve quotes and make payments?',
-      a: 'The platform includes quote and payment workflows. Customers can review quotes and make payments directly in the portal. Live payment processing requires the relevant payment gateway integrations (such as Stripe) to be configured.',
+      a: 'Yes. Quotes are delivered directly to the client’s phone and web portal with clear line items. Clients can approve scopes in 1 click and settle invoices instantly using credit card, ACH, Apple Pay, or Google Pay via direct Stripe integration.',
     },
     {
       q: 'What’s included in the $200 monthly fee?',
-      a: 'Hosting, maintenance, bug fixes, and continuous product updates. Third-party services, payment processing fees, and any additional custom implementation requirements should be clarified in your proposal.',
+      a: 'Everything required to run your client portal: continuous cloud hosting, iOS and Android app store maintenance, automated SSL certificates, push notification servers, daily backups, feature upgrades, and dedicated technical support. No hidden add-on fees.',
     },
     {
       q: 'Can I try the software before purchasing?',
-      a: 'Yes. You can explore the sample workspace and book a live demonstration. The sample workspace uses illustrative data and does not process real payments, allowing you to evaluate the full client journey risk-free.',
+      a: 'Yes. You can explore a personalized live demo where we showcase the app pre-configured with your logo and brand colors. You can evaluate the entire client experience risk-free before deciding to launch.',
     },
   ];
 

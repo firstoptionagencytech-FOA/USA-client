@@ -141,6 +141,27 @@ export const PhoneMockup: React.FC = () => {
                   </button>
                 </div>
 
+                {/* Loyalty Rewards & Coins Card (Ad Angle 2: Points like Starbucks) */}
+                <div
+                  onClick={() => setTicketNotice('450 Loyalty Coins available! ($50 credit applied to next retainer)')}
+                  className="p-2.5 rounded-2xl bg-gradient-to-r from-[#182c26] via-[#203a30] to-[#182c26] text-white border border-[#d2f56d]/30 shadow-xs cursor-pointer hover:border-[#d2f56d] transition-all flex items-center justify-between"
+                >
+                  <div className="flex items-center gap-2">
+                    <div className="w-7 h-7 rounded-full bg-[#d2f56d] text-[#182c26] font-black text-xs flex items-center justify-center shadow-xs">
+                      🪙
+                    </div>
+                    <div>
+                      <div className="text-[10px] text-[#d2f56d] font-extrabold uppercase tracking-wider">
+                        Client Loyalty Coins
+                      </div>
+                      <div className="text-xs font-black text-white">450 Points Earned</div>
+                    </div>
+                  </div>
+                  <span className="text-[9px] font-bold px-2 py-0.5 rounded-full bg-white/15 text-[#d2f56d] border border-white/20 shrink-0">
+                    $50 Credit
+                  </span>
+                </div>
+
                 {/* 2x2 Quick Action Interactive Tiles */}
                 <div className="grid grid-cols-2 gap-2">
                   {/* Tile 1: My Tickets */}

@@ -24,27 +24,27 @@ export const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({ onOpenBooking 
         </div>
 
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight font-display mb-6 leading-tight">
-          Your IT Business Deserves More Than Scattered Messages.
+          Your clients should have your app on their phone, not your competitor&apos;s ad.
         </h2>
 
         <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl mx-auto mb-4">
-          Give customers a professional, branded place to work with you. Give your team a clearer way to manage service requests. And give yourself more room to focus on the work that matters.
+          Lock in client loyalty with your own iOS and Android app, Starbucks-style points, and lock-screen push notifications.
         </p>
 
-        <p className="text-lg sm:text-xl font-black text-white font-display mb-10 tracking-wide">
-          Your Brand. Your Customers. Your Platform.
+        <p className="text-lg sm:text-xl font-black text-[#d2f56d] font-display mb-10 tracking-wide">
+          Your Brand. Your Logo. Zero Long-Term Lock-In.
         </p>
 
         {/* CTA Button */}
         <div className="flex flex-col items-center justify-center gap-4 mb-16">
           <button
             onClick={onOpenBooking}
-            className="cta-glow-btn group px-8 sm:px-9 py-3 sm:py-3.5 rounded-full text-white font-bold text-sm flex items-center gap-2.5 cursor-pointer shadow-lg hover:shadow-xl transition-all"
+            className="cta-glow-btn group px-8 sm:px-9 py-3.5 sm:py-4 rounded-full text-white font-extrabold text-sm sm:text-base flex items-center gap-2.5 cursor-pointer shadow-lg hover:shadow-xl transition-all"
           >
             <div className="w-5 h-5 rounded-md bg-white/20 flex items-center justify-center">
               <Calendar className="w-3.5 h-3.5 text-white" />
             </div>
-            <span>Book Your Free JIT Helpdesk Demo</span>
+            <span>Book a demo. See the app with your logo on it.</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </button>
 

@@ -9,33 +9,33 @@ export const BenefitsSection: React.FC = () => {
       icon: HeartHandshake,
       title: 'Higher Client Retention & Trust',
       subtitle: 'Stand Out From Competitors',
-      metric: '+94% Retention',
+      metric: 'Brand Loyalty',
       description:
         'When customers have their own dedicated branded portal, they view your IT company as an established, permanent infrastructure partner—not just an on-call freelancer.',
     },
     {
       icon: ShieldCheck,
       title: 'Faster Approvals & Clear Scopes',
-      subtitle: 'Zero Lost Quotes',
-      metric: '< 15m Approval',
+      subtitle: 'Clear Approvals',
+      metric: '1-Click Signoff',
       description:
         'Quotes and scopes are presented clearly with direct 1-click approvals. No more chasing down signatures or wondering if a client saw your email.',
     },
     {
       icon: DollarSign,
       title: 'Predictable Cash Flow & Payments',
-      subtitle: 'Prompt Payment Collection',
-      metric: 'Zero Overdue Bills',
+      subtitle: 'Prompt Invoicing',
+      metric: 'Integrated Stripe',
       description:
         'Integrated payment workflows allow clients to settle invoices via Apple Pay, Google Pay, and Stripe cards instantly from their phone or browser.',
     },
     {
       icon: Sparkles,
       title: 'Operational Calm & Clear Queues',
-      subtitle: 'Eliminate Status Tag Chaos',
-      metric: '85% Less Calls',
+      subtitle: 'Direct Reach',
+      metric: 'Push Notifications',
       description:
-        'By providing self-service status tracking, your technicians spend less time answering “Where is my ticket?” calls and more time resolving billable issues.',
+        'By providing self-service status tracking and lock-screen push notifications, your technicians spend less time answering “Where is my ticket?” calls and more time resolving billable issues.',
     },
   ];
 

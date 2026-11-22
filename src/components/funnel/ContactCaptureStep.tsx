@@ -8,14 +8,6 @@ interface ContactCaptureStepProps {
   onSuccess: (leadId: string, initialData: { full_name: string; email: string; phone: string; company_name: string }) => void;
 }
 
-// Format raw digits into standard (XXX) XXX-XXXX
-function formatPhoneNumber(value: string): string {
-  const digits = value.replace(/\D/g, '');
-  if (digits.length <= 3) return digits;
-  if (digits.length <= 6) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
-  return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6, 10)}`;
-}
-
 export const ContactCaptureStep: React.FC<ContactCaptureStepProps> = ({ onSuccess }) => {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
@@ -32,15 +24,6 @@ export const ContactCaptureStep: React.FC<ContactCaptureStepProps> = ({ onSucces
     company?: string;
   }>({});
 
-  // Real-time phone input handler with auto-masking
-  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const formatted = formatPhoneNumber(e.target.value);
-    setPhone(formatted);
-    if (fieldErrors.phone) {
-      setFieldErrors(prev => ({ ...prev, phone: undefined }));
-    }
-  };
-
   // Validation Engine
   const validateForm = (): boolean => {
     const errors: typeof fieldErrors = {};
@@ -51,8 +34,6 @@ export const ContactCaptureStep: React.FC<ContactCaptureStepProps> = ({ onSucces
       errors.name = 'Full name is required.';
     } else if (trimmedName.length < 2) {
       errors.name = 'Please enter at least 2 characters.';
-    } else if (!/^[a-zA-Z\s.'-]+$/.test(trimmedName)) {
-      errors.name = 'Please enter a valid name (letters only).';
     }
 
     // 2. Email: standard valid email check (accepts Gmail, Yahoo, Outlook, custom domain, etc.)
@@ -61,18 +42,15 @@ export const ContactCaptureStep: React.FC<ContactCaptureStepProps> = ({ onSucces
     if (!trimmedEmail) {
       errors.email = 'Email address is required.';
     } else if (!emailRegex.test(trimmedEmail)) {
-      errors.email = 'Please enter a valid email address (e.g. name@gmail.com).';
+      errors.email = 'Please enter a valid email address (e.g. name@domain.com).';
     }
 
-    // 3. Phone: minimum 10 digits & reject obvious fake sequence
+    // 3. Phone: raw numbers with optional + (e.g. +91..., +1..., or plain digits)
     const digits = phone.replace(/\D/g, '');
-    const fakeSequences = ['1111111111', '0000000000', '1234567890', '9999999999', '1231231234'];
-    if (!digits) {
-      errors.phone = 'Phone number is required for SMS confirmation.';
-    } else if (digits.length < 10) {
-      errors.phone = 'Please enter a complete 10-digit phone number.';
-    } else if (fakeSequences.includes(digits) || /^(\d)\1{9,}$/.test(digits)) {
-      errors.phone = 'Please provide a valid direct phone number.';
+    if (!phone.trim()) {
+      errors.phone = 'Phone number is required.';
+    } else if (digits.length < 7) {
+      errors.phone = 'Please enter a valid phone number (at least 7 digits).';
     }
 
     // 4. Company Name: required
@@ -92,7 +70,7 @@ export const ContactCaptureStep: React.FC<ContactCaptureStepProps> = ({ onSucces
     setFormError('');
 
     if (!validateForm()) {
-      setFormError('Please resolve the highlighted errors below before proceeding.');
+      setFormError('Please resolve the highlighted fields below.');
       return;
     }
 
@@ -213,7 +191,7 @@ export const ContactCaptureStep: React.FC<ContactCaptureStepProps> = ({ onSucces
                 setEmail(e.target.value);
                 if (fieldErrors.email) setFieldErrors(prev => ({ ...prev, email: undefined }));
               }}
-              placeholder="e.g. david@gmail.com or alex@company.com"
+              placeholder="e.g. alex@gmail.com or david@company.com"
               className={`w-full pl-10 pr-3.5 py-2.5 sm:py-3 rounded-xl border text-base sm:text-sm focus:outline-none transition-all text-slate-900 placeholder:text-slate-400 ${
                 fieldErrors.email
                   ? 'border-rose-400 bg-rose-50/30 focus:ring-2 focus:ring-rose-500'
@@ -223,11 +201,11 @@ export const ContactCaptureStep: React.FC<ContactCaptureStepProps> = ({ onSucces
           </div>
         </div>
 
-        {/* Direct Phone */}
+        {/* Direct Phone (Plain numbers with optional + country code) */}
         <div>
           <div className="flex items-center justify-between mb-1">
             <label className="text-xs font-bold text-slate-700">
-              Phone Number (SMS confirmation) <span className="text-rose-500">*</span>
+              Phone Number <span className="text-rose-500">*</span>
             </label>
             {fieldErrors.phone && (
               <span className="text-[11px] font-semibold text-rose-600">{fieldErrors.phone}</span>
@@ -238,9 +216,11 @@ export const ContactCaptureStep: React.FC<ContactCaptureStepProps> = ({ onSucces
             <input
               type="tel"
               value={phone}
-              onChange={handlePhoneChange}
-              placeholder="e.g. (555) 345-6789"
-              maxLength={14}
+              onChange={e => {
+                setPhone(e.target.value);
+                if (fieldErrors.phone) setFieldErrors(prev => ({ ...prev, phone: undefined }));
+              }}
+              placeholder="e.g. 9876543210 or +91 9876543210 or +1 5553456789"
               className={`w-full pl-10 pr-3.5 py-2.5 sm:py-3 rounded-xl border text-base sm:text-sm focus:outline-none transition-all text-slate-900 placeholder:text-slate-400 ${
                 fieldErrors.phone
                   ? 'border-rose-400 bg-rose-50/30 focus:ring-2 focus:ring-rose-500'

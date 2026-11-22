@@ -33,6 +33,7 @@ import {
   Menu,
   Sparkles,
   ArrowRight,
+  Copy,
   List,
   Check,
   LogOut,
@@ -73,9 +74,14 @@ export default function AdminDashboardPage() {
   const [selectedBooking, setSelectedBooking] = useState<Booking | null>(null);
   const [calendarViewMode, setCalendarViewMode] = useState<'grid' | 'agenda'>('grid');
   const [adminViewTimezone, setAdminViewTimezone] = useState<string>('Asia/Kolkata'); // Default to India Standard Time (IST) as requested
+  const [currentOrigin, setCurrentOrigin] = useState<string>('http://localhost:3001');
+  const [prodDomainDraft, setProdDomainDraft] = useState<string>('https://jewarinternational.vercel.app');
 
   // Verify Session & Auth Listener
   useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setCurrentOrigin(window.location.origin);
+    }
     // 1. Check local session
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('deskora_admin_session');
@@ -369,7 +375,7 @@ export default function AdminDashboardPage() {
   }
 
   return (
-    <div className="h-screen overflow-hidden bg-[#182c26] text-slate-800 flex flex-col lg:flex-row font-sans">
+    <div className="h-screen w-full max-w-full overflow-hidden bg-[#182c26] text-slate-800 flex flex-col lg:flex-row font-sans">
       
       {/* Toast Notification */}
       {toastMessage && (
@@ -380,7 +386,7 @@ export default function AdminDashboardPage() {
       )}
 
       {/* MOBILE TOPBAR */}
-      <div className="lg:hidden bg-[#182c26] text-white px-4 py-3 flex items-center justify-between sticky top-0 z-40 border-b border-slate-800">
+      <div className="lg:hidden bg-[#182c26] text-white px-4 py-3 flex items-center justify-between sticky top-0 z-40 border-b border-slate-800 w-full max-w-full overflow-hidden shrink-0">
         <div className="flex items-center gap-2.5">
           <div className="w-7 h-7 shrink-0 flex items-center justify-center">
             <img
@@ -627,12 +633,12 @@ export default function AdminDashboardPage() {
       {/* ======================================================== */}
       {/* MAIN CONTENT WORKSPACE                                  */}
       {/* ======================================================== */}
-      <div className="flex-1 h-screen overflow-y-auto flex flex-col min-w-0 bg-[#F1F5F9]">
+      <div className="flex-1 min-h-0 w-full max-w-full overflow-y-auto overflow-x-hidden flex flex-col min-w-0 bg-[#F1F5F9]">
         
         {/* Workspace Top Header Bar */}
-        <header className="bg-white border-b border-slate-200/80 px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 sticky top-0 z-30 shadow-2xs">
+        <header className="bg-white border-b border-slate-200/80 px-4 sm:px-6 py-3 sm:py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 sticky top-0 z-30 shadow-2xs w-full max-w-full shrink-0">
           <div>
-            <h1 className="text-lg font-black text-slate-900 font-display capitalize">
+            <h1 className="text-base sm:text-lg font-black text-slate-900 font-display capitalize truncate">
               {activeTab === 'overview' && 'Executive Pipeline & Funnel Overview'}
               {activeTab === 'leads' && 'Prospective Lead Directory & Survey Records'}
               {activeTab === 'meetings' && 'Google Calendar Confirmed Demo Schedule'}
@@ -644,7 +650,7 @@ export default function AdminDashboardPage() {
             </p>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 shrink-0">
             <button
               onClick={loadAllData}
               className="px-3 py-1.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-1.5 transition-colors shadow-2xs cursor-pointer"
@@ -661,7 +667,7 @@ export default function AdminDashboardPage() {
         </header>
 
         {/* Content Body Container */}
-        <div className="p-4 sm:p-6 lg:p-8 space-y-6 max-w-7xl w-full mx-auto">
+        <div className="p-3 sm:p-6 lg:p-8 space-y-4 sm:space-y-6 max-w-7xl w-full mx-auto overflow-x-hidden">
           
           {/* TAB 1: OVERVIEW DASHBOARD */}
           {activeTab === 'overview' && (
@@ -917,8 +923,8 @@ export default function AdminDashboardPage() {
               </div>
 
               {/* Table */}
-              <div className="overflow-x-auto">
-                <table className="w-full text-left text-xs">
+              <div className="overflow-x-auto w-full max-w-full border border-slate-200/80 rounded-xl">
+                <table className="w-full min-w-[700px] text-left text-xs">
                   <thead className="bg-slate-50 border-b border-slate-200 text-slate-500 font-bold uppercase tracking-wider">
                     <tr>
                       <th className="py-3.5 px-4">Prospect & Contact</th>
@@ -1068,34 +1074,34 @@ export default function AdminDashboardPage() {
             return (
               <div className="space-y-6 animate-in fade-in duration-200">
                 {/* Calendar Header with Controls */}
-                <div className="bg-white rounded-2xl border border-slate-200/80 shadow-xs p-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div className="bg-white rounded-2xl border border-slate-200/80 shadow-xs p-3.5 sm:p-5 flex flex-col xl:flex-row xl:items-center justify-between gap-3 sm:gap-4 w-full max-w-full">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-brand-50 border border-brand-200 flex items-center justify-center text-brand-700">
+                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-brand-50 border border-brand-200 flex items-center justify-center text-brand-700 shrink-0">
                       <CalendarDays className="w-5 h-5" />
                     </div>
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <h2 className="text-lg font-black text-slate-900 font-display">{monthName}</h2>
+                    <div className="min-w-0">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <h2 className="text-base sm:text-lg font-black text-slate-900 font-display">{monthName}</h2>
                         <span className="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-bold inline-flex items-center gap-1">
                           <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                           Live GCal Sync
                         </span>
                       </div>
-                      <p className="text-xs text-slate-500">
+                      <p className="text-[11px] sm:text-xs text-slate-500 truncate">
                         Admin Timezone: <strong className="text-slate-700">{settings?.business_timezone || 'Asia/Kolkata'}</strong> · {bookings.length} Total Booked Sessions
                       </p>
                     </div>
                   </div>
 
-                  <div className="flex flex-wrap items-center gap-2">
+                  <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 max-w-full">
                     {/* Timezone Filter for Viewing Sessions (Default: India IST) */}
-                    <div className="flex items-center gap-1.5 bg-slate-100 p-1 rounded-xl border border-slate-200">
-                      <Globe className="w-3.5 h-3.5 text-brand-700 ml-1.5 shrink-0" />
-                      <span className="text-[11px] font-bold text-slate-500">Zone:</span>
+                    <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl border border-slate-200">
+                      <Globe className="w-3.5 h-3.5 text-brand-700 ml-1 shrink-0" />
+                      <span className="text-[10px] sm:text-[11px] font-bold text-slate-500">Zone:</span>
                       <select
                         value={adminViewTimezone}
                         onChange={e => setAdminViewTimezone(e.target.value)}
-                        className="text-xs font-bold bg-white text-slate-800 border border-slate-200 rounded-lg px-2 py-1 focus:ring-1 focus:ring-brand-700 cursor-pointer shadow-2xs"
+                        className="text-[11px] sm:text-xs font-bold bg-white text-slate-800 border border-slate-200 rounded-lg px-1.5 sm:px-2 py-1 focus:ring-1 focus:ring-brand-700 cursor-pointer shadow-2xs"
                       >
                         <option value="Asia/Kolkata">🇮🇳 India (IST)</option>
                         <option value="America/New_York">🇺🇸 Eastern (ET)</option>
@@ -1108,14 +1114,14 @@ export default function AdminDashboardPage() {
                     </div>
 
                     {/* Month Nav Buttons with Separate Today & Visible Month Name */}
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1.5 sm:gap-2">
                       <button
                         onClick={() => {
                           const now = new Date();
                           setCalendarMonth(new Date(now.getFullYear(), now.getMonth(), 1));
                           setSelectedDate(now.toISOString().split('T')[0]);
                         }}
-                        className="px-3 py-1.5 text-xs font-extrabold text-slate-700 bg-white hover:bg-slate-50 border border-slate-200 rounded-xl transition-colors shadow-2xs cursor-pointer"
+                        className="px-2.5 sm:px-3 py-1.5 text-xs font-extrabold text-slate-700 bg-white hover:bg-slate-50 border border-slate-200 rounded-xl transition-colors shadow-2xs cursor-pointer"
                       >
                         Today
                       </button>
@@ -1123,17 +1129,17 @@ export default function AdminDashboardPage() {
                       <div className="flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200 shadow-inner">
                         <button
                           onClick={() => setCalendarMonth(new Date(year, month - 1, 1))}
-                          className="p-1.5 rounded-lg hover:bg-white text-slate-700 transition-colors cursor-pointer"
+                          className="p-1 sm:p-1.5 rounded-lg hover:bg-white text-slate-700 transition-colors cursor-pointer"
                           title="Previous Month"
                         >
                           <ChevronLeft className="w-4 h-4" />
                         </button>
-                        <span className="px-3 text-xs sm:text-sm font-black text-slate-900 font-display min-w-[140px] text-center select-none">
+                        <span className="px-1.5 sm:px-3 text-xs sm:text-sm font-black text-slate-900 font-display min-w-[105px] sm:min-w-[140px] text-center select-none truncate">
                           {monthName}
                         </span>
                         <button
                           onClick={() => setCalendarMonth(new Date(year, month + 1, 1))}
-                          className="p-1.5 rounded-lg hover:bg-white text-slate-700 transition-colors cursor-pointer"
+                          className="p-1 sm:p-1.5 rounded-lg hover:bg-white text-slate-700 transition-colors cursor-pointer"
                           title="Next Month"
                         >
                           <ChevronRight className="w-4 h-4" />
@@ -1145,7 +1151,7 @@ export default function AdminDashboardPage() {
                     <div className="flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200">
                       <button
                         onClick={() => setCalendarViewMode('grid')}
-                        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                        className={`flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                           calendarViewMode === 'grid'
                             ? 'bg-white text-brand-800 shadow-2xs'
                             : 'text-slate-600 hover:text-slate-900'
@@ -1156,7 +1162,7 @@ export default function AdminDashboardPage() {
                       </button>
                       <button
                         onClick={() => setCalendarViewMode('agenda')}
-                        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                        className={`flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                           calendarViewMode === 'agenda'
                             ? 'bg-white text-brand-800 shadow-2xs'
                             : 'text-slate-600 hover:text-slate-900'
@@ -1169,7 +1175,7 @@ export default function AdminDashboardPage() {
 
                     <button
                       onClick={loadAllData}
-                      className="p-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-600 transition-colors cursor-pointer"
+                      className="p-1.5 sm:p-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-600 transition-colors cursor-pointer"
                       title="Refresh FreeBusy data"
                     >
                       <RefreshCw className="w-4 h-4" />
@@ -1179,102 +1185,106 @@ export default function AdminDashboardPage() {
 
                 {calendarViewMode === 'grid' ? (
                   /* ================= MONTH GRID VIEW + SIDE AGENDA ================= */
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 items-start max-w-full">
                     
-                    {/* Left: 7-Column Interactive Month Grid */}
-                    <div className="lg:col-span-8 bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden">
-                      {/* Day Names Bar */}
-                      <div className="grid grid-cols-7 border-b border-slate-200 bg-slate-50/80 text-center py-2.5 text-[11px] font-extrabold text-slate-600 uppercase tracking-wider">
-                        {dayNames.map(d => (
-                          <div key={d} className={d === 'Sun' || d === 'Sat' ? 'text-slate-400' : ''}>
-                            {d}
+                    {/* Left: 7-Column Interactive Month Grid with horizontal containment */}
+                    <div className="lg:col-span-8 bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden max-w-full">
+                      <div className="overflow-x-auto w-full max-w-full">
+                        <div className="min-w-[560px] sm:min-w-full">
+                          {/* Day Names Bar */}
+                          <div className="grid grid-cols-7 border-b border-slate-200 bg-slate-50/80 text-center py-2.5 text-[11px] font-extrabold text-slate-600 uppercase tracking-wider">
+                            {dayNames.map(d => (
+                              <div key={d} className={d === 'Sun' || d === 'Sat' ? 'text-slate-400' : ''}>
+                                {d}
+                              </div>
+                            ))}
                           </div>
-                        ))}
-                      </div>
 
-                      {/* Days Grid */}
-                      <div className="grid grid-cols-7 divide-x divide-y divide-slate-100">
-                        {cells.map((cell, idx) => {
-                          const cellBookings = bookings.filter(b => {
-                            const bDate = b.meeting_start ? b.meeting_start.split('T')[0] : '';
-                            return bDate === cell.dateString;
-                          });
-                          const isSelected = selectedDate === cell.dateString;
+                          {/* Days Grid */}
+                          <div className="grid grid-cols-7 divide-x divide-y divide-slate-100">
+                            {cells.map((cell, idx) => {
+                              const cellBookings = bookings.filter(b => {
+                                const bDate = b.meeting_start ? b.meeting_start.split('T')[0] : '';
+                                return bDate === cell.dateString;
+                              });
+                              const isSelected = selectedDate === cell.dateString;
 
-                          return (
-                            <div
-                              key={idx}
-                              onClick={() => {
-                                setSelectedDate(cell.dateString);
-                                if (cellBookings.length > 0) {
-                                  setSelectedBooking(cellBookings[0]);
-                                }
-                              }}
-                              className={`min-h-[96px] p-2 flex flex-col justify-between transition-all cursor-pointer ${
-                                !cell.isCurrentMonth
-                                  ? 'bg-slate-50/40 text-slate-300'
-                                  : isSelected
-                                  ? 'bg-blue-50/60 ring-2 ring-inset ring-blue-600'
-                                  : 'hover:bg-slate-50/70 text-slate-800 bg-white'
-                              }`}
-                            >
-                              <div className="flex items-center justify-between">
-                                <span
-                                  className={`text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center ${
-                                    cell.isToday
-                                      ? 'bg-[#274c3b] text-[#d2f56d] border-l-2 border-[#d2f56d] font-extrabold shadow-xs'
+                              return (
+                                <div
+                                  key={idx}
+                                  onClick={() => {
+                                    setSelectedDate(cell.dateString);
+                                    if (cellBookings.length > 0) {
+                                      setSelectedBooking(cellBookings[0]);
+                                    }
+                                  }}
+                                  className={`min-h-[96px] p-2 flex flex-col justify-between transition-all cursor-pointer ${
+                                    !cell.isCurrentMonth
+                                      ? 'bg-slate-50/40 text-slate-300'
                                       : isSelected
-                                      ? 'text-blue-900 font-black'
-                                      : cell.isCurrentMonth
-                                      ? 'text-slate-800'
-                                      : 'text-slate-300'
+                                      ? 'bg-blue-50/60 ring-2 ring-inset ring-blue-600'
+                                      : 'hover:bg-slate-50/70 text-slate-800 bg-white'
                                   }`}
                                 >
-                                  {cell.dayNum}
-                                </span>
-
-                                {cellBookings.length > 0 && (
-                                  <span className="w-2 h-2 rounded-full bg-emerald-500 ring-2 ring-emerald-200" />
-                                )}
-                              </div>
-
-                              {/* Meeting Chips on Date */}
-                              <div className="space-y-1 mt-1">
-                                {cellBookings.slice(0, 2).map(b => {
-                                  const leadObj = b.lead || leads.find(l => l.id === b.lead_id);
-                                  const timeFormatted = new Date(b.meeting_start).toLocaleTimeString('en-US', {
-                                    hour: 'numeric',
-                                    minute: '2-digit',
-                                    hour12: true,
-                                    timeZone: adminViewTimezone,
-                                  });
-
-                                  return (
-                                    <div
-                                      key={b.id}
-                                      onClick={(e) => {
-                                        e.stopPropagation();
-                                        setSelectedDate(cell.dateString);
-                                        setSelectedBooking(b);
-                                      }}
-                                      className="px-1.5 py-0.5 rounded text-[10px] font-bold truncate transition-colors flex items-center gap-1 bg-slate-900 text-white hover:bg-[#274c3b] shadow-2xs"
-                                      title={`${timeFormatted} - ${leadObj?.company_name || leadObj?.full_name || 'Prospect'}`}
+                                  <div className="flex items-center justify-between">
+                                    <span
+                                      className={`text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center ${
+                                        cell.isToday
+                                          ? 'bg-[#274c3b] text-[#d2f56d] border-l-2 border-[#d2f56d] font-extrabold shadow-xs'
+                                          : isSelected
+                                          ? 'text-blue-900 font-black'
+                                          : cell.isCurrentMonth
+                                          ? 'text-slate-800'
+                                          : 'text-slate-300'
+                                      }`}
                                     >
-                                      <Clock className="w-2.5 h-2.5 shrink-0 opacity-80" />
-                                      <span className="truncate">{timeFormatted}</span>
-                                    </div>
-                                  );
-                                })}
+                                      {cell.dayNum}
+                                    </span>
 
-                                {cellBookings.length > 2 && (
-                                  <div className="text-[9px] font-bold text-slate-500 text-right pr-1">
-                                    +{cellBookings.length - 2} more
+                                    {cellBookings.length > 0 && (
+                                      <span className="w-2 h-2 rounded-full bg-emerald-500 ring-2 ring-emerald-200" />
+                                    )}
                                   </div>
-                                )}
-                              </div>
-                            </div>
-                          );
-                        })}
+
+                                  {/* Meeting Chips on Date */}
+                                  <div className="space-y-1 mt-1">
+                                    {cellBookings.slice(0, 2).map(b => {
+                                      const leadObj = b.lead || leads.find(l => l.id === b.lead_id);
+                                      const timeFormatted = new Date(b.meeting_start).toLocaleTimeString('en-US', {
+                                        hour: 'numeric',
+                                        minute: '2-digit',
+                                        hour12: true,
+                                        timeZone: adminViewTimezone,
+                                      });
+
+                                      return (
+                                        <div
+                                          key={b.id}
+                                          onClick={(e) => {
+                                            e.stopPropagation();
+                                            setSelectedDate(cell.dateString);
+                                            setSelectedBooking(b);
+                                          }}
+                                          className="px-1.5 py-0.5 rounded text-[10px] font-bold truncate transition-colors flex items-center gap-1 bg-slate-900 text-white hover:bg-[#274c3b] shadow-2xs"
+                                          title={`${timeFormatted} - ${leadObj?.company_name || leadObj?.full_name || 'Prospect'}`}
+                                        >
+                                          <Clock className="w-2.5 h-2.5 shrink-0 opacity-80" />
+                                          <span className="truncate">{timeFormatted}</span>
+                                        </div>
+                                      );
+                                    })}
+
+                                    {cellBookings.length > 2 && (
+                                      <div className="text-[9px] font-bold text-slate-500 text-right pr-1">
+                                        +{cellBookings.length - 2} more
+                                      </div>
+                                    )}
+                                  </div>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        </div>
                       </div>
                     </div>
 
@@ -1744,34 +1754,55 @@ export default function AdminDashboardPage() {
                     </span>
                   </div>
 
-                  {/* Redirect URI Bar with 1-Click Copy */}
-                  <div className="mt-3 p-3 rounded-xl bg-[#0b1512] border border-[#274c3b] flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
-                    <div className="flex items-center gap-2 overflow-hidden">
-                      <span className="text-[10px] font-black uppercase text-[#d2f56d] shrink-0">Redirect URI:</span>
-                      <span className="font-mono text-[11px] text-[#edf3e3] truncate">
-                        http://localhost:3000/api/auth/google/callback
-                      </span>
+                  {/* Live Vercel & Dev Redirect URI Box */}
+                  <div className="mt-3 p-3.5 rounded-xl bg-[#0b1512] border border-[#274c3b] space-y-2.5 text-xs">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                      <div className="min-w-0">
+                        <span className="text-[10px] font-black uppercase text-[#d2f56d] block tracking-wider">
+                          Live Production Callback URI:
+                        </span>
+                        <span className="font-mono text-xs text-white font-bold select-all truncate block mt-0.5">
+                          https://jewarinternational.vercel.app/api/auth/google/callback
+                        </span>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          if (typeof navigator !== 'undefined') {
+                            navigator.clipboard.writeText('https://jewarinternational.vercel.app/api/auth/google/callback');
+                            showToast('Live Callback URI copied to clipboard!');
+                          }
+                        }}
+                        className="px-3.5 py-1.5 rounded-lg bg-[#d2f56d] hover:bg-[#bfe854] text-[#182c26] text-xs font-black uppercase shrink-0 transition-colors cursor-pointer flex items-center gap-1.5 shadow-xs"
+                      >
+                        <Copy className="w-3.5 h-3.5" />
+                        <span>Copy Live URI</span>
+                      </button>
                     </div>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        if (typeof navigator !== 'undefined') {
-                          navigator.clipboard.writeText('http://localhost:3000/api/auth/google/callback');
-                          showToast('Redirect URI copied to clipboard!');
-                        }
-                      }}
-                      className="px-3 py-1 rounded-lg bg-[#274c3b] hover:bg-[#34654f] text-[#d2f56d] text-[10px] font-extrabold uppercase shrink-0 transition-colors cursor-pointer"
-                    >
-                      Copy URI
-                    </button>
+
+                    <div className="pt-2 border-t border-[#274c3b]/60 flex items-center justify-between text-[11px] text-slate-400">
+                      <span className="truncate">Local Dev: <code className="text-[#edf3e3]">{`${currentOrigin}/api/auth/google/callback`}</code></span>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          if (typeof navigator !== 'undefined') {
+                            navigator.clipboard.writeText(`${currentOrigin}/api/auth/google/callback`);
+                            showToast('Local Dev URI copied!');
+                          }
+                        }}
+                        className="text-[10px] text-[#d2f56d] hover:underline font-bold shrink-0 ml-2 cursor-pointer"
+                      >
+                        Copy Local
+                      </button>
+                    </div>
                   </div>
 
-                  {/* Step-by-Step Instructions Guide */}
-                  <div className="mt-4 pt-4 border-t border-[#274c3b]/80">
-                    <div className="flex items-center justify-between mb-3">
+                  {/* Simple 3-Step Google Setup Guide */}
+                  <div className="mt-4 pt-4 border-t border-[#274c3b]/80 space-y-2.5 text-xs text-[#dce3d4]">
+                    <div className="flex items-center justify-between mb-2">
                       <span className="text-xs font-black uppercase tracking-wider text-[#d2f56d] flex items-center gap-1.5">
                         <Sparkles className="w-3.5 h-3.5" />
-                        How to get Google Client ID &amp; Secret (2-Minute Steps):
+                        Connect Google Calendar (3 Simple Steps):
                       </span>
                       <a
                         href="https://console.cloud.google.com/apis/credentials"
@@ -1783,47 +1814,30 @@ export default function AdminDashboardPage() {
                       </a>
                     </div>
 
-                    <div className="space-y-2 text-[11px] text-[#dce3d4]">
-                      <div className="flex items-start gap-2">
-                        <span className="w-4 h-4 rounded-full bg-[#274c3b] text-[#d2f56d] font-black flex items-center justify-center shrink-0 text-[10px]">1</span>
-                        <span>
-                          <a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noreferrer" className="text-white font-bold underline">console.cloud.google.com</a> par jao aur ek project create karo (ya existing select karo).
-                        </span>
+                    <div className="flex items-start gap-2.5">
+                      <span className="w-5 h-5 rounded-full bg-[#274c3b] text-[#d2f56d] font-black flex items-center justify-center shrink-0 text-xs">1</span>
+                      <div className="leading-snug">
+                        <strong>Google Console</strong> par <a href="https://console.cloud.google.com/apis/library/calendar-json.googleapis.com" target="_blank" rel="noreferrer" className="text-white underline font-bold">Google Calendar API</a> enable karo, aur <strong>Credentials &gt; Create OAuth Client ID (Web Application)</strong> banao.
                       </div>
+                    </div>
 
-                      <div className="flex items-start gap-2">
-                        <span className="w-4 h-4 rounded-full bg-[#274c3b] text-[#d2f56d] font-black flex items-center justify-center shrink-0 text-[10px]">2</span>
-                        <span>
-                          <a href="https://console.cloud.google.com/apis/library/calendar-json.googleapis.com" target="_blank" rel="noreferrer" className="text-white font-bold underline">Google Calendar API</a> ko search karke <strong>ENABLE</strong> karo.
-                        </span>
+                    <div className="flex items-start gap-2.5">
+                      <span className="w-5 h-5 rounded-full bg-[#274c3b] text-[#d2f56d] font-black flex items-center justify-center shrink-0 text-xs">2</span>
+                      <div className="leading-snug space-y-1">
+                        <div><strong>Authorized redirect URIs</strong> mein yeh exact link paste karo:</div>
+                        <div className="font-mono text-[11px] text-[#d2f56d] bg-black/40 px-2.5 py-1 rounded border border-[#274c3b] select-all inline-block">
+                          https://jewarinternational.vercel.app/api/auth/google/callback
+                        </div>
+                        <div className="text-[10px] text-slate-400">
+                          (Testing ke liye <code>http://localhost:3001/api/auth/google/callback</code> bhi add kar sakte hain).
+                        </div>
                       </div>
+                    </div>
 
-                      <div className="flex items-start gap-2">
-                        <span className="w-4 h-4 rounded-full bg-[#274c3b] text-[#d2f56d] font-black flex items-center justify-center shrink-0 text-[10px]">3</span>
-                        <span>
-                          <strong>OAuth Consent Screen</strong> mein ja kar <strong>User Type: External</strong> chuno aur App Name me <em>JIT Helpdesk</em> likh kar Save karo.
-                        </span>
-                      </div>
-
-                      <div className="flex items-start gap-2">
-                        <span className="w-4 h-4 rounded-full bg-[#274c3b] text-[#d2f56d] font-black flex items-center justify-center shrink-0 text-[10px]">4</span>
-                        <span>
-                          <strong>Credentials</strong> &gt; <strong>Create Credentials</strong> &gt; <strong>OAuth Client ID</strong> &gt; Application Type: <strong>Web application</strong> select karo.
-                        </span>
-                      </div>
-
-                      <div className="flex items-start gap-2">
-                        <span className="w-4 h-4 rounded-full bg-[#274c3b] text-[#d2f56d] font-black flex items-center justify-center shrink-0 text-[10px]">5</span>
-                        <span>
-                          <strong>Authorized redirect URIs</strong> mein upar diya gaya URI paste karo (<code className="text-[#d2f56d] font-mono">http://localhost:3000/api/auth/google/callback</code>).
-                        </span>
-                      </div>
-
-                      <div className="flex items-start gap-2">
-                        <span className="w-4 h-4 rounded-full bg-[#274c3b] text-[#d2f56d] font-black flex items-center justify-center shrink-0 text-[10px]">6</span>
-                        <span>
-                          Create par click karte hi aapko <strong>Client ID</strong> aur <strong>Client Secret</strong> mil jayega. Unhe upar paste karo, <strong>Save Settings</strong> dabao aur <strong>[Connect Google Calendar]</strong> par click karo!
-                        </span>
+                    <div className="flex items-start gap-2.5">
+                      <span className="w-5 h-5 rounded-full bg-[#274c3b] text-[#d2f56d] font-black flex items-center justify-center shrink-0 text-xs">3</span>
+                      <div className="leading-snug">
+                        Google se mila <strong>Client ID</strong> aur <strong>Client Secret</strong> upar daal kar <strong>Save Settings</strong> dabao, phir <strong>[Connect Google Calendar]</strong> par click karo. Done!
                       </div>
                     </div>
                   </div>

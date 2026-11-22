@@ -7,7 +7,7 @@ export function getGoogleCalendarClient(settings?: any) {
   const clientId = (process.env.GOOGLE_CLIENT_ID || settings?.google_client_id || '').trim();
   const clientSecret = (process.env.GOOGLE_CLIENT_SECRET || settings?.google_client_secret || '').trim();
   const refreshToken = (process.env.GOOGLE_REFRESH_TOKEN || settings?.google_refresh_token || '').trim();
-  const redirectUri = (process.env.GOOGLE_REDIRECT_URI || 'http://localhost:3000/api/auth/google/callback').trim();
+  const redirectUri = (process.env.GOOGLE_REDIRECT_URI || 'https://jewarinternational.vercel.app/api/auth/google/callback').trim();
 
   if (!clientId || !clientSecret || !refreshToken) {
     return null;

@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { HeroHdVisual } from './HeroHdVisual';
 import { Calendar, ArrowRight, Users, Sparkles, ShieldCheck } from 'lucide-react';
@@ -10,6 +10,22 @@ interface HeroSectionProps {
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenBooking }) => {
+  const [headlineAngle, setHeadlineAngle] = useState<'default' | 'fear' | 'loyalty' | 'notify'>('default');
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const angleParam = (params.get('angle') || params.get('utm_angle') || params.get('utm_campaign') || '').toLowerCase();
+      if (angleParam.includes('fear') || angleParam.includes('switch') || angleParam.includes('competitor')) {
+        setHeadlineAngle('fear');
+      } else if (angleParam.includes('loyalty') || angleParam.includes('starbucks') || angleParam.includes('points') || angleParam.includes('reward')) {
+        setHeadlineAngle('loyalty');
+      } else if (angleParam.includes('notify') || angleParam.includes('doordash') || angleParam.includes('lock') || angleParam.includes('screen')) {
+        setHeadlineAngle('notify');
+      }
+    }
+  }, []);
+
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-[#f6f6ef] via-[#f1f3ea] to-[#e7ece0] pt-6 sm:pt-8 pb-0 text-[#182c26]">
       
@@ -80,17 +96,45 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenBooking }) => {
           <span>FOR IT SUPPORT BUSINESSES &amp; GROWING MSPS</span>
         </div>
 
-        {/* Main Headline */}
+        {/* Main Headline (Ad-Aligned Dynamic UTM) */}
         <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[46px] font-extrabold text-[#182c26] tracking-tight leading-[1.15] max-w-3xl font-display mb-3">
-          Your Clients Shouldn&apos;t Have to Chase You for{' '}
-          <span className="text-[#274c3b] inline-block decoration-[#d2f56d] underline decoration-4 underline-offset-4">
-            IT Support Updates.
-          </span>
+          {headlineAngle === 'fear' && (
+            <>
+              Your clients see other IT companies&apos; ads every week.{' '}
+              <span className="text-[#274c3b] inline-block decoration-[#d2f56d] underline decoration-4 underline-offset-4">
+                Give them a reason to stay.
+              </span>
+            </>
+          )}
+          {headlineAngle === 'loyalty' && (
+            <>
+              Your clients collect points at Starbucks.{' '}
+              <span className="text-[#274c3b] inline-block decoration-[#d2f56d] underline decoration-4 underline-offset-4">
+                Now they can collect them with you.
+              </span>
+            </>
+          )}
+          {headlineAngle === 'notify' && (
+            <>
+              Show up on your clients&apos; lock screen,{' '}
+              <span className="text-[#274c3b] inline-block decoration-[#d2f56d] underline decoration-4 underline-offset-4">
+                just like DoorDash and Amazon.
+              </span>
+            </>
+          )}
+          {headlineAngle === 'default' && (
+            <>
+              The branded app that keeps your IT clients{' '}
+              <span className="text-[#274c3b] inline-block decoration-[#d2f56d] underline decoration-4 underline-offset-4">
+                coming back to you.
+              </span>
+            </>
+          )}
         </h2>
 
         {/* Subheadline / Description */}
         <p className="text-xs sm:text-sm md:text-base text-[#61705f] font-normal leading-relaxed max-w-xl sm:max-w-2xl mb-1 sm:mb-2">
-          Give your IT business its own branded mobile app and customer web portal—so clients can request help, approve quotes, make payments, and track progress, all under your business name.
+          Your own iOS and Android app and web portal, with your name and logo. Loyalty rewards and notifications keep clients with you, not your competitors.
         </p>
 
         {/* Ultra-Crisp Transparent 3D Showcase Image */}
@@ -99,7 +143,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenBooking }) => {
         {/* Primary CTA Area: Glowing Jewar Deskora Pill Button & Pricing */}
         <div className="flex flex-col items-center text-center mt-3 mb-8 sm:mb-10 w-full max-w-lg">
           
-          {/* Glowing Jewar Deskora Capsule Button */}
+          {/* Glowing Jewar Deskora Capsule Button matching Ad CTA */}
           <button
             onClick={onOpenBooking}
             className="poster-glow-btn w-full sm:w-auto px-8 sm:px-11 py-3.5 sm:py-4 rounded-full text-white font-black text-xs sm:text-sm flex items-center justify-center gap-3 cursor-pointer group"
@@ -108,7 +152,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenBooking }) => {
               <Calendar className="w-3.5 h-3.5 text-[#d2f56d] stroke-[2.5]" />
             </div>
             <span className="tracking-wide text-white drop-shadow-sm font-extrabold text-[13px] sm:text-[15px]">
-              Book Your Free Personalized Demo
+              Book a demo. See the app with your logo on it.
             </span>
             <ArrowRight className="w-4 h-4 stroke-[2.5] text-[#d2f56d] transition-transform group-hover:translate-x-1" />
           </button>
@@ -130,21 +174,21 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenBooking }) => {
             <span className="w-8 sm:w-16 h-[1.5px] bg-[#dce3d4]" />
           </div>
 
-          {/* 3 Interactive Live Trust Badges with Hover Micro-interactions */}
+          {/* 3 High-Authority Badges: iOS & Android app, Your logo & domain, No long-term lock-in */}
           <div className="grid grid-cols-3 gap-2 sm:gap-3 mt-4 w-full max-w-md">
             {[
-              { label: 'Branded App', desc: 'iOS & Android' },
-              { label: 'Live Portal', desc: 'Custom Subdomain' },
-              { label: 'Zero Churn', desc: '15-Min Live SLA' },
+              { label: 'iOS & Android app', desc: 'Native Mobile Apps' },
+              { label: 'Your logo & domain', desc: '100% White-Label' },
+              { label: 'No long-term lock-in', desc: 'Cancel Anytime' },
             ].map((item, idx) => (
               <div
                 key={idx}
                 className="p-2 sm:p-2.5 rounded-2xl bg-white/90 backdrop-blur-sm border border-[#dce3d4] shadow-xs hover:border-[#274c3b] hover:-translate-y-0.5 transition-all text-center cursor-default group"
               >
-                <div className="text-[11px] font-black text-[#182c26] group-hover:text-[#274c3b] transition-colors">
+                <div className="text-[11px] font-black text-[#182c26] group-hover:text-[#274c3b] transition-colors leading-tight">
                   {item.label}
                 </div>
-                <div className="text-[9px] text-[#61705f] font-medium">
+                <div className="text-[9px] text-[#61705f] font-medium mt-0.5">
                   {item.desc}
                 </div>
               </div>

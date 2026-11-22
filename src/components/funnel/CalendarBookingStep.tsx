@@ -262,19 +262,19 @@ export const CalendarBookingStep: React.FC<CalendarBookingStepProps> = ({ leadId
         )}
       </div>
 
-      {/* Available Slots Grid (3 Columns on Mobile & Desktop) */}
-      <div className="mb-2 sm:mb-3">
+      {/* Available Slots Grid (4 Columns on Desktop, 3 on Mobile with Room for All Times) */}
+      <div className="mb-3 sm:mb-4">
         {loadingSlots && slots.length === 0 ? (
-          <div className="py-8 flex flex-col items-center justify-center text-slate-400 text-xs">
+          <div className="py-10 flex flex-col items-center justify-center text-slate-400 text-xs">
             <Loader2 className="w-5 h-5 animate-spin text-brand-700 mb-1.5" />
-            <span className="text-[11px]">Checking availability...</span>
+            <span className="text-xs">Checking live availability...</span>
           </div>
         ) : slots.length === 0 ? (
-          <div className="py-6 px-3 rounded-xl bg-slate-50 border border-slate-200 text-center text-xs text-slate-500">
+          <div className="py-8 px-4 rounded-xl bg-slate-50 border border-slate-200 text-center text-xs text-slate-500">
             No slots remaining on this date. Please pick another date above.
           </div>
         ) : (
-          <div className="grid grid-cols-3 gap-1.5 sm:gap-2 max-h-[145px] sm:max-h-[190px] overflow-y-auto pr-1 overscroll-contain">
+          <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 sm:gap-2.5 max-h-[280px] sm:max-h-[340px] overflow-y-auto pr-1 overscroll-contain">
             {slots.map((slot, idx) => {
               const isSelected = selectedSlot?.start === slot.start;
               const slotDate = new Date(slot.start);
@@ -294,13 +294,13 @@ export const CalendarBookingStep: React.FC<CalendarBookingStepProps> = ({ leadId
                     setBookingFailed(false);
                     setError('');
                   }}
-                  className={`min-h-[38px] sm:min-h-[44px] py-1 px-1.5 sm:py-2 sm:px-2 rounded-lg sm:rounded-xl border transition-all text-center cursor-pointer flex flex-col sm:flex-row items-center justify-center gap-0.5 sm:gap-1.5 ${
+                  className={`min-h-[42px] sm:min-h-[46px] py-1.5 px-2 sm:py-2.5 sm:px-2.5 rounded-xl border transition-all text-center cursor-pointer flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-1.5 ${
                     isSelected
-                      ? 'bg-brand-700 text-white border-brand-700 shadow-sm ring-2 ring-[#d2f56d]'
+                      ? 'bg-brand-700 text-white border-brand-700 shadow-md ring-2 ring-[#d2f56d]'
                       : 'bg-white hover:border-brand-400 border-slate-200 text-slate-800 hover:bg-slate-50'
                   }`}
                 >
-                  <span className="font-extrabold text-[11px] sm:text-xs">
+                  <span className="font-extrabold text-xs sm:text-sm">
                     {usTime}
                   </span>
                   <span className={`text-[9px] font-bold px-1 rounded ${

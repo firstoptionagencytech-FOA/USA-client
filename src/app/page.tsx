@@ -68,43 +68,43 @@ export default function LandingPage() {
   return (
     <main className="min-h-screen bg-[#f6f6ef] text-[#182c26] selection:bg-[#274c3b] selection:text-[#d2f56d] relative">
       
-      {/* 1. Hero Section (Official Jewar Emblem + 3D Product Visual + Headline + Direct CTA) */}
+      {/* 1. Hero Section (Dynamic angle headline + Badges + CTA) */}
       <HeroSection onOpenBooking={handleOpenBooking} />
 
-      {/* 2. Device Showcase Section (Phone & Laptop Detailed View) */}
+      {/* 2. Device Showcase Section (Phone Mockup with Loyalty Coins + Web Portal) */}
       <DeviceShowcaseSection onOpenBooking={handleOpenBooking} />
 
-      {/* 3. 5 Core Capabilities (The Redesigned Cards: Instant Support, Quotes, Payments, Tracking, Branded Portal) */}
-      <CoreCapabilitiesSection onOpenBooking={handleOpenBooking} />
-
-      {/* 4. Interactive Time & Cost Savings ROI Calculator */}
-      <MspRoiCalculator onOpenBooking={handleOpenBooking} />
-
-      {/* 5. Customer Problems / Pain Points */}
+      {/* 3. Customer Problems / Pain Points (3 exact ad angles: Competitors' ads, Cheaper shops, Unread emails) */}
       <ProblemSection onOpenBooking={handleOpenBooking} />
 
-      {/* 6. Product Walkthrough Demonstration */}
-      <ProductDemoSection onOpenBooking={handleOpenBooking} />
+      {/* 4. Retention Business Case (Keep just 1 client a year and the app has paid for itself) */}
+      <BusinessCaseSection onOpenBooking={handleOpenBooking} />
 
-      {/* 7. Product Solution Pillars */}
+      {/* 5. Interactive Client Retention Loss Calculator */}
+      <MspRoiCalculator onOpenBooking={handleOpenBooking} />
+
+      {/* 6. Product Solution Pillars (Loyalty & Referrals moved to #1) */}
       <SolutionSection onOpenBooking={handleOpenBooking} />
 
-      {/* 8. How It Works (Step 1-5) */}
+      {/* 7. 5 Core Capabilities (Moved down: features after main retention message) */}
+      <CoreCapabilitiesSection onOpenBooking={handleOpenBooking} />
+
+      {/* 8. Product Walkthrough Demonstration */}
+      <ProductDemoSection onOpenBooking={handleOpenBooking} />
+
+      {/* 9. How It Works (Step 1-5) */}
       <HowItWorksSection onOpenBooking={handleOpenBooking} />
 
-      {/* 9. Commercial Business Benefits */}
+      {/* 10. Commercial Business Benefits (Defensible benefits without fake metrics) */}
       <BenefitsSection />
 
-      {/* 10. Transparent Pricing Package */}
+      {/* 11. Transparent Pricing Package ($400 setup + $200/mo flat) */}
       <PricingSection onOpenBooking={handleOpenBooking} />
-
-      {/* 11. Illustrative Business Case */}
-      <BusinessCaseSection onOpenBooking={handleOpenBooking} />
 
       {/* 12. Who It Is For & Personalized Walkthrough Expectations */}
       <WhoItIsForSection onOpenBooking={handleOpenBooking} />
 
-      {/* 13. Approved FAQs */}
+      {/* 13. Approved FAQs (With full answers + Autotask/PSA integration) */}
       <FaqSection />
 
       {/* 14. Final Call to Action & Footer */}

@@ -71,7 +71,7 @@ export const FunnelModal: React.FC<FunnelModalProps> = ({
     <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4">
       
       {/* Modal Card with Mobile Safe Max Height & Smooth Scroll */}
-      <div className="relative w-full max-w-xl bg-white rounded-2xl sm:rounded-3xl shadow-2xl border border-slate-200 overflow-hidden my-auto max-h-[94dvh] flex flex-col animate-in fade-in zoom-in-95 duration-200">
+      <div className="relative w-full max-w-2xl bg-white rounded-2xl sm:rounded-3xl shadow-2xl border border-slate-200 overflow-hidden my-auto max-h-[95dvh] flex flex-col animate-in fade-in zoom-in-95 duration-200">
         
         {/* Close Button */}
         <button

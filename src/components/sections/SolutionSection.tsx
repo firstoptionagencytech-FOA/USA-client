@@ -50,7 +50,46 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenBooking 
         {/* 5 Pillar Grid with Rich Interactive Visuals & Card Hover Lift */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           
-          {/* Pillar 1: Branded Customer Mobile App */}
+          {/* Pillar 1: Loyalty & Referral Engine (Moved to #1 for Ad alignment) */}
+          <div className="group bg-[#f6f6ef] rounded-3xl p-6 sm:p-8 border border-[#dce3d4] hover:border-[#274c3b] hover:bg-white hover:shadow-[0_20px_40px_-15px_rgba(24,44,38,0.15)] hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between mb-5">
+                <div className="w-13 h-13 rounded-2xl bg-[#182c26] text-[#d2f56d] border border-[#d2f56d]/30 shadow-md flex items-center justify-center p-3 group-hover:scale-110 transition-transform duration-300">
+                  <Gift className="w-6 h-6 stroke-[2.2]" />
+                </div>
+                <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full bg-white border border-[#dce3d4] text-[#274c3b]">
+                  Starbucks-Style Points
+                </span>
+              </div>
+              
+              <h3 className="text-lg font-extrabold text-[#182c26] mb-2 tracking-tight group-hover:text-[#274c3b] transition-colors">
+                1. Loyalty Rewards and Referral Engine
+              </h3>
+              
+              <p className="text-xs sm:text-sm text-[#61705f] leading-relaxed mb-4">
+                Your clients collect points at Starbucks. Now they can collect them with you. Every paid invoice awards service credits, and automated referral links turn happy clients into your best sales reps.
+              </p>
+
+              {/* Visual Credits Wallet Snippet */}
+              <div className="my-3 p-3 rounded-2xl bg-white border border-[#dce3d4] shadow-2xs space-y-1.5">
+                <div className="flex items-center justify-between text-[11px] font-bold text-[#182c26]">
+                  <span>Client Service Credits</span>
+                  <span className="text-[#274c3b] font-black">$200.00 Balance</span>
+                </div>
+                <div className="text-[10px] text-slate-500 flex items-center justify-between">
+                  <span>Referral Code: REF-884</span>
+                  <span className="text-emerald-700 font-bold">450 Points Earned</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="pt-4 border-t border-[#dce3d4] flex items-center gap-2 text-xs font-bold text-[#182c26]">
+              <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+              <span>Automated referral credits &amp; customer lock-in</span>
+            </div>
+          </div>
+
+          {/* Pillar 2: Branded Customer Mobile App */}
           <div className="group bg-[#f6f6ef] rounded-3xl p-6 sm:p-8 border border-[#dce3d4] hover:border-[#274c3b] hover:bg-white hover:shadow-[0_20px_40px_-15px_rgba(24,44,38,0.15)] hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between mb-5">
@@ -58,16 +97,16 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenBooking 
                   <Smartphone className="w-6 h-6 stroke-[2.2]" />
                 </div>
                 <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full bg-white border border-[#dce3d4] text-[#274c3b]">
-                  iOS &amp; Android
+                  Lock-Screen Direct Reach
                 </span>
               </div>
               
               <h3 className="text-lg font-extrabold text-[#182c26] mb-2 tracking-tight group-hover:text-[#274c3b] transition-colors">
-                1. Your Branded Customer Mobile App
+                2. Your Branded Customer Mobile App
               </h3>
               
               <p className="text-xs sm:text-sm text-[#61705f] leading-relaxed mb-4">
-                Give customers a convenient way to access your IT services, submit support requests, review quotes, book meetings, and follow progress right from their smartphone.
+                Show up on your clients&apos; lock screens just like DoorDash and Amazon. Give them 1-tap support tickets, instant push notifications, and fast quote approvals right from their iPhone or Android.
               </p>
 
               {/* Visual Interactive App Snippet */}
@@ -96,7 +135,7 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenBooking 
             </div>
           </div>
 
-          {/* Pillar 2: Branded Customer Web Portal */}
+          {/* Pillar 3: Branded Customer Web Portal */}
           <div className="group bg-[#f6f6ef] rounded-3xl p-6 sm:p-8 border border-[#dce3d4] hover:border-[#274c3b] hover:bg-white hover:shadow-[0_20px_40px_-15px_rgba(24,44,38,0.15)] hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between mb-5">
@@ -109,7 +148,7 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenBooking 
               </div>
               
               <h3 className="text-lg font-extrabold text-[#182c26] mb-2 tracking-tight group-hover:text-[#274c3b] transition-colors">
-                2. Your Branded Customer Web Portal
+                3. Your Branded Customer Web Portal
               </h3>
               
               <p className="text-xs sm:text-sm text-[#61705f] leading-relaxed mb-4">
@@ -135,7 +174,7 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenBooking 
             </div>
           </div>
 
-          {/* Pillar 3: Owner Admin Dashboard */}
+          {/* Pillar 4: Owner Admin Dashboard */}
           <div className="group bg-[#f6f6ef] rounded-3xl p-6 sm:p-8 border border-[#dce3d4] hover:border-[#274c3b] hover:bg-white hover:shadow-[0_20px_40px_-15px_rgba(24,44,38,0.15)] hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between mb-5">
@@ -148,7 +187,7 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenBooking 
               </div>
               
               <h3 className="text-lg font-extrabold text-[#182c26] mb-2 tracking-tight group-hover:text-[#274c3b] transition-colors">
-                3. Your Owner Admin Dashboard
+                4. Your Owner Admin Dashboard
               </h3>
               
               <p className="text-xs sm:text-sm text-[#61705f] leading-relaxed mb-4">
@@ -178,7 +217,7 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenBooking 
             </div>
           </div>
 
-          {/* Pillar 4: Unlimited Support Agents */}
+          {/* Pillar 5: Unlimited Support Agents */}
           <div className="group bg-[#f6f6ef] rounded-3xl p-6 sm:p-8 border border-[#dce3d4] hover:border-[#274c3b] hover:bg-white hover:shadow-[0_20px_40px_-15px_rgba(24,44,38,0.15)] hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between mb-5">
@@ -191,7 +230,7 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenBooking 
               </div>
               
               <h3 className="text-lg font-extrabold text-[#182c26] mb-2 tracking-tight group-hover:text-[#274c3b] transition-colors">
-                4. Unlimited Support Agents
+                5. Unlimited Support Agents
               </h3>
               
               <p className="text-xs sm:text-sm text-[#61705f] leading-relaxed mb-4">
@@ -222,45 +261,6 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenBooking 
             <div className="pt-4 border-t border-[#dce3d4] flex items-center gap-2 text-xs font-bold text-[#182c26]">
               <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
               <span>No per-seat fees as your technician team expands</span>
-            </div>
-          </div>
-
-          {/* Pillar 5: Loyalty and Referral Tools */}
-          <div className="group bg-[#f6f6ef] rounded-3xl p-6 sm:p-8 border border-[#dce3d4] hover:border-[#274c3b] hover:bg-white hover:shadow-[0_20px_40px_-15px_rgba(24,44,38,0.15)] hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between">
-            <div>
-              <div className="flex items-center justify-between mb-5">
-                <div className="w-13 h-13 rounded-2xl bg-[#182c26] text-[#d2f56d] border border-[#d2f56d]/30 shadow-md flex items-center justify-center p-3 group-hover:scale-110 transition-transform duration-300">
-                  <Gift className="w-6 h-6 stroke-[2.2]" />
-                </div>
-                <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full bg-white border border-[#dce3d4] text-[#274c3b]">
-                  Client Retention
-                </span>
-              </div>
-              
-              <h3 className="text-lg font-extrabold text-[#182c26] mb-2 tracking-tight group-hover:text-[#274c3b] transition-colors">
-                5. Loyalty and Referral Tools
-              </h3>
-              
-              <p className="text-xs sm:text-sm text-[#61705f] leading-relaxed mb-4">
-                Encourage returning customers and reward qualified client referrals through built-in service credits and automated reward workflows.
-              </p>
-
-              {/* Visual Credits Wallet Snippet */}
-              <div className="my-3 p-3 rounded-2xl bg-white border border-[#dce3d4] shadow-2xs space-y-1.5">
-                <div className="flex items-center justify-between text-[11px] font-bold text-[#182c26]">
-                  <span>Client Service Credits</span>
-                  <span className="text-[#274c3b] font-black">$200.00 Balance</span>
-                </div>
-                <div className="text-[10px] text-slate-500 flex items-center justify-between">
-                  <span>Referral Code: REF-884</span>
-                  <span className="text-emerald-700 font-bold">1 Credit = $1.00</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="pt-4 border-t border-[#dce3d4] flex items-center gap-2 text-xs font-bold text-[#182c26]">
-              <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-              <span>Automated referral credits &amp; customer retention</span>
             </div>
           </div>
 

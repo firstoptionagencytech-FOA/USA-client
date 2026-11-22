@@ -10,8 +10,9 @@ export async function GET(req: NextRequest) {
     const clientId = (process.env.GOOGLE_CLIENT_ID || (settings as any).google_client_id || '').trim();
     const clientSecret = (process.env.GOOGLE_CLIENT_SECRET || (settings as any).google_client_secret || '').trim();
 
-    const protocol = req.headers.get('x-forwarded-proto') || 'http';
-    const host = req.headers.get('host') || 'localhost:3000';
+    const host = req.headers.get('x-forwarded-host') || req.headers.get('host') || 'localhost:3001';
+    const isLocalhost = host.includes('localhost') || host.includes('127.0.0.1');
+    const protocol = req.headers.get('x-forwarded-proto') || (isLocalhost ? 'http' : 'https');
     const redirectUri = process.env.GOOGLE_REDIRECT_URI || `${protocol}://${host}/api/auth/google/callback`;
 
     if (!clientId || !clientSecret) {
