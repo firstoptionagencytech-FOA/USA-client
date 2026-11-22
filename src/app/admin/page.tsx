@@ -44,6 +44,8 @@ import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
 import { AdminLoginGate } from '@/components/admin/AdminLoginGate';
 import { Lead, Booking, AdminSettings, LeadStatus } from '@/types';
+import { FlagUS, FlagIN, FlagGB, FlagGlobe, getTimezoneFlag } from '@/components/ui/CountryFlags';
+import { TimePickerAmPm } from '@/components/ui/TimePickerAmPm';
 
 type AdminTab = 'overview' | 'leads' | 'meetings' | 'survey_config' | 'settings';
 
@@ -224,7 +226,7 @@ export default function AdminDashboardPage() {
     const matchesSearch =
       l.full_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       l.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      l.company_name.toLowerCase().includes(searchQuery.toLowerCase());
+      (l.company_name || '').toLowerCase().includes(searchQuery.toLowerCase());
     const matchesStatus = statusFilter === 'all' || l.status === statusFilter;
     return matchesSearch && matchesStatus;
   });
@@ -1843,50 +1845,50 @@ export default function AdminDashboardPage() {
                   </div>
                 </div>
                 
-                {/* Business Timezone */}
+                {/* Business Timezone with Real Country Flag */}
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">
-                    Admin Business Timezone (Default: India IST)
-                  </label>
-                  <select
-                    value={settingsDraft.business_timezone || 'Asia/Kolkata'}
-                    onChange={e => setSettingsDraft(prev => ({ ...prev, business_timezone: e.target.value }))}
-                    className="w-full text-xs font-bold border border-slate-200 rounded-xl p-2.5 text-slate-800 focus:ring-2 focus:ring-brand-700 bg-white"
-                  >
-                    <option value="Asia/Kolkata">🇮🇳 India Standard Time (Asia/Kolkata · IST)</option>
-                    <option value="America/New_York">🇺🇸 Eastern Time (America/New_York · ET)</option>
-                    <option value="America/Chicago">🇺🇸 Central Time (America/Chicago · CT)</option>
-                    <option value="America/Denver">🇺🇸 Mountain Time (America/Denver · MT)</option>
-                    <option value="America/Los_Angeles">🇺🇸 Pacific Time (America/Los_Angeles · PT)</option>
-                    <option value="Europe/London">🇬🇧 United Kingdom (Europe/London · GMT/BST)</option>
-                    <option value="UTC">🌐 Coordinated Universal Time (UTC)</option>
-                  </select>
+                  <div className="flex items-center justify-between mb-1">
+                    <label className="block text-xs font-bold text-slate-700">
+                      Admin Business Timezone (Default: India IST)
+                    </label>
+                    <span className="text-[10px] text-brand-700 font-extrabold flex items-center gap-1.5 bg-[#edf3e3] px-2 py-0.5 rounded-full border border-[#dce3d4]">
+                      {getTimezoneFlag(settingsDraft.business_timezone || 'Asia/Kolkata', 'w-3.5 h-2.5 rounded-xs')}
+                      <span>{settingsDraft.business_timezone === 'Asia/Kolkata' ? 'India IST Active' : 'Active Timezone'}</span>
+                    </span>
+                  </div>
+
+                  <div className="relative flex items-center">
+                    <div className="absolute left-3 z-10 pointer-events-none flex items-center">
+                      {getTimezoneFlag(settingsDraft.business_timezone || 'Asia/Kolkata', 'w-5 h-3.5 rounded-xs shadow-xs')}
+                    </div>
+                    <select
+                      value={settingsDraft.business_timezone || 'Asia/Kolkata'}
+                      onChange={e => setSettingsDraft(prev => ({ ...prev, business_timezone: e.target.value }))}
+                      className="w-full text-xs font-bold border border-slate-200 rounded-xl pl-11 pr-4 py-2.5 text-slate-800 focus:ring-2 focus:ring-brand-700 bg-white cursor-pointer shadow-2xs"
+                    >
+                      <option value="Asia/Kolkata">India Standard Time (Asia/Kolkata · IST)</option>
+                      <option value="America/New_York">US Eastern Time (America/New_York · ET)</option>
+                      <option value="America/Chicago">US Central Time (America/Chicago · CT)</option>
+                      <option value="America/Denver">US Mountain Time (America/Denver · MT)</option>
+                      <option value="America/Los_Angeles">US Pacific Time (America/Los_Angeles · PT)</option>
+                      <option value="Europe/London">United Kingdom (Europe/London · GMT/BST)</option>
+                      <option value="UTC">Coordinated Universal Time (UTC)</option>
+                    </select>
+                  </div>
                 </div>
 
-                {/* Working Hours */}
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">
-                      Working Hours Start
-                    </label>
-                    <input
-                      type="time"
-                      value={settingsDraft.working_hours_start || '09:00'}
-                      onChange={e => setSettingsDraft(prev => ({ ...prev, working_hours_start: e.target.value }))}
-                      className="w-full text-xs font-bold border border-slate-200 rounded-xl p-2.5 text-slate-800"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">
-                      Working Hours End
-                    </label>
-                    <input
-                      type="time"
-                      value={settingsDraft.working_hours_end || '17:00'}
-                      onChange={e => setSettingsDraft(prev => ({ ...prev, working_hours_end: e.target.value }))}
-                      className="w-full text-xs font-bold border border-slate-200 rounded-xl p-2.5 text-slate-800"
-                    />
-                  </div>
+                {/* Working Hours with Professional 12-Hour AM/PM Pickers */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <TimePickerAmPm
+                    label="Working Hours Start"
+                    value={settingsDraft.working_hours_start || '09:00'}
+                    onChange={val => setSettingsDraft(prev => ({ ...prev, working_hours_start: val }))}
+                  />
+                  <TimePickerAmPm
+                    label="Working Hours End"
+                    value={settingsDraft.working_hours_end || '18:00'}
+                    onChange={val => setSettingsDraft(prev => ({ ...prev, working_hours_end: val }))}
+                  />
                 </div>
 
                 {/* Meeting Durations & Buffers */}

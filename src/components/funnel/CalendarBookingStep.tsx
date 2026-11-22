@@ -5,6 +5,7 @@ import { Calendar as CalendarIcon, Clock, Globe, ArrowLeft, ArrowRight, Loader2,
 import { TimeSlot, Booking } from '@/types';
 import { trackMetaEvent } from '@/lib/meta-pixel';
 import { getCachedSlots, setCachedSlots, clearSlotsCache } from '@/lib/slotsClientCache';
+import { FlagUS } from '@/components/ui/CountryFlags';
 
 interface CalendarBookingStepProps {
   leadId: string;
@@ -163,10 +164,11 @@ export const CalendarBookingStep: React.FC<CalendarBookingStepProps> = ({ leadId
       
       {/* Compact Header (Zero scroll on mobile) */}
       <div className="text-center mb-2.5 sm:mb-4">
-        <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
-          ✓ Step 3 of 3: Reserve Demo
+        <span className="inline-flex items-center gap-1.5 text-[10px] sm:text-xs font-bold uppercase tracking-wider text-emerald-800 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200 shadow-2xs">
+          <FlagUS className="w-3.5 h-2.5 rounded-xs" />
+          <span>Step 3 of 3: Reserve Demo (US Schedule)</span>
         </span>
-        <h3 className="text-base sm:text-2xl font-extrabold text-slate-900 mt-1 font-display leading-tight">
+        <h3 className="text-base sm:text-2xl font-extrabold text-slate-900 mt-1.5 font-display leading-tight">
           Select Your Personalized Demo Time
         </h3>
         <p className="text-xs text-slate-500 mt-0.5 hidden sm:block">
@@ -204,9 +206,9 @@ export const CalendarBookingStep: React.FC<CalendarBookingStepProps> = ({ leadId
           <span>Select Date:</span>
         </span>
 
-        {/* Compact US Timezone Selector */}
-        <div className="flex items-center gap-1 bg-slate-50 px-2 py-0.5 rounded-lg border border-slate-200 shadow-2xs">
-          <Globe className="w-3 h-3 text-brand-700 shrink-0" />
+        {/* Compact US Timezone Selector with Flag */}
+        <div className="flex items-center gap-1.5 bg-slate-50 px-2 py-1 rounded-lg border border-slate-200 shadow-2xs">
+          <FlagUS className="w-4 h-3 rounded-xs shrink-0 shadow-xs" />
           <select
             value={selectedTimezone}
             onChange={e => setSelectedTimezone(e.target.value)}

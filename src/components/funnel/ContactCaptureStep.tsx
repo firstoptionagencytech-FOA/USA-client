@@ -1,18 +1,17 @@
 'use client';
 
 import React, { useState } from 'react';
-import { User, Mail, Phone, Building, ArrowRight, ShieldCheck, AlertCircle } from 'lucide-react';
+import { User, Mail, Phone, ArrowRight, ShieldCheck, AlertCircle } from 'lucide-react';
 import { extractUtmParams, trackMetaEvent } from '@/lib/meta-pixel';
 
 interface ContactCaptureStepProps {
-  onSuccess: (leadId: string, initialData: { full_name: string; email: string; phone: string; company_name: string }) => void;
+  onSuccess: (leadId: string, initialData: { full_name: string; email: string; phone: string; company_name?: string }) => void;
 }
 
 export const ContactCaptureStep: React.FC<ContactCaptureStepProps> = ({ onSuccess }) => {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [companyName, setCompanyName] = useState('');
   const [loading, setLoading] = useState(false);
   const [formError, setFormError] = useState('');
 
@@ -21,7 +20,6 @@ export const ContactCaptureStep: React.FC<ContactCaptureStepProps> = ({ onSucces
     name?: string;
     email?: string;
     phone?: string;
-    company?: string;
   }>({});
 
   // Validation Engine
@@ -53,14 +51,6 @@ export const ContactCaptureStep: React.FC<ContactCaptureStepProps> = ({ onSucces
       errors.phone = 'Please enter a valid phone number (at least 7 digits).';
     }
 
-    // 4. Company Name: required
-    const trimmedCompany = companyName.trim();
-    if (!trimmedCompany) {
-      errors.company = 'Company name is required.';
-    } else if (trimmedCompany.length < 2) {
-      errors.company = 'Please enter at least 2 characters.';
-    }
-
     setFieldErrors(errors);
     return Object.keys(errors).length === 0;
   };
@@ -86,7 +76,7 @@ export const ContactCaptureStep: React.FC<ContactCaptureStepProps> = ({ onSucces
           full_name: fullName.trim(),
           email: email.trim().toLowerCase(),
           phone: phone.trim(),
-          company_name: companyName.trim(),
+          company_name: '',
           utm_params: utmParams,
         }),
       });
@@ -112,7 +102,7 @@ export const ContactCaptureStep: React.FC<ContactCaptureStepProps> = ({ onSucces
         full_name: fullName.trim(),
         email: email.trim().toLowerCase(),
         phone: phone.trim(),
-        company_name: companyName.trim(),
+        company_name: '',
       });
     } catch (err: any) {
       setFormError(err.message || 'Something went wrong. Please check your information and try again.');
@@ -142,7 +132,7 @@ export const ContactCaptureStep: React.FC<ContactCaptureStepProps> = ({ onSucces
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-3.5 sm:space-y-4">
         {/* Full Name */}
         <div>
           <div className="flex items-center justify-between mb-1">
@@ -223,35 +213,6 @@ export const ContactCaptureStep: React.FC<ContactCaptureStepProps> = ({ onSucces
               placeholder="e.g. 9876543210 or +91 9876543210 or +1 5553456789"
               className={`w-full pl-10 pr-3.5 py-2.5 sm:py-3 rounded-xl border text-base sm:text-sm focus:outline-none transition-all text-slate-900 placeholder:text-slate-400 ${
                 fieldErrors.phone
-                  ? 'border-rose-400 bg-rose-50/30 focus:ring-2 focus:ring-rose-500'
-                  : 'border-slate-200 focus:ring-2 focus:ring-brand-700 focus:border-brand-700'
-              }`}
-            />
-          </div>
-        </div>
-
-        {/* Company Name */}
-        <div>
-          <div className="flex items-center justify-between mb-1">
-            <label className="text-xs font-bold text-slate-700">
-              Business / Company Name <span className="text-rose-500">*</span>
-            </label>
-            {fieldErrors.company && (
-              <span className="text-[11px] font-semibold text-rose-600">{fieldErrors.company}</span>
-            )}
-          </div>
-          <div className="relative">
-            <Building className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
-            <input
-              type="text"
-              value={companyName}
-              onChange={e => {
-                setCompanyName(e.target.value);
-                if (fieldErrors.company) setFieldErrors(prev => ({ ...prev, company: undefined }));
-              }}
-              placeholder="e.g. Apex Managed Systems"
-              className={`w-full pl-10 pr-3.5 py-2.5 sm:py-3 rounded-xl border text-base sm:text-sm focus:outline-none transition-all text-slate-900 placeholder:text-slate-400 ${
-                fieldErrors.company
                   ? 'border-rose-400 bg-rose-50/30 focus:ring-2 focus:ring-rose-500'
                   : 'border-slate-200 focus:ring-2 focus:ring-brand-700 focus:border-brand-700'
               }`}
