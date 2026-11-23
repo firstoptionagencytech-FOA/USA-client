@@ -70,13 +70,13 @@ export function trackMetaEvent(
 }
 
 /**
- * Extracts UTM parameters and creative IDs from the current URL query string
+ * Extracts UTM parameters and creative IDs from the current URL query string,
+ * with automatic sessionStorage persistence across page actions & refreshes.
  */
 export function extractUtmParams(): Record<string, string> {
   if (typeof window === 'undefined') return {};
+  
   const params = new URLSearchParams(window.location.search);
-  const result: Record<string, string> = {};
-
   const keys = [
     'utm_source',
     'utm_medium',
@@ -89,11 +89,36 @@ export function extractUtmParams(): Record<string, string> {
     'creative',
   ];
 
+  const currentFromUrl: Record<string, string> = {};
+  let hasUrlParams = false;
+
   keys.forEach(k => {
     const val = params.get(k);
-    if (val) result[k] = val;
+    if (val) {
+      currentFromUrl[k] = val;
+      hasUrlParams = true;
+    }
   });
 
-  result.landing_page_url = window.location.href;
-  return result;
+  // If new UTM params are in the current URL, save them to storage
+  if (hasUrlParams) {
+    try {
+      sessionStorage.setItem('jit_active_utm_params', JSON.stringify(currentFromUrl));
+      localStorage.setItem('jit_active_utm_params', JSON.stringify(currentFromUrl));
+    } catch (e) {}
+    currentFromUrl.landing_page_url = window.location.href;
+    return currentFromUrl;
+  }
+
+  // Otherwise, retrieve previously captured UTMs from session/local storage
+  try {
+    const stored = sessionStorage.getItem('jit_active_utm_params') || localStorage.getItem('jit_active_utm_params');
+    if (stored) {
+      const parsed = JSON.parse(stored);
+      parsed.landing_page_url = window.location.href;
+      return parsed;
+    }
+  } catch (e) {}
+
+  return { landing_page_url: window.location.href };
 }

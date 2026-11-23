@@ -10,10 +10,21 @@ export async function GET(req: NextRequest) {
     const clientId = (process.env.GOOGLE_CLIENT_ID || (settings as any).google_client_id || '').trim();
     const clientSecret = (process.env.GOOGLE_CLIENT_SECRET || (settings as any).google_client_secret || '').trim();
 
-    const host = req.headers.get('x-forwarded-host') || req.headers.get('host') || 'localhost:3001';
+    const host = req.headers.get('x-forwarded-host') || req.headers.get('host') || 'jewarinternational.vercel.app';
     const isLocalhost = host.includes('localhost') || host.includes('127.0.0.1');
     const protocol = req.headers.get('x-forwarded-proto') || (isLocalhost ? 'http' : 'https');
-    const redirectUri = process.env.GOOGLE_REDIRECT_URI || `${protocol}://${host}/api/auth/google/callback`;
+    
+    // Automatically match the current environment
+    let redirectUri = `${protocol}://${host}/api/auth/google/callback`;
+    if (process.env.GOOGLE_REDIRECT_URI) {
+      const configured = process.env.GOOGLE_REDIRECT_URI.trim();
+      // Only use env var if it matches the current environment (never send localhost on production)
+      if (isLocalhost && (configured.includes('localhost') || configured.includes('127.0.0.1'))) {
+        redirectUri = configured;
+      } else if (!isLocalhost && !configured.includes('localhost') && !configured.includes('127.0.0.1')) {
+        redirectUri = configured;
+      }
+    }
 
     if (!clientId || !clientSecret) {
       // Redirect back to admin settings with a friendly prompt to enter credentials

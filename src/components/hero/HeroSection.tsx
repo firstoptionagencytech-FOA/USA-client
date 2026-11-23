@@ -16,13 +16,23 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenBooking }) => {
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
       // Whitelist matching: utm_content, angle, utm_campaign
-      const rawParam = (
+      let rawParam = (
         params.get('utm_content') ||
         params.get('angle') ||
         params.get('utm_angle') ||
         params.get('utm_campaign') ||
         ''
       ).toLowerCase();
+
+      if (!rawParam) {
+        try {
+          const stored = sessionStorage.getItem('jit_active_utm_params') || localStorage.getItem('jit_active_utm_params');
+          if (stored) {
+            const parsed = JSON.parse(stored);
+            rawParam = (parsed.utm_content || parsed.utm_campaign || '').toLowerCase();
+          }
+        } catch (e) {}
+      }
 
       if (rawParam.includes('fear') || rawParam.includes('switch') || rawParam.includes('competitor')) {
         setHeadlineAngle('fear');
