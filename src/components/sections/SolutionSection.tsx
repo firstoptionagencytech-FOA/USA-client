@@ -13,8 +13,10 @@ import {
   ShieldCheck,
   Lock,
   Sparkles,
+  TrendingUp,
   CreditCard,
-  Ticket
+  Bell,
+  Coins
 } from 'lucide-react';
 
 interface SolutionSectionProps {
@@ -47,10 +49,10 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenBooking 
           </p>
         </div>
 
-        {/* 5 Pillar Grid with Rich Transparent 3D Visuals & Graphic-Designer Level Polish */}
+        {/* 5 Pillar Grid with High-Fidelity 3D Renders (Identical to Hero Section Visuals) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           
-          {/* Pillar 1: Loyalty & Referral Engine (Moved to #1 for Ad alignment) */}
+          {/* Pillar 1: Loyalty Rewards & Referral Engine */}
           <div className="group bg-[#f6f6ef] rounded-3xl p-6 sm:p-8 border border-[#dce3d4] hover:border-[#274c3b] hover:bg-white hover:shadow-[0_20px_40px_-15px_rgba(24,44,38,0.15)] hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between mb-4">
@@ -62,29 +64,30 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenBooking 
                 </span>
               </div>
               
-              <h3 className="text-lg font-extrabold text-[#182c26] mb-2 tracking-tight group-hover:text-[#274c3b] transition-colors">
+              <h3 className="text-lg font-extrabold text-[#182c26] mb-2 tracking-tight group-hover:text-[#274c3b] transition-colors font-display">
                 1. Loyalty Rewards &amp; Referral Engine
               </h3>
               
-              <p className="text-xs sm:text-sm text-[#61705f] leading-relaxed mb-3">
+              <p className="text-xs sm:text-sm text-[#61705f] leading-relaxed mb-4">
                 Your clients collect points at Starbucks. Now they can collect them with you. Every paid invoice awards service credits, and automated referral links turn happy clients into repeat accounts.
               </p>
 
-              {/* 3D Transparent Loyalty Coins Showcase */}
-              <div className="relative w-full h-32 my-3 rounded-2xl bg-gradient-to-b from-white to-[#edf3e3] border border-[#dce3d4] flex items-center justify-center overflow-hidden p-2">
+              {/* 3D Transparent Loyalty Coins Graphic (Same High-End Studio Render as Hero) */}
+              <div className="relative w-full h-44 my-3 rounded-2xl bg-gradient-to-b from-[#ffffff] to-[#f1f4eb] border border-[#dce3d4] flex items-center justify-center overflow-hidden p-2 group-hover:border-[#274c3b] transition-all">
                 <Image
                   src="/brand/3d_loyalty_coins_transparent.png"
-                  alt="3D Loyalty Rewards Coins"
-                  width={160}
-                  height={110}
-                  className="object-contain drop-shadow-md group-hover:scale-105 transition-transform duration-300"
+                  alt="3D Gold and Emerald Loyalty Coins"
+                  width={340}
+                  height={220}
+                  unoptimized
+                  className="w-auto h-full max-h-[155px] object-contain drop-shadow-[0_12px_24px_rgba(24,44,38,0.22)] group-hover:scale-105 transition-transform duration-300"
                 />
               </div>
 
               {/* Wallet Summary */}
-              <div className="p-2.5 rounded-xl bg-white border border-[#dce3d4] text-[11px] font-bold text-[#182c26] flex items-center justify-between">
+              <div className="p-2.5 rounded-xl bg-white border border-[#dce3d4] text-[11px] font-bold text-[#182c26] flex items-center justify-between shadow-2xs">
                 <span>Client Credits Wallet</span>
-                <span className="text-[#274c3b] font-black">$200.00 Balance</span>
+                <span className="text-[#274c3b] font-black">$200.00 Balance (450 Pts)</span>
               </div>
             </div>
 
@@ -106,27 +109,28 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenBooking 
                 </span>
               </div>
               
-              <h3 className="text-lg font-extrabold text-[#182c26] mb-2 tracking-tight group-hover:text-[#274c3b] transition-colors">
+              <h3 className="text-lg font-extrabold text-[#182c26] mb-2 tracking-tight group-hover:text-[#274c3b] transition-colors font-display">
                 2. Your Branded Customer Mobile App
               </h3>
               
-              <p className="text-xs sm:text-sm text-[#61705f] leading-relaxed mb-3">
+              <p className="text-xs sm:text-sm text-[#61705f] leading-relaxed mb-4">
                 Show up on your clients&apos; lock screens just like DoorDash and Amazon. Give them 1-tap support tickets, instant push notifications, and fast quote approvals right on iOS and Android.
               </p>
 
-              {/* 3D Transparent Notification Pill Showcase */}
-              <div className="relative w-full h-32 my-3 rounded-2xl bg-gradient-to-b from-white to-[#edf3e3] border border-[#dce3d4] flex items-center justify-center overflow-hidden p-2">
+              {/* 3D Transparent Mobile Device with Lock-Screen Notification */}
+              <div className="relative w-full h-44 my-3 rounded-2xl bg-gradient-to-b from-[#ffffff] to-[#f1f4eb] border border-[#dce3d4] flex items-center justify-center overflow-hidden p-2 group-hover:border-[#274c3b] transition-all">
                 <Image
                   src="/brand/3d_notification_pill_transparent.png"
-                  alt="3D Lock Screen Notification Alert"
-                  width={200}
-                  height={90}
-                  className="object-contain drop-shadow-md group-hover:scale-105 transition-transform duration-300"
+                  alt="3D Smartphone with JIT Helpdesk Lock Screen Alert"
+                  width={340}
+                  height={220}
+                  unoptimized
+                  className="w-auto h-full max-h-[155px] object-contain drop-shadow-[0_12px_24px_rgba(24,44,38,0.22)] group-hover:scale-105 transition-transform duration-300"
                 />
               </div>
 
               {/* Mobile Spec */}
-              <div className="p-2.5 rounded-xl bg-white border border-[#dce3d4] text-[11px] font-bold text-[#182c26] flex items-center justify-between">
+              <div className="p-2.5 rounded-xl bg-white border border-[#dce3d4] text-[11px] font-bold text-[#182c26] flex items-center justify-between shadow-2xs">
                 <span>iOS &amp; Android Apps</span>
                 <span className="text-[#274c3b] font-black">Your Name &amp; Logo</span>
               </div>
@@ -150,28 +154,43 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenBooking 
                 </span>
               </div>
               
-              <h3 className="text-lg font-extrabold text-[#182c26] mb-2 tracking-tight group-hover:text-[#274c3b] transition-colors">
+              <h3 className="text-lg font-extrabold text-[#182c26] mb-2 tracking-tight group-hover:text-[#274c3b] transition-colors font-display">
                 3. Your Branded Customer Web Portal
               </h3>
               
-              <p className="text-xs sm:text-sm text-[#61705f] leading-relaxed mb-3">
+              <p className="text-xs sm:text-sm text-[#61705f] leading-relaxed mb-4">
                 Let clients access their tickets, hardware inventory, pending approvals, invoices, and service credits directly from any desktop browser under your own domain name.
               </p>
 
-              {/* Visual Custom Domain Snippet */}
-              <div className="w-full h-32 my-3 rounded-2xl bg-gradient-to-b from-white to-[#edf3e3] border border-[#dce3d4] flex flex-col justify-center p-4 space-y-2">
-                <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white border border-[#dce3d4] text-xs font-mono text-[#182c26] shadow-2xs">
-                  <Lock className="w-3.5 h-3.5 text-emerald-600" />
-                  <span className="truncate">support.youritbusiness.com</span>
+              {/* Graphic-Designer Grade Web Portal Browser Widget */}
+              <div className="relative w-full h-44 my-3 p-4 rounded-2xl bg-gradient-to-b from-white to-[#f1f4eb] border border-[#dce3d4] flex flex-col justify-center shadow-md group-hover:border-[#274c3b] transition-all">
+                {/* Browser Top Bar with 3 Dots */}
+                <div className="flex items-center justify-between pb-2 mb-3 border-b border-slate-200">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-2.5 h-2.5 rounded-full bg-rose-400 inline-block" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-amber-400 inline-block" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 inline-block" />
+                  </div>
+                  <div className="flex items-center gap-1.5 px-3 py-1 rounded-md bg-white border border-slate-200 text-[10px] font-mono text-[#182c26] shadow-2xs">
+                    <Lock className="w-2.5 h-2.5 text-emerald-600" />
+                    <span className="truncate max-w-[150px]">support.youritbusiness.com</span>
+                  </div>
+                  <span className="text-[9px] font-extrabold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">
+                    SSL Active
+                  </span>
                 </div>
-                <div className="flex items-center justify-between text-[11px] font-bold text-[#61705f] px-1">
-                  <span>Hardware Inventory:</span>
-                  <span className="text-[#274c3b] font-black">42 Devices Protected</span>
+
+                {/* Portal Content Row */}
+                <div className="bg-white p-3 rounded-xl border border-slate-200 flex items-center justify-between text-[11px] shadow-2xs">
+                  <div>
+                    <div className="font-extrabold text-[#182c26]">42 Endpoints Protected</div>
+                    <div className="text-[9px] text-[#61705f]">Hardware &amp; License Tracking</div>
+                  </div>
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                 </div>
               </div>
 
-              {/* Portal Feature */}
-              <div className="p-2.5 rounded-xl bg-white border border-[#dce3d4] text-[11px] font-bold text-[#182c26] flex items-center justify-between">
+              <div className="p-2.5 rounded-xl bg-white border border-[#dce3d4] text-[11px] font-bold text-[#182c26] flex items-center justify-between shadow-2xs">
                 <span>Self-Service Portal</span>
                 <span className="text-[#274c3b] font-black">Zero Phone Tag</span>
               </div>
@@ -195,29 +214,29 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenBooking 
                 </span>
               </div>
               
-              <h3 className="text-lg font-extrabold text-[#182c26] mb-2 tracking-tight group-hover:text-[#274c3b] transition-colors">
+              <h3 className="text-lg font-extrabold text-[#182c26] mb-2 tracking-tight group-hover:text-[#274c3b] transition-colors font-display">
                 4. Your Owner Admin Dashboard
               </h3>
               
-              <p className="text-xs sm:text-sm text-[#61705f] leading-relaxed mb-3">
+              <p className="text-xs sm:text-sm text-[#61705f] leading-relaxed mb-4">
                 Keep real-time command over customer requests, technician assignment, pricing, delivery timelines, and business health from one intuitive executive console.
               </p>
 
-              {/* 3D Transparent Dashboard Showcase */}
-              <div className="relative w-full h-32 my-3 rounded-2xl bg-gradient-to-b from-white to-[#edf3e3] border border-[#dce3d4] flex items-center justify-center overflow-hidden p-2">
+              {/* 3D Transparent Tablet Displaying Executive Admin Dashboard */}
+              <div className="relative w-full h-44 my-3 rounded-2xl bg-gradient-to-b from-[#ffffff] to-[#f1f4eb] border border-[#dce3d4] flex items-center justify-center overflow-hidden p-2 group-hover:border-[#274c3b] transition-all">
                 <Image
                   src="/brand/3d_dashboard_preview_transparent.png"
-                  alt="3D Owner Admin Console"
-                  width={180}
-                  height={110}
-                  className="object-contain drop-shadow-md group-hover:scale-105 transition-transform duration-300"
+                  alt="3D Tablet showing JIT Helpdesk Admin Dashboard"
+                  width={340}
+                  height={220}
+                  unoptimized
+                  className="w-auto h-full max-h-[155px] object-contain drop-shadow-[0_12px_24px_rgba(24,44,38,0.22)] group-hover:scale-105 transition-transform duration-300"
                 />
               </div>
 
-              {/* Admin Spec */}
-              <div className="p-2.5 rounded-xl bg-white border border-[#dce3d4] text-[11px] font-bold text-[#182c26] flex items-center justify-between">
+              <div className="p-2.5 rounded-xl bg-white border border-[#dce3d4] text-[11px] font-bold text-[#182c26] flex items-center justify-between shadow-2xs">
                 <span>Real-Time SLA Tracking</span>
-                <span className="text-[#274c3b] font-black">Live Visibility</span>
+                <span className="text-[#274c3b] font-black">99.8% Uptime SLA</span>
               </div>
             </div>
 
@@ -239,36 +258,35 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenBooking 
                 </span>
               </div>
               
-              <h3 className="text-lg font-extrabold text-[#182c26] mb-2 tracking-tight group-hover:text-[#274c3b] transition-colors">
+              <h3 className="text-lg font-extrabold text-[#182c26] mb-2 tracking-tight group-hover:text-[#274c3b] transition-colors font-display">
                 5. Unlimited Support Agents
               </h3>
               
-              <p className="text-xs sm:text-sm text-[#61705f] leading-relaxed mb-3">
+              <p className="text-xs sm:text-sm text-[#61705f] leading-relaxed mb-4">
                 Give your entire support team access without software bills that inflate for every technician or dispatcher you hire. Scale without penalty.
               </p>
 
-              {/* Team Avatars Visual Box */}
-              <div className="w-full h-32 my-3 rounded-2xl bg-gradient-to-b from-white to-[#edf3e3] border border-[#dce3d4] flex flex-col justify-center items-center p-3 space-y-2">
-                <div className="flex items-center -space-x-2">
+              {/* Graphic-Designer Grade Unlimited Team Avatars Widget */}
+              <div className="relative w-full h-44 my-3 p-4 rounded-2xl bg-gradient-to-b from-white to-[#f1f4eb] border border-[#dce3d4] shadow-md group-hover:border-[#274c3b] transition-all flex flex-col items-center justify-center space-y-3">
+                <div className="flex items-center -space-x-3">
                   {['MS', 'JD', 'AM', 'ST', 'RW'].map((initial, i) => (
                     <div
                       key={i}
-                      className="w-8 h-8 rounded-full bg-[#182c26] text-[#d2f56d] text-[10px] font-black flex items-center justify-center border-2 border-white shadow-2xs"
+                      className="w-10 h-10 rounded-full bg-[#182c26] text-[#d2f56d] text-xs font-black flex items-center justify-center border-2 border-white shadow-md transform hover:-translate-y-1 transition-transform"
                     >
                       {initial}
                     </div>
                   ))}
-                  <div className="w-8 h-8 rounded-full bg-[#274c3b] text-white text-[9px] font-bold flex items-center justify-center border-2 border-white shadow-2xs">
+                  <div className="w-10 h-10 rounded-full bg-[#274c3b] text-white text-[10px] font-bold flex items-center justify-center border-2 border-white shadow-md">
                     +All
                   </div>
                 </div>
-                <span className="text-[11px] font-black text-[#274c3b] bg-white px-3 py-1 rounded-full border border-[#dce3d4] shadow-2xs">
+                <span className="text-xs font-black text-[#274c3b] bg-white px-4 py-1.5 rounded-full border border-[#dce3d4] shadow-xs">
                   Zero Per-Tech Upcharges
                 </span>
               </div>
 
-              {/* Seat Metric */}
-              <div className="p-2.5 rounded-xl bg-white border border-[#dce3d4] text-[11px] font-bold text-[#182c26] flex items-center justify-between">
+              <div className="p-2.5 rounded-xl bg-white border border-[#dce3d4] text-[11px] font-bold text-[#182c26] flex items-center justify-between shadow-2xs">
                 <span>Technician Accounts</span>
                 <span className="text-[#274c3b] font-black">Unlimited Included</span>
               </div>
