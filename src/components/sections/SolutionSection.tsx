@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import {
   Smartphone,
   Globe,
@@ -12,7 +13,6 @@ import {
   ShieldCheck,
   Lock,
   Sparkles,
-  TrendingUp,
   CreditCard,
   Ticket
 } from 'lucide-react';
@@ -23,7 +23,7 @@ interface SolutionSectionProps {
 
 export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenBooking }) => {
   return (
-    <section className="py-20 px-4 bg-white relative overflow-hidden">
+    <section className="py-20 px-4 bg-white relative overflow-hidden" id="solution">
       
       {/* Background Decor */}
       <div className="absolute top-1/3 left-10 w-96 h-96 bg-[#edf3e3] rounded-full blur-3xl opacity-70 pointer-events-none -z-10" />
@@ -47,14 +47,14 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenBooking 
           </p>
         </div>
 
-        {/* 5 Pillar Grid with Rich Interactive Visuals & Card Hover Lift */}
+        {/* 5 Pillar Grid with Rich Transparent 3D Visuals & Graphic-Designer Level Polish */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           
           {/* Pillar 1: Loyalty & Referral Engine (Moved to #1 for Ad alignment) */}
           <div className="group bg-[#f6f6ef] rounded-3xl p-6 sm:p-8 border border-[#dce3d4] hover:border-[#274c3b] hover:bg-white hover:shadow-[0_20px_40px_-15px_rgba(24,44,38,0.15)] hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between">
             <div>
-              <div className="flex items-center justify-between mb-5">
-                <div className="w-13 h-13 rounded-2xl bg-[#182c26] text-[#d2f56d] border border-[#d2f56d]/30 shadow-md flex items-center justify-center p-3 group-hover:scale-110 transition-transform duration-300">
+              <div className="flex items-center justify-between mb-4">
+                <div className="w-12 h-12 rounded-2xl bg-[#182c26] text-[#d2f56d] border border-[#d2f56d]/30 shadow-md flex items-center justify-center p-2.5 group-hover:scale-110 transition-transform duration-300">
                   <Gift className="w-6 h-6 stroke-[2.2]" />
                 </div>
                 <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full bg-white border border-[#dce3d4] text-[#274c3b]">
@@ -63,27 +63,32 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenBooking 
               </div>
               
               <h3 className="text-lg font-extrabold text-[#182c26] mb-2 tracking-tight group-hover:text-[#274c3b] transition-colors">
-                1. Loyalty Rewards and Referral Engine
+                1. Loyalty Rewards &amp; Referral Engine
               </h3>
               
-              <p className="text-xs sm:text-sm text-[#61705f] leading-relaxed mb-4">
-                Your clients collect points at Starbucks. Now they can collect them with you. Every paid invoice awards service credits, and automated referral links turn happy clients into your best sales reps.
+              <p className="text-xs sm:text-sm text-[#61705f] leading-relaxed mb-3">
+                Your clients collect points at Starbucks. Now they can collect them with you. Every paid invoice awards service credits, and automated referral links turn happy clients into repeat accounts.
               </p>
 
-              {/* Visual Credits Wallet Snippet */}
-              <div className="my-3 p-3 rounded-2xl bg-white border border-[#dce3d4] shadow-2xs space-y-1.5">
-                <div className="flex items-center justify-between text-[11px] font-bold text-[#182c26]">
-                  <span>Client Service Credits</span>
-                  <span className="text-[#274c3b] font-black">$200.00 Balance</span>
-                </div>
-                <div className="text-[10px] text-slate-500 flex items-center justify-between">
-                  <span>Referral Code: REF-884</span>
-                  <span className="text-emerald-700 font-bold">450 Points Earned</span>
-                </div>
+              {/* 3D Transparent Loyalty Coins Showcase */}
+              <div className="relative w-full h-32 my-3 rounded-2xl bg-gradient-to-b from-white to-[#edf3e3] border border-[#dce3d4] flex items-center justify-center overflow-hidden p-2">
+                <Image
+                  src="/brand/3d_loyalty_coins_transparent.png"
+                  alt="3D Loyalty Rewards Coins"
+                  width={160}
+                  height={110}
+                  className="object-contain drop-shadow-md group-hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+
+              {/* Wallet Summary */}
+              <div className="p-2.5 rounded-xl bg-white border border-[#dce3d4] text-[11px] font-bold text-[#182c26] flex items-center justify-between">
+                <span>Client Credits Wallet</span>
+                <span className="text-[#274c3b] font-black">$200.00 Balance</span>
               </div>
             </div>
 
-            <div className="pt-4 border-t border-[#dce3d4] flex items-center gap-2 text-xs font-bold text-[#182c26]">
+            <div className="pt-4 mt-4 border-t border-[#dce3d4] flex items-center gap-2 text-xs font-bold text-[#182c26]">
               <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
               <span>Automated referral credits &amp; customer lock-in</span>
             </div>
@@ -92,8 +97,8 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenBooking 
           {/* Pillar 2: Branded Customer Mobile App */}
           <div className="group bg-[#f6f6ef] rounded-3xl p-6 sm:p-8 border border-[#dce3d4] hover:border-[#274c3b] hover:bg-white hover:shadow-[0_20px_40px_-15px_rgba(24,44,38,0.15)] hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between">
             <div>
-              <div className="flex items-center justify-between mb-5">
-                <div className="w-13 h-13 rounded-2xl bg-[#182c26] text-[#d2f56d] border border-[#d2f56d]/30 shadow-md flex items-center justify-center p-3 group-hover:scale-110 transition-transform duration-300">
+              <div className="flex items-center justify-between mb-4">
+                <div className="w-12 h-12 rounded-2xl bg-[#182c26] text-[#d2f56d] border border-[#d2f56d]/30 shadow-md flex items-center justify-center p-2.5 group-hover:scale-110 transition-transform duration-300">
                   <Smartphone className="w-6 h-6 stroke-[2.2]" />
                 </div>
                 <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full bg-white border border-[#dce3d4] text-[#274c3b]">
@@ -105,31 +110,29 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenBooking 
                 2. Your Branded Customer Mobile App
               </h3>
               
-              <p className="text-xs sm:text-sm text-[#61705f] leading-relaxed mb-4">
-                Show up on your clients&apos; lock screens just like DoorDash and Amazon. Give them 1-tap support tickets, instant push notifications, and fast quote approvals right from their iPhone or Android.
+              <p className="text-xs sm:text-sm text-[#61705f] leading-relaxed mb-3">
+                Show up on your clients&apos; lock screens just like DoorDash and Amazon. Give them 1-tap support tickets, instant push notifications, and fast quote approvals right on iOS and Android.
               </p>
 
-              {/* Visual Interactive App Snippet */}
-              <div className="my-3 p-3 rounded-2xl bg-white border border-[#dce3d4] shadow-2xs space-y-2">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <div className="w-6 h-6 rounded-lg bg-[#182c26] text-[#d2f56d] flex items-center justify-center font-black text-[10px]">
-                      IT
-                    </div>
-                    <div>
-                      <div className="text-[10px] font-extrabold text-[#182c26]">Your Business App</div>
-                      <div className="text-[9px] text-[#61705f]">Client Self-Service</div>
-                    </div>
-                  </div>
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                </div>
-                <div className="py-1.5 px-3 rounded-xl bg-[#edf3e3] text-[#274c3b] text-[10px] font-bold text-center">
-                  + New Support Request in 1-Tap
-                </div>
+              {/* 3D Transparent Notification Pill Showcase */}
+              <div className="relative w-full h-32 my-3 rounded-2xl bg-gradient-to-b from-white to-[#edf3e3] border border-[#dce3d4] flex items-center justify-center overflow-hidden p-2">
+                <Image
+                  src="/brand/3d_notification_pill_transparent.png"
+                  alt="3D Lock Screen Notification Alert"
+                  width={200}
+                  height={90}
+                  className="object-contain drop-shadow-md group-hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+
+              {/* Mobile Spec */}
+              <div className="p-2.5 rounded-xl bg-white border border-[#dce3d4] text-[11px] font-bold text-[#182c26] flex items-center justify-between">
+                <span>iOS &amp; Android Apps</span>
+                <span className="text-[#274c3b] font-black">Your Name &amp; Logo</span>
               </div>
             </div>
 
-            <div className="pt-4 border-t border-[#dce3d4] flex items-center gap-2 text-xs font-bold text-[#182c26]">
+            <div className="pt-4 mt-4 border-t border-[#dce3d4] flex items-center gap-2 text-xs font-bold text-[#182c26]">
               <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
               <span>iOS &amp; Android with your logo &amp; brand colors</span>
             </div>
@@ -138,8 +141,8 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenBooking 
           {/* Pillar 3: Branded Customer Web Portal */}
           <div className="group bg-[#f6f6ef] rounded-3xl p-6 sm:p-8 border border-[#dce3d4] hover:border-[#274c3b] hover:bg-white hover:shadow-[0_20px_40px_-15px_rgba(24,44,38,0.15)] hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between">
             <div>
-              <div className="flex items-center justify-between mb-5">
-                <div className="w-13 h-13 rounded-2xl bg-[#182c26] text-[#d2f56d] border border-[#d2f56d]/30 shadow-md flex items-center justify-center p-3 group-hover:scale-110 transition-transform duration-300">
+              <div className="flex items-center justify-between mb-4">
+                <div className="w-12 h-12 rounded-2xl bg-[#182c26] text-[#d2f56d] border border-[#d2f56d]/30 shadow-md flex items-center justify-center p-2.5 group-hover:scale-110 transition-transform duration-300">
                   <Globe className="w-6 h-6 stroke-[2.2]" />
                 </div>
                 <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full bg-white border border-[#dce3d4] text-[#274c3b]">
@@ -151,24 +154,30 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenBooking 
                 3. Your Branded Customer Web Portal
               </h3>
               
-              <p className="text-xs sm:text-sm text-[#61705f] leading-relaxed mb-4">
-                Let clients access their tickets, hardware inventory, pending approvals, invoices, and service credits directly from any browser under your domain name.
+              <p className="text-xs sm:text-sm text-[#61705f] leading-relaxed mb-3">
+                Let clients access their tickets, hardware inventory, pending approvals, invoices, and service credits directly from any desktop browser under your own domain name.
               </p>
 
               {/* Visual Custom Domain Snippet */}
-              <div className="my-3 p-3 rounded-2xl bg-white border border-[#dce3d4] shadow-2xs space-y-2">
-                <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-xl bg-slate-50 border border-slate-200 text-[10px] font-mono text-[#182c26]">
-                  <Lock className="w-3 h-3 text-emerald-600" />
+              <div className="w-full h-32 my-3 rounded-2xl bg-gradient-to-b from-white to-[#edf3e3] border border-[#dce3d4] flex flex-col justify-center p-4 space-y-2">
+                <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white border border-[#dce3d4] text-xs font-mono text-[#182c26] shadow-2xs">
+                  <Lock className="w-3.5 h-3.5 text-emerald-600" />
                   <span className="truncate">support.youritbusiness.com</span>
                 </div>
-                <div className="flex items-center justify-between text-[10px] px-1 font-bold text-[#61705f]">
-                  <span>Hardware Records</span>
-                  <span className="text-[#274c3b]">42 Endpoints Protected</span>
+                <div className="flex items-center justify-between text-[11px] font-bold text-[#61705f] px-1">
+                  <span>Hardware Inventory:</span>
+                  <span className="text-[#274c3b] font-black">42 Devices Protected</span>
                 </div>
+              </div>
+
+              {/* Portal Feature */}
+              <div className="p-2.5 rounded-xl bg-white border border-[#dce3d4] text-[11px] font-bold text-[#182c26] flex items-center justify-between">
+                <span>Self-Service Portal</span>
+                <span className="text-[#274c3b] font-black">Zero Phone Tag</span>
               </div>
             </div>
 
-            <div className="pt-4 border-t border-[#dce3d4] flex items-center gap-2 text-xs font-bold text-[#182c26]">
+            <div className="pt-4 mt-4 border-t border-[#dce3d4] flex items-center gap-2 text-xs font-bold text-[#182c26]">
               <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
               <span>Hosted on your custom domain with SSL</span>
             </div>
@@ -177,8 +186,8 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenBooking 
           {/* Pillar 4: Owner Admin Dashboard */}
           <div className="group bg-[#f6f6ef] rounded-3xl p-6 sm:p-8 border border-[#dce3d4] hover:border-[#274c3b] hover:bg-white hover:shadow-[0_20px_40px_-15px_rgba(24,44,38,0.15)] hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between">
             <div>
-              <div className="flex items-center justify-between mb-5">
-                <div className="w-13 h-13 rounded-2xl bg-[#182c26] text-[#d2f56d] border border-[#d2f56d]/30 shadow-md flex items-center justify-center p-3 group-hover:scale-110 transition-transform duration-300">
+              <div className="flex items-center justify-between mb-4">
+                <div className="w-12 h-12 rounded-2xl bg-[#182c26] text-[#d2f56d] border border-[#d2f56d]/30 shadow-md flex items-center justify-center p-2.5 group-hover:scale-110 transition-transform duration-300">
                   <LayoutDashboard className="w-6 h-6 stroke-[2.2]" />
                 </div>
                 <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full bg-white border border-[#dce3d4] text-[#274c3b]">
@@ -190,28 +199,29 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenBooking 
                 4. Your Owner Admin Dashboard
               </h3>
               
-              <p className="text-xs sm:text-sm text-[#61705f] leading-relaxed mb-4">
-                Keep real-time command over customer requests, technician assignment, pricing, delivery timelines, and business health from one intuitive console.
+              <p className="text-xs sm:text-sm text-[#61705f] leading-relaxed mb-3">
+                Keep real-time command over customer requests, technician assignment, pricing, delivery timelines, and business health from one intuitive executive console.
               </p>
 
-              {/* Visual Metric Counter Snippet */}
-              <div className="my-3 p-3 rounded-2xl bg-white border border-[#dce3d4] shadow-2xs grid grid-cols-3 gap-1.5 text-center">
-                <div className="p-1.5 rounded-xl bg-[#edf3e3]">
-                  <div className="text-xs font-black text-[#182c26]">24</div>
-                  <div className="text-[8px] font-bold text-[#274c3b]">Tickets</div>
-                </div>
-                <div className="p-1.5 rounded-xl bg-emerald-50">
-                  <div className="text-xs font-black text-emerald-800">18</div>
-                  <div className="text-[8px] font-bold text-emerald-700">Resolved</div>
-                </div>
-                <div className="p-1.5 rounded-xl bg-amber-50">
-                  <div className="text-xs font-black text-amber-800">100%</div>
-                  <div className="text-[8px] font-bold text-amber-700">SLA Met</div>
-                </div>
+              {/* 3D Transparent Dashboard Showcase */}
+              <div className="relative w-full h-32 my-3 rounded-2xl bg-gradient-to-b from-white to-[#edf3e3] border border-[#dce3d4] flex items-center justify-center overflow-hidden p-2">
+                <Image
+                  src="/brand/3d_dashboard_preview_transparent.png"
+                  alt="3D Owner Admin Console"
+                  width={180}
+                  height={110}
+                  className="object-contain drop-shadow-md group-hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+
+              {/* Admin Spec */}
+              <div className="p-2.5 rounded-xl bg-white border border-[#dce3d4] text-[11px] font-bold text-[#182c26] flex items-center justify-between">
+                <span>Real-Time SLA Tracking</span>
+                <span className="text-[#274c3b] font-black">Live Visibility</span>
               </div>
             </div>
 
-            <div className="pt-4 border-t border-[#dce3d4] flex items-center gap-2 text-xs font-bold text-[#182c26]">
+            <div className="pt-4 mt-4 border-t border-[#dce3d4] flex items-center gap-2 text-xs font-bold text-[#182c26]">
               <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
               <span>Full visibility over queues, SLA times &amp; revenue</span>
             </div>
@@ -220,8 +230,8 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenBooking 
           {/* Pillar 5: Unlimited Support Agents */}
           <div className="group bg-[#f6f6ef] rounded-3xl p-6 sm:p-8 border border-[#dce3d4] hover:border-[#274c3b] hover:bg-white hover:shadow-[0_20px_40px_-15px_rgba(24,44,38,0.15)] hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between">
             <div>
-              <div className="flex items-center justify-between mb-5">
-                <div className="w-13 h-13 rounded-2xl bg-[#182c26] text-[#d2f56d] border border-[#d2f56d]/30 shadow-md flex items-center justify-center p-3 group-hover:scale-110 transition-transform duration-300">
+              <div className="flex items-center justify-between mb-4">
+                <div className="w-12 h-12 rounded-2xl bg-[#182c26] text-[#d2f56d] border border-[#d2f56d]/30 shadow-md flex items-center justify-center p-2.5 group-hover:scale-110 transition-transform duration-300">
                   <Users2 className="w-6 h-6 stroke-[2.2]" />
                 </div>
                 <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full bg-white border border-[#dce3d4] text-[#274c3b]">
@@ -233,32 +243,38 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenBooking 
                 5. Unlimited Support Agents
               </h3>
               
-              <p className="text-xs sm:text-sm text-[#61705f] leading-relaxed mb-4">
+              <p className="text-xs sm:text-sm text-[#61705f] leading-relaxed mb-3">
                 Give your entire support team access without software bills that inflate for every technician or dispatcher you hire. Scale without penalty.
               </p>
 
-              {/* Visual Team Avatars Snippet */}
-              <div className="my-3 p-3 rounded-2xl bg-white border border-[#dce3d4] shadow-2xs flex items-center justify-between">
+              {/* Team Avatars Visual Box */}
+              <div className="w-full h-32 my-3 rounded-2xl bg-gradient-to-b from-white to-[#edf3e3] border border-[#dce3d4] flex flex-col justify-center items-center p-3 space-y-2">
                 <div className="flex items-center -space-x-2">
-                  {['MS', 'JD', 'AM', 'ST'].map((initial, i) => (
+                  {['MS', 'JD', 'AM', 'ST', 'RW'].map((initial, i) => (
                     <div
                       key={i}
-                      className="w-7 h-7 rounded-full bg-[#182c26] text-[#d2f56d] text-[9px] font-black flex items-center justify-center border-2 border-white shadow-2xs"
+                      className="w-8 h-8 rounded-full bg-[#182c26] text-[#d2f56d] text-[10px] font-black flex items-center justify-center border-2 border-white shadow-2xs"
                     >
                       {initial}
                     </div>
                   ))}
-                  <div className="w-7 h-7 rounded-full bg-[#edf3e3] text-[#274c3b] text-[8px] font-bold flex items-center justify-center border-2 border-white">
+                  <div className="w-8 h-8 rounded-full bg-[#274c3b] text-white text-[9px] font-bold flex items-center justify-center border-2 border-white shadow-2xs">
                     +All
                   </div>
                 </div>
-                <span className="text-[10px] font-extrabold text-[#274c3b] bg-[#edf3e3] px-2 py-0.5 rounded-full">
-                  Flat $200/mo Always
+                <span className="text-[11px] font-black text-[#274c3b] bg-white px-3 py-1 rounded-full border border-[#dce3d4] shadow-2xs">
+                  Zero Per-Tech Upcharges
                 </span>
+              </div>
+
+              {/* Seat Metric */}
+              <div className="p-2.5 rounded-xl bg-white border border-[#dce3d4] text-[11px] font-bold text-[#182c26] flex items-center justify-between">
+                <span>Technician Accounts</span>
+                <span className="text-[#274c3b] font-black">Unlimited Included</span>
               </div>
             </div>
 
-            <div className="pt-4 border-t border-[#dce3d4] flex items-center gap-2 text-xs font-bold text-[#182c26]">
+            <div className="pt-4 mt-4 border-t border-[#dce3d4] flex items-center gap-2 text-xs font-bold text-[#182c26]">
               <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
               <span>No per-seat fees as your technician team expands</span>
             </div>
@@ -281,10 +297,10 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenBooking 
             <div className="mt-8 relative z-10">
               <button
                 onClick={onOpenBooking}
-                className="poster-glow-btn w-full py-3.5 px-6 rounded-full text-white font-extrabold text-xs sm:text-sm transition-all shadow-md cursor-pointer flex items-center justify-center gap-2 group-hover:scale-[1.02]"
+                className="w-full py-3.5 px-6 rounded-full text-[#182c26] font-extrabold text-xs sm:text-sm bg-[#d2f56d] hover:bg-[#bfe853] transition-all shadow-md cursor-pointer flex items-center justify-center gap-2 group-hover:scale-[1.02]"
               >
                 <span>Book Your Free Live Demo</span>
-                <ArrowRight className="w-4 h-4 text-[#d2f56d]" />
+                <ArrowRight className="w-4 h-4 text-[#182c26]" />
               </button>
             </div>
           </div>

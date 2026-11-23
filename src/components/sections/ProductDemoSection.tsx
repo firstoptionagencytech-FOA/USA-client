@@ -11,7 +11,8 @@ import {
   ArrowRight,
   ShieldAlert,
   Clock,
-  Sparkles
+  Sparkles,
+  Gift
 } from 'lucide-react';
 
 interface ProductDemoSectionProps {
@@ -41,7 +42,7 @@ export const ProductDemoSection: React.FC<ProductDemoSectionProps> = ({ onOpenBo
       id: 1,
       title: '2. Owner Reviews & Prepares Quote',
       subtitle: 'Owner Admin Dashboard',
-      caption: 'Your team triages the request, allocates an technician, sets the timeline, and attaches a fixed-price quote.',
+      caption: 'Your team triages the request, allocates a technician, sets the timeline, and attaches a fixed-price quote.',
       tag: 'Owner Dashboard',
       icon: Laptop,
       preview: {
@@ -84,23 +85,23 @@ export const ProductDemoSection: React.FC<ProductDemoSectionProps> = ({ onOpenBo
     },
     {
       id: 4,
-      title: '5. Real-Time Tracking & Completion',
-      subtitle: 'Live Milestone Updates',
-      caption: 'Client tracks hardware testing, OS reinstallation, and final bench verification directly in their portal.',
-      tag: 'Live Tracking',
-      icon: CheckCircle,
+      title: '5. Real-Time Tracking & Loyalty Rewards',
+      subtitle: 'Live Milestone Updates & Points',
+      caption: 'Client tracks bench testing in real time and automatically earns 50 loyalty points into their wallet upon completion.',
+      tag: 'Rewards & Resolution',
+      icon: Gift,
       preview: {
         header: 'Ticket #1024 — Resolved & Picked Up',
-        device: 'Stress test passed: 100% stable',
+        device: '50 Loyalty Coins Added to Customer Wallet',
         severity: 'Customer Rating: 5/5 Stars',
         status: 'Archived to Customer History',
-        note: 'Client satisfaction recorded. Referral prompt unlocked.',
+        note: 'Client satisfaction recorded. Referral link activated.',
       },
     },
   ];
 
   return (
-    <section className="py-20 px-4 bg-[#f6f6ef] border-y border-slate-200 relative">
+    <section className="py-20 px-4 bg-[#f6f6ef] border-y border-[#dce3d4] relative" id="walkthrough">
       <div className="max-w-6xl mx-auto">
         
         {/* Section Header */}
@@ -128,11 +129,11 @@ export const ProductDemoSection: React.FC<ProductDemoSectionProps> = ({ onOpenBo
                 onClick={() => setActiveStep(idx)}
                 className={`flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all cursor-pointer ${
                   isActive
-                    ? 'bg-brand-700 text-white shadow-md shadow-brand-900/20'
-                    : 'bg-white hover:bg-slate-100 text-slate-700 border border-slate-200'
+                    ? 'bg-[#182c26] text-[#d2f56d] border border-[#d2f56d]/40 shadow-md'
+                    : 'bg-white hover:bg-slate-100 text-[#182c26] border border-[#dce3d4]'
                 }`}
               >
-                <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-white' : 'text-brand-700'}`} />
+                <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-[#d2f56d]' : 'text-[#274c3b]'}`} />
                 <span className="hidden sm:inline">{s.title}</span>
                 <span className="sm:hidden">Step {idx + 1}</span>
               </button>
@@ -141,65 +142,65 @@ export const ProductDemoSection: React.FC<ProductDemoSectionProps> = ({ onOpenBo
         </div>
 
         {/* Software Walkthrough Stage */}
-        <div className="bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden max-w-4xl mx-auto">
+        <div className="bg-white rounded-3xl border border-[#dce3d4] shadow-xl overflow-hidden max-w-4xl mx-auto">
           
           {/* Top Browser Bar */}
-          <div className="bg-slate-900 text-slate-300 px-5 py-3 flex items-center justify-between text-xs border-b border-slate-800">
+          <div className="bg-[#11201b] text-slate-300 px-5 py-3 flex items-center justify-between text-xs border-b border-[#274c3b]">
             <div className="flex items-center gap-2">
               <div className="flex gap-1.5">
                 <span className="w-3 h-3 rounded-full bg-rose-500 inline-block" />
                 <span className="w-3 h-3 rounded-full bg-amber-500 inline-block" />
                 <span className="w-3 h-3 rounded-full bg-emerald-500 inline-block" />
               </div>
-              <span className="font-mono text-[11px] text-slate-400 ml-2 hidden sm:inline">
+              <span className="font-mono text-[11px] text-slate-300 ml-2 hidden sm:inline">
                 https://portal.youritcompany.com/workspace
               </span>
             </div>
             
-            <span className="px-2.5 py-0.5 rounded-full bg-brand-800/80 text-[#d2f56d] text-[10px] font-bold tracking-wider uppercase">
+            <span className="px-2.5 py-0.5 rounded-full bg-[#182c26] border border-[#d2f56d]/30 text-[#d2f56d] text-[10px] font-bold tracking-wider uppercase">
               Illustrative Interactive Preview
             </span>
           </div>
 
           {/* Main Stage Display */}
-          <div className="p-6 sm:p-10 bg-gradient-to-br from-[#F8FAFC] to-white min-h-[340px] flex flex-col justify-between">
+          <div className="p-6 sm:p-10 bg-gradient-to-br from-[#fafbf7] to-white min-h-[340px] flex flex-col justify-between">
             
             <div>
               <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
-                <span className="px-3 py-1 rounded-full bg-brand-50 text-brand-700 border border-brand-200/50 text-xs font-bold">
+                <span className="px-3 py-1 rounded-full bg-[#edf3e3] text-[#274c3b] border border-[#dce3d4] text-xs font-bold">
                   {steps[activeStep].tag}
                 </span>
-                <span className="text-xs text-slate-400 font-medium flex items-center gap-1">
+                <span className="text-xs text-[#61705f] font-medium flex items-center gap-1">
                   <Clock className="w-3.5 h-3.5" /> Stage {activeStep + 1} of 5
                 </span>
               </div>
 
-              <h3 className="text-xl sm:text-2xl font-black text-slate-900 font-display mb-2">
+              <h3 className="text-xl sm:text-2xl font-black text-[#182c26] font-display mb-2">
                 {steps[activeStep].subtitle}
               </h3>
               
-              <p className="text-sm sm:text-base text-slate-600 leading-relaxed mb-6">
+              <p className="text-sm sm:text-base text-[#61705f] leading-relaxed mb-6">
                 {steps[activeStep].caption}
               </p>
 
               {/* Realistic Mockup Ticket Detail Box */}
-              <div className="bg-white rounded-2xl p-5 border border-slate-200/90 shadow-sm">
+              <div className="bg-white rounded-2xl p-5 border border-[#dce3d4] shadow-xs">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
                   <div>
-                    <h4 className="font-bold text-slate-900 text-sm">
+                    <h4 className="font-bold text-[#182c26] text-sm">
                       {steps[activeStep].preview.header}
                     </h4>
-                    <p className="text-xs text-slate-500 mt-0.5">
+                    <p className="text-xs text-[#61705f] mt-0.5">
                       {steps[activeStep].preview.device}
                     </p>
                   </div>
-                  <span className="px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 font-bold text-xs inline-block w-fit">
+                  <span className="px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 font-bold text-xs inline-block w-fit">
                     {steps[activeStep].preview.status}
                   </span>
                 </div>
 
-                <div className="pt-3 flex flex-col sm:flex-row sm:items-center justify-between text-xs text-slate-600 gap-2">
-                  <span className="font-semibold text-brand-800">
+                <div className="pt-3 flex flex-col sm:flex-row sm:items-center justify-between text-xs text-[#61705f] gap-2">
+                  <span className="font-semibold text-[#274c3b]">
                     {steps[activeStep].preview.severity}
                   </span>
                   <span className="italic text-slate-500">
@@ -214,14 +215,14 @@ export const ProductDemoSection: React.FC<ProductDemoSectionProps> = ({ onOpenBo
               <button
                 disabled={activeStep === 0}
                 onClick={() => setActiveStep(prev => Math.max(0, prev - 1))}
-                className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-100 disabled:opacity-30 disabled:pointer-events-none transition-colors"
+                className="px-4 py-2 rounded-xl text-xs font-semibold text-[#61705f] hover:bg-slate-100 disabled:opacity-30 disabled:pointer-events-none transition-colors"
               >
                 ← Previous Stage
               </button>
 
               <button
                 onClick={() => setActiveStep(prev => (prev + 1) % steps.length)}
-                className="px-5 py-2.5 rounded-xl bg-brand-700 hover:bg-brand-800 text-white text-xs font-bold flex items-center gap-1.5 transition-colors shadow-xs"
+                className="px-5 py-2.5 rounded-xl bg-[#182c26] hover:bg-[#274c3b] text-[#d2f56d] text-xs font-bold flex items-center gap-1.5 transition-colors shadow-xs"
               >
                 <span>{activeStep === steps.length - 1 ? 'Replay Walkthrough' : 'Next Stage'}</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -231,7 +232,7 @@ export const ProductDemoSection: React.FC<ProductDemoSectionProps> = ({ onOpenBo
           </div>
 
           {/* Compliance & Demo Disclaimer */}
-          <div className="bg-slate-50 px-6 py-2.5 border-t border-slate-200/60 text-[11px] text-slate-500 flex items-center justify-center gap-1.5 text-center">
+          <div className="bg-[#f6f6ef] px-6 py-2.5 border-t border-[#dce3d4] text-[11px] text-[#61705f] flex items-center justify-center gap-1.5 text-center">
             <ShieldAlert className="w-3.5 h-3.5 text-slate-400 shrink-0" />
             <span>Interactive walkthrough uses simulated data. Live payment gateways and tenant branding are configured during onboarding.</span>
           </div>
@@ -242,10 +243,10 @@ export const ProductDemoSection: React.FC<ProductDemoSectionProps> = ({ onOpenBo
         <div className="text-center mt-10">
           <button
             onClick={onOpenBooking}
-            className="cta-glow-btn px-6 sm:px-8 py-2.5 sm:py-3 rounded-full text-white font-bold text-xs sm:text-sm inline-flex items-center gap-2 cursor-pointer shadow-md hover:shadow-lg transition-all"
+            className="px-7 sm:px-9 py-3 sm:py-3.5 rounded-full text-white font-extrabold text-xs sm:text-sm inline-flex items-center gap-2.5 cursor-pointer bg-gradient-to-r from-[#182c26] via-[#274c3b] to-[#11201b] hover:from-[#203e30] hover:via-[#2f5a46] hover:to-[#182c26] border border-[#d2f56d] shadow-md hover:shadow-lg transition-all group"
           >
             <span>See How JIT Helpdesk Works — Book a Demo</span>
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight className="w-4 h-4 text-[#d2f56d] group-hover:translate-x-1 transition-transform" />
           </button>
         </div>
 

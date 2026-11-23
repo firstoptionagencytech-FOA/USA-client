@@ -7,7 +7,11 @@ import { PricePerceptionSection } from '@/components/sections/PricePerceptionSec
 import { ProblemSection } from '@/components/sections/ProblemSection';
 import { SolutionSection } from '@/components/sections/SolutionSection';
 import { BusinessCaseSection } from '@/components/sections/BusinessCaseSection';
+import { ProductDemoSection } from '@/components/sections/ProductDemoSection';
+import { BenefitsSection } from '@/components/sections/BenefitsSection';
+import { CoreCapabilitiesSection } from '@/components/sections/CoreCapabilitiesSection';
 import { PricingSection } from '@/components/sections/PricingSection';
+import { WhoItIsForSection } from '@/components/sections/WhoItIsForSection';
 import { FaqSection } from '@/components/sections/FaqSection';
 import { FinalCtaSection } from '@/components/sections/FinalCtaSection';
 import { FunnelModal } from '@/components/funnel/FunnelModal';
@@ -75,44 +79,55 @@ export default function LandingPage() {
       {/* 4. Customer Experience Gap (3 Ad Angles: Competitor Ads, Cheaper Shops, Unread Emails) */}
       <ProblemSection onOpenBooking={handleOpenBooking} />
 
-      {/* 5. Complete Solution (Loyalty Rewards #1, Branded Mobile App, Notifications, Web Portal, Admin) */}
+      {/* 5. Complete Solution (Loyalty Rewards #1 with 3D Assets, Mobile App, Notifications, Web Portal, Admin) */}
       <SolutionSection onOpenBooking={handleOpenBooking} />
 
       {/* 6. Retention Business Case (Keeping Just 1 Client Covers the $2,800/yr Fee) */}
       <BusinessCaseSection onOpenBooking={handleOpenBooking} />
 
-      {/* 7. Transparent Pricing Package ($400 setup + $200/mo flat) */}
+      {/* 7. Product Walkthrough (Interactive 5-Step Customer Journey) */}
+      <ProductDemoSection onOpenBooking={handleOpenBooking} />
+
+      {/* 8. Business Benefits (Build a Business Customers Want to Return To — Proven Qualitative Outcomes) */}
+      <BenefitsSection />
+
+      {/* 9. Five Core Capabilities (Everything Connected Under Your Brand) */}
+      <CoreCapabilitiesSection onOpenBooking={handleOpenBooking} />
+
+      {/* 10. Transparent Pricing Package ($400 setup + $200/mo flat) */}
       <PricingSection onOpenBooking={handleOpenBooking} />
 
-      {/* 8. Approved FAQs (10 Complete Questions & Answers) */}
+      {/* 11. Audience Qualification & Personalized Walkthrough Expectations */}
+      <WhoItIsForSection onOpenBooking={handleOpenBooking} />
+
+      {/* 12. Approved FAQs (10 Complete Questions & Answers) */}
       <FaqSection />
 
-      {/* 9. Final Call to Action & Footer */}
+      {/* 13. Final Call to Action & Footer */}
       <FinalCtaSection onOpenBooking={handleOpenBooking} />
 
       {/* Sticky Bottom Floating Bar for Mobile */}
-      {showStickyBar && (
-        <div className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-[#dce3d4] p-3 sm:hidden shadow-[0_-5px_20px_rgba(0,0,0,0.1)] flex items-center justify-between gap-3 animate-in slide-in-from-bottom-2">
-          <div className="flex flex-col">
-            <span className="text-[11px] font-black text-[#182c26] font-display leading-tight">
-              JIT Helpdesk Demo
-            </span>
-            <span className="text-[10px] text-[#274c3b] font-bold">
-              $400 setup + $200/mo
-            </span>
+      <div
+        className={`fixed bottom-0 left-0 right-0 z-40 bg-[#182c26]/95 backdrop-blur-md border-t border-[#d2f56d]/30 px-4 py-2.5 sm:hidden transition-transform duration-300 ${
+          showStickyBar ? 'translate-y-0' : 'translate-y-full'
+        }`}
+      >
+        <div className="flex items-center justify-between gap-3">
+          <div>
+            <div className="text-[11px] font-bold text-white">JIT Helpdesk</div>
+            <div className="text-[9px] text-[#d2f56d] font-black">$400 setup · $200/mo</div>
           </div>
-
           <button
             onClick={handleOpenBooking}
-            className="poster-glow-btn px-5 py-2.5 rounded-full text-white font-extrabold text-xs flex items-center gap-1.5 cursor-pointer shrink-0"
+            className="px-4 py-2 rounded-full bg-[#d2f56d] text-[#182c26] text-xs font-black flex items-center gap-1.5 shadow-md active:scale-95 transition-transform"
           >
-            <span>Book Free Demo</span>
-            <ArrowRight className="w-3.5 h-3.5 text-[#d2f56d]" />
+            <span>Book Demo</span>
+            <ArrowRight className="w-3.5 h-3.5" />
           </button>
         </div>
-      )}
+      </div>
 
-      {/* Qualification & Booking Funnel Modal */}
+      {/* Funnel Booking Modal */}
       <FunnelModal
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
