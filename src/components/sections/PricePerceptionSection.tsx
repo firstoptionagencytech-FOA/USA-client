@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Layers, CheckCircle2, ArrowRight, ShieldCheck, Sparkles, AlertCircle, XCircle } from 'lucide-react';
+import { Layers, CheckCircle2, ArrowRight, ShieldCheck, Sparkles, XCircle } from 'lucide-react';
 
 interface PricePerceptionSectionProps {
   onOpenBooking: () => void;
@@ -31,33 +31,33 @@ export const PricePerceptionSection: React.FC<PricePerceptionSectionProps> = ({ 
           </p>
         </div>
 
-        {/* Two Comparison Columns (Gradient Card Style) */}
+        {/* Two Comparison Columns (Signature Gradient Card Style) */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 items-stretch mb-12">
           
           {/* Column A: Traditional Custom-Build */}
-          <div className="group bg-white rounded-3xl p-7 sm:p-9 border border-slate-200 shadow-xs hover:border-slate-300 transition-all duration-300 flex flex-col justify-between relative overflow-hidden">
+          <div className="group bg-white rounded-3xl p-7 sm:p-9 border border-[#dce3d4] shadow-xs hover:border-[#274c3b] transition-all duration-300 flex flex-col justify-between relative overflow-hidden">
             {/* Top Subtle Ambient Corner Glow */}
-            <div className="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-slate-300/20 to-transparent rounded-full blur-xl pointer-events-none" />
+            <div className="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-[#274c3b]/15 to-transparent rounded-full blur-xl pointer-events-none" />
 
             <div>
               <div className="flex items-center justify-between mb-4 relative z-10">
-                <span className="text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
+                <span className="text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded-full bg-[#edf3e3] text-[#274c3b] border border-[#dce3d4]">
                   Traditional Agency Path
                 </span>
-                <span className="text-xs font-bold text-slate-400">
+                <span className="text-xs font-bold text-[#61705f]">
                   Custom Code From Scratch
                 </span>
               </div>
 
-              <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-1">
+              <div className="text-[11px] font-bold uppercase tracking-wider text-[#61705f] mb-1">
                 BESPOKE SOFTWARE AGENCY
               </div>
 
-              <h3 className="text-xl sm:text-2xl font-black text-slate-800 mb-2 font-display">
+              <h3 className="text-xl sm:text-2xl font-black text-[#182c26] mb-2 font-display">
                 Building From Scratch
               </h3>
 
-              <p className="text-xs sm:text-sm text-slate-500 leading-relaxed mb-6">
+              <p className="text-xs sm:text-sm text-[#61705f] leading-relaxed mb-6">
                 Commissioning a bespoke software agency to build iOS, Android, and web systems requires dedicated technical architecture, custom backend engineering, and indefinite developer retainers.
               </p>
 
@@ -72,25 +72,25 @@ export const PricePerceptionSection: React.FC<PricePerceptionSectionProps> = ({ 
                   { step: '6. Ongoing Maintenance', desc: 'Funding dedicated DevOps to fix bugs, OS updates, and server downtime.' },
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-start gap-3 text-xs sm:text-sm">
-                    <div className="w-5 h-5 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center shrink-0 mt-0.5">
+                    <div className="w-5 h-5 rounded-full bg-[#edf3e3] text-[#274c3b] flex items-center justify-center shrink-0 mt-0.5">
                       <XCircle className="w-3.5 h-3.5" />
                     </div>
                     <div>
-                      <span className="font-bold text-slate-700">{item.step}: </span>
-                      <span className="text-slate-500">{item.desc}</span>
+                      <span className="font-bold text-[#182c26]">{item.step}: </span>
+                      <span className="text-[#61705f]">{item.desc}</span>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Embedded Live Status Snippet */}
+            {/* Embedded Live Dark Pine Snippet */}
             <div className="mt-auto pt-3 border-t border-slate-100 relative z-10">
-              <div className="bg-slate-100 rounded-xl p-3 border border-slate-200 flex items-center justify-between text-[11px] text-slate-700">
-                <span className="font-mono text-[10px] sm:text-[11px] text-slate-600">
-                  Custom Build Timeline
+              <div className="bg-[#11201b] rounded-xl p-3 border border-[#274c3b] flex items-center justify-between text-[11px] text-white shadow-inner">
+                <span className="font-mono text-[10px] sm:text-[11px] text-[#edf3e3]">
+                  Custom Agency Timeline
                 </span>
-                <span className="text-rose-600 font-bold text-[10px] sm:text-[11px]">
+                <span className="text-rose-400 font-bold text-[10px] sm:text-[11px]">
                   $25,000+ &amp; 6+ Months
                 </span>
               </div>

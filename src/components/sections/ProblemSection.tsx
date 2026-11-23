@@ -7,11 +7,7 @@ import {
   Layers,
   ArrowRight,
   CheckCircle2,
-  AlertTriangle,
-  Clock,
-  Sparkles,
-  ShieldAlert,
-  Users
+  Sparkles
 } from 'lucide-react';
 
 interface ProblemSectionProps {
@@ -26,8 +22,7 @@ export const ProblemSection: React.FC<ProblemSectionProps> = ({ onOpenBooking })
       subtitle: 'SWITCHING RISK',
       title: 'Invisible in Their Everyday Workflow',
       badge: 'Switching Risk',
-      accentGlow: 'from-rose-500/20 to-transparent',
-      badgeClass: 'bg-rose-50 text-rose-800 border-rose-200',
+      accentGlow: 'from-[#274c3b]/30 to-transparent',
       description:
         'Your clients are constantly targeted by competing IT companies promising lower rates and flashier tools. When you only exist as an invisible email thread, switching to someone else feels effortless.',
       snippetLabel: 'Competitor Ads Target Clients',
@@ -40,8 +35,7 @@ export const ProblemSection: React.FC<ProblemSectionProps> = ({ onOpenBooking })
       subtitle: 'ZERO RETENTION HOOK',
       title: 'Commodity Price Comparison',
       badge: 'Zero Loyalty',
-      accentGlow: 'from-amber-500/20 to-transparent',
-      badgeClass: 'bg-amber-50 text-amber-900 border-amber-200',
+      accentGlow: 'from-[#d2f56d]/20 to-transparent',
       description:
         'Without a loyalty program or service credits, clients shop around purely on hourly price. Give them points for every paid invoice, exactly like Starbucks, so leaving you means forfeiting real money.',
       snippetLabel: 'Starbucks-Style Points',
@@ -53,9 +47,8 @@ export const ProblemSection: React.FC<ProblemSectionProps> = ({ onOpenBooking })
       quote: '“Your emails sit unread.”',
       subtitle: 'NO DIRECT REACH',
       title: 'Lost in Cluttered Inboxes',
-      badge: 'Unread Emails',
-      accentGlow: 'from-[#d2f56d]/25 to-transparent',
-      badgeClass: 'bg-[#edf3e3] text-[#274c3b] border-[#dce3d4]',
+      badge: 'Direct Reach',
+      accentGlow: 'from-[#274c3b]/30 to-transparent',
       description:
         'Quotes, scopes, and status updates get buried under hundreds of daily spam emails. With your own branded app on their phone, push notifications show up directly on their lock screen like DoorDash.',
       snippetLabel: 'Lock-Screen Push Alerts',
@@ -67,8 +60,8 @@ export const ProblemSection: React.FC<ProblemSectionProps> = ({ onOpenBooking })
   return (
     <section className="py-20 px-4 bg-white relative overflow-hidden" id="gap">
       
-      {/* Background Decor */}
-      <div className="absolute top-0 right-10 w-80 h-80 bg-[#edf3e3] rounded-full blur-3xl opacity-60 pointer-events-none -z-10" />
+      {/* Background Soft Emerald Lighting */}
+      <div className="absolute top-0 right-10 w-80 h-80 bg-[#d2f56d]/10 rounded-full blur-3xl opacity-70 pointer-events-none -z-10" />
 
       <div className="max-w-6xl mx-auto">
         
@@ -86,7 +79,7 @@ export const ProblemSection: React.FC<ProblemSectionProps> = ({ onOpenBooking })
           </p>
         </div>
 
-        {/* 3 Rich Visual Problem Cards - Matching the Gradient Card Aesthetic */}
+        {/* 3 Rich Visual Problem Cards - Identical Color Palette to the Signature Gradient Card */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
           {problems.map((item) => {
             const IconComponent = item.icon;
@@ -106,25 +99,25 @@ export const ProblemSection: React.FC<ProblemSectionProps> = ({ onOpenBooking })
                       <IconComponent className="w-6 h-6 stroke-[2.2] group-hover:animate-pulse" />
                     </div>
 
-                    <span className={`text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full border shadow-2xs ${item.badgeClass}`}>
+                    <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#edf3e3] text-[#274c3b] border border-[#dce3d4] group-hover:bg-[#182c26] group-hover:text-[#d2f56d] group-hover:border-[#d2f56d]/40 transition-colors shadow-2xs">
                       {item.badge}
                     </span>
                   </div>
 
-                  {/* Quote Hook */}
-                  <div className="text-sm font-bold text-[#182c26] mb-1 italic">
-                    {item.quote}
-                  </div>
-
                   {/* Subtitle / Kicker */}
-                  <div className="text-[11px] font-bold uppercase tracking-wider text-[#61705f] mb-2">
+                  <div className="text-[11px] font-bold uppercase tracking-wider text-[#61705f] mb-1">
                     {item.subtitle}
                   </div>
 
                   {/* Main Title */}
-                  <h3 className="text-lg font-black text-[#182c26] tracking-tight leading-snug mb-3 group-hover:text-[#274c3b] transition-colors font-display">
+                  <h3 className="text-lg font-black text-[#182c26] tracking-tight leading-snug mb-2 group-hover:text-[#274c3b] transition-colors font-display">
                     {item.title}
                   </h3>
+
+                  {/* Quote Hook */}
+                  <div className="text-xs font-semibold text-[#274c3b] mb-3 italic">
+                    {item.quote}
+                  </div>
 
                   {/* Description */}
                   <p className="text-xs sm:text-sm text-[#61705f] leading-relaxed mb-6">
