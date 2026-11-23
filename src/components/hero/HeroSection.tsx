@@ -15,13 +15,23 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenBooking }) => {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
-      const angleParam = (params.get('angle') || params.get('utm_angle') || params.get('utm_campaign') || '').toLowerCase();
-      if (angleParam.includes('fear') || angleParam.includes('switch') || angleParam.includes('competitor')) {
+      // Whitelist matching: utm_content, angle, utm_campaign
+      const rawParam = (
+        params.get('utm_content') ||
+        params.get('angle') ||
+        params.get('utm_angle') ||
+        params.get('utm_campaign') ||
+        ''
+      ).toLowerCase();
+
+      if (rawParam.includes('fear') || rawParam.includes('switch') || rawParam.includes('competitor')) {
         setHeadlineAngle('fear');
-      } else if (angleParam.includes('loyalty') || angleParam.includes('starbucks') || angleParam.includes('points') || angleParam.includes('reward')) {
+      } else if (rawParam.includes('loyalty') || rawParam.includes('starbucks') || rawParam.includes('points') || rawParam.includes('reward')) {
         setHeadlineAngle('loyalty');
-      } else if (angleParam.includes('notify') || angleParam.includes('doordash') || angleParam.includes('lock') || angleParam.includes('screen')) {
+      } else if (rawParam.includes('notify') || rawParam.includes('doordash') || rawParam.includes('lock') || rawParam.includes('screen')) {
         setHeadlineAngle('notify');
+      } else {
+        setHeadlineAngle('default');
       }
     }
   }, []);
@@ -77,9 +87,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenBooking }) => {
               />
             </div>
             
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-[#182c26] font-display">
+            <span className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-[#182c26] font-display">
               JIT HELPDESK
-            </h1>
+            </span>
           </div>
 
           {/* Subtitle Byline with Thin Elegant Dividers */}
@@ -90,14 +100,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenBooking }) => {
           </div>
         </div>
 
-        {/* Live Audience Kicker Pill with Pulsing Indicator */}
+        {/* 2.1 Eyebrow / Price-Perception Tagline (Visible across all variations) */}
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#182c26] text-[#d2f56d] text-[10px] sm:text-[11px] font-black tracking-wider uppercase mb-3.5 shadow-sm border border-[#d2f56d]/30">
           <span className="w-2 h-2 rounded-full bg-[#d2f56d] live-indicator" />
-          <span>FOR IT SUPPORT BUSINESSES &amp; GROWING MSPS</span>
+          <span>YOUR OWN BRANDED APP. PRICED LIKE SAAS.</span>
         </div>
 
-        {/* Main Headline (Ad-Aligned Dynamic UTM) */}
-        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[46px] font-extrabold text-[#182c26] tracking-tight leading-[1.15] max-w-3xl font-display mb-3">
+        {/* 2.2 Main Dynamic H1 Headline */}
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[46px] font-extrabold text-[#182c26] tracking-tight leading-[1.15] max-w-3xl font-display mb-3">
           {headlineAngle === 'fear' && (
             <>
               Your clients see other IT companies&apos; ads every week.{' '}
@@ -124,40 +134,45 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenBooking }) => {
           )}
           {headlineAngle === 'default' && (
             <>
-              The branded app that keeps your IT clients{' '}
+              The Branded App That Keeps Your IT Clients{' '}
               <span className="text-[#274c3b] inline-block decoration-[#d2f56d] underline decoration-4 underline-offset-4">
-                coming back to you.
+                Coming Back to You.
               </span>
             </>
           )}
-        </h2>
+        </h1>
 
-        {/* Subheadline / Description */}
+        {/* 2.3 Subheadline */}
         <p className="text-xs sm:text-sm md:text-base text-[#61705f] font-normal leading-relaxed max-w-xl sm:max-w-2xl mb-1 sm:mb-2">
-          Your own iOS and Android app and web portal, with your name and logo. Loyalty rewards and notifications keep clients with you, not your competitors.
+          Your own iOS and Android app and web portal, with your name and logo. Loyalty rewards and notifications help you stay connected with clients and give them more reasons to choose your business.
+        </p>
+
+        {/* Value Statement */}
+        <p className="text-xs sm:text-sm font-semibold text-[#274c3b] mb-1">
+          A branded customer experience for your IT business—without building every feature from scratch.
         </p>
 
         {/* Ultra-Crisp Transparent 3D Showcase Image */}
         <HeroHdVisual />
 
-        {/* Primary CTA Area: Glowing Jewar Deskora Pill Button & Pricing */}
+        {/* Primary CTA Area: Glowing Pill Button & Pricing */}
         <div className="flex flex-col items-center text-center mt-3 mb-8 sm:mb-10 w-full max-w-lg">
           
           {/* Glowing Jewar Deskora Capsule Button matching Ad CTA */}
           <button
             onClick={onOpenBooking}
-            className="poster-glow-btn w-full sm:w-auto px-8 sm:px-11 py-3.5 sm:py-4 rounded-full text-white font-black text-xs sm:text-sm flex items-center justify-center gap-3 cursor-pointer group"
+            className="poster-glow-btn w-full sm:w-auto px-8 sm:px-11 py-3.5 sm:py-4 rounded-full text-white font-black text-xs sm:text-sm flex items-center justify-center gap-3 cursor-pointer group shadow-lg"
           >
             <div className="w-6 h-6 rounded-lg bg-[#d2f56d]/20 border border-[#d2f56d]/40 flex items-center justify-center shrink-0 shadow-inner">
               <Calendar className="w-3.5 h-3.5 text-[#d2f56d] stroke-[2.5]" />
             </div>
             <span className="tracking-wide text-white drop-shadow-sm font-extrabold text-[13px] sm:text-[15px]">
-              Book a demo. See the app with your logo on it.
+              Book a Demo. See the App With Your Logo on It.
             </span>
             <ArrowRight className="w-4 h-4 stroke-[2.5] text-[#d2f56d] transition-transform group-hover:translate-x-1" />
           </button>
 
-          {/* Pricing Details Below CTA */}
+          {/* 2.6 Pricing Anchor Directly Below CTA */}
           <div className="flex items-center justify-center gap-2 sm:gap-3 mt-4 text-[#182c26] font-bold">
             <span className="w-8 sm:w-16 h-[1.5px] bg-[#dce3d4]" />
             
@@ -174,12 +189,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenBooking }) => {
             <span className="w-8 sm:w-16 h-[1.5px] bg-[#dce3d4]" />
           </div>
 
-          {/* 3 High-Authority Badges: iOS & Android app, Your logo & domain, No long-term lock-in */}
+          {/* 2.4 Hero Badges */}
           <div className="grid grid-cols-3 gap-2 sm:gap-3 mt-4 w-full max-w-md">
             {[
-              { label: 'iOS & Android app', desc: 'Native Mobile Apps' },
-              { label: 'Your logo & domain', desc: '100% White-Label' },
-              { label: 'No long-term lock-in', desc: 'Cancel Anytime' },
+              { label: 'iOS & Android App', desc: 'Native Mobile Apps' },
+              { label: 'Your Logo & Domain', desc: '100% White-Label' },
+              { label: 'No Long-Term Lock-In*', desc: 'Cancel Anytime' },
             ].map((item, idx) => (
               <div
                 key={idx}
@@ -195,13 +210,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenBooking }) => {
             ))}
           </div>
 
-          {/* Micro-copy Info Note with Circular Icon */}
-          <div className="flex items-center justify-center gap-1.5 mt-3 text-[11px] sm:text-xs text-[#61705f] font-medium">
-            <div className="w-4 h-4 rounded-full bg-[#274c3b] text-[#d2f56d] flex items-center justify-center shrink-0 text-[10px] font-black">
-              i
-            </div>
-            <span>See the customer experience and owner dashboard in action. No obligation.</span>
-          </div>
+          {/* Micro-copy Info Note */}
+          <p className="mt-3 text-[11px] sm:text-xs text-[#61705f] font-medium text-center">
+            Built for independent IT service businesses, computer service providers, and growing MSPs.
+          </p>
         </div>
 
       </div>

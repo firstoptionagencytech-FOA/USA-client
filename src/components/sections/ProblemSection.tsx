@@ -31,13 +31,13 @@ export const ProblemSection: React.FC<ProblemSectionProps> = ({ onOpenBooking })
         <div className="text-center max-w-3xl mx-auto mb-14">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#edf3e3] border border-[#dce3d4] text-[#274c3b] text-xs font-bold uppercase tracking-wider mb-4 shadow-xs">
             <span className="w-1.5 h-1.5 rounded-full bg-[#274c3b]" />
-            <span>The MSP Customer Experience Gap</span>
+            <span>The Customer Experience Gap</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#182c26] tracking-tight font-display mb-4">
-            Great IT Support Shouldn&apos;t Feel Disorganized.
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#182c26] tracking-tight font-display mb-4">
+            Your Competitors Are Fighting for Attention. Give Clients a Reason to Remember You.
           </h2>
           <p className="text-base sm:text-lg text-[#61705f] leading-relaxed">
-            You may be excellent at fixing technical problems. But when customers can&apos;t see what&apos;s happening, even great service can feel frustrating. Sound familiar?
+            When service communication is buried in emails and phone tag, competitors have an opening. Give your clients a modern, branded experience they can see and remember.
           </p>
         </div>
 
@@ -206,17 +206,17 @@ export const ProblemSection: React.FC<ProblemSectionProps> = ({ onOpenBooking })
         <div className="mt-14 p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-[#11201b] via-[#182c26] to-[#274c3b] text-white flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl border border-[#d2f56d]/30">
           <div className="text-center sm:text-left">
             <h3 className="text-xl sm:text-2xl font-bold font-display text-white">
-              Your technical skills aren&apos;t the problem.
+              Your customers already use apps to shop, book, pay, and collect rewards.
             </h3>
             <p className="text-sm text-[#edf3e3]/90 mt-1 max-w-xl">
-              Your customer experience needs a better system. That&apos;s where JIT Helpdesk comes in.
+              Why shouldn&apos;t they have one for their IT service provider?
             </p>
           </div>
           <button
             onClick={onOpenBooking}
             className="poster-glow-btn px-6 sm:px-7 py-3 rounded-full text-white font-bold text-xs sm:text-sm flex items-center gap-2 shrink-0 cursor-pointer shadow-md hover:shadow-lg transition-all group"
           >
-            <span>See How It Works</span>
+            <span>Book a Demo</span>
             <ArrowRight className="w-4 h-4 text-[#d2f56d] group-hover:translate-x-1 transition-transform" />
           </button>
         </div>

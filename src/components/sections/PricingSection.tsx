@@ -26,14 +26,14 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onOpenBooking })
         
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <div className="inline-flex items-center px-3.5 py-1 rounded-full bg-white border border-[#dce3d4] text-brand-800 text-xs font-bold uppercase tracking-wider mb-4 shadow-xs">
-            Simple, Transparent Pricing
+          <div className="inline-flex items-center px-3.5 py-1 rounded-full bg-white border border-[#dce3d4] text-[#274c3b] text-xs font-bold uppercase tracking-wider mb-4 shadow-xs">
+            Predictable SaaS Pricing
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight font-display mb-4">
-            A Professional Branded Platform Without Building From Scratch.
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#182c26] tracking-tight font-display mb-4">
+            Your Brand. Your App. One Predictable Price.
           </h2>
-          <p className="text-base text-slate-600 leading-relaxed">
-            Your IT Business. Your Own Mobile App & Web Portal. Complete ownership of your client support experience.
+          <p className="text-base text-[#61705f] leading-relaxed">
+            Your IT Business. Your Own Mobile App &amp; Web Portal. No need to build the platform from scratch.
           </p>
         </div>
 
@@ -97,23 +97,23 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onOpenBooking })
           {/* CTA Button */}
           <div className="pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="text-xs text-slate-500 text-center sm:text-left">
-              <span>No long-term lock-in. Implementation scope confirmed during onboarding.</span>
+              <span>No need to build the platform from scratch.</span>
             </div>
 
             <button
               onClick={onOpenBooking}
               className="cta-glow-btn w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-3 rounded-full text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 cursor-pointer shrink-0 shadow-md hover:shadow-lg transition-all"
             >
-              <span>See What Your Business Could Look Like — Book a Free Demo</span>
-              <ArrowRight className="w-4 h-4" />
+              <span>Book a Demo. See the App With Your Logo on It.</span>
+              <ArrowRight className="w-4 h-4 text-[#d2f56d]" />
             </button>
           </div>
 
           {/* Verification Disclaimer */}
           <div className="mt-6 pt-4 border-t border-slate-100 bg-slate-50 -mx-7 sm:-mx-10 -mb-7 sm:-mb-10 p-5 text-[11px] text-slate-500 flex items-start gap-2">
-            <ShieldCheck className="w-4 h-4 text-brand-700 shrink-0 mt-0.5" />
+            <ShieldCheck className="w-4 h-4 text-[#274c3b] shrink-0 mt-0.5" />
             <span>
-              Branding assets, application store publishing arrangements, and third-party payment integration credentials are confirmed during onboarding walkthrough.
+              Final implementation scope, app distribution, integrations, third-party charges, and cancellation terms are confirmed in the agreement.
             </span>
           </div>
 

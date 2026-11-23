@@ -105,15 +105,15 @@ export const ProductDemoSection: React.FC<ProductDemoSectionProps> = ({ onOpenBo
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white border border-[#dce3d4] text-brand-700 text-xs font-bold uppercase tracking-wider mb-4 shadow-2xs">
-            <Sparkles className="w-3.5 h-3.5 text-brand-700" />
-            <span>Interactive Software Walkthrough</span>
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white border border-[#dce3d4] text-[#274c3b] text-xs font-bold uppercase tracking-wider mb-4 shadow-2xs">
+            <Sparkles className="w-3.5 h-3.5 text-[#274c3b]" />
+            <span>Product Walkthrough</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-display mb-4">
-            See the Complete Support Lifecycle in Action.
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#182c26] tracking-tight font-display mb-4">
+            See How Your Branded Customer Experience Works.
           </h2>
-          <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
-            Follow a real customer request from mobile submission to quote approval, payment, and final resolution.
+          <p className="text-base sm:text-lg text-[#61705f] leading-relaxed">
+            Watch how a customer moves through the platform: opens your branded app, submits a request, approves a quote, completes a payment, checks progress, and views loyalty rewards. Then see how the owner manages the workflow.
           </p>
         </div>
 

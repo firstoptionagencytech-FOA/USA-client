@@ -10,23 +10,23 @@ interface CoreCapabilitiesSectionProps {
 export const CoreCapabilitiesSection: React.FC<CoreCapabilitiesSectionProps> = ({ onOpenBooking }) => {
   const capabilities = [
     {
-      id: 'support',
+      id: 'requests',
       icon: Zap,
-      badge: 'Sub-2 Min Dispatch',
-      title: 'Instant Support Requests',
-      subtitle: 'Mobile & Web Submission',
-      description: 'Clients submit tickets with 1-tap photo uploads and device diagnostics directly from their smartphone or browser.',
+      badge: 'Self-Service',
+      title: 'Customer Requests',
+      subtitle: 'Submit & Follow Progress',
+      description: 'Let customers submit service requests with photo attachments and follow resolution status in real time.',
       snippetLabel: 'Ticket #4109',
-      snippetStatus: 'Assigned · < 2m',
+      snippetStatus: 'In Progress · Assigned',
       accentGlow: 'from-[#d2f56d]/20 to-transparent',
     },
     {
       id: 'quotes',
       icon: FileCheck2,
       badge: '1-Click Sign-Off',
-      title: 'Approve Quotes Online',
-      subtitle: 'Zero Email Ping-Pong',
-      description: 'Hardware upgrades, project scopes, and out-of-scope labor approved with immediate digital signatures.',
+      title: 'Quotes & Approvals',
+      subtitle: 'Review & Revise Online',
+      description: 'Review, revise, and approve service scopes and hardware orders with frictionless digital approvals.',
       snippetLabel: 'Scope #824 · $1,250',
       snippetStatus: 'Approved ✓',
       accentGlow: 'from-[#274c3b]/30 to-transparent',
@@ -34,40 +34,40 @@ export const CoreCapabilitiesSection: React.FC<CoreCapabilitiesSectionProps> = (
     {
       id: 'payments',
       icon: CreditCard,
-      badge: 'Stripe & Apple Pay',
-      title: 'Secure Client Payments',
-      subtitle: 'Instant Cash Flow',
-      description: 'Integrated checkout allows clients to pay monthly retainers and project invoices in seconds via mobile wallet.',
+      badge: 'Integrated Billing',
+      title: 'Payments & Credits',
+      subtitle: 'Prompt Settlements',
+      description: 'Support configured payment workflows via Stripe and allow clients to redeem eligible service credits.',
       snippetLabel: 'Invoice #1048 · $450',
       snippetStatus: 'Settled Instant',
       accentGlow: 'from-[#d2f56d]/20 to-transparent',
     },
     {
-      id: 'tracking',
+      id: 'meetings',
       icon: TrendingUp,
-      badge: 'Live SLA Stepper',
-      title: 'Real-Time Job Tracking',
-      subtitle: 'No "Where Is My Tech?" Calls',
-      description: 'Clients watch ticket progression across stages (Triage → Diagnostic → Resolved) with zero phone tag.',
-      snippetLabel: 'Tech En Route',
-      snippetStatus: 'ETA: 14 mins',
+      badge: 'Sync & Records',
+      title: 'Meetings & Devices',
+      subtitle: 'Organized Scheduling',
+      description: 'Keep scheduled service activity, calendar appointments, and customer hardware device records organized.',
+      snippetLabel: 'Scheduled Demo',
+      snippetStatus: 'Synced to Calendar',
       accentGlow: 'from-[#274c3b]/30 to-transparent',
     },
     {
-      id: 'portal',
+      id: 'loyalty',
       icon: Star,
-      badge: '100% White-Label',
-      title: 'Your Brand, Your Portal',
-      subtitle: 'Custom Subdomain & App Store',
-      description: 'Your business name, your logo, your colors. Clients see you as an elite infrastructure MSP, not a freelancer.',
-      snippetLabel: 'support.yourmsp.com',
-      snippetStatus: 'SSL Active',
+      badge: 'Client Retention',
+      title: 'Loyalty & Referrals',
+      subtitle: 'Reward Repeat Clients',
+      description: 'Manage reward earning rules, referral activity, and related customer benefits that keep clients coming back.',
+      snippetLabel: '450 Loyalty Points',
+      snippetStatus: 'Active Reward',
       accentGlow: 'from-[#d2f56d]/25 to-transparent',
     },
   ];
 
   return (
-    <section className="py-16 sm:py-24 px-4 bg-gradient-to-b from-white via-[#f6f6ef] to-white relative overflow-hidden border-y border-[#dce3d4]/70">
+    <section className="py-16 sm:py-24 px-4 bg-gradient-to-b from-white via-[#f6f6ef] to-white relative overflow-hidden border-y border-[#dce3d4]/70" id="capabilities">
       
       {/* Background Soft Emerald Lighting */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[350px] bg-[#d2f56d]/10 blur-[130px] rounded-full pointer-events-none" />
@@ -78,18 +78,18 @@ export const CoreCapabilitiesSection: React.FC<CoreCapabilitiesSectionProps> = (
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#182c26] text-[#d2f56d] text-xs font-bold uppercase tracking-wider mb-4 shadow-sm border border-[#d2f56d]/30">
             <Sparkles className="w-3.5 h-3.5 text-[#d2f56d]" />
-            <span>5 Core Capabilities Delivered Under Your Brand</span>
+            <span>Five Core Capabilities</span>
           </div>
 
           <h2 className="text-2xl sm:text-3xl md:text-5xl font-extrabold text-[#182c26] tracking-tight font-display mb-4">
-            Everything Your Clients Need.{' '}
+            Everything Your IT Business Needs.{' '}
             <span className="text-[#274c3b] inline-block decoration-[#d2f56d] underline decoration-4 underline-offset-4">
-              None of the Headaches.
+              Connected Under Your Brand.
             </span>
           </h2>
 
           <p className="text-xs sm:text-sm md:text-base text-[#61705f] leading-relaxed max-w-2xl mx-auto">
-            Give customers an executive-grade support experience while freeing your technicians to focus on billable resolution instead of answering update calls.
+            Give customers an executive-grade support experience while keeping all service requests, quotes, payments, scheduling, and rewards in one organized system.
           </p>
         </div>
 

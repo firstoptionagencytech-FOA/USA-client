@@ -7,53 +7,53 @@ export const BenefitsSection: React.FC = () => {
   const benefits = [
     {
       icon: HeartHandshake,
-      title: 'Higher Client Retention & Trust',
-      subtitle: 'Stand Out From Competitors',
-      metric: 'Brand Loyalty',
+      title: 'Be Easier to Remember',
+      subtitle: 'Brand Recognition',
+      metric: 'Your App Icon',
       description:
-        'When customers have their own dedicated branded portal, they view your IT company as an established, permanent infrastructure partner—not just an on-call freelancer.',
-    },
-    {
-      icon: ShieldCheck,
-      title: 'Faster Approvals & Clear Scopes',
-      subtitle: 'Clear Approvals',
-      metric: '1-Click Signoff',
-      description:
-        'Quotes and scopes are presented clearly with direct 1-click approvals. No more chasing down signatures or wondering if a client saw your email.',
+        'A branded app gives customers a recognizable place to find your business when they need help, right on their phone screen.',
     },
     {
       icon: DollarSign,
-      title: 'Predictable Cash Flow & Payments',
-      subtitle: 'Prompt Invoicing',
-      metric: 'Integrated Stripe',
+      title: 'Give Customers More Reasons to Return',
+      subtitle: 'Repeat Business',
+      metric: 'Loyalty Rewards',
       description:
-        'Integrated payment workflows allow clients to settle invoices via Apple Pay, Google Pay, and Stripe cards instantly from their phone or browser.',
+        'Loyalty rewards and referral programs can support repeat-business opportunities, giving clients incentives to stay loyal to your brand.',
+    },
+    {
+      icon: ShieldCheck,
+      title: 'Make Service Easier to Access',
+      subtitle: 'Frictionless Requests',
+      metric: '1-Tap Service',
+      description:
+        'Let customers submit requests, review quotes, approve work, make payments, and follow progress directly without phone tag.',
     },
     {
       icon: Sparkles,
-      title: 'Operational Calm & Clear Queues',
-      subtitle: 'Direct Reach',
-      metric: 'Push Notifications',
+      title: 'Build a More Professional Experience',
+      subtitle: 'Premium Perception',
+      metric: 'Client Portal',
       description:
-        'By providing self-service status tracking and lock-screen push notifications, your technicians spend less time answering “Where is my ticket?” calls and more time resolving billable issues.',
+        'Your brand becomes part of the service journey, from the first request to the next visit, elevating your business above commodity competitors.',
     },
   ];
 
   return (
-    <section className="py-20 px-4 bg-white relative overflow-hidden">
+    <section className="py-20 px-4 bg-white relative overflow-hidden" id="benefits">
       <div className="max-w-6xl mx-auto">
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#edf3e3] border border-[#dce3d4] text-[#274c3b] text-xs font-bold uppercase tracking-wider mb-4 shadow-xs">
             <span className="w-1.5 h-1.5 rounded-full bg-[#274c3b]" />
-            <span>Commercial Business Benefits</span>
+            <span>Business Benefits</span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#182c26] tracking-tight font-display mb-4">
-            Don&apos;t Just Manage Support. Build a Business Customers Want to Return To.
+            Build a Business Customers Want to Return To.
           </h2>
           <p className="text-base sm:text-lg text-[#61705f] leading-relaxed">
-            JIT Helpdesk isn&apos;t only about organizing requests. It&apos;s about creating a better business experience that supports your bottom line. Same IT expertise. A more professional way to deliver it.
+            Your expertise solves the IT problem. Your branded platform improves the experience around it. Same high-level service, delivered in a way clients appreciate and stick with.
           </p>
         </div>
 

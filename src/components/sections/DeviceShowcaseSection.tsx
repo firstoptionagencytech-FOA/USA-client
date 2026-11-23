@@ -22,15 +22,15 @@ export const DeviceShowcaseSection: React.FC<DeviceShowcaseSectionProps> = ({ on
         <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
           <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#edf3e3] border border-[#dce3d4] text-[#274c3b] text-xs font-bold uppercase tracking-wider mb-3 shadow-xs">
             <Sparkles className="w-3.5 h-3.5 text-[#274c3b]" />
-            <span>Interactive Multi-Platform Showcase</span>
+            <span>Product Showcase</span>
           </div>
 
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#182c26] tracking-tight font-display mb-3">
-            Branded Mobile App &amp; Owner Admin Dashboard.
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-[#182c26] tracking-tight font-display mb-3">
+            Your Brand. On Their Phone. In Their Everyday Workflow.
           </h2>
 
           <p className="text-xs sm:text-sm md:text-base text-[#61705f] leading-relaxed">
-            Experience the dual interface that powers your IT business: your clients get their own intuitive branded app and web portal, while your team operates through a real-time command dashboard.
+            Imagine your customers opening an app with your business name and logo—not another software company&apos;s identity. From submitting a service request to checking rewards, your customers have a familiar place to connect with your business.
           </p>
         </div>
 

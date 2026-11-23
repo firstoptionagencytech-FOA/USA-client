@@ -34,13 +34,13 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenBooking 
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#edf3e3] border border-[#dce3d4] text-[#274c3b] text-xs font-bold uppercase tracking-wider mb-4 shadow-xs">
             <span className="w-1.5 h-1.5 rounded-full bg-[#274c3b]" />
-            <span>The Complete Solution</span>
+            <span>Complete Solution: Loyalty First</span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#182c26] tracking-tight font-display mb-5">
-            What If Every Client Had a Better Way to Work With You?
+            More Than an IT Support App. A Reason for Customers to Come Back.
           </h2>
           <p className="text-base sm:text-lg text-[#61705f] leading-relaxed">
-            Imagine a customer opening an app with your business name and logo. They can request IT support, review a quote, approve the work, make a payment, and check progress—all in one connected experience. Meanwhile, you manage everything from your owner dashboard.
+            Imagine a customer opening an app with your business name and logo. They can request IT support, collect loyalty rewards, review quotes, approve work, make payments, and follow progress—all in one place. Meanwhile, you manage everything from your owner dashboard.
           </p>
           <p className="text-sm font-semibold text-[#274c3b] mt-3">
             No need to build software from scratch. Meet JIT Helpdesk.

@@ -3,15 +3,16 @@
 import React, { useState, useEffect } from 'react';
 import { HeroSection } from '@/components/hero/HeroSection';
 import { DeviceShowcaseSection } from '@/components/sections/DeviceShowcaseSection';
-import { CoreCapabilitiesSection } from '@/components/sections/CoreCapabilitiesSection';
-import { MspRoiCalculator } from '@/components/sections/MspRoiCalculator';
+import { PricePerceptionSection } from '@/components/sections/PricePerceptionSection';
 import { ProblemSection } from '@/components/sections/ProblemSection';
-import { ProductDemoSection } from '@/components/sections/ProductDemoSection';
 import { SolutionSection } from '@/components/sections/SolutionSection';
-import { HowItWorksSection } from '@/components/sections/HowItWorksSection';
-import { BenefitsSection } from '@/components/sections/BenefitsSection';
-import { PricingSection } from '@/components/sections/PricingSection';
 import { BusinessCaseSection } from '@/components/sections/BusinessCaseSection';
+import { BenefitsSection } from '@/components/sections/BenefitsSection';
+import { MspRoiCalculator } from '@/components/sections/MspRoiCalculator';
+import { CoreCapabilitiesSection } from '@/components/sections/CoreCapabilitiesSection';
+import { ProductDemoSection } from '@/components/sections/ProductDemoSection';
+import { HowItWorksSection } from '@/components/sections/HowItWorksSection';
+import { PricingSection } from '@/components/sections/PricingSection';
 import { WhoItIsForSection } from '@/components/sections/WhoItIsForSection';
 import { FaqSection } from '@/components/sections/FaqSection';
 import { FinalCtaSection } from '@/components/sections/FinalCtaSection';
@@ -68,46 +69,49 @@ export default function LandingPage() {
   return (
     <main className="min-h-screen bg-[#f6f6ef] text-[#182c26] selection:bg-[#274c3b] selection:text-[#d2f56d] relative">
       
-      {/* 1. Hero Section (Dynamic angle headline + Badges + CTA) */}
+      {/* 1. Hero Section (SaaS-price perception + dynamic headline + anchor) */}
       <HeroSection onOpenBooking={handleOpenBooking} />
 
-      {/* 2. Device Showcase Section (Phone Mockup with Loyalty Coins + Web Portal) */}
+      {/* 2. Product Showcase (Mobile, web, and loyalty screen) */}
       <DeviceShowcaseSection onOpenBooking={handleOpenBooking} />
 
-      {/* 3. Customer Problems / Pain Points (3 exact ad angles: Competitors' ads, Cheaper shops, Unread emails) */}
+      {/* 3. Price-Perception Comparison (Custom Build vs JIT Helpdesk) */}
+      <PricePerceptionSection onOpenBooking={handleOpenBooking} />
+
+      {/* 4. Customer Experience Gap (Competitor ads, cheaper shops, unread emails) */}
       <ProblemSection onOpenBooking={handleOpenBooking} />
 
-      {/* 4. Retention Business Case (Keep just 1 client a year and the app has paid for itself) */}
-      <BusinessCaseSection onOpenBooking={handleOpenBooking} />
-
-      {/* 5. Interactive Client Retention Loss Calculator */}
-      <MspRoiCalculator onOpenBooking={handleOpenBooking} />
-
-      {/* 6. Product Solution Pillars (Loyalty & Referrals moved to #1) */}
+      {/* 5. Complete Solution (Loyalty & referrals #1, mobile app, notifications, portal, admin) */}
       <SolutionSection onOpenBooking={handleOpenBooking} />
 
-      {/* 7. 5 Core Capabilities (Moved down: features after main retention message) */}
-      <CoreCapabilitiesSection onOpenBooking={handleOpenBooking} />
+      {/* 6. Retention Business Case (Sometimes keeping just one client changes the math) */}
+      <BusinessCaseSection onOpenBooking={handleOpenBooking} />
 
-      {/* 8. Product Walkthrough Demonstration */}
-      <ProductDemoSection onOpenBooking={handleOpenBooking} />
-
-      {/* 9. How It Works (Step 1-5) */}
-      <HowItWorksSection onOpenBooking={handleOpenBooking} />
-
-      {/* 10. Commercial Business Benefits (Defensible benefits without fake metrics) */}
+      {/* 7. Business Benefits (Build a business customers want to return to) */}
       <BenefitsSection />
 
-      {/* 11. Transparent Pricing Package ($400 setup + $200/mo flat) */}
+      {/* 8. Interactive Retention Calculator (3-input formula: Lost clients × Revenue × Margin) */}
+      <MspRoiCalculator onOpenBooking={handleOpenBooking} />
+
+      {/* 9. Five Core Capabilities (Everything your IT business needs connected) */}
+      <CoreCapabilitiesSection onOpenBooking={handleOpenBooking} />
+
+      {/* 10. Product Walkthrough (See how your branded customer experience works) */}
+      <ProductDemoSection onOpenBooking={handleOpenBooking} />
+
+      {/* 11. How It Works (Onboarding & launch steps) */}
+      <HowItWorksSection onOpenBooking={handleOpenBooking} />
+
+      {/* 12. Transparent Pricing Package ($400 setup + $200/mo flat) */}
       <PricingSection onOpenBooking={handleOpenBooking} />
 
-      {/* 12. Who It Is For & Personalized Walkthrough Expectations */}
+      {/* 13. Who It Is For & Personalized Walkthrough Expectations */}
       <WhoItIsForSection onOpenBooking={handleOpenBooking} />
 
-      {/* 13. Approved FAQs (With full answers + Autotask/PSA integration) */}
+      {/* 14. Approved FAQs (10 Complete Questions & Answers) */}
       <FaqSection />
 
-      {/* 14. Final Call to Action & Footer */}
+      {/* 15. Final Call to Action & Footer */}
       <FinalCtaSection onOpenBooking={handleOpenBooking} />
 
       {/* Sticky Bottom Floating Bar for Mobile */}

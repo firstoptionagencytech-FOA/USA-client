@@ -24,15 +24,19 @@ export const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({ onOpenBooking 
         </div>
 
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight font-display mb-6 leading-tight">
-          Your clients should have your app on their phone, not your competitor&apos;s ad.
+          Your Clients Should Have Your App on Their Phone, Not Your Competitor&apos;s Ad.
         </h2>
 
         <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl mx-auto mb-4">
-          Lock in client loyalty with your own iOS and Android app, Starbucks-style points, and lock-screen push notifications.
+          Your business already provides the IT expertise. Now give customers a branded place to request service, access rewards, receive relevant updates, and come back when they need you.
         </p>
 
-        <p className="text-lg sm:text-xl font-black text-[#d2f56d] font-display mb-10 tracking-wide">
-          Your Brand. Your Logo. Zero Long-Term Lock-In.
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 text-[#d2f56d] text-xs font-black uppercase tracking-wider mb-4 border border-[#d2f56d]/30">
+          <span>Your Own Branded App. Priced Like SaaS.</span>
+        </div>
+
+        <p className="text-xl sm:text-2xl font-black text-white font-display mb-8 tracking-wide">
+          $400 Setup + $200/Month
         </p>
 
         {/* CTA Button */}
@@ -44,12 +48,12 @@ export const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({ onOpenBooking 
             <div className="w-5 h-5 rounded-md bg-white/20 flex items-center justify-center">
               <Calendar className="w-3.5 h-3.5 text-white" />
             </div>
-            <span>Book a demo. See the app with your logo on it.</span>
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            <span>Book a Demo. See the App With Your Logo on It.</span>
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform text-[#d2f56d]" />
           </button>
 
           <span className="text-xs text-[#edf3e3]/70 font-medium">
-            For IT service business owners and decision-makers exploring a branded customer experience.
+            For US IT service business owners and decision-makers.
           </span>
         </div>
 

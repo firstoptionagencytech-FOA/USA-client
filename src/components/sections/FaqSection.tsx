@@ -8,32 +8,44 @@ export const FaqSection: React.FC = () => {
 
   const faqs = [
     {
-      q: 'Does it work with Autotask / my current PSA tools?',
-      a: 'Yes. JIT Helpdesk is not built to replace your internal backend ticketing engines or PSA software like Autotask, ConnectWise, or HaloPSA. Instead, JIT Helpdesk acts as the high-end, client-facing mobile app and web portal layer that sits in front of your clients. Your clients get a sleek, branded app on their phone with loyalty points and push notifications, while you and your techs can continue running your backend operations smoothly.',
+      q: 'Is this really my own branded app?',
+      a: 'JIT Helpdesk provides a customizable customer app and web portal using your business identity. The service agreement will specify branding rights, app distribution, hosting, and ownership terms.',
     },
     {
-      q: 'Is this platform branded for my IT business?',
-      a: 'Yes, 100%. The mobile apps, web portal, email notifications, and quote PDFs all showcase your company logo, custom brand colors, and your own domain (e.g. support.youritcompany.com). To your clients, it looks and feels like proprietary enterprise software built exclusively by your IT team.',
+      q: 'Do I need to build software from scratch?',
+      a: 'No. The proposed solution starts with an existing configurable platform. Your branding, workflows, integrations, and launch requirements are agreed during implementation.',
     },
     {
-      q: 'Can my customers use both mobile and web?',
-      a: 'Yes. Clients can download your native app from the iOS App Store and Google Play Store to receive push notifications and 1-tap support, or log in from any desktop web browser to approve large quotes, review endpoint hardware inventories, and settle invoices.',
+      q: 'Does the package include iOS, Android, and web?',
+      a: 'The proposed offer includes these experiences, subject to confirmation of supported platforms, publishing arrangements, and final deliverables.',
     },
     {
-      q: 'How many technicians or agents can use it?',
-      a: 'Unlimited. Unlike legacy MSP tools that penalize your business with rising per-seat license fees every time you hire a technician or dispatcher, JIT Helpdesk includes unlimited agent seats under the flat $200/month plan.',
+      q: 'How do loyalty points and referrals work?',
+      a: 'The platform supports configurable earning rules, redemption limits, and referral workflows. Your team can discuss the exact rules during the demo.',
     },
     {
-      q: 'Can customers approve quotes and make payments?',
-      a: 'Yes. Quotes are delivered directly to the client’s phone and web portal with clear line items. Clients can approve scopes in 1 click and settle invoices instantly using credit card, ACH, Apple Pay, or Google Pay via direct Stripe integration.',
+      q: 'Can I send push notifications to customers?',
+      a: 'Notification capabilities depend on the configured mobile app and backend services. Customers must enable the necessary permissions, and supported notification types will be confirmed during implementation.',
     },
     {
-      q: 'What’s included in the $200 monthly fee?',
-      a: 'Everything required to run your client portal: continuous cloud hosting, iOS and Android app store maintenance, automated SSL certificates, push notification servers, daily backups, feature upgrades, and dedicated technical support. No hidden add-on fees.',
+      q: 'Does JIT Helpdesk work with Autotask or my current tools?',
+      a: 'Integration options are assessed individually. Share your existing tools during the demo so compatibility, implementation scope, and any additional costs can be confirmed.',
     },
     {
-      q: 'Can I try the software before purchasing?',
-      a: 'Yes. You can explore a personalized live demo where we showcase the app pre-configured with your logo and brand colors. You can evaluate the entire client experience risk-free before deciding to launch.',
+      q: 'What does $200 per month cover?',
+      a: 'The proposed monthly service covers hosting, maintenance, bug fixes, and product updates. Additional third-party or integration charges are clarified in the agreement.',
+    },
+    {
+      q: 'Is there a long-term contract?',
+      a: 'Contract duration, cancellation notice, and termination conditions will be confirmed in your written agreement.',
+    },
+    {
+      q: 'How long does setup take?',
+      a: 'The implementation timeline depends on branding, integrations, app publishing, and the agreed scope. You’ll receive a proposed timeline during onboarding.',
+    },
+    {
+      q: 'Can I see my logo on the app before deciding?',
+      a: 'The demo can explain the available branding options. A personalized logo preview is available only if supported by the agreed demo process.',
     },
   ];
 
@@ -43,15 +55,15 @@ export const FaqSection: React.FC = () => {
         
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#edf3e3] border border-[#dce3d4] text-brand-800 text-xs font-bold uppercase tracking-wider mb-4">
-            <HelpCircle className="w-3.5 h-3.5 text-brand-700" />
-            <span>Answers to Common Questions</span>
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#edf3e3] border border-[#dce3d4] text-[#274c3b] text-xs font-bold uppercase tracking-wider mb-4 shadow-xs">
+            <HelpCircle className="w-3.5 h-3.5 text-[#274c3b]" />
+            <span>Frequently Asked Questions</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-display mb-4">
-            Frequently Asked Questions
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#182c26] tracking-tight font-display mb-4">
+            Answers to Common Questions
           </h2>
-          <p className="text-base text-slate-600 leading-relaxed">
-            Everything you need to know about branding, setup, agent licenses, and ongoing maintenance.
+          <p className="text-base text-[#61705f] leading-relaxed">
+            Everything you need to know about branding, setup, device support, and ongoing maintenance.
           </p>
         </div>
 
@@ -62,18 +74,18 @@ export const FaqSection: React.FC = () => {
             return (
               <div
                 key={idx}
-                className="bg-[#f6f6ef] rounded-2xl border border-slate-200 overflow-hidden transition-all duration-200"
+                className="bg-[#f6f6ef] rounded-2xl border border-[#dce3d4] overflow-hidden transition-all duration-200"
               >
                 <button
                   onClick={() => setOpenIdx(isOpen ? null : idx)}
                   className="w-full py-4.5 px-6 flex items-center justify-between text-left gap-4 hover:bg-[#edf3e3]/50 transition-colors cursor-pointer"
                 >
-                  <span className="text-sm sm:text-base font-extrabold text-slate-900 tracking-tight">
+                  <span className="text-sm sm:text-base font-extrabold text-[#182c26] tracking-tight">
                     {item.q}
                   </span>
                   <div
                     className={`w-7 h-7 rounded-full bg-white border border-[#dce3d4] flex items-center justify-center shrink-0 transition-transform duration-200 ${
-                      isOpen ? 'rotate-180 bg-brand-50 text-brand-700' : 'text-slate-500'
+                      isOpen ? 'rotate-180 bg-[#edf3e3] text-[#274c3b]' : 'text-slate-500'
                     }`}
                   >
                     <ChevronDown className="w-4 h-4" />
@@ -81,7 +93,7 @@ export const FaqSection: React.FC = () => {
                 </button>
 
                 {isOpen && (
-                  <div className="px-6 pb-5 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-200 bg-white">
+                  <div className="px-6 pb-5 pt-1 text-xs sm:text-sm text-[#61705f] leading-relaxed border-t border-[#dce3d4] bg-white">
                     {item.a}
                   </div>
                 )}
