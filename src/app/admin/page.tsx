@@ -219,8 +219,16 @@ export default function AdminDashboardPage() {
     setTimeout(() => setToastMessage(''), 3500);
   };
 
+  // Active Bookings (Strictly exclude cancelled meetings & appointments of deleted leads)
+  const activeBookings = bookings.filter(b => {
+    if (b.status === 'cancelled') return false;
+    const leadObj = b.lead || leads.find(l => l.id === b.lead_id);
+    if (leadObj?.is_deleted) return false;
+    return true;
+  });
+
   // Helper to determine if a lead has a confirmed booking
-  const isLeadBooked = (l: Lead) => l.status === 'meeting_booked' || bookings.some(b => b.lead_id === l.id && b.status !== 'cancelled');
+  const isLeadBooked = (l: Lead) => l.status === 'meeting_booked' || activeBookings.some(b => b.lead_id === l.id);
 
   // Active vs Soft-Deleted Leads
   const activeLeads = leads.filter(l => !l.is_deleted);
@@ -279,8 +287,12 @@ export default function AdminDashboardPage() {
       const data = await res.json();
       if (data.success) {
         setLeads(prev => prev.map(l => (l.id === leadId ? { ...l, is_deleted: true, deleted_at: new Date().toISOString() } : l)));
+        setBookings(prev => prev.map(b => (b.lead_id === leadId ? { ...b, status: 'cancelled' } : b)));
         if (selectedLead?.id === leadId) {
           setSelectedLead(null);
+        }
+        if (selectedBooking?.lead_id === leadId) {
+          setSelectedBooking(null);
         }
         setLeadToDelete(null);
         showToast('Lead moved to Deleted section safely.');
@@ -900,13 +912,13 @@ export default function AdminDashboardPage() {
                     </div>
 
                     <div className="space-y-3">
-                      {leads.filter(l => l.status === 'meeting_booked').slice(0, 3).length === 0 ? (
+                      {activeLeads.filter(l => isLeadBooked(l)).slice(0, 3).length === 0 ? (
                         <div className="py-8 text-center text-xs text-slate-400 border border-dashed border-slate-200 rounded-xl">
                           No demo meetings currently scheduled.
                         </div>
                       ) : (
-                        leads
-                          .filter(l => l.status === 'meeting_booked')
+                        activeLeads
+                          .filter(l => isLeadBooked(l))
                           .slice(0, 3)
                           .map(lead => (
                             <div
@@ -1295,8 +1307,8 @@ export default function AdminDashboardPage() {
               });
             }
 
-            // Selected date appointments
-            const selectedDayBookings = bookings.filter(b => {
+            // Selected date appointments (Strictly active, non-deleted leads)
+            const selectedDayBookings = activeBookings.filter(b => {
               const bDate = b.meeting_start ? b.meeting_start.split('T')[0] : '';
               return bDate === selectedDate;
             });
@@ -1320,7 +1332,7 @@ export default function AdminDashboardPage() {
                         </span>
                       </div>
                       <p className="text-[11px] sm:text-xs text-slate-500 truncate">
-                        Admin Timezone: <strong className="text-slate-700">{settings?.business_timezone || 'Asia/Kolkata'}</strong> · {bookings.length} Total Booked Sessions
+                        Admin Timezone: <strong className="text-slate-700">{settings?.business_timezone || 'Asia/Kolkata'}</strong> · {activeBookings.length} Active Booked Sessions
                       </p>
                     </div>
                   </div>
@@ -1435,7 +1447,7 @@ export default function AdminDashboardPage() {
                           {/* Days Grid */}
                           <div className="grid grid-cols-7 divide-x divide-y divide-slate-100">
                             {cells.map((cell, idx) => {
-                              const cellBookings = bookings.filter(b => {
+                              const cellBookings = activeBookings.filter(b => {
                                 const bDate = b.meeting_start ? b.meeting_start.split('T')[0] : '';
                                 return bDate === cell.dateString;
                               });
@@ -1670,6 +1682,17 @@ export default function AdminDashboardPage() {
                                 <X className="w-3.5 h-3.5" />
                                 <span>No-Show</span>
                               </button>
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  handleUpdateBookingStatus(selectedBooking.id, 'cancelled');
+                                  setSelectedBooking(null);
+                                }}
+                                className="col-span-2 px-2.5 py-1.5 rounded-lg bg-rose-50 text-rose-700 hover:bg-rose-100 text-xs font-bold border border-rose-200 transition-colors flex items-center justify-center gap-1 cursor-pointer"
+                              >
+                                <Trash2 className="w-3.5 h-3.5" />
+                                <span>Cancel & Remove from Calendar</span>
+                              </button>
                             </div>
                           </div>
                         </div>
@@ -1681,16 +1704,16 @@ export default function AdminDashboardPage() {
                   /* ================= AGENDA CHRONOLOGICAL LIST VIEW ================= */
                   <div className="bg-white rounded-2xl border border-slate-200/80 shadow-xs p-6 space-y-4">
                     <div className="text-sm font-extrabold text-slate-900 pb-3 border-b border-slate-100">
-                      Chronological Agenda ({bookings.length} Confirmed Appointments)
+                      Chronological Agenda ({activeBookings.length} Active Appointments)
                     </div>
 
-                    {bookings.length === 0 ? (
+                    {activeBookings.length === 0 ? (
                       <div className="py-12 text-center text-slate-400 text-xs border border-dashed border-slate-200 rounded-2xl">
-                        No meetings booked yet.
+                        No active meetings scheduled.
                       </div>
                     ) : (
                       <div className="space-y-3">
-                        {bookings.map(b => {
+                        {activeBookings.map(b => {
                           const leadObj = b.lead || leads.find(l => l.id === b.lead_id);
                           const dateObj = new Date(b.meeting_start);
                           const dateFormatted = dateObj.toLocaleDateString('en-US', {
