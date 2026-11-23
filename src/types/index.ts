@@ -69,6 +69,8 @@ export interface Lead {
   utm_params: UTMParameters;
   internal_notes?: string;
   updated_at: string;
+  is_deleted?: boolean;
+  deleted_at?: string;
 }
 
 export interface Booking {

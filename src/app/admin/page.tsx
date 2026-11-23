@@ -37,7 +37,10 @@ import {
   List,
   Check,
   LogOut,
-  Loader2
+  Loader2,
+  Trash2,
+  RotateCcw,
+  FileText
 } from 'lucide-react';
 import Link from 'next/link';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
@@ -62,6 +65,9 @@ export default function AdminDashboardPage() {
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('all');
+  const [leadCategoryFilter, setLeadCategoryFilter] = useState<'all' | 'form_only' | 'booked' | 'trash'>('all');
+  const [leadToDelete, setLeadToDelete] = useState<Lead | null>(null);
+  const [deletingLead, setDeletingLead] = useState<boolean>(false);
   const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
   const [savingNotes, setSavingNotes] = useState(false);
   const [notesDraft, setNotesDraft] = useState('');
@@ -213,23 +219,105 @@ export default function AdminDashboardPage() {
     setTimeout(() => setToastMessage(''), 3500);
   };
 
+  // Helper to determine if a lead has a confirmed booking
+  const isLeadBooked = (l: Lead) => l.status === 'meeting_booked' || bookings.some(b => b.lead_id === l.id && b.status !== 'cancelled');
+
+  // Active vs Soft-Deleted Leads
+  const activeLeads = leads.filter(l => !l.is_deleted);
+  const deletedLeads = leads.filter(l => Boolean(l.is_deleted));
+
+  // Break active leads into Booked vs Form Filled Only (No Meeting)
+  const bookedLeads = activeLeads.filter(isLeadBooked);
+  const formOnlyLeads = activeLeads.filter(l => !isLeadBooked(l));
+
   // Metrics
-  const totalLeads = leads.length;
-  const newLeads = leads.filter(l => l.status === 'new').length;
-  const qualifiedLeads = leads.filter(l => l.is_qualified || l.status === 'qualified').length;
-  const unqualifiedLeads = leads.filter(l => !l.is_qualified || l.status === 'unqualified').length;
-  const bookedMeetings = leads.filter(l => l.status === 'meeting_booked').length;
-  const completedMeetings = leads.filter(l => l.status === 'meeting_completed').length;
+  const totalLeads = activeLeads.length;
+  const newLeads = activeLeads.filter(l => l.status === 'new').length;
+  const qualifiedLeads = activeLeads.filter(l => l.is_qualified || l.status === 'qualified').length;
+  const unqualifiedLeads = activeLeads.filter(l => !l.is_qualified || l.status === 'unqualified').length;
+  const bookedMeetings = bookedLeads.length;
+  const formOnlyCount = formOnlyLeads.length;
+  const completedMeetings = activeLeads.filter(l => l.status === 'meeting_completed').length;
+  const deletedCount = deletedLeads.length;
 
   // Filtered Leads
   const filteredLeads = leads.filter(l => {
+    // 1. Category Filter:
+    if (leadCategoryFilter === 'trash') {
+      if (!l.is_deleted) return false;
+    } else {
+      if (l.is_deleted) return false;
+      if (leadCategoryFilter === 'form_only' && isLeadBooked(l)) return false;
+      if (leadCategoryFilter === 'booked' && !isLeadBooked(l)) return false;
+    }
+
+    // 2. Text Search:
     const matchesSearch =
       l.full_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       l.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (l.phone || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
       (l.company_name || '').toLowerCase().includes(searchQuery.toLowerCase());
+
+    // 3. Status Filter:
     const matchesStatus = statusFilter === 'all' || l.status === statusFilter;
+
     return matchesSearch && matchesStatus;
   });
+
+  // Soft Delete Lead Handler
+  const handleSoftDeleteLead = async (leadId: string) => {
+    setDeletingLead(true);
+    try {
+      const res = await fetch(`/api/admin/leads/${leadId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          is_deleted: true,
+          deleted_at: new Date().toISOString(),
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setLeads(prev => prev.map(l => (l.id === leadId ? { ...l, is_deleted: true, deleted_at: new Date().toISOString() } : l)));
+        if (selectedLead?.id === leadId) {
+          setSelectedLead(null);
+        }
+        setLeadToDelete(null);
+        showToast('Lead moved to Deleted section safely.');
+      } else {
+        showToast('Failed to delete lead: ' + (data.error || 'Unknown error'));
+      }
+    } catch (e) {
+      console.error(e);
+      showToast('Error moving lead to deleted section.');
+    } finally {
+      setDeletingLead(false);
+    }
+  };
+
+  // Restore Soft-Deleted Lead Handler
+  const handleRestoreLead = async (leadId: string) => {
+    try {
+      const res = await fetch(`/api/admin/leads/${leadId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          is_deleted: false,
+          deleted_at: null,
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setLeads(prev => prev.map(l => (l.id === leadId ? { ...l, is_deleted: false, deleted_at: undefined } : l)));
+        showToast('Lead restored back to active list!');
+      } else {
+        showToast('Failed to restore lead: ' + (data.error || 'Unknown error'));
+      }
+    } catch (e) {
+      console.error(e);
+      showToast('Error restoring lead.');
+    }
+  };
 
   // Update Lead Status & Notes
   const handleSaveLeadProfile = async () => {
@@ -677,16 +765,35 @@ export default function AdminDashboardPage() {
               
               {/* Top 6 KPI Metric Cards */}
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
-                <div className="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-xs">
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Total Leads</span>
+                <div
+                  onClick={() => { setActiveTab('leads'); setLeadCategoryFilter('all'); }}
+                  className="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-xs cursor-pointer hover:border-[#274c3b] transition-all"
+                >
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Total Active</span>
                   <div className="text-2xl font-black text-slate-900 mt-1 font-display">{totalLeads}</div>
-                  <span className="text-[10px] text-slate-500 mt-0.5 block">Captured Inbound</span>
+                  <span className="text-[10px] text-slate-500 mt-0.5 block">Active Leads</span>
                 </div>
 
-                <div className="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-xs">
-                  <span className="text-[10px] font-bold text-blue-500 uppercase tracking-wider block">New Inbound</span>
-                  <div className="text-2xl font-black text-[#274c3b] mt-1 font-display">{newLeads}</div>
-                  <span className="text-[10px] text-blue-500 mt-0.5 block">Awaiting Review</span>
+                <div
+                  onClick={() => { setActiveTab('leads'); setLeadCategoryFilter('form_only'); }}
+                  className="bg-amber-50/50 rounded-2xl p-4 border border-amber-300 shadow-xs cursor-pointer hover:border-amber-500 hover:scale-[1.02] transition-all"
+                >
+                  <span className="text-[10px] font-bold text-amber-800 uppercase tracking-wider block flex items-center gap-1">
+                    <AlertCircle className="w-3 h-3 text-amber-600" /> Form Only
+                  </span>
+                  <div className="text-2xl font-black text-amber-900 mt-1 font-display">{formOnlyCount}</div>
+                  <span className="text-[10px] text-amber-700 font-bold mt-0.5 block">No Meeting Booked</span>
+                </div>
+
+                <div
+                  onClick={() => { setActiveTab('leads'); setLeadCategoryFilter('booked'); }}
+                  className="bg-emerald-50/40 rounded-2xl p-4 border border-emerald-200 shadow-xs cursor-pointer hover:border-emerald-400 hover:scale-[1.02] transition-all"
+                >
+                  <span className="text-[10px] font-bold text-emerald-800 uppercase tracking-wider block flex items-center gap-1">
+                    <Calendar className="w-3 h-3 text-emerald-600" /> Demos Booked
+                  </span>
+                  <div className="text-2xl font-black text-emerald-900 mt-1 font-display">{bookedMeetings}</div>
+                  <span className="text-[10px] text-emerald-700 font-bold mt-0.5 block">Google Cal Synced</span>
                 </div>
 
                 <div className="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-xs">
@@ -701,16 +808,15 @@ export default function AdminDashboardPage() {
                   <span className="text-[10px] text-slate-400 mt-0.5 block">Alternative Path</span>
                 </div>
 
-                <div className="bg-white rounded-2xl p-4 border border-pink-200 shadow-xs bg-pink-50/20">
-                  <span className="text-[10px] font-bold text-brand-700 uppercase tracking-wider block">Demos Booked</span>
-                  <div className="text-2xl font-black text-brand-700 mt-1 font-display">{bookedMeetings}</div>
-                  <span className="text-[10px] text-brand-600 mt-0.5 block">Google Cal Synced</span>
-                </div>
-
-                <div className="bg-white rounded-2xl p-4 border border-purple-200 shadow-xs bg-purple-50/20">
-                  <span className="text-[10px] font-bold text-purple-600 uppercase tracking-wider block">Completed</span>
-                  <div className="text-2xl font-black text-purple-700 mt-1 font-display">{completedMeetings}</div>
-                  <span className="text-[10px] text-purple-600 mt-0.5 block">Demo Attended</span>
+                <div
+                  onClick={() => { setActiveTab('leads'); setLeadCategoryFilter('trash'); }}
+                  className="bg-slate-50 rounded-2xl p-4 border border-slate-200 shadow-xs cursor-pointer hover:border-rose-300 transition-all"
+                >
+                  <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block flex items-center gap-1">
+                    <Trash2 className="w-3 h-3 text-slate-400" /> Deleted Section
+                  </span>
+                  <div className="text-2xl font-black text-slate-600 mt-1 font-display">{deletedCount}</div>
+                  <span className="text-[10px] text-slate-400 mt-0.5 block">Safely Preserved</span>
                 </div>
               </div>
 
@@ -891,6 +997,66 @@ export default function AdminDashboardPage() {
           {activeTab === 'leads' && (
             <div className="bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden animate-in fade-in duration-200">
               
+              {/* Category Segmented Quick Filter Bar */}
+              <div className="p-3 bg-slate-100/80 border-b border-slate-200 flex flex-wrap items-center justify-between gap-2">
+                <div className="flex flex-wrap items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setLeadCategoryFilter('all')}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                      leadCategoryFilter === 'all'
+                        ? 'bg-[#182c26] text-[#d2f56d] shadow-sm'
+                        : 'bg-white hover:bg-slate-200 text-slate-700 border border-slate-200'
+                    }`}
+                  >
+                    <Users className="w-3.5 h-3.5" />
+                    <span>All Active</span>
+                    <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-white/20">{totalLeads}</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setLeadCategoryFilter('form_only')}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                      leadCategoryFilter === 'form_only'
+                        ? 'bg-amber-600 text-white shadow-sm ring-2 ring-amber-300'
+                        : 'bg-white hover:bg-amber-50 text-amber-900 border border-amber-300'
+                    }`}
+                  >
+                    <AlertCircle className="w-3.5 h-3.5 text-amber-600" />
+                    <span>Form Only (No Meeting)</span>
+                    <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-amber-100 text-amber-900 font-extrabold">{formOnlyCount}</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setLeadCategoryFilter('booked')}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                      leadCategoryFilter === 'booked'
+                        ? 'bg-emerald-700 text-white shadow-sm ring-2 ring-emerald-300'
+                        : 'bg-white hover:bg-emerald-50 text-emerald-800 border border-emerald-300'
+                    }`}
+                  >
+                    <Calendar className="w-3.5 h-3.5 text-emerald-600" />
+                    <span>Demos Booked</span>
+                    <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-emerald-100 text-emerald-900 font-extrabold">{bookedMeetings}</span>
+                  </button>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => setLeadCategoryFilter('trash')}
+                  className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                    leadCategoryFilter === 'trash'
+                      ? 'bg-rose-700 text-white shadow-sm ring-2 ring-rose-300'
+                      : 'bg-white hover:bg-rose-50 text-slate-600 border border-slate-200'
+                  }`}
+                >
+                  <Trash2 className="w-3.5 h-3.5 text-rose-500" />
+                  <span>Deleted Section ({deletedCount})</span>
+                </button>
+              </div>
+
               {/* Filter and Search Bar */}
               <div className="p-4 border-b border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-slate-50/50">
                 <div className="relative flex-1 max-w-md">
@@ -930,70 +1096,134 @@ export default function AdminDashboardPage() {
                   <thead className="bg-slate-50 border-b border-slate-200 text-slate-500 font-bold uppercase tracking-wider">
                     <tr>
                       <th className="py-3.5 px-4">Prospect & Contact</th>
-                      <th className="py-3.5 px-4">Company</th>
+                      <th className="py-3.5 px-4">Booking Status</th>
                       <th className="py-3.5 px-4">Survey Fit</th>
-                      <th className="py-3.5 px-4">Status</th>
+                      <th className="py-3.5 px-4">Pipeline Status</th>
                       <th className="py-3.5 px-4">Ad Source</th>
                       <th className="py-3.5 px-4">Captured</th>
-                      <th className="py-3.5 px-4 text-right">Action</th>
+                      <th className="py-3.5 px-4 text-right">Actions</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-100">
                     {filteredLeads.length === 0 ? (
                       <tr>
                         <td colSpan={7} className="py-12 text-center text-slate-400">
-                          No leads matching your search criteria.
+                          {leadCategoryFilter === 'trash'
+                            ? 'No deleted leads in trash.'
+                            : leadCategoryFilter === 'form_only'
+                            ? 'No form-only leads without meetings found.'
+                            : 'No leads matching your search criteria.'}
                         </td>
                       </tr>
                     ) : (
-                      filteredLeads.map(lead => (
-                        <tr
-                          key={lead.id}
-                          onClick={() => setSelectedLead(lead)}
-                          className="hover:bg-pink-50/40 transition-colors cursor-pointer"
-                        >
-                          <td className="py-3.5 px-4">
-                            <div className="font-extrabold text-slate-900">{lead.full_name}</div>
-                            <div className="text-[11px] text-slate-500">{lead.email} · {lead.phone}</div>
-                          </td>
-                          <td className="py-3.5 px-4 font-semibold text-slate-800">
-                            {lead.company_name || 'N/A'}
-                          </td>
-                          <td className="py-3.5 px-4">
-                            {lead.is_qualified ? (
-                              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-bold border border-emerald-200 text-[10px]">
-                                <CheckCircle2 className="w-3 h-3" />
-                                <span>Qualified</span>
+                      filteredLeads.map(lead => {
+                        const booked = isLeadBooked(lead);
+                        return (
+                          <tr
+                            key={lead.id}
+                            onClick={() => setSelectedLead(lead)}
+                            className={`transition-colors cursor-pointer ${
+                              lead.is_deleted ? 'bg-rose-50/20 hover:bg-rose-50/50' : 'hover:bg-slate-50/80'
+                            }`}
+                          >
+                            <td className="py-3.5 px-4">
+                              <div className="font-extrabold text-slate-900">{lead.full_name}</div>
+                              <div className="text-[11px] text-slate-500">{lead.email} · {lead.phone}</div>
+                              {lead.company_name && (
+                                <div className="text-[10px] text-slate-400 font-medium">{lead.company_name}</div>
+                              )}
+                            </td>
+                            <td className="py-3.5 px-4">
+                              {lead.is_deleted ? (
+                                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-rose-100 text-rose-800 font-bold text-[10px] border border-rose-200">
+                                  <Trash2 className="w-3 h-3 text-rose-600" />
+                                  <span>In Deleted Section</span>
+                                </span>
+                              ) : booked ? (
+                                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 font-extrabold text-[10px] border border-emerald-200 shadow-2xs">
+                                  <Calendar className="w-3 h-3 text-emerald-600" />
+                                  <span>Demo Booked</span>
+                                </span>
+                              ) : (
+                                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-amber-50 text-amber-900 font-extrabold text-[10px] border border-amber-300 shadow-2xs animate-pulse">
+                                  <AlertCircle className="w-3 h-3 text-amber-600" />
+                                  <span>Form Only (No Meeting)</span>
+                                </span>
+                              )}
+                            </td>
+                            <td className="py-3.5 px-4">
+                              {lead.is_qualified ? (
+                                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-bold border border-emerald-200 text-[10px]">
+                                  <CheckCircle2 className="w-3 h-3" />
+                                  <span>Qualified</span>
+                                </span>
+                              ) : (
+                                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 font-semibold text-[10px]">
+                                  <span>Unqualified</span>
+                                </span>
+                              )}
+                            </td>
+                            <td className="py-3.5 px-4">
+                              <span className="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-800 font-bold text-[10px] uppercase tracking-wider border border-slate-200">
+                                {lead.status.replace('_', ' ')}
                               </span>
-                            ) : (
-                              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 font-semibold text-[10px]">
-                                <span>Unqualified</span>
-                              </span>
-                            )}
-                          </td>
-                          <td className="py-3.5 px-4">
-                            <span className="px-2.5 py-1 rounded-lg bg-pink-50 text-brand-900 font-bold text-[10px] uppercase tracking-wider border border-pink-100">
-                              {lead.status.replace('_', ' ')}
-                            </span>
-                          </td>
-                          <td className="py-3.5 px-4 font-mono text-[10px] text-slate-500">
-                            {lead.utm_params?.utm_source || 'direct'}
-                          </td>
-                          <td className="py-3.5 px-4 text-slate-500 text-[11px]">
-                            {new Date(lead.created_at).toLocaleDateString('en-US', {
-                              month: 'short',
-                              day: 'numeric',
-                              hour: 'numeric',
-                              minute: '2-digit',
-                            })}
-                          </td>
-                          <td className="py-3.5 px-4 text-right">
-                            <span className="text-brand-700 font-bold hover:underline inline-flex items-center gap-0.5 text-xs">
-                              Inspect <ChevronRight className="w-3.5 h-3.5" />
-                            </span>
-                          </td>
-                        </tr>
-                      ))
+                            </td>
+                            <td className="py-3.5 px-4 font-mono text-[10px] text-slate-500">
+                              {lead.utm_params?.utm_source || 'direct'}
+                            </td>
+                            <td className="py-3.5 px-4 text-slate-500 text-[11px]">
+                              {new Date(lead.created_at).toLocaleDateString('en-US', {
+                                month: 'short',
+                                day: 'numeric',
+                                hour: 'numeric',
+                                minute: '2-digit',
+                              })}
+                            </td>
+                            <td className="py-3.5 px-4 text-right">
+                              {lead.is_deleted ? (
+                                <button
+                                  type="button"
+                                  onClick={e => {
+                                    e.stopPropagation();
+                                    handleRestoreLead(lead.id);
+                                  }}
+                                  className="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs inline-flex items-center gap-1 shadow-xs cursor-pointer"
+                                  title="Restore Lead back to active list"
+                                >
+                                  <RotateCcw className="w-3 h-3" />
+                                  <span>Restore</span>
+                                </button>
+                              ) : (
+                                <div className="flex items-center justify-end gap-1.5">
+                                  <button
+                                    type="button"
+                                    onClick={e => {
+                                      e.stopPropagation();
+                                      setSelectedLead(lead);
+                                    }}
+                                    className="px-2 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs inline-flex items-center gap-1 cursor-pointer"
+                                    title="Inspect Lead"
+                                  >
+                                    <span>Inspect</span>
+                                    <ChevronRight className="w-3 h-3" />
+                                  </button>
+                                  <button
+                                    type="button"
+                                    onClick={e => {
+                                      e.stopPropagation();
+                                      setLeadToDelete(lead);
+                                    }}
+                                    className="p-1.5 rounded-lg hover:bg-rose-50 text-slate-400 hover:text-rose-600 transition-colors cursor-pointer"
+                                    title="Move to Deleted Section"
+                                  >
+                                    <Trash2 className="w-3.5 h-3.5" />
+                                  </button>
+                                </div>
+                              )}
+                            </td>
+                          </tr>
+                        );
+                      })
                     )}
                   </tbody>
                 </table>
@@ -1987,6 +2217,21 @@ export default function AdminDashboardPage() {
                   <h3 className="text-xl font-black text-slate-900 font-display mt-0.5">
                     {selectedLead.full_name}
                   </h3>
+                  <div className="flex items-center gap-2 mt-1">
+                    {selectedLead.is_deleted ? (
+                      <span className="px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-800 font-extrabold text-[10px] border border-rose-200">
+                        🗑️ In Deleted Section
+                      </span>
+                    ) : isLeadBooked(selectedLead) ? (
+                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-extrabold text-[10px] border border-emerald-200">
+                        <Calendar className="w-3 h-3 text-emerald-700" /> Demo Booked
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 font-extrabold text-[10px] border border-amber-300">
+                        <AlertCircle className="w-3 h-3 text-amber-700" /> Form Only (No Meeting Booked)
+                      </span>
+                    )}
+                  </div>
                 </div>
                 <button
                   onClick={() => setSelectedLead(null)}
@@ -2121,23 +2366,87 @@ export default function AdminDashboardPage() {
             </div>
 
             {/* Bottom Actions */}
-            <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
-              <button
-                onClick={() => setSelectedLead(null)}
-                className="px-4 py-2 text-xs font-semibold text-slate-500 hover:text-slate-800"
-              >
-                Close Drawer
-              </button>
-              <button
-                onClick={handleSaveLeadProfile}
-                disabled={savingNotes}
-                className="cta-glow-btn px-6 py-2.5 rounded-full text-white font-bold text-xs flex items-center gap-1.5 cursor-pointer shadow-md"
-              >
-                <Save className="w-3.5 h-3.5" />
-                <span>{savingNotes ? 'Saving...' : 'Save Lead Changes'}</span>
-              </button>
+            <div className="pt-4 border-t border-slate-100 flex items-center justify-between gap-2">
+              {selectedLead.is_deleted ? (
+                <button
+                  type="button"
+                  onClick={() => handleRestoreLead(selectedLead.id)}
+                  className="px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center gap-1.5 shadow-sm cursor-pointer"
+                >
+                  <RotateCcw className="w-3.5 h-3.5" />
+                  <span>Restore Lead</span>
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => setLeadToDelete(selectedLead)}
+                  className="px-3 py-2 rounded-xl border border-rose-200 bg-rose-50 hover:bg-rose-100 text-rose-700 font-bold text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
+                >
+                  <Trash2 className="w-3.5 h-3.5" />
+                  <span>Move to Deleted Section</span>
+                </button>
+              )}
+
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setSelectedLead(null)}
+                  className="px-4 py-2 text-xs font-semibold text-slate-500 hover:text-slate-800"
+                >
+                  Close
+                </button>
+                <button
+                  onClick={handleSaveLeadProfile}
+                  disabled={savingNotes}
+                  className="cta-glow-btn px-6 py-2.5 rounded-full text-white font-bold text-xs flex items-center gap-1.5 cursor-pointer shadow-md"
+                >
+                  <Save className="w-3.5 h-3.5" />
+                  <span>{savingNotes ? 'Saving...' : 'Save Lead Changes'}</span>
+                </button>
+              </div>
             </div>
 
+          </div>
+        </div>
+      )}
+
+      {/* ======================================================== */}
+      {/* CONFIRMATION DIALOG: SOFT DELETE LEAD                     */}
+      {/* ======================================================== */}
+      {leadToDelete && (
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 animate-in zoom-in-95 duration-150">
+            <div className="w-12 h-12 rounded-2xl bg-rose-100 border border-rose-200 flex items-center justify-center text-rose-600 mb-4">
+              <Trash2 className="w-6 h-6 stroke-[2.2]" />
+            </div>
+            <h3 className="text-base font-extrabold text-slate-900 mb-1">
+              Move Lead to Deleted Section?
+            </h3>
+            <p className="text-xs text-slate-600 leading-relaxed mb-4">
+              Are you sure you want to move <strong>{leadToDelete.full_name}</strong> ({leadToDelete.email}) to the Deleted section?
+            </p>
+            <div className="p-3 bg-amber-50 rounded-xl border border-amber-200 text-[11px] text-amber-900 flex items-start gap-2 mb-6">
+              <AlertCircle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+              <span>This lead will <strong>NOT be permanently deleted</strong>. It will be stored safely in the <strong>Deleted Leads</strong> section, and you can restore it anytime with one click.</span>
+            </div>
+            <div className="flex items-center justify-end gap-2.5">
+              <button
+                type="button"
+                onClick={() => setLeadToDelete(null)}
+                disabled={deletingLead}
+                className="px-4 py-2 rounded-xl border border-slate-200 text-xs font-bold text-slate-700 hover:bg-slate-50 cursor-pointer"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={() => handleSoftDeleteLead(leadToDelete.id)}
+                disabled={deletingLead}
+                className="px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold shadow-md cursor-pointer flex items-center gap-1.5"
+              >
+                {deletingLead ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Trash2 className="w-3.5 h-3.5" />}
+                <span>{deletingLead ? 'Moving...' : 'Confirm Move to Deleted'}</span>
+              </button>
+            </div>
           </div>
         </div>
       )}
