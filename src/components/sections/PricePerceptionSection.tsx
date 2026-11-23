@@ -31,31 +31,38 @@ export const PricePerceptionSection: React.FC<PricePerceptionSectionProps> = ({ 
           </p>
         </div>
 
-        {/* Two Comparison Columns */}
+        {/* Two Comparison Columns (Gradient Card Style) */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 items-stretch mb-12">
           
           {/* Column A: Traditional Custom-Build */}
-          <div className="bg-[#f6f6ef] rounded-3xl p-7 sm:p-9 border border-[#dce3d4] flex flex-col justify-between shadow-xs">
+          <div className="group bg-white rounded-3xl p-7 sm:p-9 border border-slate-200 shadow-xs hover:border-slate-300 transition-all duration-300 flex flex-col justify-between relative overflow-hidden">
+            {/* Top Subtle Ambient Corner Glow */}
+            <div className="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-slate-300/20 to-transparent rounded-full blur-xl pointer-events-none" />
+
             <div>
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-xs font-black uppercase tracking-wider px-3 py-1 rounded-full bg-slate-200/80 text-slate-700">
-                  Traditional Path
+              <div className="flex items-center justify-between mb-4 relative z-10">
+                <span className="text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
+                  Traditional Agency Path
                 </span>
-                <span className="text-xs font-bold text-slate-500">
-                  Custom Development
+                <span className="text-xs font-bold text-slate-400">
+                  Custom Code From Scratch
                 </span>
               </div>
 
-              <h3 className="text-xl sm:text-2xl font-extrabold text-[#182c26] mb-3 font-display">
+              <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-1">
+                BESPOKE SOFTWARE AGENCY
+              </div>
+
+              <h3 className="text-xl sm:text-2xl font-black text-slate-800 mb-2 font-display">
                 Building From Scratch
               </h3>
 
-              <p className="text-xs sm:text-sm text-[#61705f] leading-relaxed mb-6">
+              <p className="text-xs sm:text-sm text-slate-500 leading-relaxed mb-6">
                 Commissioning a bespoke software agency to build iOS, Android, and web systems requires dedicated technical architecture, custom backend engineering, and indefinite developer retainers.
               </p>
 
               {/* Steps List */}
-              <div className="space-y-3.5">
+              <div className="space-y-3.5 mb-6">
                 {[
                   { step: '1. Product Planning', desc: 'Months spent scoping specifications and technical architectures.' },
                   { step: '2. Interface Design', desc: 'Designing custom UI/UX wireframes, prototypes, and asset kits.' },
@@ -65,108 +72,105 @@ export const PricePerceptionSection: React.FC<PricePerceptionSectionProps> = ({ 
                   { step: '6. Ongoing Maintenance', desc: 'Funding dedicated DevOps to fix bugs, OS updates, and server downtime.' },
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-start gap-3 text-xs sm:text-sm">
-                    <div className="w-5 h-5 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center shrink-0 mt-0.5">
+                    <div className="w-5 h-5 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center shrink-0 mt-0.5">
                       <XCircle className="w-3.5 h-3.5" />
                     </div>
                     <div>
-                      <strong className="text-slate-800">{item.step}:</strong>{' '}
-                      <span className="text-[#61705f]">{item.desc}</span>
+                      <span className="font-bold text-slate-700">{item.step}: </span>
+                      <span className="text-slate-500">{item.desc}</span>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="pt-6 mt-6 border-t border-[#dce3d4] text-xs text-slate-500">
-              *Requires significant upfront capital, technical management overhead, and separate hosting retainers.
+            {/* Embedded Live Status Snippet */}
+            <div className="mt-auto pt-3 border-t border-slate-100 relative z-10">
+              <div className="bg-slate-100 rounded-xl p-3 border border-slate-200 flex items-center justify-between text-[11px] text-slate-700">
+                <span className="font-mono text-[10px] sm:text-[11px] text-slate-600">
+                  Custom Build Timeline
+                </span>
+                <span className="text-rose-600 font-bold text-[10px] sm:text-[11px]">
+                  $25,000+ &amp; 6+ Months
+                </span>
+              </div>
             </div>
           </div>
 
-          {/* Column B: Starting With JIT Helpdesk */}
-          <div className="bg-gradient-to-br from-[#11201b] via-[#182c26] to-[#274c3b] rounded-3xl p-7 sm:p-9 text-white flex flex-col justify-between shadow-2xl border border-[#d2f56d]/30 relative overflow-hidden">
-            {/* Top decorative glow */}
-            <div className="absolute top-0 right-0 w-48 h-48 bg-[#d2f56d]/15 blur-3xl pointer-events-none rounded-full" />
+          {/* Column B: JIT Helpdesk Platform (High-End Pine & Cyber Lime Gradient Card) */}
+          <div className="group bg-gradient-to-br from-[#11201b] via-[#182c26] to-[#274c3b] rounded-3xl p-7 sm:p-9 text-white shadow-xl border border-[#d2f56d]/30 hover:border-[#d2f56d]/70 hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between relative overflow-hidden">
+            {/* Top Subtle Ambient Corner Glow */}
+            <div className="absolute -top-10 -right-10 w-40 h-40 bg-gradient-to-br from-[#d2f56d]/30 to-transparent rounded-full blur-2xl group-hover:scale-125 transition-transform duration-500 pointer-events-none" />
 
-            <div className="relative z-10">
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-xs font-black uppercase tracking-wider px-3 py-1 rounded-full bg-[#d2f56d] text-[#182c26] shadow-sm">
-                  The JIT Approach
+            <div>
+              <div className="flex items-center justify-between mb-4 relative z-10">
+                <span className="text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded-full bg-[#d2f56d] text-[#182c26] font-bold shadow-xs">
+                  Purpose-Built Solution
                 </span>
-                <span className="text-xs font-bold text-[#d2f56d]">
-                  Configured Platform
+                <span className="text-xs font-bold text-[#d2f56d] flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5" /> Ready in 48 Hours
                 </span>
               </div>
 
-              <h3 className="text-xl sm:text-2xl font-extrabold text-white mb-3 font-display">
-                Starting With JIT Helpdesk
+              <div className="text-[11px] font-bold uppercase tracking-wider text-[#dce3d4] mb-1">
+                JIT HELPDESK PLATFORM
+              </div>
+
+              <h3 className="text-xl sm:text-2xl font-black text-white mb-2 font-display">
+                Already Built. Branded for You.
               </h3>
 
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-6">
-                Start with a battle-tested, configurable customer app, web portal, and owner dashboard. We apply your branding, connect supported services, and maintain the infrastructure.
+              <p className="text-xs sm:text-sm text-[#edf3e3]/90 leading-relaxed mb-6">
+                Skip the engineering risks. JIT Helpdesk delivers a proven customer experience engine already architected for IT support, customized with your branding, domain, and colors.
               </p>
 
-              {/* Features List */}
-              <div className="space-y-3.5">
+              {/* Benefits Checklist */}
+              <div className="space-y-3.5 mb-6">
                 {[
-                  { step: '1. Existing Configurable Platform', desc: 'Proven architecture built specifically for IT service providers.' },
-                  { step: '2. Your Business Branding', desc: 'Your company name, logo, brand colors, and custom web domain.' },
-                  { step: '3. Customer Mobile & Web Experiences', desc: 'iOS and Android app downloads plus a responsive client web portal.' },
-                  { step: '4. Built-in Supported Workflows', desc: 'Tickets, 1-click quote approvals, Stripe billing, and loyalty points.' },
-                  { step: '5. Agreed Integrations & Setup', desc: 'Fast guided onboarding without writing a single line of backend code.' },
-                  { step: '6. Ongoing Maintenance Plan', desc: 'Cloud hosting, App Store maintenance, security patches, and updates included.' },
+                  { title: 'Proven Foundation', desc: 'No architecture phases. Jump directly into a battle-tested support system.' },
+                  { title: 'Dedicated Branding', desc: 'Your business name, logo, domain, and brand identity across all platforms.' },
+                  { title: 'Connected Workflows', desc: 'Requests, quotes, digital approvals, payments, and scheduling out of the box.' },
+                  { title: 'No Development Team Needed', desc: 'Platform infrastructure, cloud security, and updates are fully maintained.' },
+                  { title: 'Faster Time to Launch', desc: 'Be live with your branded customer portal in days, not three quarters.' },
+                  { title: 'Transparent Flat Cost', desc: '$400 setup + flat $200 per month. Zero per-technician upcharges.' },
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-start gap-3 text-xs sm:text-sm">
-                    <div className="w-5 h-5 rounded-full bg-[#d2f56d] text-[#182c26] flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
+                    <div className="w-5 h-5 rounded-full bg-[#d2f56d] text-[#182c26] flex items-center justify-center shrink-0 mt-0.5 shadow-2xs font-bold">
                       <CheckCircle2 className="w-3.5 h-3.5 stroke-[2.5]" />
                     </div>
                     <div>
-                      <strong className="text-white">{item.step}:</strong>{' '}
-                      <span className="text-slate-300">{item.desc}</span>
+                      <span className="font-bold text-[#d2f56d]">{item.title}: </span>
+                      <span className="text-[#edf3e3]/90">{item.desc}</span>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Pricing Badge Anchor */}
-            <div className="pt-6 mt-6 border-t border-white/15 relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-              <div>
-                <div className="text-[11px] font-extrabold uppercase tracking-wider text-[#d2f56d]">
-                  Predictable SaaS-Style Fee
-                </div>
-                <div className="text-2xl sm:text-3xl font-black text-white font-display mt-0.5">
-                  $400 <span className="text-xs font-normal text-slate-300">setup</span> + $200 <span className="text-xs font-normal text-slate-300">/ mo</span>
-                </div>
+            {/* Embedded Live Dark Pine Snippet */}
+            <div className="mt-auto pt-3 border-t border-white/10 relative z-10">
+              <div className="bg-[#0e1b17] rounded-xl p-3 border border-[#d2f56d]/30 flex items-center justify-between text-[11px] text-white shadow-inner">
+                <span className="font-mono text-[10px] sm:text-[11px] text-[#edf3e3]">
+                  Fixed Predictable SaaS Pricing
+                </span>
+                <span className="text-[#d2f56d] font-bold text-[10px] sm:text-[11px] flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#d2f56d] live-indicator" />
+                  $400 setup · $200/mo flat
+                </span>
               </div>
-
-              <span className="text-[11px] text-slate-300 font-medium">
-                No need to build software from scratch.
-              </span>
             </div>
           </div>
 
         </div>
 
-        {/* Section Bottom Banner & CTA Anchor */}
-        <div className="bg-[#f6f6ef] rounded-3xl p-6 sm:p-8 border border-[#dce3d4] flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left shadow-xs">
-          <div>
-            <span className="text-xs font-black uppercase tracking-wider text-[#274c3b]">
-              Your Own Branded Experience. One Simple Software-Style Price.
-            </span>
-            <h4 className="text-lg sm:text-xl font-extrabold text-[#182c26] mt-1 font-display">
-              $400 to set up. $200 per month. No custom software development risks.
-            </h4>
-            <p className="text-xs sm:text-sm text-[#61705f] mt-1">
-              A branded customer experience without the multi-month delay or custom agency price tag.
-            </p>
-          </div>
-
+        {/* Bottom CTA */}
+        <div className="text-center">
           <button
             onClick={onOpenBooking}
-            className="poster-glow-btn px-7 sm:px-9 py-3.5 rounded-full text-white font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 cursor-pointer shrink-0 transition-transform hover:scale-105 shadow-md"
+            className="px-7 sm:px-9 py-3 sm:py-3.5 rounded-full text-white font-extrabold text-xs sm:text-sm inline-flex items-center gap-2.5 cursor-pointer bg-gradient-to-r from-[#182c26] via-[#274c3b] to-[#11201b] hover:from-[#203e30] hover:via-[#2f5a46] hover:to-[#182c26] border border-[#d2f56d] shadow-md hover:shadow-lg transition-all group"
           >
-            <span>See What Your Branded App Could Look Like</span>
-            <ArrowRight className="w-4 h-4 text-[#d2f56d]" />
+            <span>See the JIT Helpdesk Platform Live — Book a Demo</span>
+            <ArrowRight className="w-4 h-4 text-[#d2f56d] group-hover:translate-x-1 transition-transform" />
           </button>
         </div>
 

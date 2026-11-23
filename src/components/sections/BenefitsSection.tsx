@@ -8,32 +8,44 @@ export const BenefitsSection: React.FC = () => {
     {
       icon: HeartHandshake,
       title: 'Be Easier to Remember',
-      subtitle: 'Brand Recognition',
-      metric: 'Your App Icon',
+      subtitle: 'BRAND RECOGNITION',
+      badge: 'App on Phone',
+      accentGlow: 'from-[#d2f56d]/20 to-transparent',
+      snippetLabel: 'App Icon on Client Phone',
+      snippetStatus: 'Always Visible',
       description:
-        'A branded app gives customers a recognizable place to find your business when they need help, right on their phone screen.',
+        'A branded app gives customers a recognizable place to find your business when they need help, right on their iPhone and Android home screen.',
     },
     {
       icon: DollarSign,
       title: 'Give Customers More Reasons to Return',
-      subtitle: 'Repeat Business',
-      metric: 'Loyalty Rewards',
+      subtitle: 'REPEAT BUSINESS',
+      badge: 'Loyalty Rewards',
+      accentGlow: 'from-[#274c3b]/30 to-transparent',
+      snippetLabel: 'Starbucks-Style Points',
+      snippetStatus: 'Repeat Account Lock-In',
       description:
         'Loyalty rewards and referral programs can support repeat-business opportunities, giving clients incentives to stay loyal to your brand.',
     },
     {
       icon: ShieldCheck,
       title: 'Make Service Easier to Access',
-      subtitle: 'Frictionless Requests',
-      metric: '1-Tap Service',
+      subtitle: 'FRICTIONLESS REQUESTS',
+      badge: '1-Tap Service',
+      accentGlow: 'from-[#d2f56d]/20 to-transparent',
+      snippetLabel: 'No Phone Tag or Lost Emails',
+      snippetStatus: '1-Click Digital Sign-Off',
       description:
         'Let customers submit requests, review quotes, approve work, make payments, and follow progress directly without phone tag.',
     },
     {
       icon: Sparkles,
       title: 'Build a More Professional Experience',
-      subtitle: 'Premium Perception',
-      metric: 'Client Portal',
+      subtitle: 'PREMIUM PERCEPTION',
+      badge: 'Client Portal',
+      accentGlow: 'from-[#274c3b]/30 to-transparent',
+      snippetLabel: 'support.yourcompany.com',
+      snippetStatus: 'SSL Enterprise Security',
       description:
         'Your brand becomes part of the service journey, from the first request to the next visit, elevating your business above commodity competitors.',
     },
@@ -57,37 +69,59 @@ export const BenefitsSection: React.FC = () => {
           </p>
         </div>
 
-        {/* 4 Benefits Grid with Crisp 3D Glass Badges & Hover Lift */}
+        {/* 4 Benefits Grid with Ambient Corner Glows & Live Embedded Dark Snippets */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
           {benefits.map((b, idx) => {
             const IconComp = b.icon;
             return (
               <div
                 key={idx}
-                className="group bg-[#f6f6ef] rounded-3xl p-7 sm:p-9 border border-[#dce3d4] hover:border-[#274c3b] hover:bg-white hover:shadow-[0_20px_40px_-15px_rgba(24,44,38,0.15)] hover:-translate-y-2 transition-all duration-300 flex gap-5 items-start"
+                className="group bg-white rounded-3xl p-7 sm:p-9 border border-[#dce3d4] hover:border-[#274c3b] hover:shadow-[0_20px_40px_-15px_rgba(24,44,38,0.15)] hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between relative overflow-hidden"
               >
-                {/* 3D Pine & Cyber Lime Glass Badge */}
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#11201b] via-[#182c26] to-[#274c3b] text-[#d2f56d] border border-[#d2f56d]/30 shadow-md flex items-center justify-center p-3 shrink-0 group-hover:scale-110 group-hover:border-[#d2f56d] transition-all duration-300">
-                  <IconComp className="w-7 h-7 stroke-[2.2]" />
-                </div>
+                {/* Top Subtle Ambient Corner Glow */}
+                <div className={`absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br ${b.accentGlow} rounded-full blur-xl group-hover:scale-125 transition-transform duration-500 pointer-events-none`} />
 
-                <div className="flex-1">
-                  <div className="flex items-center justify-between gap-2 mb-1">
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-[#274c3b] group-hover:text-[#274c3b]">
-                      {b.subtitle}
-                    </span>
-                    <span className="px-2.5 py-0.5 rounded-full bg-white border border-[#dce3d4] text-[10px] font-extrabold text-[#182c26] group-hover:bg-[#182c26] group-hover:text-[#d2f56d] group-hover:border-[#d2f56d]/40 transition-colors">
-                      {b.metric}
+                <div>
+                  {/* Top Bar: 3D Vector Icon Badge & Micro Pill */}
+                  <div className="flex items-center justify-between mb-5 relative z-10">
+                    <div className="w-13 h-13 rounded-2xl bg-gradient-to-tr from-[#11201b] via-[#182c26] to-[#274c3b] p-3 text-[#d2f56d] border border-[#d2f56d]/30 shadow-md group-hover:scale-110 group-hover:border-[#d2f56d] transition-all duration-300 flex items-center justify-center">
+                      <IconComp className="w-6 h-6 stroke-[2.2] group-hover:animate-pulse" />
+                    </div>
+
+                    <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#edf3e3] text-[#274c3b] border border-[#dce3d4]">
+                      {b.badge}
                     </span>
                   </div>
 
-                  <h3 className="text-lg sm:text-xl font-bold text-[#182c26] mt-1 mb-2.5 group-hover:text-[#274c3b] transition-colors font-display">
+                  {/* Subtitle / Kicker */}
+                  <div className="text-[11px] font-bold uppercase tracking-wider text-[#61705f] mb-1">
+                    {b.subtitle}
+                  </div>
+
+                  {/* Main Title */}
+                  <h3 className="text-xl font-black text-[#182c26] tracking-tight leading-snug mb-3 group-hover:text-[#274c3b] transition-colors font-display">
                     {b.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-[#61705f] leading-relaxed">
+
+                  {/* Description */}
+                  <p className="text-xs sm:text-sm text-[#61705f] leading-relaxed mb-6">
                     {b.description}
                   </p>
                 </div>
+
+                {/* Embedded Live UI Snippet (Dark Pine Glass) */}
+                <div className="mt-auto pt-3 border-t border-slate-100 relative z-10">
+                  <div className="bg-[#11201b] rounded-xl p-3 border border-[#274c3b] flex items-center justify-between text-[11px] text-white shadow-inner">
+                    <span className="font-mono text-[10px] sm:text-[11px] text-[#edf3e3] truncate max-w-[170px]">
+                      {b.snippetLabel}
+                    </span>
+                    <span className="text-[#d2f56d] font-bold text-[10px] sm:text-[11px] shrink-0 flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#d2f56d] live-indicator" />
+                      {b.snippetStatus}
+                    </span>
+                  </div>
+                </div>
+
               </div>
             );
           })}
