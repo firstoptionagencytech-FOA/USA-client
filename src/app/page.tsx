@@ -7,13 +7,7 @@ import { PricePerceptionSection } from '@/components/sections/PricePerceptionSec
 import { ProblemSection } from '@/components/sections/ProblemSection';
 import { SolutionSection } from '@/components/sections/SolutionSection';
 import { BusinessCaseSection } from '@/components/sections/BusinessCaseSection';
-import { BenefitsSection } from '@/components/sections/BenefitsSection';
-import { MspRoiCalculator } from '@/components/sections/MspRoiCalculator';
-import { CoreCapabilitiesSection } from '@/components/sections/CoreCapabilitiesSection';
-import { ProductDemoSection } from '@/components/sections/ProductDemoSection';
-import { HowItWorksSection } from '@/components/sections/HowItWorksSection';
 import { PricingSection } from '@/components/sections/PricingSection';
-import { WhoItIsForSection } from '@/components/sections/WhoItIsForSection';
 import { FaqSection } from '@/components/sections/FaqSection';
 import { FinalCtaSection } from '@/components/sections/FinalCtaSection';
 import { FunnelModal } from '@/components/funnel/FunnelModal';
@@ -67,51 +61,33 @@ export default function LandingPage() {
   };
 
   return (
-    <main className="min-h-screen bg-[#f6f6ef] text-[#182c26] selection:bg-[#274c3b] selection:text-[#d2f56d] relative">
+    <main className="min-h-screen bg-[#f6f6ef] text-[#182c26] selection:bg-[#274c3b] selection:text-[#d2f56d] relative overflow-x-hidden">
       
-      {/* 1. Hero Section (SaaS-price perception + dynamic headline + anchor) */}
+      {/* 1. Hero Section (SaaS-Price Tagline + Dynamic UTM Headline + 3D Showcase + CTA + Price Anchor) */}
       <HeroSection onOpenBooking={handleOpenBooking} />
 
-      {/* 2. Product Showcase (Mobile, web, and loyalty screen) */}
+      {/* 2. Device Showcase Section (Phone Mockup with Loyalty Coins + Laptop Admin View) */}
       <DeviceShowcaseSection onOpenBooking={handleOpenBooking} />
 
-      {/* 3. Price-Perception Comparison (Custom Build vs JIT Helpdesk) */}
+      {/* 3. Price-Perception Comparison (Custom Build Agency vs JIT Helpdesk Platform) */}
       <PricePerceptionSection onOpenBooking={handleOpenBooking} />
 
-      {/* 4. Customer Experience Gap (Competitor ads, cheaper shops, unread emails) */}
+      {/* 4. Customer Experience Gap (3 Ad Angles: Competitor Ads, Cheaper Shops, Unread Emails) */}
       <ProblemSection onOpenBooking={handleOpenBooking} />
 
-      {/* 5. Complete Solution (Loyalty & referrals #1, mobile app, notifications, portal, admin) */}
+      {/* 5. Complete Solution (Loyalty Rewards #1, Branded Mobile App, Notifications, Web Portal, Admin) */}
       <SolutionSection onOpenBooking={handleOpenBooking} />
 
-      {/* 6. Retention Business Case (Sometimes keeping just one client changes the math) */}
+      {/* 6. Retention Business Case (Keeping Just 1 Client Covers the $2,800/yr Fee) */}
       <BusinessCaseSection onOpenBooking={handleOpenBooking} />
 
-      {/* 7. Business Benefits (Build a business customers want to return to) */}
-      <BenefitsSection />
-
-      {/* 8. Interactive Retention Calculator (3-input formula: Lost clients × Revenue × Margin) */}
-      <MspRoiCalculator onOpenBooking={handleOpenBooking} />
-
-      {/* 9. Five Core Capabilities (Everything your IT business needs connected) */}
-      <CoreCapabilitiesSection onOpenBooking={handleOpenBooking} />
-
-      {/* 10. Product Walkthrough (See how your branded customer experience works) */}
-      <ProductDemoSection onOpenBooking={handleOpenBooking} />
-
-      {/* 11. How It Works (Onboarding & launch steps) */}
-      <HowItWorksSection onOpenBooking={handleOpenBooking} />
-
-      {/* 12. Transparent Pricing Package ($400 setup + $200/mo flat) */}
+      {/* 7. Transparent Pricing Package ($400 setup + $200/mo flat) */}
       <PricingSection onOpenBooking={handleOpenBooking} />
 
-      {/* 13. Who It Is For & Personalized Walkthrough Expectations */}
-      <WhoItIsForSection onOpenBooking={handleOpenBooking} />
-
-      {/* 14. Approved FAQs (10 Complete Questions & Answers) */}
+      {/* 8. Approved FAQs (10 Complete Questions & Answers) */}
       <FaqSection />
 
-      {/* 15. Final Call to Action & Footer */}
+      {/* 9. Final Call to Action & Footer */}
       <FinalCtaSection onOpenBooking={handleOpenBooking} />
 
       {/* Sticky Bottom Floating Bar for Mobile */}
