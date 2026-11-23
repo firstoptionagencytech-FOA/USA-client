@@ -28,7 +28,7 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenBooking 
     <section className="py-20 px-4 bg-white relative overflow-hidden" id="solution">
       
       {/* Background Soft Emerald Lighting */}
-      <div className="absolute top-1/3 left-10 w-96 h-96 bg-[#d2f56d]/10 rounded-full blur-3xl opacity-70 pointer-events-none -z-10" />
+      <div className="absolute top-1/3 left-10 w-96 h-96 bg-[#d2f56d]/15 rounded-full blur-3xl opacity-75 pointer-events-none -z-10" />
 
       <div className="max-w-6xl mx-auto">
         
@@ -49,18 +49,20 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenBooking 
           </p>
         </div>
 
-        {/* 5 Pillar Grid - Styled with the EXACT Signature Gradient Card Colors */}
+        {/* 5 Pillar Grid with Amplified Corner Glow & 3D Vibrant Gradient Badges */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           
           {/* Pillar 1: Loyalty Rewards & Referral Engine */}
-          <div className="group cursor-pointer bg-white rounded-3xl p-7 sm:p-8 border border-[#dce3d4] shadow-xs hover:border-[#274c3b] hover:shadow-[0_20px_40px_-15px_rgba(24,44,38,0.2)] hover:-translate-y-2 active:scale-[0.99] transition-all duration-300 flex flex-col justify-between relative overflow-hidden">
-            {/* Top Subtle Ambient Corner Glow */}
-            <div className="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-[#274c3b]/30 to-transparent rounded-full blur-xl group-hover:scale-125 transition-transform duration-500 pointer-events-none" />
+          <div className="group cursor-pointer bg-white rounded-3xl p-7 sm:p-8 border border-[#dce3d4] shadow-xs hover:border-[#274c3b] hover:shadow-[0_20px_40px_-15px_rgba(24,44,38,0.22)] hover:-translate-y-2 active:scale-[0.99] transition-all duration-300 flex flex-col justify-between relative overflow-hidden">
+            {/* Amplified Corner Ambient Glow */}
+            <div className="absolute -top-14 -right-14 w-56 h-56 bg-gradient-to-br from-[#d2f56d]/35 via-[#274c3b]/30 to-transparent rounded-full blur-2xl group-hover:scale-130 group-hover:opacity-100 opacity-80 transition-all duration-500 pointer-events-none" />
 
             <div>
               <div className="flex items-center justify-between mb-5 relative z-10">
-                <div className="w-13 h-13 rounded-2xl bg-gradient-to-tr from-[#11201b] via-[#182c26] to-[#274c3b] p-3 text-[#d2f56d] border border-[#d2f56d]/30 shadow-md group-hover:scale-110 group-hover:border-[#d2f56d] transition-all duration-300 flex items-center justify-center">
-                  <Gift className="w-6 h-6 stroke-[2.2] group-hover:animate-pulse" />
+                <div className="relative w-13 h-13 rounded-2xl bg-gradient-to-br from-[#d2f56d] via-[#274c3b] to-[#182c26] p-0.5 shadow-md border-2 border-white/70 group-hover:scale-110 group-hover:border-[#d2f56d] transition-all duration-300 flex items-center justify-center">
+                  <div className="w-full h-full rounded-[14px] flex items-center justify-center bg-gradient-to-br from-transparent to-[#182c26]/30 shadow-inner">
+                    <Gift className="w-6 h-6 stroke-[2.4] text-[#d2f56d] drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)]" />
+                  </div>
                 </div>
                 <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#edf3e3] text-[#274c3b] border border-[#dce3d4] group-hover:bg-[#182c26] group-hover:text-[#d2f56d] group-hover:border-[#d2f56d]/40 transition-colors shadow-2xs">
                   Starbucks-Style Points
@@ -107,14 +109,16 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenBooking 
           </div>
 
           {/* Pillar 2: Branded Customer Mobile App */}
-          <div className="group cursor-pointer bg-white rounded-3xl p-7 sm:p-8 border border-[#dce3d4] shadow-xs hover:border-[#274c3b] hover:shadow-[0_20px_40px_-15px_rgba(24,44,38,0.2)] hover:-translate-y-2 active:scale-[0.99] transition-all duration-300 flex flex-col justify-between relative overflow-hidden">
-            {/* Top Subtle Ambient Corner Glow */}
-            <div className="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-[#d2f56d]/20 to-transparent rounded-full blur-xl group-hover:scale-125 transition-transform duration-500 pointer-events-none" />
+          <div className="group cursor-pointer bg-white rounded-3xl p-7 sm:p-8 border border-[#dce3d4] shadow-xs hover:border-[#274c3b] hover:shadow-[0_20px_40px_-15px_rgba(24,44,38,0.22)] hover:-translate-y-2 active:scale-[0.99] transition-all duration-300 flex flex-col justify-between relative overflow-hidden">
+            {/* Amplified Corner Ambient Glow */}
+            <div className="absolute -top-14 -right-14 w-56 h-56 bg-gradient-to-br from-[#d2f56d]/40 via-[#274c3b]/30 to-transparent rounded-full blur-2xl group-hover:scale-130 group-hover:opacity-100 opacity-80 transition-all duration-500 pointer-events-none" />
 
             <div>
               <div className="flex items-center justify-between mb-5 relative z-10">
-                <div className="w-13 h-13 rounded-2xl bg-gradient-to-tr from-[#11201b] via-[#182c26] to-[#274c3b] p-3 text-[#d2f56d] border border-[#d2f56d]/30 shadow-md group-hover:scale-110 group-hover:border-[#d2f56d] transition-all duration-300 flex items-center justify-center">
-                  <Smartphone className="w-6 h-6 stroke-[2.2] group-hover:animate-pulse" />
+                <div className="relative w-13 h-13 rounded-2xl bg-gradient-to-br from-[#d2f56d] via-[#274c3b] to-[#182c26] p-0.5 shadow-md border-2 border-white/70 group-hover:scale-110 group-hover:border-[#d2f56d] transition-all duration-300 flex items-center justify-center">
+                  <div className="w-full h-full rounded-[14px] flex items-center justify-center bg-gradient-to-br from-transparent to-[#182c26]/30 shadow-inner">
+                    <Smartphone className="w-6 h-6 stroke-[2.4] text-[#d2f56d] drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)]" />
+                  </div>
                 </div>
                 <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#edf3e3] text-[#274c3b] border border-[#dce3d4] group-hover:bg-[#182c26] group-hover:text-[#d2f56d] group-hover:border-[#d2f56d]/40 transition-colors shadow-2xs">
                   Lock-Screen Direct Reach
@@ -161,14 +165,16 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenBooking 
           </div>
 
           {/* Pillar 3: Branded Customer Web Portal */}
-          <div className="group cursor-pointer bg-white rounded-3xl p-7 sm:p-8 border border-[#dce3d4] shadow-xs hover:border-[#274c3b] hover:shadow-[0_20px_40px_-15px_rgba(24,44,38,0.2)] hover:-translate-y-2 active:scale-[0.99] transition-all duration-300 flex flex-col justify-between relative overflow-hidden">
-            {/* Top Subtle Ambient Corner Glow */}
-            <div className="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-[#274c3b]/30 to-transparent rounded-full blur-xl group-hover:scale-125 transition-transform duration-500 pointer-events-none" />
+          <div className="group cursor-pointer bg-white rounded-3xl p-7 sm:p-8 border border-[#dce3d4] shadow-xs hover:border-[#274c3b] hover:shadow-[0_20px_40px_-15px_rgba(24,44,38,0.22)] hover:-translate-y-2 active:scale-[0.99] transition-all duration-300 flex flex-col justify-between relative overflow-hidden">
+            {/* Amplified Corner Ambient Glow */}
+            <div className="absolute -top-14 -right-14 w-56 h-56 bg-gradient-to-br from-[#274c3b]/35 via-[#d2f56d]/30 to-transparent rounded-full blur-2xl group-hover:scale-130 group-hover:opacity-100 opacity-80 transition-all duration-500 pointer-events-none" />
 
             <div>
               <div className="flex items-center justify-between mb-5 relative z-10">
-                <div className="w-13 h-13 rounded-2xl bg-gradient-to-tr from-[#11201b] via-[#182c26] to-[#274c3b] p-3 text-[#d2f56d] border border-[#d2f56d]/30 shadow-md group-hover:scale-110 group-hover:border-[#d2f56d] transition-all duration-300 flex items-center justify-center">
-                  <Globe className="w-6 h-6 stroke-[2.2] group-hover:animate-pulse" />
+                <div className="relative w-13 h-13 rounded-2xl bg-gradient-to-br from-[#d2f56d] via-[#274c3b] to-[#182c26] p-0.5 shadow-md border-2 border-white/70 group-hover:scale-110 group-hover:border-[#d2f56d] transition-all duration-300 flex items-center justify-center">
+                  <div className="w-full h-full rounded-[14px] flex items-center justify-center bg-gradient-to-br from-transparent to-[#182c26]/30 shadow-inner">
+                    <Globe className="w-6 h-6 stroke-[2.4] text-[#d2f56d] drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)]" />
+                  </div>
                 </div>
                 <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#edf3e3] text-[#274c3b] border border-[#dce3d4] group-hover:bg-[#182c26] group-hover:text-[#d2f56d] group-hover:border-[#d2f56d]/40 transition-colors shadow-2xs">
                   Custom Domain
@@ -222,14 +228,16 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenBooking 
           </div>
 
           {/* Pillar 4: Owner Admin Dashboard */}
-          <div className="group cursor-pointer bg-white rounded-3xl p-7 sm:p-8 border border-[#dce3d4] shadow-xs hover:border-[#274c3b] hover:shadow-[0_20px_40px_-15px_rgba(24,44,38,0.2)] hover:-translate-y-2 active:scale-[0.99] transition-all duration-300 flex flex-col justify-between relative overflow-hidden">
-            {/* Top Subtle Ambient Corner Glow */}
-            <div className="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-[#d2f56d]/20 to-transparent rounded-full blur-xl group-hover:scale-125 transition-transform duration-500 pointer-events-none" />
+          <div className="group cursor-pointer bg-white rounded-3xl p-7 sm:p-8 border border-[#dce3d4] shadow-xs hover:border-[#274c3b] hover:shadow-[0_20px_40px_-15px_rgba(24,44,38,0.22)] hover:-translate-y-2 active:scale-[0.99] transition-all duration-300 flex flex-col justify-between relative overflow-hidden">
+            {/* Amplified Corner Ambient Glow */}
+            <div className="absolute -top-14 -right-14 w-56 h-56 bg-gradient-to-br from-[#d2f56d]/35 via-[#274c3b]/30 to-transparent rounded-full blur-2xl group-hover:scale-130 group-hover:opacity-100 opacity-80 transition-all duration-500 pointer-events-none" />
 
             <div>
               <div className="flex items-center justify-between mb-5 relative z-10">
-                <div className="w-13 h-13 rounded-2xl bg-gradient-to-tr from-[#11201b] via-[#182c26] to-[#274c3b] p-3 text-[#d2f56d] border border-[#d2f56d]/30 shadow-md group-hover:scale-110 group-hover:border-[#d2f56d] transition-all duration-300 flex items-center justify-center">
-                  <LayoutDashboard className="w-6 h-6 stroke-[2.2] group-hover:animate-pulse" />
+                <div className="relative w-13 h-13 rounded-2xl bg-gradient-to-br from-[#d2f56d] via-[#274c3b] to-[#182c26] p-0.5 shadow-md border-2 border-white/70 group-hover:scale-110 group-hover:border-[#d2f56d] transition-all duration-300 flex items-center justify-center">
+                  <div className="w-full h-full rounded-[14px] flex items-center justify-center bg-gradient-to-br from-transparent to-[#182c26]/30 shadow-inner">
+                    <LayoutDashboard className="w-6 h-6 stroke-[2.4] text-[#d2f56d] drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)]" />
+                  </div>
                 </div>
                 <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#edf3e3] text-[#274c3b] border border-[#dce3d4] group-hover:bg-[#182c26] group-hover:text-[#d2f56d] group-hover:border-[#d2f56d]/40 transition-colors shadow-2xs">
                   Command Center
@@ -276,14 +284,16 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenBooking 
           </div>
 
           {/* Pillar 5: Unlimited Support Agents */}
-          <div className="group cursor-pointer bg-white rounded-3xl p-7 sm:p-8 border border-[#dce3d4] shadow-xs hover:border-[#274c3b] hover:shadow-[0_20px_40px_-15px_rgba(24,44,38,0.2)] hover:-translate-y-2 active:scale-[0.99] transition-all duration-300 flex flex-col justify-between relative overflow-hidden">
-            {/* Top Subtle Ambient Corner Glow */}
-            <div className="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-[#274c3b]/30 to-transparent rounded-full blur-xl group-hover:scale-125 transition-transform duration-500 pointer-events-none" />
+          <div className="group cursor-pointer bg-white rounded-3xl p-7 sm:p-8 border border-[#dce3d4] shadow-xs hover:border-[#274c3b] hover:shadow-[0_20px_40px_-15px_rgba(24,44,38,0.22)] hover:-translate-y-2 active:scale-[0.99] transition-all duration-300 flex flex-col justify-between relative overflow-hidden">
+            {/* Amplified Corner Ambient Glow */}
+            <div className="absolute -top-14 -right-14 w-56 h-56 bg-gradient-to-br from-[#274c3b]/35 via-[#d2f56d]/30 to-transparent rounded-full blur-2xl group-hover:scale-130 group-hover:opacity-100 opacity-80 transition-all duration-500 pointer-events-none" />
 
             <div>
               <div className="flex items-center justify-between mb-5 relative z-10">
-                <div className="w-13 h-13 rounded-2xl bg-gradient-to-tr from-[#11201b] via-[#182c26] to-[#274c3b] p-3 text-[#d2f56d] border border-[#d2f56d]/30 shadow-md group-hover:scale-110 group-hover:border-[#d2f56d] transition-all duration-300 flex items-center justify-center">
-                  <Users2 className="w-6 h-6 stroke-[2.2] group-hover:animate-pulse" />
+                <div className="relative w-13 h-13 rounded-2xl bg-gradient-to-br from-[#d2f56d] via-[#274c3b] to-[#182c26] p-0.5 shadow-md border-2 border-white/70 group-hover:scale-110 group-hover:border-[#d2f56d] transition-all duration-300 flex items-center justify-center">
+                  <div className="w-full h-full rounded-[14px] flex items-center justify-center bg-gradient-to-br from-transparent to-[#182c26]/30 shadow-inner">
+                    <Users2 className="w-6 h-6 stroke-[2.4] text-[#d2f56d] drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)]" />
+                  </div>
                 </div>
                 <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#edf3e3] text-[#274c3b] border border-[#dce3d4] group-hover:bg-[#182c26] group-hover:text-[#d2f56d] group-hover:border-[#d2f56d]/40 transition-colors shadow-2xs">
                   0 Per-Seat Fees
@@ -340,7 +350,7 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenBooking 
           {/* 6th Card: Custom Package Summary CTA */}
           <div className="group cursor-pointer bg-gradient-to-br from-[#11201b] via-[#182c26] to-[#274c3b] rounded-3xl p-7 sm:p-8 text-white shadow-xl border border-[#d2f56d]/30 hover:border-[#d2f56d]/70 hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between relative overflow-hidden">
             {/* Top Subtle Ambient Corner Glow */}
-            <div className="absolute -top-10 -right-10 w-36 h-36 bg-gradient-to-br from-[#d2f56d]/30 to-transparent rounded-full blur-2xl group-hover:scale-125 transition-transform duration-500 pointer-events-none" />
+            <div className="absolute -top-10 -right-10 w-44 h-44 bg-gradient-to-br from-[#d2f56d]/35 via-[#274c3b]/30 to-transparent rounded-full blur-2xl group-hover:scale-125 transition-transform duration-500 pointer-events-none" />
 
             <div className="relative z-10">
               <span className="px-3 py-1 rounded-full bg-[#d2f56d]/20 text-[#d2f56d] text-xs font-bold tracking-wider uppercase mb-4 inline-block border border-[#d2f56d]/40">

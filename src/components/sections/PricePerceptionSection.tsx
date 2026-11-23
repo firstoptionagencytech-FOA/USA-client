@@ -36,8 +36,8 @@ export const PricePerceptionSection: React.FC<PricePerceptionSectionProps> = ({ 
           
           {/* Column A: Traditional Custom-Build */}
           <div className="group bg-white rounded-3xl p-7 sm:p-9 border border-[#dce3d4] shadow-xs hover:border-[#274c3b] transition-all duration-300 flex flex-col justify-between relative overflow-hidden">
-            {/* Top Subtle Ambient Corner Glow */}
-            <div className="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-[#274c3b]/15 to-transparent rounded-full blur-xl pointer-events-none" />
+            {/* Amplified Ambient Top-Right Corner Glow */}
+            <div className="absolute -top-12 -right-12 w-48 h-48 sm:w-56 sm:h-56 bg-gradient-to-br from-[#d2f56d]/35 via-[#274c3b]/20 to-transparent rounded-full blur-2xl opacity-80 group-hover:opacity-100 group-hover:scale-130 transition-all duration-500 pointer-events-none" />
 
             <div>
               <div className="flex items-center justify-between mb-4 relative z-10">
@@ -99,8 +99,8 @@ export const PricePerceptionSection: React.FC<PricePerceptionSectionProps> = ({ 
 
           {/* Column B: JIT Helpdesk Platform (High-End Pine & Cyber Lime Gradient Card) */}
           <div className="group bg-gradient-to-br from-[#11201b] via-[#182c26] to-[#274c3b] rounded-3xl p-7 sm:p-9 text-white shadow-xl border border-[#d2f56d]/30 hover:border-[#d2f56d]/70 hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between relative overflow-hidden">
-            {/* Top Subtle Ambient Corner Glow */}
-            <div className="absolute -top-10 -right-10 w-40 h-40 bg-gradient-to-br from-[#d2f56d]/30 to-transparent rounded-full blur-2xl group-hover:scale-125 transition-transform duration-500 pointer-events-none" />
+            {/* Amplified Ambient Top-Right Corner Glow */}
+            <div className="absolute -top-12 -right-12 w-48 h-48 sm:w-56 sm:h-56 bg-gradient-to-br from-[#d2f56d]/40 via-[#274c3b]/30 to-transparent rounded-full blur-2xl opacity-90 group-hover:opacity-100 group-hover:scale-130 transition-all duration-500 pointer-events-none" />
 
             <div>
               <div className="flex items-center justify-between mb-4 relative z-10">
@@ -135,7 +135,7 @@ export const PricePerceptionSection: React.FC<PricePerceptionSectionProps> = ({ 
                   { title: 'Transparent Flat Cost', desc: '$400 setup + flat $200 per month. Zero per-technician upcharges.' },
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-start gap-3 text-xs sm:text-sm">
-                    <div className="w-5 h-5 rounded-full bg-[#d2f56d] text-[#182c26] flex items-center justify-center shrink-0 mt-0.5 shadow-2xs font-bold">
+                    <div className="w-5 h-5 rounded-full bg-gradient-to-br from-[#d2f56d] via-[#274c3b] to-[#182c26] text-[#d2f56d] p-0.5 border border-white/60 shadow-xs flex items-center justify-center shrink-0 mt-0.5">
                       <CheckCircle2 className="w-3.5 h-3.5 stroke-[2.5]" />
                     </div>
                     <div>

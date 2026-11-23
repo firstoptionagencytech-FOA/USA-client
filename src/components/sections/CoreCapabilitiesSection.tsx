@@ -18,7 +18,7 @@ export const CoreCapabilitiesSection: React.FC<CoreCapabilitiesSectionProps> = (
       description: 'Let customers submit service requests with photo attachments and follow resolution status in real time.',
       snippetLabel: 'Ticket #4109',
       snippetStatus: 'In Progress · Assigned',
-      accentGlow: 'from-[#d2f56d]/20 to-transparent',
+      accentGlow: 'from-[#d2f56d]/35 via-[#274c3b]/20 to-transparent',
     },
     {
       id: 'quotes',
@@ -29,7 +29,7 @@ export const CoreCapabilitiesSection: React.FC<CoreCapabilitiesSectionProps> = (
       description: 'Review, revise, and approve service scopes and hardware orders with frictionless digital approvals.',
       snippetLabel: 'Scope #824 · $1,250',
       snippetStatus: 'Approved ✓',
-      accentGlow: 'from-[#274c3b]/30 to-transparent',
+      accentGlow: 'from-[#274c3b]/40 via-[#d2f56d]/20 to-transparent',
     },
     {
       id: 'payments',
@@ -40,7 +40,7 @@ export const CoreCapabilitiesSection: React.FC<CoreCapabilitiesSectionProps> = (
       description: 'Support configured payment workflows via Stripe and allow clients to redeem eligible service credits.',
       snippetLabel: 'Invoice #1048 · $450',
       snippetStatus: 'Settled Instant',
-      accentGlow: 'from-[#d2f56d]/20 to-transparent',
+      accentGlow: 'from-[#d2f56d]/35 via-[#274c3b]/20 to-transparent',
     },
     {
       id: 'meetings',
@@ -51,7 +51,7 @@ export const CoreCapabilitiesSection: React.FC<CoreCapabilitiesSectionProps> = (
       description: 'Keep scheduled service activity, calendar appointments, and customer hardware device records organized.',
       snippetLabel: 'Scheduled Demo',
       snippetStatus: 'Synced to Calendar',
-      accentGlow: 'from-[#274c3b]/30 to-transparent',
+      accentGlow: 'from-[#274c3b]/40 via-[#d2f56d]/20 to-transparent',
     },
     {
       id: 'loyalty',
@@ -62,7 +62,7 @@ export const CoreCapabilitiesSection: React.FC<CoreCapabilitiesSectionProps> = (
       description: 'Manage reward earning rules, referral activity, and related customer benefits that keep clients coming back.',
       snippetLabel: '450 Loyalty Points',
       snippetStatus: 'Active Reward',
-      accentGlow: 'from-[#d2f56d]/25 to-transparent',
+      accentGlow: 'from-[#d2f56d]/40 via-[#274c3b]/25 to-transparent',
     },
   ];
 
@@ -70,7 +70,7 @@ export const CoreCapabilitiesSection: React.FC<CoreCapabilitiesSectionProps> = (
     <section className="py-16 sm:py-24 px-4 bg-gradient-to-b from-white via-[#f6f6ef] to-white relative overflow-hidden border-y border-[#dce3d4]/70" id="capabilities">
       
       {/* Background Soft Emerald Lighting */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[350px] bg-[#d2f56d]/10 blur-[130px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[400px] bg-[#d2f56d]/15 blur-[140px] rounded-full pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10">
         
@@ -93,28 +93,30 @@ export const CoreCapabilitiesSection: React.FC<CoreCapabilitiesSectionProps> = (
           </p>
         </div>
 
-        {/* 5 Cards Responsive Grid: 5 columns on xl, 2-3 cols on tablet, clean stack/carousel on mobile */}
+        {/* 5 Cards Responsive Grid with Enhanced Corner Ambient Glow & 3D Vibrant Gradient Badges */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 sm:gap-6">
-          {capabilities.map((item, idx) => {
+          {capabilities.map((item) => {
             const IconComponent = item.icon;
             return (
               <div
                 key={item.id}
                 onClick={onOpenBooking}
-                className="group cursor-pointer bg-white rounded-3xl p-6 border border-[#dce3d4] shadow-xs hover:border-[#274c3b] hover:shadow-[0_20px_40px_-15px_rgba(24,44,38,0.2)] hover:-translate-y-2 active:scale-[0.99] transition-all duration-300 flex flex-col justify-between relative overflow-hidden"
+                className="group cursor-pointer bg-white rounded-3xl p-6 sm:p-7 border border-[#dce3d4] shadow-xs hover:border-[#274c3b] hover:shadow-[0_20px_40px_-15px_rgba(24,44,38,0.22)] hover:-translate-y-2 active:scale-[0.99] transition-all duration-300 flex flex-col justify-between relative overflow-hidden"
               >
-                {/* Top Subtle Ambient Corner Glow */}
-                <div className={`absolute -top-10 -right-10 w-28 h-28 bg-gradient-to-br ${item.accentGlow} rounded-full blur-xl group-hover:scale-125 transition-transform duration-500 pointer-events-none`} />
+                {/* Amplified Corner Ambient Glow (More pronounced & luscious) */}
+                <div className={`absolute -top-12 -right-12 w-48 h-48 bg-gradient-to-br ${item.accentGlow} rounded-full blur-2xl group-hover:scale-130 group-hover:opacity-100 opacity-80 transition-all duration-500 pointer-events-none`} />
 
                 <div>
-                  {/* Top Bar: 3D Vector Icon Badge & Micro Pill */}
-                  <div className="flex items-center justify-between mb-5">
-                    {/* High-Tech 3D Glass Badge in Midnight Pine & Lime */}
-                    <div className="w-13 h-13 rounded-2xl bg-gradient-to-tr from-[#11201b] via-[#182c26] to-[#274c3b] p-3 text-[#d2f56d] border border-[#d2f56d]/30 shadow-md group-hover:scale-110 group-hover:border-[#d2f56d] transition-all duration-300 flex items-center justify-center">
-                      <IconComponent className="w-6 h-6 stroke-[2.2] group-hover:animate-pulse" />
+                  {/* Top Bar: 3D Vibrant Tech Gradient Badge & Micro Pill */}
+                  <div className="flex items-center justify-between mb-5 relative z-10">
+                    {/* Vibrant Lime-to-Pine 3D Shield Badge */}
+                    <div className="relative w-13 h-13 rounded-2xl bg-gradient-to-br from-[#d2f56d] via-[#274c3b] to-[#182c26] p-0.5 shadow-md border-2 border-white/70 group-hover:scale-110 group-hover:border-[#d2f56d] transition-all duration-300 flex items-center justify-center">
+                      <div className="w-full h-full rounded-[14px] flex items-center justify-center bg-gradient-to-br from-transparent to-[#182c26]/30 shadow-inner">
+                        <IconComponent className="w-6 h-6 stroke-[2.4] text-[#d2f56d] drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)]" />
+                      </div>
                     </div>
 
-                    <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#edf3e3] text-[#274c3b] border border-[#dce3d4] group-hover:bg-[#182c26] group-hover:text-[#d2f56d] group-hover:border-[#d2f56d]/40 transition-colors">
+                    <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#edf3e3] text-[#274c3b] border border-[#dce3d4] group-hover:bg-[#182c26] group-hover:text-[#d2f56d] group-hover:border-[#d2f56d]/40 transition-colors shadow-2xs">
                       {item.badge}
                     </span>
                   </div>
@@ -136,7 +138,7 @@ export const CoreCapabilitiesSection: React.FC<CoreCapabilitiesSectionProps> = (
                 </div>
 
                 {/* Embedded Live UI Snippet (Dark Pine Glass) */}
-                <div className="mt-auto pt-3 border-t border-slate-100">
+                <div className="mt-auto pt-3 border-t border-slate-100 relative z-10">
                   <div className="bg-[#11201b] rounded-xl p-2.5 border border-[#274c3b] flex items-center justify-between text-[11px] text-white shadow-inner">
                     <span className="font-mono text-[10px] sm:text-[11px] text-[#edf3e3] truncate max-w-[130px]">
                       {item.snippetLabel}

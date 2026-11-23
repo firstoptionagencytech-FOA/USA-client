@@ -34,16 +34,18 @@ export const BusinessCaseSection: React.FC<BusinessCaseSectionProps> = ({ onOpen
           
           {/* Card 1: First-Year Platform Cost */}
           <div className="group bg-white rounded-3xl p-7 sm:p-9 border border-[#dce3d4] shadow-xs hover:border-[#274c3b] hover:shadow-[0_20px_40px_-15px_rgba(24,44,38,0.15)] hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between relative overflow-hidden">
-            {/* Top Subtle Ambient Corner Glow */}
-            <div className="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-[#274c3b]/15 to-transparent rounded-full blur-xl group-hover:scale-125 transition-transform duration-500 pointer-events-none" />
+            {/* Amplified Ambient Top-Right Corner Glow */}
+            <div className="absolute -top-12 -right-12 w-48 h-48 sm:w-56 sm:h-56 bg-gradient-to-br from-[#d2f56d]/35 via-[#274c3b]/20 to-transparent rounded-full blur-2xl opacity-80 group-hover:opacity-100 group-hover:scale-130 transition-all duration-500 pointer-events-none" />
 
             <div>
               {/* Top Bar */}
               <div className="flex items-center justify-between mb-5 relative z-10">
-                <div className="w-13 h-13 rounded-2xl bg-gradient-to-tr from-[#11201b] via-[#182c26] to-[#274c3b] p-3 text-[#d2f56d] border border-[#d2f56d]/30 shadow-md group-hover:scale-110 group-hover:border-[#d2f56d] transition-all duration-300 flex items-center justify-center">
-                  <DollarSign className="w-6 h-6 stroke-[2.2]" />
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#d2f56d] via-[#274c3b] to-[#182c26] p-0.5 border-2 border-white/70 shadow-md flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-full h-full rounded-[14px] bg-[#182c26]/90 backdrop-blur-xs flex items-center justify-center text-[#d2f56d]">
+                    <DollarSign className="w-6 h-6 stroke-[2.2]" />
+                  </div>
                 </div>
-                <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#edf3e3] text-[#274c3b] border border-[#dce3d4]">
+                <span className="text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded-full bg-[#edf3e3] text-[#274c3b] border border-[#dce3d4]">
                   Flat Predictable Cost
                 </span>
               </div>
@@ -87,16 +89,18 @@ export const BusinessCaseSection: React.FC<BusinessCaseSectionProps> = ({ onOpen
 
           {/* Card 2: Illustrative Retained Client Contribution */}
           <div className="group bg-gradient-to-br from-[#11201b] via-[#182c26] to-[#274c3b] rounded-3xl p-7 sm:p-9 text-white shadow-xl border border-[#d2f56d]/30 hover:border-[#d2f56d]/70 hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between relative overflow-hidden">
-            {/* Top Subtle Ambient Corner Glow */}
-            <div className="absolute -top-10 -right-10 w-36 h-36 bg-gradient-to-br from-[#d2f56d]/25 to-transparent rounded-full blur-2xl group-hover:scale-125 transition-transform duration-500 pointer-events-none" />
+            {/* Amplified Ambient Top-Right Corner Glow */}
+            <div className="absolute -top-12 -right-12 w-48 h-48 sm:w-56 sm:h-56 bg-gradient-to-br from-[#d2f56d]/40 via-[#274c3b]/30 to-transparent rounded-full blur-2xl opacity-90 group-hover:opacity-100 group-hover:scale-130 transition-all duration-500 pointer-events-none" />
 
             <div>
               {/* Top Bar */}
               <div className="flex items-center justify-between mb-5 relative z-10">
-                <div className="w-13 h-13 rounded-2xl bg-white/10 p-3 text-[#d2f56d] border border-white/20 shadow-md group-hover:scale-110 transition-transform duration-300 flex items-center justify-center">
-                  <TrendingUp className="w-6 h-6 stroke-[2.2]" />
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#d2f56d] via-[#274c3b] to-[#182c26] p-0.5 border-2 border-white/70 shadow-md flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-full h-full rounded-[14px] bg-[#182c26]/90 backdrop-blur-xs flex items-center justify-center text-[#d2f56d]">
+                    <TrendingUp className="w-6 h-6 stroke-[2.2]" />
+                  </div>
                 </div>
-                <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#d2f56d]/20 text-[#d2f56d] border border-[#d2f56d]/40">
+                <span className="text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded-full bg-[#d2f56d]/20 text-[#d2f56d] border border-[#d2f56d]/40">
                   ROI Math
                 </span>
               </div>

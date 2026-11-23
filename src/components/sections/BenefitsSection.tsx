@@ -78,17 +78,19 @@ export const BenefitsSection: React.FC = () => {
                 key={idx}
                 className="group bg-white rounded-3xl p-7 sm:p-9 border border-[#dce3d4] hover:border-[#274c3b] hover:shadow-[0_20px_40px_-15px_rgba(24,44,38,0.15)] hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between relative overflow-hidden"
               >
-                {/* Top Subtle Ambient Corner Glow */}
-                <div className={`absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br ${b.accentGlow} rounded-full blur-xl group-hover:scale-125 transition-transform duration-500 pointer-events-none`} />
+                {/* Amplified Ambient Top-Right Corner Glow */}
+                <div className="absolute -top-12 -right-12 w-48 h-48 sm:w-56 sm:h-56 bg-gradient-to-br from-[#d2f56d]/35 via-[#274c3b]/20 to-transparent rounded-full blur-2xl opacity-80 group-hover:opacity-100 group-hover:scale-130 transition-all duration-500 pointer-events-none" />
 
                 <div>
                   {/* Top Bar: 3D Vector Icon Badge & Micro Pill */}
                   <div className="flex items-center justify-between mb-5 relative z-10">
-                    <div className="w-13 h-13 rounded-2xl bg-gradient-to-tr from-[#11201b] via-[#182c26] to-[#274c3b] p-3 text-[#d2f56d] border border-[#d2f56d]/30 shadow-md group-hover:scale-110 group-hover:border-[#d2f56d] transition-all duration-300 flex items-center justify-center">
-                      <IconComp className="w-6 h-6 stroke-[2.2] group-hover:animate-pulse" />
+                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#d2f56d] via-[#274c3b] to-[#182c26] p-0.5 border-2 border-white/70 shadow-md flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <div className="w-full h-full rounded-[14px] bg-[#182c26]/90 backdrop-blur-xs flex items-center justify-center text-[#d2f56d]">
+                        <IconComp className="w-6 h-6 stroke-[2.2] group-hover:animate-pulse" />
+                      </div>
                     </div>
 
-                    <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#edf3e3] text-[#274c3b] border border-[#dce3d4]">
+                    <span className="text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded-full bg-[#edf3e3] text-[#274c3b] border border-[#dce3d4]">
                       {b.badge}
                     </span>
                   </div>

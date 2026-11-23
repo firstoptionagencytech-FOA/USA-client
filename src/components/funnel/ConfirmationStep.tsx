@@ -3,6 +3,7 @@
 import React from 'react';
 import { CheckCircle2, Calendar, Clock, Video, Globe, Download, Check } from 'lucide-react';
 import { Booking } from '@/types';
+import { getTimezoneFlag } from '@/components/ui/CountryFlags';
 
 interface ConfirmationStepProps {
   booking: Booking;
@@ -72,10 +73,14 @@ export const ConfirmationStep: React.FC<ConfirmationStepProps> = ({ booking, onC
         </div>
 
         <div className="flex items-start gap-3">
-          <Globe className="w-4 h-4 text-brand-700 shrink-0 mt-0.5" />
+          <div className="mt-0.5 shrink-0">
+            {getTimezoneFlag(booking.prospect_timezone, 'w-4 h-3 rounded-xs shadow-xs')}
+          </div>
           <div>
             <div className="text-[10px] font-bold uppercase text-slate-400">Timezone</div>
-            <div className="text-xs font-semibold text-slate-700">{booking.prospect_timezone}</div>
+            <div className="text-xs font-semibold text-slate-700 flex items-center gap-1.5">
+              <span>{booking.prospect_timezone}</span>
+            </div>
           </div>
         </div>
 

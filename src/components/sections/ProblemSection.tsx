@@ -22,7 +22,7 @@ export const ProblemSection: React.FC<ProblemSectionProps> = ({ onOpenBooking })
       subtitle: 'SWITCHING RISK',
       title: 'Invisible in Their Everyday Workflow',
       badge: 'Switching Risk',
-      accentGlow: 'from-[#274c3b]/30 to-transparent',
+      accentGlow: 'from-[#d2f56d]/35 via-[#274c3b]/30 to-transparent',
       description:
         'Your clients are constantly targeted by competing IT companies promising lower rates and flashier tools. When you only exist as an invisible email thread, switching to someone else feels effortless.',
       snippetLabel: 'Competitor Ads Target Clients',
@@ -35,7 +35,7 @@ export const ProblemSection: React.FC<ProblemSectionProps> = ({ onOpenBooking })
       subtitle: 'ZERO RETENTION HOOK',
       title: 'Commodity Price Comparison',
       badge: 'Zero Loyalty',
-      accentGlow: 'from-[#d2f56d]/20 to-transparent',
+      accentGlow: 'from-[#274c3b]/40 via-[#d2f56d]/30 to-transparent',
       description:
         'Without a loyalty program or service credits, clients shop around purely on hourly price. Give them points for every paid invoice, exactly like Starbucks, so leaving you means forfeiting real money.',
       snippetLabel: 'Starbucks-Style Points',
@@ -48,7 +48,7 @@ export const ProblemSection: React.FC<ProblemSectionProps> = ({ onOpenBooking })
       subtitle: 'NO DIRECT REACH',
       title: 'Lost in Cluttered Inboxes',
       badge: 'Direct Reach',
-      accentGlow: 'from-[#274c3b]/30 to-transparent',
+      accentGlow: 'from-[#d2f56d]/40 via-[#274c3b]/30 to-transparent',
       description:
         'Quotes, scopes, and status updates get buried under hundreds of daily spam emails. With your own branded app on their phone, push notifications show up directly on their lock screen like DoorDash.',
       snippetLabel: 'Lock-Screen Push Alerts',
@@ -61,7 +61,7 @@ export const ProblemSection: React.FC<ProblemSectionProps> = ({ onOpenBooking })
     <section className="py-20 px-4 bg-white relative overflow-hidden" id="gap">
       
       {/* Background Soft Emerald Lighting */}
-      <div className="absolute top-0 right-10 w-80 h-80 bg-[#d2f56d]/10 rounded-full blur-3xl opacity-70 pointer-events-none -z-10" />
+      <div className="absolute top-0 right-10 w-96 h-96 bg-[#d2f56d]/15 rounded-full blur-3xl opacity-75 pointer-events-none -z-10" />
 
       <div className="max-w-6xl mx-auto">
         
@@ -79,7 +79,7 @@ export const ProblemSection: React.FC<ProblemSectionProps> = ({ onOpenBooking })
           </p>
         </div>
 
-        {/* 3 Rich Visual Problem Cards - Identical Color Palette to the Signature Gradient Card */}
+        {/* 3 Rich Problem Cards - Amplified Ambient Glow & 3D Vibrant Gradient Badges */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
           {problems.map((item) => {
             const IconComponent = item.icon;
@@ -87,16 +87,18 @@ export const ProblemSection: React.FC<ProblemSectionProps> = ({ onOpenBooking })
               <div
                 key={item.id}
                 onClick={onOpenBooking}
-                className="group cursor-pointer bg-white rounded-3xl p-7 sm:p-8 border border-[#dce3d4] shadow-xs hover:border-[#274c3b] hover:shadow-[0_20px_40px_-15px_rgba(24,44,38,0.2)] hover:-translate-y-2 active:scale-[0.99] transition-all duration-300 flex flex-col justify-between relative overflow-hidden"
+                className="group cursor-pointer bg-white rounded-3xl p-7 sm:p-8 border border-[#dce3d4] shadow-xs hover:border-[#274c3b] hover:shadow-[0_20px_40px_-15px_rgba(24,44,38,0.22)] hover:-translate-y-2 active:scale-[0.99] transition-all duration-300 flex flex-col justify-between relative overflow-hidden"
               >
-                {/* Top Subtle Ambient Corner Glow */}
-                <div className={`absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br ${item.accentGlow} rounded-full blur-xl group-hover:scale-125 transition-transform duration-500 pointer-events-none`} />
+                {/* Amplified Corner Ambient Glow (Bigger, brighter, richer) */}
+                <div className={`absolute -top-14 -right-14 w-52 h-52 bg-gradient-to-br ${item.accentGlow} rounded-full blur-2xl group-hover:scale-130 group-hover:opacity-100 opacity-80 transition-all duration-500 pointer-events-none`} />
 
                 <div>
-                  {/* Top Bar: 3D Vector Icon Badge & Micro Pill */}
+                  {/* Top Bar: 3D Vibrant Tech Gradient Badge & Micro Pill */}
                   <div className="flex items-center justify-between mb-5 relative z-10">
-                    <div className="w-13 h-13 rounded-2xl bg-gradient-to-tr from-[#11201b] via-[#182c26] to-[#274c3b] p-3 text-[#d2f56d] border border-[#d2f56d]/30 shadow-md group-hover:scale-110 group-hover:border-[#d2f56d] transition-all duration-300 flex items-center justify-center">
-                      <IconComponent className="w-6 h-6 stroke-[2.2] group-hover:animate-pulse" />
+                    <div className="relative w-13 h-13 rounded-2xl bg-gradient-to-br from-[#d2f56d] via-[#274c3b] to-[#182c26] p-0.5 shadow-md border-2 border-white/70 group-hover:scale-110 group-hover:border-[#d2f56d] transition-all duration-300 flex items-center justify-center">
+                      <div className="w-full h-full rounded-[14px] flex items-center justify-center bg-gradient-to-br from-transparent to-[#182c26]/30 shadow-inner">
+                        <IconComponent className="w-6 h-6 stroke-[2.4] text-[#d2f56d] drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)]" />
+                      </div>
                     </div>
 
                     <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#edf3e3] text-[#274c3b] border border-[#dce3d4] group-hover:bg-[#182c26] group-hover:text-[#d2f56d] group-hover:border-[#d2f56d]/40 transition-colors shadow-2xs">
